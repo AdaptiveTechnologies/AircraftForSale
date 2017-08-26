@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.props" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectGuid>{B8C03836-A778-482E-8FC3-92267A01DFDA}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>AircraftForSale</RootNamespace>
+    <AssemblyName>AircraftForSale</AssemblyName>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchFastDev>false</MtouchFastDev>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>i386, x86_64</MtouchArch>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <MtouchTlsProvider>Legacy</MtouchTlsProvider>
+    <PlatformTarget>x86</PlatformTarget>
+    <OptimizePNGs>false</OptimizePNGs>
+    <MtouchExtraArgs></MtouchExtraArgs>
+    <DeviceSpecificBuild>false</DeviceSpecificBuild>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchProfiling>true</MtouchProfiling>
+    <MtouchFloat32>true</MtouchFloat32>
+    <CodesignKey>iPhone Developer: Clay Martin (83H34G7LM2)</CodesignKey>
+    <CodesignProvision>Showcase-dev</CodesignProvision>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchFloat32>true</MtouchFloat32>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>ARM64</MtouchArch>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <MtouchTlsProvider>Default</MtouchTlsProvider>
+    <PlatformTarget>x86</PlatformTarget>
+    <OptimizePNGs>false</OptimizePNGs>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
+    <CodesignProvision></CodesignProvision>
+    <CodesignKey>iPhone Developer: Clay Martin (83H34G7LM2)</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>i386</MtouchArch>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <MtouchTlsProvider>Default</MtouchTlsProvider>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodesignProvision></CodesignProvision>
+    <CodesignKey>iPhone Developer: Clay Martin (83H34G7LM2)</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <DeviceSpecificBuild>false</DeviceSpecificBuild>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchFastDev>false</MtouchFastDev>
+    <MtouchFloat32>true</MtouchFloat32>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchArch>ARM64</MtouchArch>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
+    <MtouchTlsProvider>Default</MtouchTlsProvider>
+    <PlatformTarget>x86</PlatformTarget>
+    <OptimizePNGs>false</OptimizePNGs>
+    <MtouchSdkVersion>10.2</MtouchSdkVersion>
+    <CodesignProvision></CodesignProvision>
+    <CodesignKey>iPhone Developer: Clay Martin (83H34G7LM2)</CodesignKey>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="Calabash">
+      <HintPath>..\packages\Xamarin.TestCloud.Agent.0.19.0\lib\Xamarin.iOS10\Calabash.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\portable-windows8+net45+wp8\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\portable-windows8+net45+wp8\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\portable-windows8+net45+wp8\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\portable-windows8+net45+wp8\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCL.raw">
+      <HintPath>..\packages\SQLitePCL.raw_basic.0.7.0\lib\Xamarin.iOS10\SQLitePCL.raw.dll</HintPath>
+    </Reference>
+    <Reference Include="Splat">
+      <HintPath>..\packages\Splat.1.6.2\lib\Xamarin.iOS10\Splat.dll</HintPath>
+    </Reference>
+    <Reference Include="SDWebImage">
+      <HintPath>..\packages\Xamarin.SDWebImage.3.7.5\lib\Xamarin.iOS\SDWebImage.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="Akavache">
+      <HintPath>..\packages\akavache.core.5.0.0\lib\Xamarin.iOS10\Akavache.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core">
+      <HintPath>..\packages\SQLitePCLRaw.core.1.1.0\lib\Xamarin.iOS10\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.lib.e_sqlite3">
+      <HintPath>..\packages\SQLitePCLRaw.lib.e_sqlite3.ios_unified.static.1.1.0\lib\Xamarin.iOS10\SQLitePCLRaw.lib.e_sqlite3.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.provider.internal">
+      <HintPath>..\packages\SQLitePCLRaw.provider.internal.ios_unified.1.1.0\lib\Xamarin.iOS10\SQLitePCLRaw.provider.internal.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_e_sqlite3">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_e_sqlite3.1.1.0\lib\Xamarin.iOS10\SQLitePCLRaw.batteries_e_sqlite3.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_v2">
+      <HintPath>..\packages\SQLitePCLRaw.bundle_e_sqlite3.1.1.0\lib\Xamarin.iOS10\SQLitePCLRaw.batteries_v2.dll</HintPath>
+    </Reference>
+    <Reference Include="Akavache.Sqlite3">
+      <HintPath>..\packages\akavache.sqlite3.5.0.0\lib\Portable-Net45+Win8+WP8+Wpa81\Akavache.Sqlite3.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings.Abstractions">
+      <HintPath>..\packages\Xam.Plugins.Settings.2.5.1.0\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings">
+      <HintPath>..\packages\Xam.Plugins.Settings.2.5.1.0\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="Google.Analytics">
+      <HintPath>..\packages\Xamarin.Google.iOS.Analytics.3.17.0.1\lib\Xamarin.iOS10\Google.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="VideoSplash">
+      <HintPath>..\Components\VideoSplash-1.0.0.0\lib\ios-unified\VideoSplash.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\IconSmall-40%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\IconSmall%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\IconSmall%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\IconSmall.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\IconSmall-40%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-76.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-76%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-83.5%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\IconSmall-20%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="ViewController\" />
+    <Folder Include="CustomControls\" />
+    <Folder Include="Resources\New Folder\" />
+    <Folder Include="Resources\slider\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
+    <InterfaceDefinition Include="Main.storyboard" />
+    <InterfaceDefinition Include="Registration.storyboard" />
+    <InterfaceDefinition Include="Resources\Main~.storyboard" />
+    <InterfaceDefinition Include="ViewController\ContactViewController.xib" />
+    <InterfaceDefinition Include="Main_ipad.storyboard" />
+    <InterfaceDefinition Include="Interfaces\Registration_ipad.storyboard" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="Interfaces\IMultiStepProcessStep.cs" />
+    <Compile Include="GridLayout.cs" />
+    <Compile Include="ViewController\FavoritesViewController.cs" />
+    <Compile Include="ViewController\FavoritesViewController.designer.cs">
+      <DependentUpon>FavoritesViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\RegistrationViewController.cs" />
+    <Compile Include="ViewController\RegistrationViewController.designer.cs">
+      <DependentUpon>RegistrationViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\SettingsViewController.cs" />
+    <Compile Include="ViewController\SettingsViewController.designer.cs">
+      <DependentUpon>SettingsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\ViewController.cs" />
+    <Compile Include="ViewController\ViewController.designer.cs">
+      <DependentUpon>ViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelController.cs" />
+    <Compile Include="LineLayout.cs" />
+    <Compile Include="TextCollectionViewCell.cs" />
+    <Compile Include="TextCollectionViewCell.designer.cs">
+      <DependentUpon>TextCollectionViewCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Interfaces\IAdLayoutInterface.cs" />
+    <Compile Include="Helpers\ExtensionMethods.cs" />
+    <Compile Include="Helpers\HelperMethods.cs" />
+    <Compile Include="ViewController\MultiStepProcessHorizontalViewController.cs" />
+    <Compile Include="UIPageViewControllerDataSource.cs" />
+    <Compile Include="BetterExperienceOverlay.cs" />
+    <Compile Include="FavoriteAircraftTableCell.cs" />
+    <Compile Include="FavoriteAircraftTableCell.designer.cs">
+      <DependentUpon>FavoriteAircraftTableCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\AdLayout1ViewController.cs" />
+    <Compile Include="ViewController\AdLayout1ViewController.designer.cs">
+      <DependentUpon>AdLayout1ViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\AdLayout2ViewController.cs" />
+    <Compile Include="ViewController\AdLayout2ViewController.designer.cs">
+      <DependentUpon>AdLayout2ViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\AdLayout3ViewController.cs" />
+    <Compile Include="ViewController\AdLayout3ViewController.designer.cs">
+      <DependentUpon>AdLayout3ViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\ChooseClassificationCollectionViewController.cs" />
+    <Compile Include="ViewController\ChooseClassificationCollectionViewController.designer.cs">
+      <DependentUpon>ChooseClassificationCollectionViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\LoginViewController.cs" />
+    <Compile Include="ViewController\LoginViewController.designer.cs">
+      <DependentUpon>LoginViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\MagazineFlipBoardViewController.cs" />
+    <Compile Include="ViewController\MagazineFlipBoardViewController.designer.cs">
+      <DependentUpon>MagazineFlipBoardViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\MagazineNavigationViewController.cs" />
+    <Compile Include="ViewController\MagazineNavigationViewController.designer.cs">
+      <DependentUpon>MagazineNavigationViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainTabBarController.cs" />
+    <Compile Include="MainTabBarController.designer.cs">
+      <DependentUpon>MainTabBarController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrationNavigationController.cs" />
+    <Compile Include="RegistrationNavigationController.designer.cs">
+      <DependentUpon>RegistrationNavigationController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\AdLayoutPhoneViewController.cs" />
+    <Compile Include="ViewController\AdLayoutPhoneViewController.designer.cs">
+      <DependentUpon>AdLayoutPhoneViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\RegistrationProfileViewController.cs" />
+    <Compile Include="ViewController\RegistrationProfileViewController.designer.cs">
+      <DependentUpon>RegistrationProfileViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\LikeManufacturerView.cs" />
+    <Compile Include="CustomControls\ManButton.cs" />
+    <Compile Include="MagazinePageIndicator.cs" />
+    <Compile Include="PageIndicatorClass.cs" />
+    <Compile Include="PageIndicatorClass.designer.cs">
+      <DependentUpon>PageIndicatorClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\CircleButton.cs" />
+    <Compile Include="SpecCell.cs" />
+    <Compile Include="SpecCell.designer.cs">
+      <DependentUpon>SpecCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadingOverlay.cs" />
+    <Compile Include="Reachability.cs" />
+    <Compile Include="AkavacheSqliteLinkerOverride.cs" />
+    <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="NotesInputOverlay.cs" />
+    <Compile Include="ViewController\EmailInquiryViewController.cs" />
+    <Compile Include="ViewController\EmailInquiryViewController.designer.cs">
+      <DependentUpon>EmailInquiryViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\MainRegistrationViewController.cs" />
+    <Compile Include="ViewController\MainRegistrationViewController.designer.cs">
+      <DependentUpon>MainRegistrationViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\MapViewController.cs" />
+    <Compile Include="ViewController\MapViewController.designer.cs">
+      <DependentUpon>MapViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\FavoriteClassificationsViewController.cs" />
+    <Compile Include="ViewController\Page2RegistrationViewController.cs" />
+    <Compile Include="ViewController\Page2RegistrationViewController.designer.cs">
+      <DependentUpon>Page2RegistrationViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\Page3RegistrationViewController.cs" />
+    <Compile Include="ViewController\Page3RegistrationViewController.designer.cs">
+      <DependentUpon>Page3RegistrationViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\BanManProViewController.cs" />
+    <Compile Include="ViewController\BanManProViewController.designer.cs">
+      <DependentUpon>BanManProViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\ContactViewController.cs" />
+    <Compile Include="ViewController\ContactViewController.designer.cs">
+      <DependentUpon>ContactViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\ContactWebViewController.cs" />
+    <Compile Include="ViewController\ContactWebViewController.designer.cs">
+      <DependentUpon>ContactWebViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\SplashViewController.cs" />
+    <Compile Include="ViewController\SplashViewController.designer.cs">
+      <DependentUpon>SplashViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SplashVideoViewController.cs" />
+    <Compile Include="SplashVideoViewController.designer.cs">
+      <DependentUpon>SplashVideoViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\SpecViewController_.cs" />
+    <Compile Include="ViewController\SpecViewController_.designer.cs">
+      <DependentUpon>SpecViewController_.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewController\ChangePassViewController.cs" />
+    <Compile Include="ViewController\ChangePassViewController.designer.cs">
+      <DependentUpon>ChangePassViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SpecCell1.cs" />
+    <Compile Include="SpecCell1.designer.cs">
+      <DependentUpon>SpecCell1.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\profile.png" />
+    <BundleResource Include="Resources\settings.png" />
+    <BundleResource Include="Resources\airplane.png" />
+    <BundleResource Include="Resources\garage.jpeg" />
+    <BundleResource Include="Resources\log_in_background.png" />
+    <BundleResource Include="Resources\amphibian.png" />
+    <BundleResource Include="Resources\commercial.png" />
+    <BundleResource Include="Resources\experimental.png" />
+    <BundleResource Include="Resources\helicopter.png" />
+    <BundleResource Include="Resources\jet.png" />
+    <BundleResource Include="Resources\light_sport.png" />
+    <BundleResource Include="Resources\single_engine.png" />
+    <BundleResource Include="Resources\singles.png" />
+    <BundleResource Include="Resources\twin_piston.png" />
+    <BundleResource Include="Resources\twin_turbine.png" />
+    <BundleResource Include="Resources\vintage.png" />
+    <BundleResource Include="Resources\warbird.png" />
+    <BundleResource Include="Resources\aircraft_manufacturing.png" />
+    <BundleResource Include="Resources\aircraft_classifications.png" />
+    <BundleResource Include="Resources\bombardier.png" />
+    <BundleResource Include="Resources\aerospatiale.png" />
+    <BundleResource Include="Resources\grumman.png" />
+    <BundleResource Include="Resources\maule.png" />
+    <BundleResource Include="Resources\airbus.png" />
+    <BundleResource Include="Resources\cockpit.png" />
+    <BundleResource Include="Resources\gruman_ad.jpg" />
+    <BundleResource Include="Resources\bombardier_ad.jpg" />
+    <BundleResource Include="Resources\bombardier_ad2.jpg" />
+    <BundleResource Include="Resources\bombardier_ad3.jpg" />
+    <BundleResource Include="Resources\email.png" />
+    <BundleResource Include="Resources\email%402x.png" />
+    <BundleResource Include="Resources\email%403x.png" />
+    <BundleResource Include="Resources\share.png" />
+    <BundleResource Include="Resources\share%402x.png" />
+    <BundleResource Include="Resources\share%403x.png" />
+    <BundleResource Include="Resources\like.png" />
+    <BundleResource Include="Resources\like%402x.png" />
+    <BundleResource Include="Resources\like%403x.png" />
+    <BundleResource Include="Resources\like_selected.png" />
+    <BundleResource Include="Resources\like_selected%402x.png" />
+    <BundleResource Include="Resources\like_selected%403x.png" />
+    <BundleResource Include="Resources\close.png" />
+    <BundleResource Include="Resources\runway.jpg" />
+    <BundleResource Include="Resources\swipe_left.png" />
+    <BundleResource Include="Resources\swipe_left%402x.png" />
+    <BundleResource Include="Resources\swipe_left%403x.png" />
+    <BundleResource Include="Resources\lake2.gif" />
+    <BundleResource Include="Resources\like_image.png" />
+    <BundleResource Include="Resources\like_image%402x.png" />
+    <BundleResource Include="Resources\like_image%403x.png" />
+    <BundleResource Include="Resources\Amphibian_Ad_Response.txt" />
+    <BundleResource Include="Resources\ad_placeholder.jpg" />
+    <BundleResource Include="Resources\globalairLogo_large.png" />
+    <BundleResource Include="Resources\conklin.jpg" />
+    <BundleResource Include="Resources\phone.png" />
+    <BundleResource Include="Resources\phone%402x.png" />
+    <BundleResource Include="Resources\phone%403x.png" />
+    <BundleResource Include="Resources\messages.png" />
+    <BundleResource Include="Resources\messages%402x.png" />
+    <BundleResource Include="Resources\messages%403x.png" />
+    <BundleResource Include="Resources\globalair_logo.png" />
+    <BundleResource Include="Resources\globalair_logo%402x.png" />
+    <BundleResource Include="Resources\globalair_logo%403x.png" />
+    <BundleResource Include="Resources\map.png" />
+    <BundleResource Include="Resources\map%402x.png" />
+    <BundleResource Include="Resources\map%403x.png" />
+    <BundleResource Include="Resources\pencil.png" />
+    <BundleResource Include="Resources\pencil%402x.png" />
+    <BundleResource Include="Resources\pencil%403x.png" />
+    <BundleResource Include="Resources\New Folder\new_Logo.png" />
+    <BundleResource Include="Resources\New Folder\new_home_bg.png" />
+    <BundleResource Include="Resources\New Folder\new_home_bg1.png" />
+    <BundleResource Include="Resources\New Folder\new_top_pic.png" />
+    <BundleResource Include="Resources\new_Logo.png" />
+    <BundleResource Include="Resources\new_home_bg.png" />
+    <BundleResource Include="Resources\new_home_bg1.png" />
+    <BundleResource Include="Resources\new_top_pic.png" />
+    <BundleResource Include="Resources\New Folder\company.png" />
+    <BundleResource Include="Resources\New Folder\location.png" />
+    <BundleResource Include="Resources\New Folder\mail_b.png" />
+    <BundleResource Include="Resources\New Folder\mail_w.png" />
+    <BundleResource Include="Resources\New Folder\mobile.png" />
+    <BundleResource Include="Resources\New Folder\pass_b.png" />
+    <BundleResource Include="Resources\New Folder\pass_w.png" />
+    <BundleResource Include="Resources\New Folder\user_b.png" />
+    <BundleResource Include="Resources\New Folder\user_w.png" />
+    <BundleResource Include="Resources\company.png" />
+    <BundleResource Include="Resources\location.png" />
+    <BundleResource Include="Resources\mail_b.png" />
+    <BundleResource Include="Resources\mail_w.png" />
+    <BundleResource Include="Resources\mobile.png" />
+    <BundleResource Include="Resources\pass_b.png" />
+    <BundleResource Include="Resources\pass_w.png" />
+    <BundleResource Include="Resources\user_b.png" />
+    <BundleResource Include="Resources\user_w.png" />
+    <BundleResource Include="Resources\bg_image.png" />
+    <BundleResource Include="Resources\contact_icon.png" />
+    <BundleResource Include="Resources\email1_icon.png" />
+    <BundleResource Include="Resources\like_icon.png" />
+    <BundleResource Include="Resources\message_icon.png" />
+    <BundleResource Include="Resources\new_contact_icon.png" />
+    <BundleResource Include="Resources\new_email1_icon.png" />
+    <BundleResource Include="Resources\new_like_icon.png" />
+    <BundleResource Include="Resources\new_message_icon.png" />
+    <BundleResource Include="Resources\new_share_icon.png" />
+    <BundleResource Include="Resources\share_icon.png" />
+    <BundleResource Include="Resources\New Folder\login_bg.png" />
+    <BundleResource Include="Resources\New Folder\login_logo.png" />
+    <BundleResource Include="Resources\New Folder\new_fav.png" />
+    <BundleResource Include="Resources\New Folder\new_mail.png" />
+    <BundleResource Include="Resources\New Folder\new_magazine.png" />
+    <BundleResource Include="Resources\New Folder\new_profile.png" />
+    <BundleResource Include="Resources\login_bg.png" />
+    <BundleResource Include="Resources\login_logo.png" />
+    <BundleResource Include="Resources\new_fav.png" />
+    <BundleResource Include="Resources\new_mail.png" />
+    <BundleResource Include="Resources\new_profile.png" />
+    <BundleResource Include="Resources\new_magazine.png" />
+    <BundleResource Include="Resources\new_back_arrow.png" />
+    <BundleResource Include="Resources\new_home.png" />
+    <BundleResource Include="Resources\New Folder\new_home.png" />
+    <BundleResource Include="Resources\continue_btn.png" />
+    <BundleResource Include="Resources\Ipad\continue_btn_ipad.png" />
+    <BundleResource Include="Resources\Ipad\fav_icon_ipad.png" />
+    <BundleResource Include="Resources\Ipad\feature_icon_ipad.png" />
+    <BundleResource Include="Resources\Ipad\home_icon_ipad.png" />
+    <BundleResource Include="Resources\Ipad\home_screen_bg_ipad.jpg" />
+    <BundleResource Include="Resources\Ipad\like_icon_ipad.png" />
+    <BundleResource Include="Resources\Ipad\logo_ipad.png" />
+    <BundleResource Include="Resources\Ipad\magazine_icon_ipad.png" />
+    <BundleResource Include="Resources\Ipad\mail1_icon_ipad.png" />
+    <BundleResource Include="Resources\Ipad\mail_icon_ipad.png" />
+    <BundleResource Include="Resources\Ipad\message_icon_ipad.png" />
+    <BundleResource Include="Resources\Ipad\profile_icon_ipad.png" />
+    <BundleResource Include="Resources\Ipad\refresh_icon_ipad.png" />
+    <BundleResource Include="Resources\Ipad\share_icon_ipad.png" />
+    <BundleResource Include="Resources\Ipad\technical_bg_ipad.png" />
+    <BundleResource Include="Resources\add_bg.png" />
+    <BundleResource Include="Resources\Bg_new.png" />
+    <BundleResource Include="Resources\close_ipad.png" />
+    <BundleResource Include="Resources\detail_info.png" />
+    <BundleResource Include="Resources\Ipad\detail_info.png" />
+    <BundleResource Include="Resources\star.png" />
+    <BundleResource Include="Resources\star2.png" />
+    <BundleResource Include="Resources\star-64.png" />
+    <BundleResource Include="Resources\splashipad.mp4" />
+    <BundleResource Include="Resources\splash_image.png" />
+    <BundleResource Include="Resources\checked_checkbox.png" />
+    <BundleResource Include="Resources\unchecked_checkbox.png" />
+    <BundleResource Include="Resources\tablet_back2.png" />
+    <BundleResource Include="Resources\tablet_back3.png" />
+    <BundleResource Include="Resources\tablet_back4.png" />
+    <BundleResource Include="Resources\tablet_back5.png" />
+    <BundleResource Include="Resources\tablet_back6.png" />
+    <BundleResource Include="Resources\tablet_back7.png" />
+    <BundleResource Include="Resources\tablet_back8.png" />
+    <BundleResource Include="Resources\tablet_back9.png" />
+    <BundleResource Include="Resources\tablet_back1.png" />
+    <BundleResource Include="Resources\tablet_back0.png" />
+    <BundleResource Include="Resources\background0.png" />
+    <BundleResource Include="Resources\background1.png" />
+    <BundleResource Include="Resources\background2.png" />
+    <BundleResource Include="Resources\background3.png" />
+    <BundleResource Include="Resources\background4.png" />
+    <BundleResource Include="Resources\background5.png" />
+    <BundleResource Include="Resources\background6.png" />
+    <BundleResource Include="Resources\background7.png" />
+    <BundleResource Include="Resources\background8.png" />
+    <BundleResource Include="Resources\background9.png" />
+    <BundleResource Include="Resources\home_logo.png" />
+    <BundleResource Include="Resources\loginscreen_ipad_background.png" />
+    <BundleResource Include="Resources\loginscreen_phonebackground.png" />
+    <BundleResource Include="Resources\globalairphone.mov" />
+    <BundleResource Include="Resources\globalairtablet.mov" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AircraftForSale.PCL\AircraftForSale.PCL.csproj">
+      <Project>{5C8CFE42-ADD0-4253-9399-F2C497E8DD9B}</Project>
+      <Name>AircraftForSale.PCL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="sdwebimage">
+      <Version>3.7.5</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="googleiosanalytics">
+      <Version>3.17.0.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="VideoSplash">
+      <Version>1.0.0.0</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <Import Project="..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets')" />
+  <Import Project="..\packages\Xamarin.Google.iOS.Analytics.3.17.0.1\build\Xamarin.Google.iOS.Analytics.targets" Condition="Exists('..\packages\Xamarin.Google.iOS.Analytics.3.17.0.1\build\Xamarin.Google.iOS.Analytics.targets')" />
+</Project>
