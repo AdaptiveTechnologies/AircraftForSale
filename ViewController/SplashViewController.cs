@@ -41,15 +41,19 @@ namespace AircraftForSale
 			var bundle =  Foundation.NSBundle.MainBundle;
 			//var resource = bundle.PathForResource("splashipad", "mp4");
 
+
+            //May need to comment... experimenting with performance cost of loading video
 			var fileName = (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)? "globalairphone" : "globalairtablet";
 
 			var resource = bundle.PathForResource(fileName, "mov");
 
-// set the video
+//// set the video
 			VideoUrl = new Foundation.NSUrl(resource, false);
 
 			FillMode = ScalingMode.ResizeAspectFill;
 
+
+            this.PerformSegue("loginSegue", this);
 		}
 
 		public override void OnVideoReady()

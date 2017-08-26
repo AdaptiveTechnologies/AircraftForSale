@@ -54,9 +54,9 @@ namespace AircraftForSale
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton Ad1RGButton { get; set; }
 
-        //[Outlet]
-        //[GeneratedCode ("iOS Designer", "1.0")]
-        //AircraftForSale.CircleButton Ad1RGButton { get; set; }
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        AircraftForSale.CircleButton Ad1RGButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -68,19 +68,19 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel Ad1TeaserLabel { get; set; }
+        UIKit.UITextView Ad1TeaserLabel { get; set; }
 
-        //[Outlet]
-        //[GeneratedCode ("iOS Designer", "1.0")]
-        //UIKit.UITextView Ad1TeaserLabel { get; set; }
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel Ad1TeaserLabel { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton Ad1TechnicalSpecButton { get; set; }
 
-        //[Outlet]
-        //[GeneratedCode ("iOS Designer", "1.0")]
-        //AircraftForSale.CircleButton Ad1TechnicalSpecButton { get; set; }
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        AircraftForSale.CircleButton Ad1TechnicalSpecButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -122,9 +122,9 @@ namespace AircraftForSale
         [GeneratedCode ("iOS Designer", "1.0")]
         AircraftForSale.CircleButton Ad2RGButton { get; set; }
 
-        //[Outlet]
-        //[GeneratedCode ("iOS Designer", "1.0")]
-        //UIKit.UIButton Ad2RGButton { get; set; }
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton Ad2RGButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -132,19 +132,19 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel Ad2TeaserLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextView Ad2TeaserLabel { get; set; }
 
-        //[Outlet]
-        //[GeneratedCode ("iOS Designer", "1.0")]
-        //UIKit.UILabel Ad2TeaserLabel { get; set; }
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton Ad2TechnicalSpecButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         AircraftForSale.CircleButton Ad2TechnicalSpecButton { get; set; }
-
-        //[Outlet]
-        //[GeneratedCode ("iOS Designer", "1.0")]
-        //UIKit.UIButton Ad2TechnicalSpecButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -186,9 +186,9 @@ namespace AircraftForSale
         [GeneratedCode ("iOS Designer", "1.0")]
         AircraftForSale.CircleButton Ad3RGButton { get; set; }
 
-        //[Outlet]
-        //[GeneratedCode ("iOS Designer", "1.0")]
-        //UIKit.UIButton Ad3RGButton { get; set; }
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton Ad3RGButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -198,17 +198,17 @@ namespace AircraftForSale
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel Ad3TeaserLabel { get; set; }
 
-        //[Outlet]
-        //[GeneratedCode ("iOS Designer", "1.0")]
-        //UIKit.UITextView Ad3TeaserLabel { get; set; }
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextView Ad3TeaserLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        AircraftForSale.CircleButton Ad3TechnicalSpecButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton Ad3TechnicalSpecButton { get; set; }
-
-        //[Outlet]
-        //[GeneratedCode ("iOS Designer", "1.0")]
-        //AircraftForSale.CircleButton Ad3TechnicalSpecButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
