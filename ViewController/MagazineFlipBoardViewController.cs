@@ -129,7 +129,7 @@ public override void ViewDidAppear(bool animated)
 								//get search terms
 								var searchTermList = searchText.Split(' ').ToList();
 
-                                SearchResultsViewController searchResultsViewController = (SearchResultsViewController)Storyboard.InstantiateViewController("SearchResultsViewController");
+                                SearchResultsViewController searchResultsViewController = (SearchResultsViewController)UIStoryboard.FromName("Main_ipad", null).InstantiateViewController("SearchResultsViewController");
                                 var secondarySearchResults = adList.Take(5).ToList();
                                 searchResultsViewController.SearchResultsAdList = secondarySearchResults;
                                 this.PresentViewController(searchResultsViewController, true, null);

@@ -15,61 +15,61 @@ namespace AircraftForSale
 {
 	public partial class AdLayout3ViewController : UIViewController, IAdLayoutInterface
 	{
-		async void AdRGButton_TouchUpInside(object sender, EventArgs e)
-		{
-			Ad ad = new Ad();
+		//async void AdRGButton_TouchUpInside(object sender, EventArgs e)
+		//{
+		//	Ad ad = new Ad();
 
 
-			if (sender == Ad1RGButton)
-			{
-				ad = DataObject.Ads[0];
-			}
+		//	if (sender == Ad1RGButton)
+		//	{
+		//		ad = DataObject.Ads[0];
+		//	}
 
-			if (sender == Ad2RGButton)
-			{
-				ad = DataObject.Ads[1];
-			}
+		//	if (sender == Ad2RGButton)
+		//	{
+		//		ad = DataObject.Ads[1];
+		//	}
 
-			if (sender == Ad3RGButton)
-			{
-				ad = DataObject.Ads[2];
-			}
+		//	if (sender == Ad3RGButton)
+		//	{
+		//		ad = DataObject.Ads[2];
+		//	}
 
-			if (sender == Ad4RGButton)
-			{
-				ad = DataObject.Ads[3];
-			}
+		//	if (sender == Ad4RGButton)
+		//	{
+		//		ad = DataObject.Ads[3];
+		//	}
 
 
-			if (Reachability.IsHostReachable(Settings._baseDomain))
-			{
-				SpecResponse specResponse = new SpecResponse();
+		//	if (Reachability.IsHostReachable(Settings._baseDomain))
+		//	{
+		//		SpecResponse specResponse = new SpecResponse();
 
-				var specification = await specResponse.GetSpecBySpecIDDesignationIDAsync(ad.SpecId, ad.DesignationId);
+		//		var specification = await specResponse.GetSpecBySpecIDDesignationIDAsync(ad.SpecId, ad.DesignationId);
 
-				if (specification.SpecId != 0)
-				{
-					//var specTableViewController = this.Storyboard.InstantiateViewController("SpecViewController_") as SpecViewController_;
+		//		if (specification.SpecId != 0)
+		//		{
+		//			//var specTableViewController = this.Storyboard.InstantiateViewController("SpecViewController_") as SpecViewController_;
 
-					//specTableViewController.Spec = specification;
+		//			//specTableViewController.Spec = specification;
 
-					//this.PresentViewController(specTableViewController, true, null);
+		//			//this.PresentViewController(specTableViewController, true, null);
 
-					MapViewController mapViewController = (MapViewController)Storyboard.InstantiateViewController("MapViewController");
-					mapViewController.SpecFieldList = specification.SpecFieldDictionary[SpecTableViewSource._rangeSection];
-					ShowDetailViewController(mapViewController, this);
-				}
+		//			MapViewController mapViewController = (MapViewController)Storyboard.InstantiateViewController("MapViewController");
+		//			mapViewController.SpecFieldList = specification.SpecFieldDictionary[SpecTableViewSource._rangeSection];
+		//			ShowDetailViewController(mapViewController, this);
+		//		}
 
 			
 
 
-			}
+		//	}
 
-			else {
+		//	else {
 
-				HelperMethods.SendBasicAlert("Connect to a Network", Settings._networkProblemMessage);
-			}
-		}
+		//		HelperMethods.SendBasicAlert("Connect to a Network", Settings._networkProblemMessage);
+		//	}
+		//}
 
 		void AdMessages_TouchUpInside(object sender, EventArgs e)
 		{
@@ -230,59 +230,59 @@ namespace AircraftForSale
 				});
 			});
 		}
-		async void TechnicalSpecButton_TouchUpInside(object sender, EventArgs e)
-		{
-			Ad ad = new Ad();
+		//async void TechnicalSpecButton_TouchUpInside(object sender, EventArgs e)
+		//{
+		//	Ad ad = new Ad();
 
-			if (sender == Ad1TechnicalSpecButton)
-			{
-				ad = DataObject.Ads[0];
-			}
+		//	if (sender == Ad1TechnicalSpecButton)
+		//	{
+		//		ad = DataObject.Ads[0];
+		//	}
 
 
-			if (sender == Ad2TechnicalSpecButton)
-			{
-				ad = DataObject.Ads[1];
-			}
+		//	if (sender == Ad2TechnicalSpecButton)
+		//	{
+		//		ad = DataObject.Ads[1];
+		//	}
 
-			if (sender == Ad3TechnicalSpecButton)
-			{
-				ad = DataObject.Ads[2];
-			}
+		//	if (sender == Ad3TechnicalSpecButton)
+		//	{
+		//		ad = DataObject.Ads[2];
+		//	}
 
-			if (sender == Ad4TechnicalSpecButton)
-			{
-				ad = DataObject.Ads[3];
-			}
+		//	if (sender == Ad4TechnicalSpecButton)
+		//	{
+		//		ad = DataObject.Ads[3];
+		//	}
 
-			SpecResponse specResponse = new SpecResponse();
+		//	SpecResponse specResponse = new SpecResponse();
 
-			var specification = await specResponse.GetSpecBySpecIDDesignationIDAsync(ad.SpecId, ad.DesignationId);
+		//	var specification = await specResponse.GetSpecBySpecIDDesignationIDAsync(ad.SpecId, ad.DesignationId);
 
-			if (specification.SpecId != 0)
-			{
-				var specTableViewController = this.Storyboard.InstantiateViewController("SpecViewController_") as SpecViewController_;
+		//	if (specification.SpecId != 0)
+		//	{
+		//		var specTableViewController = this.Storyboard.InstantiateViewController("SpecViewController_") as SpecViewController_;
 
-				specTableViewController.Spec = specification;
+		//		specTableViewController.Spec = specification;
 
-				this.PresentViewController(specTableViewController, true, null);
-			}
-			else
-			{
-				if (!Reachability.IsHostReachable(Settings._baseDomain))
-				{
-					var alert = UIAlertController.Create("Connect to a Network", "Please connect to a network to retrieve these aircraft specs", UIAlertControllerStyle.Alert);
+		//		this.PresentViewController(specTableViewController, true, null);
+		//	}
+		//	else
+		//	{
+		//		if (!Reachability.IsHostReachable(Settings._baseDomain))
+		//		{
+		//			var alert = UIAlertController.Create("Connect to a Network", "Please connect to a network to retrieve these aircraft specs", UIAlertControllerStyle.Alert);
 
-					alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Cancel, null));
-					if (alert.PopoverPresentationController != null)
-					{
-						alert.PopoverPresentationController.SourceView = this.View;
-						alert.PopoverPresentationController.PermittedArrowDirections = UIPopoverArrowDirection.Up;
-					}
-					PresentViewController(alert, animated: true, completionHandler: null);
-				}
-			}
-		}
+		//			alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Cancel, null));
+		//			if (alert.PopoverPresentationController != null)
+		//			{
+		//				alert.PopoverPresentationController.SourceView = this.View;
+		//				alert.PopoverPresentationController.PermittedArrowDirections = UIPopoverArrowDirection.Up;
+		//			}
+		//			PresentViewController(alert, animated: true, completionHandler: null);
+		//		}
+		//	}
+		//}
 
 
 		void TapImageAction1(UITapGestureRecognizer tap)
@@ -674,10 +674,10 @@ namespace AircraftForSale
 			AdLike3.TouchUpInside += AdLike_TouchUpInside;
 			AdLike4.TouchUpInside += AdLike_TouchUpInside;
 
-			Ad1TechnicalSpecButton.TouchUpInside += TechnicalSpecButton_TouchUpInside;
-			Ad2TechnicalSpecButton.TouchUpInside += TechnicalSpecButton_TouchUpInside;
-			Ad3TechnicalSpecButton.TouchUpInside += TechnicalSpecButton_TouchUpInside;
-			Ad4TechnicalSpecButton.TouchUpInside += TechnicalSpecButton_TouchUpInside;
+			//Ad1TechnicalSpecButton.TouchUpInside += TechnicalSpecButton_TouchUpInside;
+			//Ad2TechnicalSpecButton.TouchUpInside += TechnicalSpecButton_TouchUpInside;
+			//Ad3TechnicalSpecButton.TouchUpInside += TechnicalSpecButton_TouchUpInside;
+			//Ad4TechnicalSpecButton.TouchUpInside += TechnicalSpecButton_TouchUpInside;
 
 			Ad1NameButton.TouchUpInside += AdSortButton_TouchUpInside;
 			Ad2NameButton.TouchUpInside += AdSortButton_TouchUpInside;
@@ -699,10 +699,10 @@ namespace AircraftForSale
 			Ad3MessageButton.TouchUpInside += AdMessages_TouchUpInside;
 			Ad4MessageButton.TouchUpInside += AdMessages_TouchUpInside;
 
-			Ad1RGButton.TouchUpInside += AdRGButton_TouchUpInside;
-			Ad2RGButton.TouchUpInside += AdRGButton_TouchUpInside;
-			Ad3RGButton.TouchUpInside += AdRGButton_TouchUpInside;
-			Ad4RGButton.TouchUpInside += AdRGButton_TouchUpInside;
+			//Ad1RGButton.TouchUpInside += AdRGButton_TouchUpInside;
+			//Ad2RGButton.TouchUpInside += AdRGButton_TouchUpInside;
+			//Ad3RGButton.TouchUpInside += AdRGButton_TouchUpInside;
+			//Ad4RGButton.TouchUpInside += AdRGButton_TouchUpInside;
 		}
 
 		public override void ViewDidDisappear(bool animated)
@@ -726,10 +726,10 @@ namespace AircraftForSale
 			AdLike3.TouchUpInside -= AdLike_TouchUpInside;
 			AdLike4.TouchUpInside -= AdLike_TouchUpInside;
 
-			Ad1TechnicalSpecButton.TouchUpInside -= TechnicalSpecButton_TouchUpInside;
-			Ad2TechnicalSpecButton.TouchUpInside -= TechnicalSpecButton_TouchUpInside;
-			Ad3TechnicalSpecButton.TouchUpInside -= TechnicalSpecButton_TouchUpInside;
-			Ad4TechnicalSpecButton.TouchUpInside -= TechnicalSpecButton_TouchUpInside;
+			//Ad1TechnicalSpecButton.TouchUpInside -= TechnicalSpecButton_TouchUpInside;
+			//Ad2TechnicalSpecButton.TouchUpInside -= TechnicalSpecButton_TouchUpInside;
+			//Ad3TechnicalSpecButton.TouchUpInside -= TechnicalSpecButton_TouchUpInside;
+			//Ad4TechnicalSpecButton.TouchUpInside -= TechnicalSpecButton_TouchUpInside;
 
 			Ad1NameButton.TouchUpInside -= AdSortButton_TouchUpInside;
 			Ad2NameButton.TouchUpInside -= AdSortButton_TouchUpInside;
@@ -751,10 +751,10 @@ namespace AircraftForSale
 			Ad3MessageButton.TouchUpInside -= AdMessages_TouchUpInside;
 			Ad4MessageButton.TouchUpInside -= AdMessages_TouchUpInside;
 
-			Ad1RGButton.TouchUpInside -= AdRGButton_TouchUpInside;
-			Ad2RGButton.TouchUpInside -= AdRGButton_TouchUpInside;
-			Ad3RGButton.TouchUpInside -= AdRGButton_TouchUpInside;
-			Ad4RGButton.TouchUpInside -= AdRGButton_TouchUpInside;
+			//Ad1RGButton.TouchUpInside -= AdRGButton_TouchUpInside;
+			//Ad2RGButton.TouchUpInside -= AdRGButton_TouchUpInside;
+			//Ad3RGButton.TouchUpInside -= AdRGButton_TouchUpInside;
+			//Ad4RGButton.TouchUpInside -= AdRGButton_TouchUpInside;
 		}
 	}
 }

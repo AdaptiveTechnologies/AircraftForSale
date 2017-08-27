@@ -88,40 +88,40 @@ namespace AircraftForSale
 
         }
 
-		void AdSlideUpButton_TouchUpInside(object sender, EventArgs e)
-		{
-			if (sender == Ad1SlideUpButton)
-			{
-				if (!isAd1ImageUp)
-				{
+		//void AdSlideUpButton_TouchUpInside(object sender, EventArgs e)
+		//{
+		//	if (sender == Ad1SlideUpButton)
+		//	{
+		//		if (!isAd1ImageUp)
+		//		{
 
-					AdImage1.RemoveConstraint(ad1ImageOriginalConstraint);
-					AdImage1.AddConstraint(ad1ImageNewConstraint);
+		//			AdImage1.RemoveConstraint(ad1ImageOriginalConstraint);
+		//			AdImage1.AddConstraint(ad1ImageNewConstraint);
 
-					UIView.Animate(1, () =>
-					{
+		//			UIView.Animate(1, () =>
+		//			{
 
-						this.View.LayoutIfNeeded();
-					});
+		//				this.View.LayoutIfNeeded();
+		//			});
 
-					Ad1SlideUpButton.SetTitle("Detail", UIControlState.Normal);
-					isAd1ImageUp = true;
-				}
-				else {
+		//			Ad1SlideUpButton.SetTitle("Detail", UIControlState.Normal);
+		//			isAd1ImageUp = true;
+		//		}
+		//		else {
 
-					AdImage1.RemoveConstraint(ad1ImageNewConstraint);
-					AdImage1.AddConstraint(ad1ImageOriginalConstraint);
+		//			AdImage1.RemoveConstraint(ad1ImageNewConstraint);
+		//			AdImage1.AddConstraint(ad1ImageOriginalConstraint);
 
-					UIView.Animate(1, () =>
-					{
+		//			UIView.Animate(1, () =>
+		//			{
 
-						this.View.LayoutIfNeeded();
-					});
-					Ad1SlideUpButton.SetTitle("Detail", UIControlState.Normal);
-					isAd1ImageUp = false;
-				}
-			}
-		}
+		//				this.View.LayoutIfNeeded();
+		//			});
+		//			Ad1SlideUpButton.SetTitle("Detail", UIControlState.Normal);
+		//			isAd1ImageUp = false;
+		//		}
+		//	}
+		//}
 		void AdMessages_TouchUpInside(object sender, EventArgs e)
 		{
 			Ad ad = new Ad();
@@ -567,7 +567,7 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 
 			AdName2.Text = ad2.Name;
 			AdPrice2.Text = ""+(ad2.Price.Length == 0?"Call":ad2.Price);
-			Ad2TeaserLabel.Text = ad2.Teaser == string.Empty ? "Inquire for Details" :""+ ad2.Teaser;
+			//Ad2TeaserLabel.Text = ad2.Teaser == string.Empty ? "Inquire for Details" :""+ ad2.Teaser;
 
 			Ad2NameButton.SetTitle(ad2.Name, UIControlState.Normal);
 
@@ -600,7 +600,7 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 				ForegroundColor = UIColor.Blue
 			};
 
-			Ad1TeaserLabel.Text = ad1.Teaser == string.Empty ? "Inquire for Details" : ad1.Teaser;
+			//Ad1TeaserLabel.Text = ad1.Teaser == string.Empty ? "Inquire for Details" : ad1.Teaser;
 
 			#region Attributed Labels
 

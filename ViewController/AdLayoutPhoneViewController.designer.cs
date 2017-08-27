@@ -112,22 +112,6 @@ namespace AircraftForSale
         [Outlet]
         UIKit.UITableView SpecTableView { get; set; }
 
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        AircraftForSale.ManufacturerButton Ad1NameButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        AircraftForSale.CircleButton Ad1RGButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel Ad1TeaserLabel { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton Ad1TechnicalSpecButton { get; set; }
-
         void ReleaseDesignerOutlets ()
         {
             if (Ad1BrokerButton != null) {
@@ -143,11 +127,6 @@ namespace AircraftForSale
             if (Ad1LocationLabel != null) {
                 Ad1LocationLabel.Dispose ();
                 Ad1LocationLabel = null;
-            }
-
-            if (Ad1NameButton != null) {
-                Ad1NameButton.Dispose ();
-                Ad1NameButton = null;
             }
 
             if (Ad1NameButton != null) {
@@ -175,11 +154,6 @@ namespace AircraftForSale
                 Ad1RGButton = null;
             }
 
-            if (Ad1RGButton != null) {
-                Ad1RGButton.Dispose ();
-                Ad1RGButton = null;
-            }
-
             if (Ad1SerialLabel != null) {
                 Ad1SerialLabel.Dispose ();
                 Ad1SerialLabel = null;
@@ -188,16 +162,6 @@ namespace AircraftForSale
             if (Ad1TeaserLabel != null) {
                 Ad1TeaserLabel.Dispose ();
                 Ad1TeaserLabel = null;
-            }
-
-            if (Ad1TeaserLabel != null) {
-                Ad1TeaserLabel.Dispose ();
-                Ad1TeaserLabel = null;
-            }
-
-            if (Ad1TechnicalSpecButton != null) {
-                Ad1TechnicalSpecButton.Dispose ();
-                Ad1TechnicalSpecButton = null;
             }
 
             if (Ad1TechnicalSpecButton != null) {

@@ -186,7 +186,6 @@
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="Registration.storyboard" />
-    <InterfaceDefinition Include="Resources\Main~.storyboard" />
     <InterfaceDefinition Include="ViewController\ContactViewController.xib" />
     <InterfaceDefinition Include="Main_ipad.storyboard" />
     <InterfaceDefinition Include="Interfaces\Registration_ipad.storyboard" />
@@ -284,7 +283,6 @@
     <Compile Include="PageIndicatorClass.designer.cs">
       <DependentUpon>PageIndicatorClass.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\CircleButton.cs" />
     <Compile Include="SpecCell.cs" />
     <Compile Include="SpecCell.designer.cs">
       <DependentUpon>SpecCell.cs</DependentUpon>
@@ -355,6 +353,7 @@
     <Compile Include="SearchResultsTableCell.designer.cs">
       <DependentUpon>SearchResultsTableCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\CircleButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\profile.png" />

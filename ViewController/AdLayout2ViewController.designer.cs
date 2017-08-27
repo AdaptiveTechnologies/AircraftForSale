@@ -52,10 +52,6 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        AircraftForSale.CircleButton Ad1RGButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton Ad1RGButton { get; set; }
 
         [Outlet]
@@ -64,23 +60,11 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton Ad1SlideUpButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextView Ad1TeaserLabel { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel Ad1TeaserLabel { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton Ad1TechnicalSpecButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        AircraftForSale.CircleButton Ad1TechnicalSpecButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -148,10 +132,6 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        AircraftForSale.CircleButton Ad2RGButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel Ad2SerialLabel { get; set; }
 
         [Outlet]
@@ -160,23 +140,11 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton Ad2SlideUpButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextView Ad2TeaserLabel { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel Ad2TeaserLabel { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton Ad2TechnicalSpecButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        AircraftForSale.CircleButton Ad2TechnicalSpecButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -205,10 +173,6 @@ namespace AircraftForSale
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton AdShare1 { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIView HorizontalLineView { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -266,34 +230,14 @@ namespace AircraftForSale
                 Ad1RGButton = null;
             }
 
-            if (Ad1RGButton != null) {
-                Ad1RGButton.Dispose ();
-                Ad1RGButton = null;
-            }
-
             if (Ad1SerialLabel != null) {
                 Ad1SerialLabel.Dispose ();
                 Ad1SerialLabel = null;
             }
 
-            if (Ad1SlideUpButton != null) {
-                Ad1SlideUpButton.Dispose ();
-                Ad1SlideUpButton = null;
-            }
-
             if (Ad1TeaserLabel != null) {
                 Ad1TeaserLabel.Dispose ();
                 Ad1TeaserLabel = null;
-            }
-
-            if (Ad1TeaserLabel != null) {
-                Ad1TeaserLabel.Dispose ();
-                Ad1TeaserLabel = null;
-            }
-
-            if (Ad1TechnicalSpecButton != null) {
-                Ad1TechnicalSpecButton.Dispose ();
-                Ad1TechnicalSpecButton = null;
             }
 
             if (Ad1TechnicalSpecButton != null) {
@@ -381,11 +325,6 @@ namespace AircraftForSale
                 Ad2RGButton = null;
             }
 
-            if (Ad2RGButton != null) {
-                Ad2RGButton.Dispose ();
-                Ad2RGButton = null;
-            }
-
             if (Ad2SerialLabel != null) {
                 Ad2SerialLabel.Dispose ();
                 Ad2SerialLabel = null;
@@ -396,24 +335,9 @@ namespace AircraftForSale
                 Ad2ShareButton = null;
             }
 
-            if (Ad2SlideUpButton != null) {
-                Ad2SlideUpButton.Dispose ();
-                Ad2SlideUpButton = null;
-            }
-
             if (Ad2TeaserLabel != null) {
                 Ad2TeaserLabel.Dispose ();
                 Ad2TeaserLabel = null;
-            }
-
-            if (Ad2TeaserLabel != null) {
-                Ad2TeaserLabel.Dispose ();
-                Ad2TeaserLabel = null;
-            }
-
-            if (Ad2TechnicalSpecButton != null) {
-                Ad2TechnicalSpecButton.Dispose ();
-                Ad2TechnicalSpecButton = null;
             }
 
             if (Ad2TechnicalSpecButton != null) {
@@ -454,11 +378,6 @@ namespace AircraftForSale
             if (AdShare1 != null) {
                 AdShare1.Dispose ();
                 AdShare1 = null;
-            }
-
-            if (HorizontalLineView != null) {
-                HorizontalLineView.Dispose ();
-                HorizontalLineView = null;
             }
 
             if (PageIndicator != null) {
