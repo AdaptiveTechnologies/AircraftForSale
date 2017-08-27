@@ -34,46 +34,48 @@ namespace AircraftForSale
 
 
 
-public UITapGestureRecognizer HideKeyboardGesture
-{
-	get;
-	set;	}
+		public UITapGestureRecognizer HideKeyboardGesture
+		{
+			get;
+			set;
+		}
 
 
 
 
-		async void SubmitButton_TouchUpInside(object sender, EventArgs e) { 
-		        UsernameTextField.Enabled = false;
-				PasswordTextField.Enabled = false;
+		async void SubmitButton_TouchUpInside(object sender, EventArgs e)
+		{
+			UsernameTextField.Enabled = false;
+			PasswordTextField.Enabled = false;
 
-				string username = UsernameTextField.Text;
-                 string password = PasswordTextField.Text;
+			string username = UsernameTextField.Text;
+			string password = PasswordTextField.Text;
 
-				//TODO: Perform username/password validation
+			//TODO: Perform username/password validation
 
-				if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
-				{
-					//Save username/password to settings
+			if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
+			{
+				//Save username/password to settings
 
-					Settings.Username = username;
-					Settings.Password = password;
+				Settings.Username = username;
+				Settings.Password = password;
 
 
 				//if (Settings.AuthToken == null || Settings.AuthToken.Length == 0)
 				//{
-             LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, "Loading ...");
-			this.View.AddSubview(loadingIndicator);
+				LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, "Loading ...");
+				this.View.AddSubview(loadingIndicator);
 
 				//if(Settings.AuthToken==null)
 				{
-				    AuthResponse response = await AuthResponse.GetAuthResponseAsync(0, Settings.Username, Settings.Password);
+					AuthResponse response = await AuthResponse.GetAuthResponseAsync(0, Settings.Username, Settings.Password);
 
 					Settings.AppID = response.AppId;
 					Settings.AuthToken = response.AuthToken;
-				}   
-					APIManager manager = new APIManager();
+				}
+				APIManager manager = new APIManager();
 
-					{
+				{
 					LoginResponse authResponse = await manager.loginUser(Settings.AppID, Settings.Username, Settings.Password, Settings.AuthToken);
 
 					if (authResponse.AuthToken != null)
@@ -83,95 +85,100 @@ public UITapGestureRecognizer HideKeyboardGesture
 						Settings.UserID = authResponse.UserId;
 						Settings.AuthToken = authResponse.AuthToken;
 					}
-					else { 
-						loadingIndicator.Hide();
-					HelperMethods.SendBasicAlert("Login", "Login Failed");
-						return;
-					}
-				
-                            //AuthResponse auResponse = await AuthResponse.GetAuthResponseAsync(Settings.AppID, Settings.Username, Settings.Password);
-						try
-						{
-							var reponseProfile = await manager.getUserProfile(Settings.AppID, Settings.Username, Settings.AuthToken, Settings.Password);
-
-							Settings.IsAmphibian = reponseProfile.C1 == 1;
-							Settings.IsCommercial = reponseProfile.C2 == 1;
-							Settings.IsExperimental = reponseProfile.C3 == 1;
-							Settings.IsHelicopter = reponseProfile.C4 == 1;
-							Settings.IsJets = reponseProfile.C5 == 1;
-							Settings.IsSingles = reponseProfile.C7 == 1;
-							Settings.IsSingleEngine = reponseProfile.C6 == 1;
-							Settings.IsTwinPistons = reponseProfile.C8 == 1;
-							Settings.IsTwinTurbines = reponseProfile.C9 == 1;
-							Settings.IsVintage = reponseProfile.C10 == 1;
-							Settings.IsWarbirds = reponseProfile.C11 == 1;
-							Settings.IsLightSport = reponseProfile.C12 == 1;
-
-							Settings.Email = Settings.Username;
-
-                            Settings.FirstName = reponseProfile.FirstName;
-                            Settings.LastName = reponseProfile.LastName;
-                            Settings.Phone = reponseProfile.CellPhone;
-						loadingIndicator.Hide();
-                           this.PerformSegue("LoadTabBarControllerSeque", this);
-						}
-						catch (Exception exe) {
+					else
+					{
 						loadingIndicator.Hide();
 						HelperMethods.SendBasicAlert("Login", "Login Failed");
-						}
+						return;
+					}
 
-							
-                        }
-						
-					
-					 
-					
-					PasswordTextField.Layer.BorderColor = UIColor.Clear.CGColor;
-					PasswordTextField.Layer.BorderWidth = 0f;
+					//AuthResponse auResponse = await AuthResponse.GetAuthResponseAsync(Settings.AppID, Settings.Username, Settings.Password);
+					try
+					{
+						var reponseProfile = await manager.getUserProfile(Settings.AppID, Settings.Username, Settings.AuthToken, Settings.Password);
 
+						Settings.IsAmphibian = reponseProfile.C1 == 1;
+						Settings.IsCommercial = reponseProfile.C2 == 1;
+						Settings.IsExperimental = reponseProfile.C3 == 1;
+						Settings.IsHelicopter = reponseProfile.C4 == 1;
+						Settings.IsJets = reponseProfile.C5 == 1;
+						Settings.IsSingles = reponseProfile.C7 == 1;
+						Settings.IsSingleEngine = reponseProfile.C6 == 1;
+						Settings.IsTwinPistons = reponseProfile.C8 == 1;
+						Settings.IsTwinTurbines = reponseProfile.C9 == 1;
+						Settings.IsVintage = reponseProfile.C10 == 1;
+						Settings.IsWarbirds = reponseProfile.C11 == 1;
+						Settings.IsLightSport = reponseProfile.C12 == 1;
+
+						Settings.Email = Settings.Username;
+
+						Settings.FirstName = reponseProfile.FirstName;
+						Settings.LastName = reponseProfile.LastName;
+						Settings.Phone = reponseProfile.CellPhone;
+						loadingIndicator.Hide();
+						this.PerformSegue("LoadTabBarControllerSeque", this);
+					}
+					catch (Exception exe)
+					{
+						loadingIndicator.Hide();
+						HelperMethods.SendBasicAlert("Login", "Login Failed");
+					}
+
+
+				}
+
+
+
+
+				PasswordTextField.Layer.BorderColor = UIColor.Clear.CGColor;
+				PasswordTextField.Layer.BorderWidth = 0f;
+
+				UsernameTextField.Layer.BorderColor = UIColor.Clear.CGColor;
+				UsernameTextField.Layer.BorderWidth = 0f;
+			}
+			else
+			{
+				//Update UI to reflect invalid username or password
+
+				if (string.IsNullOrEmpty(username))
+				{
+					UsernameTextField.Layer.BorderColor = UIColor.Red.CGColor;
+					UsernameTextField.Layer.BorderWidth = 1f;
+				}
+				else
+				{
 					UsernameTextField.Layer.BorderColor = UIColor.Clear.CGColor;
 					UsernameTextField.Layer.BorderWidth = 0f;
 				}
-				else {
-					//Update UI to reflect invalid username or password
 
-					if (string.IsNullOrEmpty(username))
-					{
-						UsernameTextField.Layer.BorderColor = UIColor.Red.CGColor;
-						UsernameTextField.Layer.BorderWidth = 1f;
-					}
-					else {
-						UsernameTextField.Layer.BorderColor = UIColor.Clear.CGColor;
-						UsernameTextField.Layer.BorderWidth = 0f;
-					}
-
-					if (string.IsNullOrEmpty(password))
-					{
-						PasswordTextField.Layer.BorderColor = UIColor.Red.CGColor;
-						PasswordTextField.Layer.BorderWidth = 1f;
-					}
-					else {
-						PasswordTextField.Layer.BorderColor = UIColor.Clear.CGColor;
-						PasswordTextField.Layer.BorderWidth = 0f;
-					}
+				if (string.IsNullOrEmpty(password))
+				{
+					PasswordTextField.Layer.BorderColor = UIColor.Red.CGColor;
+					PasswordTextField.Layer.BorderWidth = 1f;
 				}
+				else
+				{
+					PasswordTextField.Layer.BorderColor = UIColor.Clear.CGColor;
+					PasswordTextField.Layer.BorderWidth = 0f;
+				}
+			}
 
-				UsernameTextField.Enabled = true;
-				PasswordTextField.Enabled = true;
-		
+			UsernameTextField.Enabled = true;
+			PasswordTextField.Enabled = true;
+
 		}
 
 
-public override void ViewDidAppear(bool animated)
-{
-	base.ViewDidAppear(animated);
+		public override void ViewDidAppear(bool animated)
+		{
+			base.ViewDidAppear(animated);
 
-	// This screen name value will remain set on the tracker and sent with
-	// hits until it is set to a new value or to null.
-	Gai.SharedInstance.DefaultTracker.Set(GaiConstants.ScreenName, "Login View");
+			// This screen name value will remain set on the tracker and sent with
+			// hits until it is set to a new value or to null.
+			Gai.SharedInstance.DefaultTracker.Set(GaiConstants.ScreenName, "Login View");
 
-	Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateAppView().Build());
-}
+			Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateAppView().Build());
+		}
 
 		public override void ViewDidLoad()
 		{
@@ -188,30 +195,30 @@ public override void ViewDidAppear(bool animated)
 
 			});
 
-            UsernameTextField.Layer.BorderColor = UIColor.White.CGColor;
-            UsernameTextField.Layer.BorderWidth = 1f;
-UsernameTextField.AttributedPlaceholder = new NSAttributedString(
-				"Email Address",
-				font: UsernameTextField.Font,
-				foregroundColor: UIColor.White
-);
+			UsernameTextField.Layer.BorderColor = UIColor.White.CGColor;
+			UsernameTextField.Layer.BorderWidth = 1f;
+			UsernameTextField.AttributedPlaceholder = new NSAttributedString(
+							"Email Address",
+							font: UsernameTextField.Font,
+							foregroundColor: UIColor.White
+			);
 
-            PasswordTextField.Layer.BorderColor = UIColor.White.CGColor;
-            PasswordTextField.Layer.BorderWidth = 1f;
-PasswordTextField.AttributedPlaceholder = new NSAttributedString(
-				"Password",
-				font: PasswordTextField.Font,
-				foregroundColor: UIColor.White
-);
+			PasswordTextField.Layer.BorderColor = UIColor.White.CGColor;
+			PasswordTextField.Layer.BorderWidth = 1f;
+			PasswordTextField.AttributedPlaceholder = new NSAttributedString(
+							"Password",
+							font: PasswordTextField.Font,
+							foregroundColor: UIColor.White
+			);
 
-            LoginButton.Layer.BorderColor = UIColor.White.CGColor;
-            LoginButton.Layer.BorderWidth = 0f;
+			LoginButton.Layer.BorderColor = UIColor.White.CGColor;
+			LoginButton.Layer.BorderWidth = 0f;
 
-            LaterButton.Layer.BorderColor = UIColor.White.CGColor;
-            LaterButton.Layer.BorderWidth = 0f;
+			LaterButton.Layer.BorderColor = UIColor.White.CGColor;
+			LaterButton.Layer.BorderWidth = 0f;
 
 			LoginButton.TouchUpInside += SubmitButton_TouchUpInside;
-	
+
 
 
 
@@ -239,8 +246,8 @@ PasswordTextField.AttributedPlaceholder = new NSAttributedString(
 
 				//this.PerformSegue("RegisterSegue", this);
 
-              //RegistrationViewController registrationViewController = (RegistrationViewController)ParentViewController.Storyboard.InstantiateViewController("RegistrationViewController");
-              //NavigationController.PushViewController(registrationViewController, true);
+				//RegistrationViewController registrationViewController = (RegistrationViewController)ParentViewController.Storyboard.InstantiateViewController("RegistrationViewController");
+				//NavigationController.PushViewController(registrationViewController, true);
 			};
 
 
@@ -269,11 +276,11 @@ PasswordTextField.AttributedPlaceholder = new NSAttributedString(
 
 		}
 
-public override void ViewWillDisappear(bool animated)
-{
-	base.ViewWillDisappear(animated);
+		public override void ViewWillDisappear(bool animated)
+		{
+			base.ViewWillDisappear(animated);
 
-	View.RemoveGestureRecognizer(HideKeyboardGesture);
+			View.RemoveGestureRecognizer(HideKeyboardGesture);
 			//LoginButton.TouchUpInside -= SubmitButton_TouchUpInside;
 		}
 
@@ -285,7 +292,7 @@ public override void ViewWillDisappear(bool animated)
 
 			if (Settings.IsRegistered)
 			{
-				
+
 				//this.TabBarItem.BadgeValue = null;
 
 				UsernameTextField.Alpha = 0f;
@@ -298,8 +305,9 @@ public override void ViewWillDisappear(bool animated)
 				LogoutButton.Alpha = 1f;
 				changePassButton.Alpha = 1f;
 			}
-			else {
-				
+			else
+			{
+
 				//this.TabBarItem.BadgeValue = "1";
 
 				UsernameTextField.Alpha = 1f;
