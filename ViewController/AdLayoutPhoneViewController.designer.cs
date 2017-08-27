@@ -112,7 +112,22 @@ namespace AircraftForSale
         [Outlet]
         UIKit.UITableView SpecTableView { get; set; }
 
-      
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        AircraftForSale.ManufacturerButton Ad1NameButton { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        AircraftForSale.CircleButton Ad1RGButton { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel Ad1TeaserLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton Ad1TechnicalSpecButton { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
             if (Ad1BrokerButton != null) {

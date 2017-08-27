@@ -347,6 +347,14 @@
     <Compile Include="SpecCell1.designer.cs">
       <DependentUpon>SpecCell1.cs</DependentUpon>
     </Compile>
+    <Compile Include="SearchResultsViewController.cs" />
+    <Compile Include="SearchResultsViewController.designer.cs">
+      <DependentUpon>SearchResultsViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchResultsTableCell.cs" />
+    <Compile Include="SearchResultsTableCell.designer.cs">
+      <DependentUpon>SearchResultsTableCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\profile.png" />

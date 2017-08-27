@@ -60,38 +60,108 @@ public override void ViewDidAppear(bool animated)
 			}
 
 
-			//Ensure database refresh
-			this.NavigationItem.SetRightBarButtonItem(
-				new UIBarButtonItem(UIBarButtonSystemItem.Refresh, async (sender, args) =>
-				{
-					if (Reachability.IsHostReachable(Settings._baseDomain))
+            //Ensure database refresh
+            //this.NavigationItem.SetRightBarButtonItem(
+            var refreshButton = new UIBarButtonItem(UIBarButtonSystemItem.Refresh, async (sender, args) =>
+            {
+                if (Reachability.IsHostReachable(Settings._baseDomain))
+                {
+                    LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame);
+                    this.View.AddSubview(loadingIndicator);
+                        // button was clicked
+                        List<Ad> adList = new List<Ad>();
+
+
+                    Ad.DeleteAdsByClassification(SelectedClassification);
+                    adList = (await Ad.GetAdsByClassificationAsync(SelectedClassification)).ToList();
+
+
+                    this.ModelController.LoadModalController(adList, SelectedClassification);
+
+                    var firstViewController = ModelController.GetViewController(0, false);
+                    var viewControllerArray = new UIViewController[] { firstViewController };
+                    PageViewController.SetViewControllers(viewControllerArray, UIPageViewControllerNavigationDirection.Forward, true, null);
+
+                    loadingIndicator.Hide();
+
+
+                }
+                else
+                {
+                    HelperMethods.SendBasicAlert("Connect to a Network", "Please connect to a network to refresh these ads");
+                }
+            });
+            //, true);
+
+            //start implementing search feature
+            var searchButton = new UIBarButtonItem(UIBarButtonSystemItem.Search, (sender, e) =>
+            {
+				//Create Alert
+                var searchAlertController = UIAlertController.Create("Search " + SelectedClassification + " Aircraft", "Search by manufacturer and/or model", UIAlertControllerStyle.Alert);
+
+				//Add Text Input
+				searchAlertController.AddTextField(textField => {
+				});
+
+				//Add Actions
+				var cancelAction = UIAlertAction.Create("Cancel", UIAlertActionStyle.Cancel, alertAction => Console.WriteLine("Cancel was Pressed"));
+				var okayAction = UIAlertAction.Create("Search", UIAlertActionStyle.Default, alertAction =>
+                {
+
+                    var errorMessage = "";
+					if (ModelController != null && ModelController.adList != null && ModelController.adList.Count > 0)
 					{
-						LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame);
-						this.View.AddSubview(loadingIndicator);
-						// button was clicked
-						List<Ad> adList = new List<Ad>();
+                        var adList = ModelController.adList;
+                        var searchText = searchAlertController.TextFields[0].Text;
+                        if(string.IsNullOrEmpty(searchText)){
+                            errorMessage = "Please enter a manufacture and/or model.";
+                        }else{
+                            //search ad list
+
+                            //first check to see if the whole search is contained in the ad name
+                            var initialSearchResults = adList.Where(row => row.Name.Contains(searchText));
+                            if(initialSearchResults != null && initialSearchResults.Count() > 0){
+
+                                //pop up a modal with search results here
+                            }else{
+
+								//if no direct hits, use searchTermList to try and get more hits
+								//get search terms
+								var searchTermList = searchText.Split(' ').ToList();
+
+                                SearchResultsViewController searchResultsViewController = (SearchResultsViewController)Storyboard.InstantiateViewController("SearchResultsViewController");
+                                var secondarySearchResults = adList.Take(5).ToList();
+                                searchResultsViewController.SearchResultsAdList = secondarySearchResults;
+                                this.PresentViewController(searchResultsViewController, true, null);
+
+                            }
+                            //var adListSearchResults = adList.Any(row => row.Name == searchText || searchTermList.Contains(row.Manufacturer) 
+                                              //|| searchTermList.Contains(row.                );
+
+                            var bPoint = "";
+                        }
+                    }else{
+                        errorMessage = "Oops... There was a problem. Aircraft ads are not yet loaded.";
+                    }
+                    if(errorMessage != string.Empty){
+                        HelperMethods.SendBasicAlert("Alert", errorMessage);
+                    }
+                });
+
+				searchAlertController.AddAction(cancelAction);
+				searchAlertController.AddAction(okayAction);
+
+				//Present Alert
+				PresentViewController(searchAlertController, true, null);
+            });
 
 
-						Ad.DeleteAdsByClassification(SelectedClassification);
-						adList = (await Ad.GetAdsByClassificationAsync(SelectedClassification)).ToList();
+            List<UIBarButtonItem> navButtonList = new List<UIBarButtonItem>();
+            navButtonList.Add(searchButton);
+            navButtonList.Add(refreshButton);;
 
 
-						this.ModelController.LoadModalController(adList, SelectedClassification);
-
-						var firstViewController = ModelController.GetViewController(0, false);
-						var viewControllerArray = new UIViewController[] { firstViewController };
-						PageViewController.SetViewControllers(viewControllerArray, UIPageViewControllerNavigationDirection.Forward, true, null);
-
-						loadingIndicator.Hide();
-
-
-					}
-					else
-					{
-						HelperMethods.SendBasicAlert("Connect to a Network", "Please connect to a network to refresh these ads");
-					}
-				})
-			, true);
+            this.NavigationItem.SetRightBarButtonItems(navButtonList.ToArray(), true);
 
 			ModelController = new ModelController(SelectedClassification);
 
