@@ -308,7 +308,7 @@ namespace AircraftForSale
 			else
 			{
 
-				//this.TabBarItem.BadgeValue = "1";
+				///this.TabBarItem.BadgeValue = "1";
 
 				UsernameTextField.Alpha = 1f;
 				PasswordTextField.Alpha = 1f;
