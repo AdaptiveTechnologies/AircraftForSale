@@ -1,6 +1,6 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
+// This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
@@ -25,10 +25,6 @@ namespace AircraftForSale
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton Ad1MessageButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        AircraftForSale.ManufacturerButton Ad1NameButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -64,10 +60,6 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        AircraftForSale.ManufacturerButton Ad2NameButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel Ad2PriceChangeLabel { get; set; }
 
         [Outlet]
@@ -100,10 +92,6 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        AircraftForSale.ManufacturerButton Ad3NameButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel Ad3PriceChangeLabel { get; set; }
 
         [Outlet]
@@ -133,10 +121,6 @@ namespace AircraftForSale
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton Ad4MessageButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        AircraftForSale.ManufacturerButton Ad4NameButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -275,11 +259,6 @@ namespace AircraftForSale
                 Ad1MessageButton = null;
             }
 
-            if (Ad1NameButton != null) {
-                Ad1NameButton.Dispose ();
-                Ad1NameButton = null;
-            }
-
             if (Ad1PriceChangeLabel != null) {
                 Ad1PriceChangeLabel.Dispose ();
                 Ad1PriceChangeLabel = null;
@@ -318,11 +297,6 @@ namespace AircraftForSale
             if (Ad2MessageButton != null) {
                 Ad2MessageButton.Dispose ();
                 Ad2MessageButton = null;
-            }
-
-            if (Ad2NameButton != null) {
-                Ad2NameButton.Dispose ();
-                Ad2NameButton = null;
             }
 
             if (Ad2PriceChangeLabel != null) {
@@ -365,11 +339,6 @@ namespace AircraftForSale
                 Ad3MessageButton = null;
             }
 
-            if (Ad3NameButton != null) {
-                Ad3NameButton.Dispose ();
-                Ad3NameButton = null;
-            }
-
             if (Ad3PriceChangeLabel != null) {
                 Ad3PriceChangeLabel.Dispose ();
                 Ad3PriceChangeLabel = null;
@@ -408,11 +377,6 @@ namespace AircraftForSale
             if (Ad4MessageButton != null) {
                 Ad4MessageButton.Dispose ();
                 Ad4MessageButton = null;
-            }
-
-            if (Ad4NameButton != null) {
-                Ad4NameButton.Dispose ();
-                Ad4NameButton = null;
             }
 
             if (Ad4PriceChangeLabel != null) {

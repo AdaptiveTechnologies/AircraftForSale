@@ -5,7 +5,7 @@ using Foundation;
 using UIKit;
 namespace AircraftForSale
 {
-	[Register("ManufacturerButton"), DesignTimeVisible(true)]
+	//[Register("ManufacturerButton"), DesignTimeVisible(true)]
 	public class ManufacturerButton : UIButton
 	{
 

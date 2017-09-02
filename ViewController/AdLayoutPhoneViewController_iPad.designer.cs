@@ -10,8 +10,8 @@ using System.CodeDom.Compiler;
 
 namespace AircraftForSale
 {
-    [Register ("AdLayoutPhoneViewController")]
-    partial class AdLayoutPhoneViewController
+    [Register ("AdLayoutPhoneViewController_iPad")]
+    partial class AdLayoutPhoneViewController_iPad
     {
         [Outlet]
         UIKit.UIButton Ad1BrokerButton { get; set; }

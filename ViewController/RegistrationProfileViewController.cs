@@ -14,45 +14,45 @@ namespace AircraftForSale
 {
 	public partial class RegistrationProfileViewController : UIViewController, IMultiStepProcessStep
 	{
-		partial void UIButton27947_TouchUpInside(UIButton sender)
-		{
-			Settings.IsRegistered = true;
+		//partial void UIButton27947_TouchUpInside(UIButton sender)
+		//{
+		//	Settings.IsRegistered = true;
 
-			//RegistrationViewController registrationVC = (RegistrationViewController)((MultiStepProcessHorizontalViewController)this.ParentViewController).ContainerViewController;
+		//	//RegistrationViewController registrationVC = (RegistrationViewController)((MultiStepProcessHorizontalViewController)this.ParentViewController).ContainerViewController;
 
-			//var loginVC = registrationVC.PresentingViewController as LoginViewController;
-			////if loginVS is null, than started registration from the GlobalAir Magazine navigation controller or tabbarcontroller main home view
-			//if (loginVC == null)
-			//{
-			//	//presenting viewcontroller will be tabbarcontroller if did registration from tab nav controller
-			//	var tabBarController = registrationVC.PresentingViewController as UITabBarController;
-			//	if (tabBarController != null)
-			//	{
-
-
-			//		registrationVC.DismissViewController(true, null);
-
-			//		var viewController = tabBarController.ViewControllers.FirstOrDefault(row => row is MagazineNavigationViewController);
-			//		tabBarController.SelectedViewController = viewController;
-
-			//		//need to set the register tab bar item badge value to null now that we are registered
-			//		var registrationTabBarItem = tabBarController.TabBar.Items[2];
-			//		registrationTabBarItem.BadgeValue = null;
+		//	//var loginVC = registrationVC.PresentingViewController as LoginViewController;
+		//	////if loginVS is null, than started registration from the GlobalAir Magazine navigation controller or tabbarcontroller main home view
+		//	//if (loginVC == null)
+		//	//{
+		//	//	//presenting viewcontroller will be tabbarcontroller if did registration from tab nav controller
+		//	//	var tabBarController = registrationVC.PresentingViewController as UITabBarController;
+		//	//	if (tabBarController != null)
+		//	//	{
 
 
-			//	}
-			//	else {
-			//		//if wasn't registering from login page or tabbarviewcontroller than registered from the Globalair magazinae nav controller
-			//		registrationVC.NavigationController.PopViewController(true);
-			//	}
-			//}
-			//else {
-			//	registrationVC.DismissViewController(true, null);
-			//	loginVC.PerformSegue("LoadTabBarControllerSeque", loginVC);
+		//	//		registrationVC.DismissViewController(true, null);
+
+		//	//		var viewController = tabBarController.ViewControllers.FirstOrDefault(row => row is MagazineNavigationViewController);
+		//	//		tabBarController.SelectedViewController = viewController;
+
+		//	//		//need to set the register tab bar item badge value to null now that we are registered
+		//	//		var registrationTabBarItem = tabBarController.TabBar.Items[2];
+		//	//		registrationTabBarItem.BadgeValue = null;
 
 
-			//}
-		}
+		//	//	}
+		//	//	else {
+		//	//		//if wasn't registering from login page or tabbarviewcontroller than registered from the Globalair magazinae nav controller
+		//	//		registrationVC.NavigationController.PopViewController(true);
+		//	//	}
+		//	//}
+		//	//else {
+		//	//	registrationVC.DismissViewController(true, null);
+		//	//	loginVC.PerformSegue("LoadTabBarControllerSeque", loginVC);
+
+
+		//	//}
+		//}
 
 		void CloseButton_TouchUpInside(object sender, EventArgs e)
 		{

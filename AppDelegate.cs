@@ -163,6 +163,8 @@ namespace AircraftForSale
 
                     //preload Jets
                     Settings.IsJets = true;
+                    Settings.IsSingleEngine = true;
+                    Settings.IsTwinTurbines = true;
 
                     List<string> preloadJetsAndOtherClassificationsIfSetSettingsTrueAbove = Settings.GetFavoredClassifications();
 

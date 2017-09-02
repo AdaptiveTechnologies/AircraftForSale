@@ -19,7 +19,7 @@ namespace AircraftForSale
 		async void AdRGButton_TouchUpInside(object sender, EventArgs e)
 		{
 			Ad ad = new Ad();
- 
+
 			if (sender == Ad1RGButton)
 			{
 				ad = DataObject.Ads[2];
@@ -54,11 +54,12 @@ namespace AircraftForSale
 					mapViewController.SpecFieldList = specification.SpecFieldDictionary[SpecTableViewSource._rangeSection];
 					ShowDetailViewController(mapViewController, this);
 				}
-			
+
 
 			}
 
-			else {
+			else
+			{
 				HelperMethods.SendBasicAlert("Connect to a Network", Settings._networkProblemMessage);
 			}
 		}
@@ -69,24 +70,24 @@ namespace AircraftForSale
 		NSLayoutConstraint ad1ImageNewConstraint;
 
 
-        void Ad2DetailButton_TouchUpInside(object sender, EventArgs e)
-       {
-	       Ad2DetailView.Hidden = !Ad2DetailView.Hidden;
+		void Ad2DetailButton_TouchUpInside(object sender, EventArgs e)
+		{
+			Ad2DetailView.Hidden = !Ad2DetailView.Hidden;
 
-        }
+		}
 
 		void Ad1DetailButton_TouchUpInside(object sender, EventArgs e)
 		{
 			Ad1DetailView.Hidden = !Ad1DetailView.Hidden;
 
-            Ad1DetailButton.SetTitle(Ad1DetailView.Hidden?"Detail":"Hide Detail", UIControlState.Normal);
- 		}
+			Ad1DetailButton.SetTitle(Ad1DetailView.Hidden ? "Detail" : "Hide Detail", UIControlState.Normal);
+		}
 
-        void Ad3DetailButton_TouchUpInside(object sender, EventArgs e)
-        {
-	    Ad3DetailView.Hidden = !Ad3DetailView.Hidden;
+		void Ad3DetailButton_TouchUpInside(object sender, EventArgs e)
+		{
+			Ad3DetailView.Hidden = !Ad3DetailView.Hidden;
 
-        }
+		}
 
 		//void AdSlideUpButton_TouchUpInside(object sender, EventArgs e)
 		//{
@@ -107,7 +108,8 @@ namespace AircraftForSale
 		//			Ad1SlideUpButton.SetTitle("Detail", UIControlState.Normal);
 		//			isAd1ImageUp = true;
 		//		}
-		//		else {
+		//		else
+		//		{
 
 		//			AdImage1.RemoveConstraint(ad1ImageNewConstraint);
 		//			AdImage1.AddConstraint(ad1ImageOriginalConstraint);
@@ -163,7 +165,8 @@ namespace AircraftForSale
 				HelperMethods.ShowAndSendSMS(this, new string[] { brokerPhoneNumber }, textMessageBody, successCallBack);
 
 			}
-			else {
+			else
+			{
 				var av = new UIAlertView("Not supported",
 				  "Text messaging is not supported on this device",
 				  null,
@@ -228,7 +231,7 @@ namespace AircraftForSale
 				isAdNameSort = false;
 			}
 
-LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSort ? "Loading Aircraft by Selected Type" : "Loading Aircraft by Selected Broker");
+			LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSort ? "Loading Aircraft by Selected Type" : "Loading Aircraft by Selected Broker");
 			this.View.AddSubview(loadingIndicator);
 
 			var modelController = magFlipBoardViewController.ModelController;
@@ -237,7 +240,7 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 			Task.Run(async () =>
 			{
 
-			
+
 
 
 				adList = (await Ad.GetAdsByClassificationAsync(DataObject.SelectedClassification)).ToList();
@@ -249,7 +252,8 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 				{
 					similarAdList = adList.Where(row => row.Name == ad.Name).ToList();
 				}
-				else {
+				else
+				{
 					similarAdList = adList.Where(row => row.BrokerName == ad.BrokerName).ToList();
 				}
 
@@ -268,7 +272,7 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 					var viewControllers = new UIViewController[] { startingViewController };
 					pageViewController.SetViewControllers(viewControllers, UIPageViewControllerNavigationDirection.Forward, true, null);
 
-					HelperMethods.SendBasicAlert("","Aircraft arranged by "+ (isAdNameSort? ad.Name:ad.BrokerName));
+					HelperMethods.SendBasicAlert("", "Aircraft arranged by " + (isAdNameSort ? ad.Name : ad.BrokerName));
 				});
 			});
 		}
@@ -279,8 +283,8 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 
 			if (sender == Ad1TechnicalSpecButton)
 			{
-				
-				ad = DataObject.Ads[DataObject.Ads.Count-1];
+
+				ad = DataObject.Ads[DataObject.Ads.Count - 1];
 			}
 
 
@@ -306,7 +310,8 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 
 				this.PresentViewController(specTableViewController, true, null);
 			}
-			else {
+			else
+			{
 				if (!Reachability.IsHostReachable(Settings._baseDomain))
 				{
 					var alert = UIAlertController.Create("Connect to a Network", "Please connect to a network to retrieve these aircraft specs", UIAlertControllerStyle.Alert);
@@ -398,7 +403,7 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 			var itemTitle = NSObject.FromObject(title);
 			var itemMessage = NSObject.FromObject(message);
 			var itemLink = NSObject.FromObject(url);
-			var activityItems = new NSObject[] { itemLink, itemMessage, itemTitle ,itemLink};
+			var activityItems = new NSObject[] { itemLink, itemMessage, itemTitle, itemLink };
 			UIActivity[] applicationActivities = null;
 
 			var activityController = new UIActivityViewController(activityItems, applicationActivities);
@@ -435,7 +440,8 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 				emailInquiryViewController.AdProperty = ad;
 				this.PresentViewController(emailInquiryViewController, true, null);
 			}
-			else {
+			else
+			{
 				HelperMethods.SendBasicAlert("Connect to a Network", "Please connect to a network to send this email");
 			}
 		}
@@ -461,7 +467,7 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 
 		//~AdLayout1ViewController()
 		//{
-		//	Console.WriteLine("AdLayout1ViewController is about to be collected");
+		//  Console.WriteLine("AdLayout1ViewController is about to be collected");
 		//}
 
 		protected override void Dispose(bool disposing)
@@ -478,12 +484,12 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 			base.ViewDidLoad();
 
 
-        SizeF size = new SizeF(310,  520);
-        myScrollView1.ContentSize = size;
+			SizeF size = new SizeF(310, 520);
+			myScrollView1.ContentSize = size;
 			myScrollView2.ContentSize = size;
 
-            Random rnd = new Random();
-            var randomDouble = rnd.NextDouble();
+			Random rnd = new Random();
+			var randomDouble = rnd.NextDouble();
 			//CGRect rect1 = upperView.Frame;
 			//CGRect rect2 = lowerView.Frame;
 
@@ -491,13 +497,13 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 
 			//condition will be met 35% of the time
 			//if (randomDouble > 0 && randomDouble <= .5)
-			//			{
-			//				//rect1.Y = 390;
-			//				//rect2.Y = 0;
+			//          {
+			//              //rect1.Y = 390;
+			//              //rect2.Y = 0;
 			//
-			//				upperView.Frame = rect2;
-			//				lowerView.Frame = rect1;
-			//			}
+			//              upperView.Frame = rect2;
+			//              lowerView.Frame = rect1;
+			//          }
 
 
 
@@ -537,16 +543,16 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 				placeholder: UIImage.FromBundle("ad_placeholder.jpg")
 			);
 			AdName3.Text = ad3.Name;
-			AdPrice3.Text = (ad3.Price.Length == 0)?"Call":ad3.Price;
+			AdPrice3.Text = (ad3.Price.Length == 0) ? "Call" : ad3.Price;
 			AdName3.TextColor = UIColor.White;
 			AdPrice3.TextColor = UIColor.White;
-            Ad1BrokerButton.SetTitle("", UIControlState.Normal);
+			Ad1BrokerButton.SetTitle("", UIControlState.Normal);
 			Ad2BrokerButton.SetTitle("", UIControlState.Normal);
 			Ad3BrokerButton.SetTitle("", UIControlState.Normal);
 
 			Ad1BrokerLabel.Text = ad1.BrokerName;
-			Ad2BrokerLabel.Text =""+ ad2.BrokerName;
-			Ad3BrokerLabel.Text = ""+ ad3.BrokerName;
+			Ad2BrokerLabel.Text = "" + ad2.BrokerName;
+			Ad3BrokerLabel.Text = "" + ad3.BrokerName;
 
 			Ad1NameButton.SetTitle(ad1.Name, UIControlState.Normal);
 			//Increase the touch area of the button
@@ -566,8 +572,8 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 			);
 
 			AdName2.Text = ad2.Name;
-			AdPrice2.Text = ""+(ad2.Price.Length == 0?"Call":ad2.Price);
-			//Ad2TeaserLabel.Text = ad2.Teaser == string.Empty ? "Inquire for Details" :""+ ad2.Teaser;
+			AdPrice2.Text = "" + (ad2.Price.Length == 0 ? "Call" : ad2.Price);
+			//Ad2TeaserLabel.Text = ad2.Teaser == string.Empty ? "Inquire for Details" : "" + ad2.Teaser;
 
 			Ad2NameButton.SetTitle(ad2.Name, UIControlState.Normal);
 
@@ -579,8 +585,8 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 
 
 			AdName3.Text = ad3.Name;
-			AdPrice3.Text = ""+(ad3.Price.Length == 0?"Call":ad3.Price);
-			Ad3TeaserLabel.Text = ad3.Teaser == string.Empty ? "Inquire for Details" : ""+ad3.Teaser;
+			AdPrice3.Text = "" + (ad3.Price.Length == 0 ? "Call" : ad3.Price);
+			Ad3TeaserLabel.Text = ad3.Teaser == string.Empty ? "Inquire for Details" : "" + ad3.Teaser;
 
 			Ad3NameButton.SetTitle(ad3.Name, UIControlState.Normal);
 
@@ -600,7 +606,7 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 				ForegroundColor = UIColor.Blue
 			};
 
-			//Ad1TeaserLabel.Text = ad1.Teaser == string.Empty ? "Inquire for Details" : ad1.Teaser;
+			Ad1TeaserLabel.Text = ad1.Teaser == string.Empty ? "Inquire for Details" : ad1.Teaser;
 
 			#region Attributed Labels
 
@@ -610,16 +616,16 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 			Ad1LocationLabel.AttributedText = HelperMethods.GetLocationAttributedString(ad1, labelAttribute);
 
 
-			Ad2RegistrationNumberLabel.Text = ""+ad2.RegistrationNumber;
-			Ad3RegistrationNumberLabel.Text = ""+ad3.RegistrationNumber;
-			Ad2SerialNumberLabel.Text = ""+ad2.SerialNumber;
-			Ad3SerialNumberLabel.Text = ""+ad3.SerialNumber;
+			Ad2RegistrationNumberLabel.Text = "" + ad2.RegistrationNumber;
+			Ad3RegistrationNumberLabel.Text = "" + ad3.RegistrationNumber;
+			Ad2SerialNumberLabel.Text = "" + ad2.SerialNumber;
+			Ad3SerialNumberLabel.Text = "" + ad3.SerialNumber;
 
-			Ad2TotalTimeLabel.Text = ""+ad2.TotalTime;
-			Ad3TotalTimeLabel.Text = ""+ad3.TotalTime;
+			Ad2TotalTimeLabel.Text = "" + ad2.TotalTime;
+			Ad3TotalTimeLabel.Text = "" + ad3.TotalTime;
 
-			Ad2LocationLabel.Text = ""+ad2.Location;
-			Ad3LocationLabel.Text = ""+ad3.Location;
+			Ad2LocationLabel.Text = "" + ad2.Location;
+			Ad3LocationLabel.Text = "" + ad3.Location;
 
 
 			//Ad2RegistrationNumberLabel.AttributedText = HelperMethods.GetRegistrationAttributedString(ad2, labelAttribute);
@@ -665,12 +671,12 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 
 			//if (DataObject.Ads[1].IsLiked)
 			//{
-			//	HelperMethods.SetInitialLikeButtonState(AdLike2, DataObject.Ads[1]);
+			//  HelperMethods.SetInitialLikeButtonState(AdLike2, DataObject.Ads[1]);
 			//}
 
 			//if (DataObject.Ads[2].IsLiked)
 			//{
-			//	HelperMethods.SetInitialLikeButtonState(AdLike3, DataObject.Ads[2]);
+			//  HelperMethods.SetInitialLikeButtonState(AdLike3, DataObject.Ads[2]);
 			//}
 
 
@@ -700,16 +706,16 @@ LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, isAdNameSo
 
 		}
 
-public override void ViewDidAppear(bool animated)
-{
-	base.ViewDidAppear(animated);
+		public override void ViewDidAppear(bool animated)
+		{
+			base.ViewDidAppear(animated);
 
-	// This screen name value will remain set on the tracker and sent with
-	// hits until it is set to a new value or to null.
-	Gai.SharedInstance.DefaultTracker.Set(GaiConstants.ScreenName, "AdLayout1 View");
+			// This screen name value will remain set on the tracker and sent with
+			// hits until it is set to a new value or to null.
+			Gai.SharedInstance.DefaultTracker.Set(GaiConstants.ScreenName, "AdLayout1 View");
 
-	Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateAppView().Build());
-}
+			Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateAppView().Build());
+		}
 
 		public override void ViewWillAppear(bool animated)
 		{
@@ -803,7 +809,7 @@ public override void ViewDidAppear(bool animated)
 			Ad2MessageButton.TouchUpInside -= AdMessages_TouchUpInside;
 			Ad3MessageButton.TouchUpInside -= AdMessages_TouchUpInside;
 
-		
+
 
 			Ad1RGButton.TouchUpInside -= AdRGButton_TouchUpInside;
 			Ad2RGButton.TouchUpInside -= AdRGButton_TouchUpInside;

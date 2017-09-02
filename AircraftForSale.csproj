@@ -189,6 +189,7 @@
     <InterfaceDefinition Include="ViewController\ContactViewController.xib" />
     <InterfaceDefinition Include="Main_ipad.storyboard" />
     <InterfaceDefinition Include="Interfaces\Registration_ipad.storyboard" />
+    <InterfaceDefinition Include="Extras.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -354,6 +355,10 @@
       <DependentUpon>SearchResultsTableCell.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomControls\CircleButton.cs" />
+    <Compile Include="ViewController\AdLayoutPhoneViewController_iPad.cs" />
+    <Compile Include="ViewController\AdLayoutPhoneViewController_iPad.designer.cs">
+      <DependentUpon>AdLayoutPhoneViewController_iPad.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\profile.png" />

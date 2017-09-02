@@ -7,12 +7,12 @@ using UIKit;
 
 namespace AircraftForSale
 {
-	[Register("LikeManufacturerView"), DesignTimeVisible(true)]
+	//[Register("LikeManufacturerView"), DesignTimeVisible(true)]
 	public class LikeManufacturerView : UIView
 	{
 		UIImage image;
 
-		[Export("Image"), Browsable(true)]
+		//[Export("Image"), Browsable(true)]
 		public UIImage Image
 		{
 			get { return image; }

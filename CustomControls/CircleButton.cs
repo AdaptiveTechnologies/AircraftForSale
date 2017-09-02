@@ -5,11 +5,11 @@ using UIKit;
 
 namespace AircraftForSale
 {
-	[Register("CircleButton"), DesignTimeVisible(true)]
+	//[Register("CircleButton"), DesignTimeVisible(true)]
 	public class CircleButton : UIButton
 	{
 
-		[Export("BackgroundColorProperty"), Browsable(true)]
+		//[Export("BackgroundColorProperty"), Browsable(true)]
 		public UIColor BackgroundColorProperty { get; set; }
 
 		public CircleButton(IntPtr handle) : base(handle) { }

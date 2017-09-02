@@ -1,6 +1,6 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
+// This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
@@ -14,10 +14,6 @@ namespace AircraftForSale
     [Register ("RegistrationProfileViewController")]
     partial class RegistrationProfileViewController
     {
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField CityTextField { get; set; }
-
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField CompanyTextField { get; set; }
@@ -52,10 +48,6 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField MobilePhoneProviderTextField { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField MobilePhoneTextField { get; set; }
 
         [Outlet]
@@ -70,17 +62,8 @@ namespace AircraftForSale
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIScrollView ProfileScrollView { get; set; }
 
-        [Action ("UIButton27947_TouchUpInside:")]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        partial void UIButton27947_TouchUpInside (UIKit.UIButton sender);
-
         void ReleaseDesignerOutlets ()
         {
-            if (CityTextField != null) {
-                CityTextField.Dispose ();
-                CityTextField = null;
-            }
-
             if (CompanyTextField != null) {
                 CompanyTextField.Dispose ();
                 CompanyTextField = null;
@@ -119,11 +102,6 @@ namespace AircraftForSale
             if (MapCCodePickerView != null) {
                 MapCCodePickerView.Dispose ();
                 MapCCodePickerView = null;
-            }
-
-            if (MobilePhoneProviderTextField != null) {
-                MobilePhoneProviderTextField.Dispose ();
-                MobilePhoneProviderTextField = null;
             }
 
             if (MobilePhoneTextField != null) {

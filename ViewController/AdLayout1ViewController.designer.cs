@@ -1,6 +1,6 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
+// This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
@@ -40,10 +40,6 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        AircraftForSale.ManufacturerButton Ad1NameButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel Ad1PriceChangedLabel { get; set; }
 
         [Outlet]
@@ -57,6 +53,10 @@ namespace AircraftForSale
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel Ad1SerialLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextView Ad1TeaserLabel { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -88,10 +88,6 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        AircraftForSale.ManufacturerButton Ad2NameButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel Ad2PriceChangeLabel { get; set; }
 
         [Outlet]
@@ -105,10 +101,6 @@ namespace AircraftForSale
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel Ad2SerialNumberLabel { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextView Ad2TeaserLabel { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -137,10 +129,6 @@ namespace AircraftForSale
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton Ad3MessageButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        AircraftForSale.ManufacturerButton Ad3NameButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -286,11 +274,6 @@ namespace AircraftForSale
                 Ad1MessageButton = null;
             }
 
-            if (Ad1NameButton != null) {
-                Ad1NameButton.Dispose ();
-                Ad1NameButton = null;
-            }
-
             if (Ad1PriceChangedLabel != null) {
                 Ad1PriceChangedLabel.Dispose ();
                 Ad1PriceChangedLabel = null;
@@ -309,6 +292,11 @@ namespace AircraftForSale
             if (Ad1SerialLabel != null) {
                 Ad1SerialLabel.Dispose ();
                 Ad1SerialLabel = null;
+            }
+
+            if (Ad1TeaserLabel != null) {
+                Ad1TeaserLabel.Dispose ();
+                Ad1TeaserLabel = null;
             }
 
             if (Ad1TechnicalSpecButton != null) {
@@ -346,11 +334,6 @@ namespace AircraftForSale
                 Ad2MessageButton = null;
             }
 
-            if (Ad2NameButton != null) {
-                Ad2NameButton.Dispose ();
-                Ad2NameButton = null;
-            }
-
             if (Ad2PriceChangeLabel != null) {
                 Ad2PriceChangeLabel.Dispose ();
                 Ad2PriceChangeLabel = null;
@@ -369,11 +352,6 @@ namespace AircraftForSale
             if (Ad2SerialNumberLabel != null) {
                 Ad2SerialNumberLabel.Dispose ();
                 Ad2SerialNumberLabel = null;
-            }
-
-            if (Ad2TeaserLabel != null) {
-                Ad2TeaserLabel.Dispose ();
-                Ad2TeaserLabel = null;
             }
 
             if (Ad2TechnicalSpecButton != null) {
@@ -409,11 +387,6 @@ namespace AircraftForSale
             if (Ad3MessageButton != null) {
                 Ad3MessageButton.Dispose ();
                 Ad3MessageButton = null;
-            }
-
-            if (Ad3NameButton != null) {
-                Ad3NameButton.Dispose ();
-                Ad3NameButton = null;
             }
 
             if (Ad3PriceChangeLabel != null) {
