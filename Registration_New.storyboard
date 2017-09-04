@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="480">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+    </dependencies>
+    <scenes>
+        <scene sceneID="479">
+            <objects>
+                <viewController id="480" sceneMemberID="viewController" customClass="TestViewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="477"/>
+                        <viewControllerLayoutGuide type="bottom" id="478"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="481">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="482" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136" y="-61"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="profile.png" width="30" height="30"/>
+        <image name="settings.png" width="30" height="30"/>
+        <image name="airplane.png" width="30" height="30"/>
+        <image name="garage.jpeg" width="480" height="320"/>
+        <image name="log_in_background.png" width="237" height="108"/>
+        <image name="amphibian.png" width="200" height="134"/>
+        <image name="commercial.png" width="312" height="154"/>
+        <image name="experimental.png" width="200" height="122"/>
+        <image name="helicopter.png" width="200" height="92"/>
+        <image name="jet.png" width="200" height="76"/>
+        <image name="light_sport.png" width="200" height="99"/>
+        <image name="single_engine.png" width="200" height="102"/>
+        <image name="singles.png" width="200" height="79"/>
+        <image name="twin_piston.png" width="200" height="120"/>
+        <image name="twin_turbine.png" width="200" height="133"/>
+        <image name="vintage.png" width="200" height="133"/>
+        <image name="warbird.png" width="200" height="125"/>
+        <image name="aircraft_manufacturing.png" width="554" height="400"/>
+        <image name="aircraft_classifications.png" width="294" height="200"/>
+        <image name="bombardier.png" width="200" height="201"/>
+        <image name="aerospatiale.png" width="200" height="78"/>
+        <image name="grumman.png" width="200" height="153"/>
+        <image name="maule.png" width="200" height="27"/>
+        <image name="airbus.png" width="200" height="48"/>
+        <image name="cockpit.png" width="320" height="212"/>
+        <image name="gruman_ad.jpg" width="550" height="413"/>
+        <image name="bombardier_ad.jpg" width="550" height="390"/>
+        <image name="bombardier_ad2.jpg" width="550" height="274"/>
+        <image name="bombardier_ad3.jpg" width="550" height="374"/>
+        <image name="email.png" width="30" height="30"/>
+        <image name="share.png" width="30" height="30"/>
+        <image name="like.png" width="30" height="30"/>
+        <image name="like_selected.png" width="30" height="30"/>
+        <image name="close.png" width="44" height="44"/>
+        <image name="runway.jpg" width="525" height="350"/>
+        <image name="swipe_left.png" width="50" height="50"/>
+        <image name="lake2.gif" width="150" height="58"/>
+        <image name="like_image.png" width="50" height="45"/>
+        <image name="ad_placeholder.jpg" width="640" height="426"/>
+        <image name="globalairLogo_large.png" width="2367" height="625"/>
+        <image name="conklin.jpg" width="923" height="196"/>
+        <image name="phone.png" width="30" height="30"/>
+        <image name="messages.png" width="30" height="30"/>
+        <image name="globalair_logo.png" width="666" height="176"/>
+        <image name="map.png" width="31" height="31"/>
+        <image name="pencil.png" width="40" height="40"/>
+        <image name="New Folder/new_Logo.png" width="624" height="158"/>
+        <image name="New Folder/new_home_bg.png" width="750" height="1334"/>
+        <image name="New Folder/new_home_bg1.png" width="750" height="1334"/>
+        <image name="New Folder/new_top_pic.png" width="750" height="739"/>
+        <image name="new_Logo.png" width="624" height="158"/>
+        <image name="new_home_bg.png" width="750" height="1334"/>
+        <image name="new_home_bg1.png" width="750" height="1334"/>
+        <image name="new_top_pic.png" width="750" height="739"/>
+        <image name="New Folder/company.png" width="28" height="24"/>
+        <image name="New Folder/location.png" width="22" height="30"/>
+        <image name="New Folder/mail_b.png" width="29" height="21"/>
+        <image name="New Folder/mail_w.png" width="29" height="21"/>
+        <image name="New Folder/mobile.png" width="20" height="34"/>
+        <image name="New Folder/pass_b.png" width="27" height="27"/>
+        <image name="New Folder/pass_w.png" width="27" height="27"/>
+        <image name="New Folder/user_b.png" width="22" height="28"/>
+        <image name="New Folder/user_w.png" width="22" height="28"/>
+        <image name="company.png" width="28" height="24"/>
+        <image name="location.png" width="22" height="30"/>
+        <image name="mail_b.png" width="29" height="21"/>
+        <image name="mail_w.png" width="29" height="21"/>
+        <image name="mobile.png" width="20" height="34"/>
+        <image name="pass_b.png" width="27" height="27"/>
+        <image name="pass_w.png" width="27" height="27"/>
+        <image name="user_b.png" width="22" height="28"/>
+        <image name="user_w.png" width="22" height="28"/>
+        <image name="bg_image.png" width="750" height="1161"/>
+        <image name="contact_icon.png" width="40" height="30"/>
+        <image name="email1_icon.png" width="40" height="31"/>
+        <image name="like_icon.png" width="38" height="36"/>
+        <image name="message_icon.png" width="38" height="37"/>
+        <image name="new_contact_icon.png" width="40" height="30"/>
+        <image name="new_email1_icon.png" width="40" height="31"/>
+        <image name="new_like_icon.png" width="38" height="36"/>
+        <image name="new_message_icon.png" width="38" height="37"/>
+        <image name="new_share_icon.png" width="30" height="41"/>
+        <image name="share_icon.png" width="30" height="41"/>
+        <image name="New Folder/login_bg.png" width="750" height="1300"/>
+        <image name="New Folder/login_logo.png" width="677" height="174"/>
+        <image name="New Folder/new_fav.png" width="37" height="35"/>
+        <image name="New Folder/new_mail.png" width="38" height="28"/>
+        <image name="New Folder/new_magazine.png" width="81" height="31"/>
+        <image name="New Folder/new_profile.png" width="32" height="32"/>
+        <image name="login_bg.png" width="750" height="1300"/>
+        <image name="login_logo.png" width="677" height="174"/>
+        <image name="new_fav.png" width="37" height="35"/>
+        <image name="new_mail.png" width="38" height="28"/>
+        <image name="new_profile.png" width="32" height="32"/>
+        <image name="new_magazine.png" width="81" height="31"/>
+        <image name="new_back_arrow.png" width="12" height="22"/>
+        <image name="new_home.png" width="31" height="29"/>
+        <image name="New Folder/new_home.png" width="31" height="29"/>
+        <image name="continue_btn.png" width="378" height="76"/>
+        <image name="Ipad/continue_btn_ipad.png" width="378" height="76"/>
+        <image name="Ipad/fav_icon_ipad.png" width="78" height="74"/>
+        <image name="Ipad/feature_icon_ipad.png" width="51" height="51"/>
+        <image name="Ipad/home_icon_ipad.png" width="66" height="60"/>
+        <image name="Ipad/home_screen_bg_ipad.jpg" width="1536" height="2048"/>
+        <image name="Ipad/like_icon_ipad.png" width="55" height="49"/>
+        <image name="Ipad/logo_ipad.png" width="1280" height="325"/>
+        <image name="Ipad/magazine_icon_ipad.png" width="167" height="65"/>
+        <image name="Ipad/mail1_icon_ipad.png" width="57" height="43"/>
+        <image name="Ipad/mail_icon_ipad.png" width="80" height="58"/>
+        <image name="Ipad/message_icon_ipad.png" width="55" height="52"/>
+        <image name="Ipad/profile_icon_ipad.png" width="68" height="68"/>
+        <image name="Ipad/refresh_icon_ipad.png" width="65" height="59"/>
+        <image name="Ipad/share_icon_ipad.png" width="43" height="57"/>
+        <image name="Ipad/technical_bg_ipad.png" width="1536" height="1784"/>
+        <image name="add_bg.png" width="750" height="1334"/>
+        <image name="Bg_new.png" width="750" height="1156"/>
+        <image name="close_ipad.png" width="44" height="44"/>
+        <image name="detail_info.png" width="64" height="64"/>
+        <image name="Ipad/detail_info.png" width="64" height="64"/>
+        <image name="star.png" width="48" height="48"/>
+        <image name="star2.png" width="48" height="48"/>
+        <image name="star-64.png" width="64" height="64"/>
+        <image name="splash_image.png" width="1536" height="2048"/>
+        <image name="checked_checkbox.png" width="26" height="26"/>
+        <image name="unchecked_checkbox.png" width="26" height="26"/>
+        <image name="tablet_back2.png" width="1536" height="2048"/>
+        <image name="tablet_back3.png" width="1536" height="2048"/>
+        <image name="tablet_back4.png" width="1536" height="2048"/>
+        <image name="tablet_back5.png" width="1536" height="2048"/>
+        <image name="tablet_back6.png" width="1536" height="2048"/>
+        <image name="tablet_back7.png" width="1536" height="2048"/>
+        <image name="tablet_back8.png" width="1536" height="2048"/>
+        <image name="tablet_back9.png" width="1536" height="2048"/>
+        <image name="tablet_back1.png" width="1536" height="2048"/>
+        <image name="tablet_back0.png" width="1536" height="2048"/>
+        <image name="background0.png" width="750" height="1334"/>
+        <image name="background1.png" width="750" height="1334"/>
+        <image name="background2.png" width="750" height="1334"/>
+        <image name="background3.png" width="750" height="1334"/>
+        <image name="background4.png" width="750" height="1334"/>
+        <image name="background5.png" width="750" height="1334"/>
+        <image name="background6.png" width="750" height="1334"/>
+        <image name="background7.png" width="750" height="1334"/>
+        <image name="background8.png" width="750" height="1334"/>
+        <image name="background9.png" width="750" height="1334"/>
+        <image name="home_logo.png" width="900" height="261"/>
+        <image name="loginscreen_ipad_background.png" width="1536" height="2048"/>
+        <image name="loginscreen_phonebackground.png" width="750" height="1300"/>
+    </resources>
+</document>

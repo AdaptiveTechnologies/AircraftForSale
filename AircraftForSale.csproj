@@ -157,9 +157,6 @@
     <Reference Include="Google.Analytics">
       <HintPath>..\packages\Xamarin.Google.iOS.Analytics.3.17.0.1\lib\Xamarin.iOS10\Google.Analytics.dll</HintPath>
     </Reference>
-    <Reference Include="VideoSplash">
-      <HintPath>..\Components\VideoSplash-1.0.0.0\lib\ios-unified\VideoSplash.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json" />
@@ -185,12 +182,12 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
+    <InterfaceDefinition Include="ViewController\ContactViewController.xib" />
+    <InterfaceDefinition Include="Interfaces\Registration_ipad.storyboard" />
+    <InterfaceDefinition Include="Registration_New.storyboard" />
+    <InterfaceDefinition Include="Main_ipad.storyboard" />
     <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="Registration.storyboard" />
-    <InterfaceDefinition Include="ViewController\ContactViewController.xib" />
-    <InterfaceDefinition Include="Main_ipad.storyboard" />
-    <InterfaceDefinition Include="Interfaces\Registration_ipad.storyboard" />
-    <InterfaceDefinition Include="Extras.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -321,14 +318,6 @@
     <Compile Include="ViewController\ContactWebViewController.designer.cs">
       <DependentUpon>ContactWebViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewController\SplashViewController.cs" />
-    <Compile Include="ViewController\SplashViewController.designer.cs">
-      <DependentUpon>SplashViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SplashVideoViewController.cs" />
-    <Compile Include="SplashVideoViewController.designer.cs">
-      <DependentUpon>SplashVideoViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="ViewController\SpecViewController_.cs" />
     <Compile Include="ViewController\SpecViewController_.designer.cs">
       <DependentUpon>SpecViewController_.cs</DependentUpon>
@@ -349,6 +338,10 @@
     <Compile Include="ViewController\AdLayoutPhoneViewController_iPad.cs" />
     <Compile Include="ViewController\AdLayoutPhoneViewController_iPad.designer.cs">
       <DependentUpon>AdLayoutPhoneViewController_iPad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestViewController.cs" />
+    <Compile Include="TestViewController.designer.cs">
+      <DependentUpon>TestViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -402,7 +395,6 @@
     <BundleResource Include="Resources\like_image.png" />
     <BundleResource Include="Resources\like_image%402x.png" />
     <BundleResource Include="Resources\like_image%403x.png" />
-    <BundleResource Include="Resources\Amphibian_Ad_Response.txt" />
     <BundleResource Include="Resources\ad_placeholder.jpg" />
     <BundleResource Include="Resources\globalairLogo_large.png" />
     <BundleResource Include="Resources\conklin.jpg" />
@@ -497,7 +489,6 @@
     <BundleResource Include="Resources\star.png" />
     <BundleResource Include="Resources\star2.png" />
     <BundleResource Include="Resources\star-64.png" />
-    <BundleResource Include="Resources\splashipad.mp4" />
     <BundleResource Include="Resources\splash_image.png" />
     <BundleResource Include="Resources\checked_checkbox.png" />
     <BundleResource Include="Resources\unchecked_checkbox.png" />
@@ -524,8 +515,6 @@
     <BundleResource Include="Resources\home_logo.png" />
     <BundleResource Include="Resources\loginscreen_ipad_background.png" />
     <BundleResource Include="Resources\loginscreen_phonebackground.png" />
-    <BundleResource Include="Resources\globalairphone.mov" />
-    <BundleResource Include="Resources\globalairtablet.mov" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AircraftForSale.PCL\AircraftForSale.PCL.csproj">
@@ -540,10 +529,6 @@
     </XamarinComponentReference>
     <XamarinComponentReference Include="googleiosanalytics">
       <Version>3.17.0.1</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
-    <XamarinComponentReference Include="VideoSplash">
-      <Version>1.0.0.0</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
