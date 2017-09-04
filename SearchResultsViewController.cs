@@ -5,6 +5,7 @@ using CoreGraphics;
 using System.Collections.Generic;
 using AircraftForSale.PCL;
 using AircraftForSale.PCL.Helpers;
+using SDWebImage;
 
 namespace AircraftForSale
 {
@@ -16,16 +17,30 @@ namespace AircraftForSale
             set;
         }
 
-        public UITableView SearchResultsTableViewProperty
+       
+
+        public UITableView SearchResultsTableView
         {
-            get
-            {
-                return SearchResultsTableView;
-            }
+            get;
+            set;
         }
 
-        public SearchResultsViewController(IntPtr handle) : base(handle)
+
+        public SearchResultsViewController()
+		{
+            //this.AdSelectedAction = addSelectedAction;
+		}
+
+        public Ad SelectedAd
         {
+            get;
+            set;
+        }
+
+        public Action AdSelectedAction
+        {
+            get;
+            set;
         }
 
         //~SearchResultsViewController()
@@ -37,6 +52,12 @@ namespace AircraftForSale
         {
             base.ViewDidLoad();
 
+            //this.NavigationController.Title = "Search Results";
+
+            this.NavigationItem.Title = "Search Results";
+
+            View.BackgroundColor = UIColor.Black;
+
             var statusBarHeight = UIApplication.SharedApplication.StatusBarFrame.Height;
 
             var closeButton = new UIButton(new CGRect(View.Bounds.Width - 110, statusBarHeight, 100, 25));
@@ -44,6 +65,40 @@ namespace AircraftForSale
             closeButton.SetTitleColor(UIColor.White, UIControlState.Normal);
 
             View.Add(closeButton);
+
+
+            //var titleView = new UITextView(titleRect);
+
+           
+
+
+			
+
+            var tableViewYValue = statusBarHeight + (closeButton.Bounds.Height + 5);
+            var tableViewHeight = this.View.Bounds.Height - tableViewYValue;
+
+
+            SearchResultsTableView = new UITableView(new CGRect(0, tableViewYValue,this.View.Bounds.Width, tableViewHeight));
+
+			var backgroundImage = UIImage.FromBundle("new_home_bg1.png").ResizeImage((float)SearchResultsTableView.Bounds.Width, (float)SearchResultsTableView.Bounds.Height);
+			SearchResultsTableView.BackgroundColor = UIColor.FromPatternImage(backgroundImage);
+
+            View.Add(SearchResultsTableView);
+
+            var titleViewHeight = this.View.Bounds.Height - (this.SearchResultsTableView.Bounds.Height + statusBarHeight);
+			var titleView = new UITextView(new CGRect(0, 0, this.View.Bounds.Width * .4f, titleViewHeight));
+
+            titleView.Center = new CGPoint(View.Frame.Size.Width / 2, (titleViewHeight + statusBarHeight)/ 2f);
+
+			titleView.Text = "Search Results";
+			titleView.TextAlignment = UITextAlignment.Center;
+			titleView.TextColor = UIColor.White;
+			titleView.BackgroundColor = UIColor.Clear;
+			titleView.Font = UIFont.BoldSystemFontOfSize(UIKit.UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone ? 15f : 20f);
+			titleView.AdjustsFontForContentSizeCategory = true;
+
+
+			this.View.Add(titleView);
 
             closeButton.TouchUpInside += (sender, e) =>
             {
@@ -55,6 +110,8 @@ namespace AircraftForSale
         }
 
     }
+
+
 
     public class SearchResultsTableSource : UITableViewSource
     {
@@ -86,16 +143,45 @@ namespace AircraftForSale
 
         public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
         {
-            SearchResultsTableCell cell = tableView.DequeueReusableCell(CellIdentifier) as SearchResultsTableCell;
-            Ad item = Owner.SearchResultsAdList[indexPath.Row];
 
-            cell.UpdateCell(item, this);
+            UITableViewCell cell = tableView.DequeueReusableCell(CellIdentifier);
+
+            if (cell == null)
+            {
+
+                cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
+                cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
+                var backgroundColor = UIColor.FromWhiteAlpha(1f, .3f);
+                cell.BackgroundColor = backgroundColor;
+            }
+           
+
+
+          
+            Ad ad = Owner.SearchResultsAdList[indexPath.Row];
+
+            //cell.UpdateCell(item, this);
+            cell.TextLabel.Text = ad.Name;
+            cell.DetailTextLabel.Text = ad.Teaser;
+
+            var image = SDImageCache.SharedImageCache.ImageFromDiskCache(ad.ImageURL);
+            var maxWidth = UIKit.UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone ? 100f : 150f;
+            image = image.MaxResizeImage(maxWidth, maxWidth);
+
+            cell.ImageView.Image = image;
+
+			//cell.ImageView.SetImage(
+			//	url: new NSUrl(item.ImageURL),
+			//	placeholder: UIImage.FromBundle("ad_placeholder.jpg")
+			//);
+
             return cell;
         }
 
         public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
         {
-            return 100;
+            var maxWidth = UIKit.UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone ? 100f : 150f;
+            return maxWidth;
         }
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
@@ -103,69 +189,19 @@ namespace AircraftForSale
             var cell = tableView.CellAt(indexPath);
 
 
-            if (Reachability.IsHostReachable(Settings._baseDomain))
-            {
-                var ad = Owner.SearchResultsAdList[indexPath.Row];
-                var statusBarHeight = UIApplication.SharedApplication.StatusBarFrame.Height;
-                var tabBarHeight = Owner.TabBarController.TabBar.Bounds.Height;
+            Owner.SelectedAd = Owner.SearchResultsAdList[indexPath.Row];
 
-                var frame = new CGRect(0, statusBarHeight, Owner.View.Bounds.Width, Owner.View.Bounds.Height - (statusBarHeight + tabBarHeight));
-                var webView = new UIWebView(frame);
-
-                LoadingOverlay loadingOverlay = new LoadingOverlay(Owner.View.Frame);
-
-                webView.LoadFinished += (sender, e) =>
-                {
-                    loadingOverlay.Hide();
-                };
-
-
-                var url = ad.AircraftForSaleURL;
-                webView.LoadRequest(new NSUrlRequest(new NSUrl(url)));
-
-                UIView.BeginAnimations("fadeflag");
-                UIView.Animate(1, () =>
-                {
-                    cell.Alpha = .5f;
-                }, () =>
-                {
-
-                    Owner.View.AddSubview(webView);
-                    Owner.View.AddSubview(loadingOverlay);
-
-                    UIButton closeButton = new UIButton(new CGRect(Owner.View.Bounds.Width - 50, 0, 50, 50));
-                    closeButton.SetImage(UIImage.FromBundle("close"), UIControlState.Normal);
-                    closeButton.BackgroundColor = UIColor.Black;
-                    closeButton.TouchUpInside += (sender, e) =>
-                    {
-                        try
-                        {
-                            webView.RemoveFromSuperview();
-                            closeButton.RemoveFromSuperview();
-                        }
-                        finally
-                        {
-                            webView.Dispose();
-                        }
-                    };
-                    //Owner.View.AddSubview(closeButton);
-                    webView.AddSubview(closeButton);
-
-                    cell.Alpha = 1f;
-                });
-
-                UIView.CommitAnimations();
-                //}
-            }
-            else
-            {
-                HelperMethods.SendBasicAlert("Connect to a Network", "Please connect to a network to view this ad");
+            if(Owner.AdSelectedAction != null){
+                Owner.AdSelectedAction.Invoke();
             }
 
-
+            Owner.DismissViewController(true, null);
 
 
             tableView.DeselectRow(indexPath, true);
         }
+
+
     }
+
 }

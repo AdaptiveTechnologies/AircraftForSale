@@ -1,6 +1,6 @@
 // WARNING
 //
-// This file has been generated automatically by Visual Studio from the outlets and
+// This file has been generated automatically by Xamarin Studio from the outlets and
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
@@ -37,6 +37,10 @@ namespace AircraftForSale
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton Ad1MessageButton { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton Ad1NameButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -88,6 +92,10 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton Ad2NameButton { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel Ad2PriceChangeLabel { get; set; }
 
         [Outlet]
@@ -129,6 +137,10 @@ namespace AircraftForSale
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton Ad3MessageButton { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton Ad3NameButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -274,6 +286,11 @@ namespace AircraftForSale
                 Ad1MessageButton = null;
             }
 
+            if (Ad1NameButton != null) {
+                Ad1NameButton.Dispose ();
+                Ad1NameButton = null;
+            }
+
             if (Ad1PriceChangedLabel != null) {
                 Ad1PriceChangedLabel.Dispose ();
                 Ad1PriceChangedLabel = null;
@@ -334,6 +351,11 @@ namespace AircraftForSale
                 Ad2MessageButton = null;
             }
 
+            if (Ad2NameButton != null) {
+                Ad2NameButton.Dispose ();
+                Ad2NameButton = null;
+            }
+
             if (Ad2PriceChangeLabel != null) {
                 Ad2PriceChangeLabel.Dispose ();
                 Ad2PriceChangeLabel = null;
@@ -387,6 +409,11 @@ namespace AircraftForSale
             if (Ad3MessageButton != null) {
                 Ad3MessageButton.Dispose ();
                 Ad3MessageButton = null;
+            }
+
+            if (Ad3NameButton != null) {
+                Ad3NameButton.Dispose ();
+                Ad3NameButton = null;
             }
 
             if (Ad3PriceChangeLabel != null) {

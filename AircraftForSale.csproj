@@ -31,10 +31,11 @@
     <MtouchExtraArgs></MtouchExtraArgs>
     <DeviceSpecificBuild>false</DeviceSpecificBuild>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
-    <MtouchProfiling>true</MtouchProfiling>
+    <MtouchProfiling>false</MtouchProfiling>
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignKey>iPhone Developer: Clay Martin (83H34G7LM2)</CodesignKey>
     <CodesignProvision>Showcase-dev</CodesignProvision>
+<MtouchSdkVersion>10.3</MtouchSdkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <Optimize>true</Optimize>
@@ -241,10 +242,6 @@
     <Compile Include="ViewController\AdLayout2ViewController.designer.cs">
       <DependentUpon>AdLayout2ViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewController\AdLayout3ViewController.cs" />
-    <Compile Include="ViewController\AdLayout3ViewController.designer.cs">
-      <DependentUpon>AdLayout3ViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="ViewController\ChooseClassificationCollectionViewController.cs" />
     <Compile Include="ViewController\ChooseClassificationCollectionViewController.designer.cs">
       <DependentUpon>ChooseClassificationCollectionViewController.cs</DependentUpon>
@@ -277,8 +274,6 @@
     <Compile Include="ViewController\RegistrationProfileViewController.designer.cs">
       <DependentUpon>RegistrationProfileViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\LikeManufacturerView.cs" />
-    <Compile Include="CustomControls\ManButton.cs" />
     <Compile Include="MagazinePageIndicator.cs" />
     <Compile Include="PageIndicatorClass.cs" />
     <Compile Include="PageIndicatorClass.designer.cs">
@@ -347,14 +342,10 @@
       <DependentUpon>SpecCell1.cs</DependentUpon>
     </Compile>
     <Compile Include="SearchResultsViewController.cs" />
-    <Compile Include="SearchResultsViewController.designer.cs">
-      <DependentUpon>SearchResultsViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="SearchResultsTableCell.cs" />
     <Compile Include="SearchResultsTableCell.designer.cs">
       <DependentUpon>SearchResultsTableCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\CircleButton.cs" />
     <Compile Include="ViewController\AdLayoutPhoneViewController_iPad.cs" />
     <Compile Include="ViewController\AdLayoutPhoneViewController_iPad.designer.cs">
       <DependentUpon>AdLayoutPhoneViewController_iPad.cs</DependentUpon>

@@ -40,7 +40,7 @@ namespace AircraftForSale
 
 					if (Owner != null && Owner.Owner != null)
 					{
-						Owner.Owner.SearchResultsTableViewProperty.ReloadData();
+						Owner.Owner.SearchResultsTableView.ReloadData();
 					}
 
 					//this.SetNeedsUpdateConstraints();
