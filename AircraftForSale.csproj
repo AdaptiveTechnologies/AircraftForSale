@@ -347,6 +347,10 @@
     <Compile Include="ClassificationSelectionTableViewCell.designer.cs">
       <DependentUpon>SelectClassificationTableViewCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="RegistrationStepTwo.cs" />
+    <Compile Include="RegistrationStepTwo.designer.cs">
+      <DependentUpon>RegistrationStepTwo.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\profile.png" />
