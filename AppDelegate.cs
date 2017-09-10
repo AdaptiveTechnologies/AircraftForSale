@@ -100,7 +100,11 @@ namespace AircraftForSale
             //Wait until need to update content in the background... once implemented let the OS decide how often to fetch new content
             UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(UIApplication.BackgroundFetchIntervalNever);
 
-            Window.RootViewController = rootViewController;
+
+			//changed for testing
+			//Window.RootViewController = rootViewController;
+			var testStoryBoard = UIStoryboard.FromName("Registration_New", NSBundle.MainBundle);
+			Window.RootViewController = testStoryBoard.InstantiateInitialViewController();
             Window.MakeKeyAndVisible();
 
             UINavigationBar.Appearance.BarTintColor = UIColor.Black;

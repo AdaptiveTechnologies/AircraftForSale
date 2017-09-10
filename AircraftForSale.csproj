@@ -339,9 +339,13 @@
     <Compile Include="ViewController\AdLayoutPhoneViewController_iPad.designer.cs">
       <DependentUpon>AdLayoutPhoneViewController_iPad.cs</DependentUpon>
     </Compile>
-    <Compile Include="TestViewController.cs" />
-    <Compile Include="TestViewController.designer.cs">
-      <DependentUpon>TestViewController.cs</DependentUpon>
+    <Compile Include="SelectClassificationTableViewController.cs" />
+    <Compile Include="SelectClassificationTableViewController.designer.cs">
+      <DependentUpon>SelectClassificationTableViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectClassificationTableViewCell.cs" />
+    <Compile Include="ClassificationSelectionTableViewCell.designer.cs">
+      <DependentUpon>SelectClassificationTableViewCell.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

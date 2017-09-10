@@ -1,25 +1,86 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="480">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9139">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
     </dependencies>
     <scenes>
-        <scene sceneID="479">
+        <scene sceneID="9138">
             <objects>
-                <viewController id="480" sceneMemberID="viewController" customClass="TestViewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="477"/>
-                        <viewControllerLayoutGuide type="bottom" id="478"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="481">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                <tableViewController id="9139" sceneMemberID="viewController" customClass="SelectClassificationTableViewController" storyboardIdentifier="SelectClassificationTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="9140" allowsMultipleSelection="YES">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="482" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.45490196078431372" green="1" blue="0.027450980392156862" alpha="1"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="9143" rowHeight="110" customClass="SelectClassificationTableViewCell" restorationIdentifier="ClassificationSelectionTableViewCell" reuseIdentifier="cell_id">
+                                <rect key="frame" x="0.0" y="28" width="320" height="110"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9143" id="9144">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="9633" translatesAutoresizingMaskIntoConstraints="NO" image="amphibian.png">
+                                            <rect key="frame" x="10" y="25" width="60" height="60"/>
+                                            <constraints>
+                                                <constraint id="10007" firstItem="9633" firstAttribute="width" constant="60">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="60"/>
+                                                </constraint>
+                                                <constraint id="10008" firstItem="9633" firstAttribute="height" constant="60">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="60"/>
+                                                </constraint>
+                                            </constraints>
+                                            <color key="backgroundColor" colorSpace="calibratedRGB" red="0" green="1" blue="0" alpha="1"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute keyPath="layer.cornerRadius" type="number">
+                                                    <real key="value" value="30"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amphibian" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="10009" translatesAutoresizingMaskIntoConstraints="NO">
+                                            <rect key="frame" x="85" y="28" width="102" height="24"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to include this category in your collection" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="10012" translatesAutoresizingMaskIntoConstraints="NO" numberOfLines="2">
+                                            <rect key="frame" x="85" y="57" width="217" height="41"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint id="10004" firstItem="9633" firstAttribute="centerY" secondItem="9144" secondAttribute="centerY"/>
+                                        <constraint id="10006" firstItem="9633" firstAttribute="leading" secondItem="9144" secondAttribute="leading" constant="10"/>
+                                        <constraint id="10010" firstItem="9144" firstAttribute="centerY" secondItem="10009" secondAttribute="centerY" constant="15">
+                                            <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                        </constraint>
+                                        <constraint id="10011" firstItem="10009" firstAttribute="leading" secondItem="9633" secondAttribute="trailing" constant="15">
+                                            <variation key="heightClass=regular-widthClass=compact" constant="15"/>
+                                        </constraint>
+                                        <constraint id="10013" firstItem="10012" firstAttribute="leading" secondItem="10009" secondAttribute="leading"/>
+                                        <constraint id="10014" firstItem="9144" firstAttribute="bottom" secondItem="10012" secondAttribute="bottom" constant="10" relation="greaterThanOrEqual"/>
+                                        <constraint id="10015" firstItem="10012" firstAttribute="top" secondItem="10009" secondAttribute="bottom" constant="5"/>
+                                        <constraint id="10016" firstItem="9144" firstAttribute="trailing" secondItem="10012" secondAttribute="trailing" constant="10" relation="greaterThanOrEqual"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="ClassificationImageView" destination="9633" id="name-outlet-9633"/>
+                                    <outlet property="ClassificationLabel" destination="10009" id="name-outlet-10009"/>
+                                    <outlet property="InstructionLabel" destination="10012" id="name-outlet-10012"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9139" id="9141"/>
+                            <outlet property="delegate" destination="9139" id="9142"/>
+                        </connections>
+                        <color key="separatorColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9145" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136" y="-61"/>
+            <point key="canvasLocation" x="186" y="165"/>
         </scene>
     </scenes>
     <resources>
@@ -172,4 +233,7 @@
         <image name="loginscreen_ipad_background.png" width="1536" height="2048"/>
         <image name="loginscreen_phonebackground.png" width="750" height="1300"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
 </document>
