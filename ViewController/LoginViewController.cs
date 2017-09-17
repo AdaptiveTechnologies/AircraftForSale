@@ -274,6 +274,13 @@ namespace AircraftForSale
 
 			//View.AddSubviews(UpdateMyProfileButton, LogoutButton);
 
+			RegisterNowButton.TouchUpInside += (sender, e) =>
+			{
+				var testStoryBoard = UIStoryboard.FromName("Registration_New", NSBundle.MainBundle);
+				var regViewController = testStoryBoard.InstantiateInitialViewController();
+				this.PresentViewController(regViewController, true, null);
+			};
+
 		}
 
 		public override void ViewWillDisappear(bool animated)

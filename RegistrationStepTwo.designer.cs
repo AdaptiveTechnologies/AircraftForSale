@@ -20,11 +20,39 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField CompanyTextView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField FirstNameTextView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField HomeAirportTextView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField LastNameTextView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel LocationLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIPickerView ManufacturerPicker { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField MobilePhoneTextView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIPickerView ModelPicker { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField PasswordTextView { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -38,6 +66,18 @@ namespace AircraftForSale
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIPickerView RatingPicker { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField ReEnterPasswordTextView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField ReEnterUsernameTextView { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField UsernameTextView { get; set; }
+
         void ReleaseDesignerOutlets ()
         {
             if (ClassificationPicker != null) {
@@ -45,14 +85,49 @@ namespace AircraftForSale
                 ClassificationPicker = null;
             }
 
+            if (CompanyTextView != null) {
+                CompanyTextView.Dispose ();
+                CompanyTextView = null;
+            }
+
+            if (FirstNameTextView != null) {
+                FirstNameTextView.Dispose ();
+                FirstNameTextView = null;
+            }
+
+            if (HomeAirportTextView != null) {
+                HomeAirportTextView.Dispose ();
+                HomeAirportTextView = null;
+            }
+
+            if (LastNameTextView != null) {
+                LastNameTextView.Dispose ();
+                LastNameTextView = null;
+            }
+
+            if (LocationLabel != null) {
+                LocationLabel.Dispose ();
+                LocationLabel = null;
+            }
+
             if (ManufacturerPicker != null) {
                 ManufacturerPicker.Dispose ();
                 ManufacturerPicker = null;
             }
 
+            if (MobilePhoneTextView != null) {
+                MobilePhoneTextView.Dispose ();
+                MobilePhoneTextView = null;
+            }
+
             if (ModelPicker != null) {
                 ModelPicker.Dispose ();
                 ModelPicker = null;
+            }
+
+            if (PasswordTextView != null) {
+                PasswordTextView.Dispose ();
+                PasswordTextView = null;
             }
 
             if (PilotSwitch != null) {
@@ -68,6 +143,21 @@ namespace AircraftForSale
             if (RatingPicker != null) {
                 RatingPicker.Dispose ();
                 RatingPicker = null;
+            }
+
+            if (ReEnterPasswordTextView != null) {
+                ReEnterPasswordTextView.Dispose ();
+                ReEnterPasswordTextView = null;
+            }
+
+            if (ReEnterUsernameTextView != null) {
+                ReEnterUsernameTextView.Dispose ();
+                ReEnterUsernameTextView = null;
+            }
+
+            if (UsernameTextView != null) {
+                UsernameTextView.Dispose ();
+                UsernameTextView = null;
             }
         }
     }

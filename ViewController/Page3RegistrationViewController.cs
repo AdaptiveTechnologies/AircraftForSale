@@ -768,7 +768,14 @@ public override UIView GetViewForHeader(UITableView tableView, nint section)
 			lbl.TextColor = UIColor.White;
 
 			lbl.TextAlignment = UITextAlignment.Center;
-			lbl.Text = Settings.LocationResponse.PurposeForFlying[(int)row].Purpose;
+			if (row != 0)
+			{
+				lbl.Text = Settings.LocationResponse.PurposeForFlying[(int)row].Purpose;
+			}
+			else
+			{
+				lbl.Text = "Select from list";
+			}
 			return lbl;
 		}
 	}

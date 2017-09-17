@@ -102,9 +102,9 @@ namespace AircraftForSale
 
 
 			//changed for testing
-			//Window.RootViewController = rootViewController;
-			var testStoryBoard = UIStoryboard.FromName("Registration_New", NSBundle.MainBundle);
-			Window.RootViewController = testStoryBoard.InstantiateInitialViewController();
+			Window.RootViewController = rootViewController;
+			//var testStoryBoard = UIStoryboard.FromName("Registration_New", NSBundle.MainBundle);
+			//Window.RootViewController = testStoryBoard.InstantiateInitialViewController();
             Window.MakeKeyAndVisible();
 
             UINavigationBar.Appearance.BarTintColor = UIColor.Black;

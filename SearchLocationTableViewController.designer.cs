@@ -11,8 +11,8 @@ using UIKit;
 
 namespace AircraftForSale
 {
-    [Register ("SelectClassificationTableViewController")]
-    partial class SelectClassificationTableViewController
+    [Register ("SearchLocationTableViewController")]
+    partial class SearchLocationTableViewController
     {
         void ReleaseDesignerOutlets ()
         {

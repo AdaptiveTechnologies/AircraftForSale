@@ -147,15 +147,15 @@
     <Reference Include="Akavache.Sqlite3">
       <HintPath>..\packages\akavache.sqlite3.5.0.0\lib\Portable-Net45+Win8+WP8+Wpa81\Akavache.Sqlite3.dll</HintPath>
     </Reference>
-    <Reference Include="Plugin.Settings.Abstractions">
-      <HintPath>..\packages\Xam.Plugins.Settings.2.5.1.0\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Settings">
-      <HintPath>..\packages\Xam.Plugins.Settings.2.5.1.0\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Services" />
     <Reference Include="Google.Analytics">
       <HintPath>..\packages\Xamarin.Google.iOS.Analytics.3.17.0.1\lib\Xamarin.iOS10\Google.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings.Abstractions">
+      <HintPath>..\packages\Xam.Plugins.Settings.3.0.1\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Settings">
+      <HintPath>..\packages\Xam.Plugins.Settings.3.0.1\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -283,7 +283,6 @@
     <Compile Include="LoadingOverlay.cs" />
     <Compile Include="Reachability.cs" />
     <Compile Include="AkavacheSqliteLinkerOverride.cs" />
-    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="NotesInputOverlay.cs" />
     <Compile Include="ViewController\EmailInquiryViewController.cs" />
     <Compile Include="ViewController\EmailInquiryViewController.designer.cs">
@@ -350,6 +349,14 @@
     <Compile Include="RegistrationStepTwo.cs" />
     <Compile Include="RegistrationStepTwo.designer.cs">
       <DependentUpon>RegistrationStepTwo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrationStepThree.cs" />
+    <Compile Include="RegistrationStepThree.designer.cs">
+      <DependentUpon>RegistrationStepThree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchLocationTableViewController.cs" />
+    <Compile Include="SearchLocationTableViewController.designer.cs">
+      <DependentUpon>SearchLocationTableViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
