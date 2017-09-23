@@ -11,12 +11,8 @@ using Google.Analytics;
 
 namespace AircraftForSale
 {
-    public partial class FavoriteClassificationsViewController : UICollectionViewController, IMultiStepProcessStep
+    public partial class FavoriteClassificationsViewController : UICollectionViewController
     {
-        public string DataObject
-        {
-            get; set;
-        }
         public FavoriteClassificationsViewController(UICollectionViewLayout layout) : base(layout)
         {
             classifications = new List<IClassification>();
@@ -34,6 +30,27 @@ namespace AircraftForSale
             classifications.Add(new Vintage());
             classifications.Add(new Warbird());
 
+            this.Title = "Registration";
+
+			
+
+			UINavigationBar.Appearance.TitleTextAttributes = new UIStringAttributes
+			{
+				ForegroundColor = UIColor.White
+			};
+
+			UITextAttributes icoFontAttribute = new UITextAttributes();
+			icoFontAttribute.Font = UIFont.BoldSystemFontOfSize(20);
+			icoFontAttribute.TextColor = UIColor.White;
+
+            NavigationItem.BackBarButtonItem = new UIBarButtonItem("Back", UIBarButtonItemStyle.Plain, null);
+            NavigationItem.BackBarButtonItem.SetTitleTextAttributes(icoFontAttribute, UIControlState.Normal);
+            NavigationItem.BackBarButtonItem.TintColor = UIColor.White;
+
+
+
+
+
         }
 
 
@@ -48,13 +65,16 @@ namespace AircraftForSale
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-            StepActivated?.Invoke(this, new MultiStepProcessStepEventArgs { Index = StepIndex });
-        }
+
+
+        
+
+		}
 
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);
-            StepDeactivated?.Invoke(this, new MultiStepProcessStepEventArgs { Index = StepIndex });
+            //StepDeactivated?.Invoke(this, new MultiStepProcessStepEventArgs { Index = StepIndex });
         }
 
         public override void LoadView()
@@ -64,40 +84,60 @@ namespace AircraftForSale
 
         }
 
-        public int StepIndex { get; set; }
-        public event EventHandler<MultiStepProcessStepEventArgs> StepActivated;
-        public event EventHandler<MultiStepProcessStepEventArgs> StepDeactivated;
 
 
 
 
         static NSString classificationCellID = new NSString("ClassificationCell");
-        static NSString headerId = new NSString("Header");
+        static NSString headerId = new NSString("headerid");
         List<IClassification> classifications;
+
+
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
 
 
-            CollectionView.RegisterClassForCell(typeof(ClassificationCell), classificationCellID);
-            CollectionView.RegisterClassForSupplementaryView(typeof(Header), UICollectionElementKindSection.Header, headerId);
+			CollectionView.RegisterClassForCell(typeof(ClassificationCell), classificationCellID);
+			CollectionView.RegisterClassForSupplementaryView(typeof(Header), UICollectionElementKindSection.Header, headerId);
 
-            UIButton nextButton = new UIButton();
+            //CollectionView.BackgroundView = new UIImageView(UIImage.FromBundle("new_home_bg1"));
+            CollectionView.BackgroundColor = UIColor.White;
+			CollectionView.AllowsMultipleSelection = true;
+
+			UIFont font = UIFont.BoldSystemFontOfSize(20);
+			var headerFrame = new CGRect(0, 60, UIScreen.MainScreen.Bounds.Width, 50);
+			var headerLabel = new UILabel()
+			{
+				Frame = headerFrame,
+				Font = font,
+				TextAlignment = UITextAlignment.Center,
+				TextColor = UIColor.White,
+				BackgroundColor = UIColor.Gray
+			};
+			headerLabel.Text = "Select Your Favorite Classifications";
+			this.View.Add(headerLabel);
+
+
+
+
+			UIButton nextButton = new UIButton();
             nextButton.SetTitle("Next", UIControlState.Normal);
-            nextButton.BackgroundColor = UIColor.Green;
+            nextButton.BackgroundColor = HelperMethods.GetLime();
 
-            UIButton cancelButton = new UIButton();
+			
+			UIButton cancelButton = new UIButton();
             cancelButton.SetTitle("Finish", UIControlState.Normal);
-            cancelButton.BackgroundColor = UIColor.Green;
+            cancelButton.BackgroundColor = HelperMethods.GetLime();
 
-            CGPoint point2 = new CGPoint((UIScreen.MainScreen.Bounds.Width / 2) - 200, UIScreen.MainScreen.Bounds.Height - 120);
+            CGPoint point2 = new CGPoint((UIScreen.MainScreen.Bounds.Width / 2) - 200, UIScreen.MainScreen.Bounds.Height - 60);
             var frame2 = new CGRect(point2, new CGSize(100, 50));
             cancelButton.Frame = frame2;
             cancelButton.Font = UIFont.BoldSystemFontOfSize(22);
 
 
-            CGPoint point = new CGPoint((UIScreen.MainScreen.Bounds.Width / 2) + 100, UIScreen.MainScreen.Bounds.Height - 120);
+            CGPoint point = new CGPoint((UIScreen.MainScreen.Bounds.Width / 2) + 100, UIScreen.MainScreen.Bounds.Height - 60);
             var frame = new CGRect(point, new CGSize(100, 50));
             nextButton.Frame = frame;
             nextButton.Font = UIFont.BoldSystemFontOfSize(22);
@@ -115,17 +155,12 @@ namespace AircraftForSale
                     return;
                 }
 
-                RegistrationViewController registrationVC = (RegistrationViewController)((MultiStepProcessHorizontalViewController)this.ParentViewController).ContainerViewController;
-                var secondStep = registrationVC.Steps[1];
-                registrationVC._pageViewController.SetViewControllers(new[] { secondStep as UIViewController }, UIPageViewControllerNavigationDirection.Forward, true, (finished) =>
-                {
-                    if (finished)
-                    {
-                        //finalStep.StepActivated(this, new MultiStepProcessStepEventArgs());
+				var testStoryBoard = UIStoryboard.FromName("Registration_New", NSBundle.MainBundle);
+                var regViewController = testStoryBoard.InstantiateViewController("RegistrationStepTwo");
+				this.ShowViewController(regViewController, this);
 
-                    }
-                });
-            };
+
+			};
 
             cancelButton.TouchUpInside += (sender, e) =>
             {
@@ -133,8 +168,61 @@ namespace AircraftForSale
             };
 
             View.Add(nextButton);
-            if (Settings.IsRegistered)
+
+			nextButton.TranslatesAutoresizingMaskIntoConstraints = false;
+
+			var topConstraint = NSLayoutConstraint.Create(
+			  nextButton,
+			  NSLayoutAttribute.Top,
+			  NSLayoutRelation.Equal,
+			  this.View,
+			  NSLayoutAttribute.Top,
+			  1,
+			  UIScreen.MainScreen.Bounds.Height - 75
+		  );
+
+			var leftConstraint = NSLayoutConstraint.Create(
+              nextButton,
+              NSLayoutAttribute.Left,
+              NSLayoutRelation.Equal,
+              this.View,
+              NSLayoutAttribute.Left,
+			  1,
+			  UIScreen.MainScreen.Bounds.Width - 130
+		  );
+
+			var widthConstaint = NSLayoutConstraint.Create(
+			   nextButton,
+			   NSLayoutAttribute.Width,
+			   NSLayoutRelation.Equal,
+				1,
+				100
+		   );
+
+            var heightConstraint = NSLayoutConstraint.Create(
+             nextButton,
+             NSLayoutAttribute.Height,
+             NSLayoutRelation.Equal,
+              1,
+               50
+            );
+
+
+
+			this.View.AddConstraint(topConstraint);
+			this.View.AddConstraint(heightConstraint);
+			this.View.AddConstraint(widthConstaint);
+			this.View.AddConstraint(leftConstraint);
+
+
+			if (Settings.IsRegistered)
                 View.Add(cancelButton);
+
+
+
+			
+            //this.View.LayoutIfNeeded();
+
         }
 
         public override nint NumberOfSections(UICollectionView collectionView)
@@ -218,6 +306,8 @@ namespace AircraftForSale
             return false;
         }
 
+
+
     }
 
     public partial class ClassificationCell : UICollectionViewCell
@@ -230,12 +320,12 @@ namespace AircraftForSale
         {
             //var semiTransparentColor = new Color(0, 0, 0, 0.5);
 
-            BackgroundView = new UIView { BackgroundColor = UIColor.White, Alpha = (nfloat).5 };
+            BackgroundView = new UIView { BackgroundColor = UIColor.LightGray, Alpha = (nfloat).5 };
             BackgroundView.Layer.CornerRadius = 6.0f;
             //BackgroundView.Alpha = 0.5f;
 
 
-            SelectedBackgroundView = new UIView { BackgroundColor = UIColor.Green, Alpha = (nfloat).5 };
+            SelectedBackgroundView = new UIView { BackgroundColor = HelperMethods.GetLime(), Alpha = (nfloat).5 };
             SelectedBackgroundView.Layer.CornerRadius = 6.0f;
             //SelectedBackgroundView.Alpha = 0.5f;
 

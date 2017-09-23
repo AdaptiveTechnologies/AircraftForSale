@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Arial.ttf">
+            <string>ArialMT</string>
+        </array>
+        <array key="Georgia.ttf">
+            <string>Georgia</string>
+        </array>
+        <array key="GeorgiaBold.ttf">
+            <string>Georgia-Bold</string>
+        </array>
+        <array key="Helvetica.ttc">
+            <string>Helvetica</string>
+            <string>Helvetica-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--Splash View Controller-->
         <!--Title-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -51,7 +61,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <connections/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="31">
                                 <rect key="frame" x="65" y="486" width="189" height="38"/>
@@ -364,7 +373,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="39648" id="39649">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="99"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="39654">
@@ -454,7 +463,7 @@
         <!--Change Pass View Controller-->
         <scene sceneID="WWf-Lw-pOa">
             <objects>
-                <viewController id="U0e-Di-1h7" customClass="ChangePassViewController" sceneMemberID="viewController" storyboardIdentifier="ChangePassViewController" useStoryboardIdentifierAsRestorationIdentifier="YES">
+                <viewController storyboardIdentifier="ChangePassViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="U0e-Di-1h7" customClass="ChangePassViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="coZ-bj-J9j">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -559,7 +568,7 @@
         <!--Registration Profile View Controller-->
         <scene sceneID="21902">
             <objects>
-                <viewController storyboardIdentifier="MyProfileViewController" id="21903" customClass="RegistrationProfileViewController" sceneMemberID="viewController" useStoryboardIdentifierAsRestorationIdentifier="YES">
+                <viewController storyboardIdentifier="MyProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="21903" customClass="RegistrationProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="21904">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -804,7 +813,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewLayout key="collectionViewLayout" id="36616"/>
                         <imageView key="backgroundView" userInteractionEnabled="NO" contentMode="scaleToFill" image="new_home_bg1.png" id="ddI-26-T2t">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                            <rect key="frame" x="0.0" y="-64" width="320" height="480"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </imageView>
@@ -853,9 +862,6 @@
             </objects>
             <point key="canvasLocation" x="1108" y="980"/>
         </scene>
-        <!--Ad Layout1 View Controller-->
-        <!--Ad Layout2 View Controller-->
-        <!--Ad Layout3 View Controller-->
         <!--Registration Navigation Controller-->
         <scene sceneID="39745">
             <objects>
@@ -1011,7 +1017,7 @@
                                 <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="tqX-S3-iNw">
-                                    <rect key="frame" x="0.0" y="0.0" width="290" height="348"/>
+                                    <rect key="frame" x="0.0" y="35" width="290" height="348"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9f5-vf-mbM" customClass="UIButton">
@@ -1217,7 +1223,7 @@
                                         <rect key="frame" x="0.0" y="56" width="290" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pU4-Wc-yOX" id="Sk3-f8-DhD">
-                                            <rect key="frame" x="0.0" y="0.0" width="290" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="290" height="69.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1L5-dt-Od8">
@@ -1335,14 +1341,14 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="spec_cell" rowHeight="70" id="42285" customClass="SpecCell">
-                                        <rect key="frame" x="0.0" y="56" width="301" height="70"/>
+                                        <rect key="frame" x="0.0" y="63" width="301" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="42285" id="42286">
-                                            <rect key="frame" x="0.0" y="0.0" width="301" height="69"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="301" height="69.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="42293">
-                                                    <rect key="frame" x="-4" y="5" width="182" height="64"/>
+                                                    <rect key="frame" x="-4" y="5" width="182" height="64.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
@@ -1350,7 +1356,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="42299">
-                                                    <rect key="frame" x="130" y="5" width="169" height="65"/>
+                                                    <rect key="frame" x="130" y="5" width="169" height="65.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1630,11 +1636,8 @@
         <image name="company.png" width="28" height="24"/>
         <image name="conklin.jpg" width="923" height="196"/>
         <image name="continue_btn.png" width="378" height="76"/>
-        <image name="email.png" width="30" height="30"/>
-        <image name="like.png" width="30" height="30"/>
         <image name="location.png" width="22" height="30"/>
         <image name="loginscreen_phonebackground.png" width="750" height="1300"/>
-        <image name="messages.png" width="30" height="30"/>
         <image name="mobile.png" width="20" height="34"/>
         <image name="new_back_arrow.png" width="12" height="22"/>
         <image name="new_email1_icon.png" width="40" height="31"/>
@@ -1646,7 +1649,6 @@
         <image name="new_share_icon.png" width="30" height="41"/>
         <image name="pencil.png" width="40" height="40"/>
         <image name="runway.jpg" width="525" height="350"/>
-        <image name="share.png" width="30" height="30"/>
         <image name="star-64.png" width="64" height="64"/>
         <image name="unchecked_checkbox.png" width="26" height="26"/>
         <image name="user_b.png" width="22" height="28"/>
@@ -1679,6 +1681,9 @@
         <image name="bombardier_ad.jpg" width="550" height="390"/>
         <image name="bombardier_ad2.jpg" width="550" height="274"/>
         <image name="bombardier_ad3.jpg" width="550" height="374"/>
+        <image name="email.png" width="30" height="30"/>
+        <image name="share.png" width="30" height="30"/>
+        <image name="like.png" width="30" height="30"/>
         <image name="like_selected.png" width="30" height="30"/>
         <image name="swipe_left.png" width="50" height="50"/>
         <image name="lake2.gif" width="150" height="58"/>
@@ -1686,6 +1691,7 @@
         <image name="ad_placeholder.jpg" width="640" height="426"/>
         <image name="globalairLogo_large.png" width="2367" height="625"/>
         <image name="phone.png" width="30" height="30"/>
+        <image name="messages.png" width="30" height="30"/>
         <image name="globalair_logo.png" width="666" height="176"/>
         <image name="map.png" width="31" height="31"/>
         <image name="New Folder/new_Logo.png" width="624" height="158"/>
@@ -1772,10 +1778,4 @@
         <image name="home_logo.png" width="900" height="261"/>
         <image name="loginscreen_ipad_background.png" width="1536" height="2048"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers/>
 </document>

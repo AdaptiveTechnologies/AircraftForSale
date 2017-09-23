@@ -276,9 +276,22 @@ namespace AircraftForSale
 
 			RegisterNowButton.TouchUpInside += (sender, e) =>
 			{
-				var testStoryBoard = UIStoryboard.FromName("Registration_New", NSBundle.MainBundle);
-				var regViewController = testStoryBoard.InstantiateInitialViewController();
-				this.PresentViewController(regViewController, true, null);
+				GridLayout classificationsGridLayout = new GridLayout();
+				int classificationItemWidth = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 200 : 100;
+				int classificationItemHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 150 : 100;
+
+				classificationsGridLayout.ItemSize = new CoreGraphics.CGSize(classificationItemWidth, classificationItemHeight);
+
+				int insetTop = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 125 : 75;
+				int insetLeftBottomRight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 50 : 5;
+
+				classificationsGridLayout.SectionInset = new UIEdgeInsets(insetTop, insetLeftBottomRight, insetLeftBottomRight, insetLeftBottomRight);
+				classificationsGridLayout.HeaderReferenceSize = new CoreGraphics.CGSize(UIScreen.MainScreen.Bounds.Width - 100, 0);
+
+				FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(classificationsGridLayout);
+
+				this.ShowViewController(new UINavigationController(favClassificationsVC), this);
+
 			};
 
 		}

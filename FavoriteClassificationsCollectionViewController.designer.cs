@@ -7,15 +7,13 @@
 using Foundation;
 using System;
 using System.CodeDom.Compiler;
+using UIKit;
 
 namespace AircraftForSale
 {
-    [Register ("ContactViewController")]
-    partial class ContactViewController
+    [Register ("FavoriteClassificationsCollectionViewController")]
+    partial class FavoriteClassificationsCollectionViewController
     {
-        [Outlet]
-        UIKit.UIWebView webView { get; set; }
-
         void ReleaseDesignerOutlets ()
         {
         }

@@ -17,7 +17,7 @@ namespace AircraftForSale
 
 		public static UIColor GetLime()
 		{
-			return UIColor.FromRGB(0, 255, 0);//lime
+			return UIColor.FromRGB(45, 185, 45);//lime
 		}
 
 		public async static void SwapLikeButtonState(UIButton senderButton, Ad ad)

@@ -70,7 +70,7 @@ Page3RegistrationViewController page3RegistrationVC = UIStoryboard.FromName(UIDe
 
 			var steps = new List<IMultiStepProcessStep>()
 			{
-				favClassificationsVC,
+				//favClassificationsVC,
 				//myInterestsVC
 					mainRegistrationVC,
 				page2RegistrationVC,
