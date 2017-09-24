@@ -539,25 +539,27 @@
                                             <rect key="frame" x="0.0" y="0.0" width="500" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When do you plan to buy? (optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12099" misplaced="YES">
-                                                    <rect key="frame" x="15" y="13" width="287" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When do you plan to buy? (optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12099">
+                                                    <rect key="frame" x="15" y="29.5" width="288" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="12103" misplaced="YES">
-                                                    <rect key="frame" x="15" y="34" width="370" height="65"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="24349" translatesAutoresizingMaskIntoConstraints="NO">
+                                                    <rect key="frame" x="10" y="60" width="480" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="65" id="12109"/>
+                                                        <constraint id="24353" firstItem="24349" firstAttribute="height" constant="30"/>
                                                     </constraints>
-                                                </pickerView>
+                                                </textField>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="12099" firstAttribute="leading" secondItem="12071" secondAttribute="leading" constant="15" id="12102"/>
-                                                <constraint firstAttribute="bottom" secondItem="12103" secondAttribute="bottom" id="12104"/>
-                                                <constraint firstItem="12103" firstAttribute="leading" secondItem="12071" secondAttribute="leading" constant="15" id="12105"/>
-                                                <constraint firstAttribute="trailing" secondItem="12103" secondAttribute="trailing" constant="15" id="12106"/>
-                                                <constraint firstItem="12103" firstAttribute="top" secondItem="12099" secondAttribute="bottom" id="12126"/>
+                                                <constraint id="24350" firstItem="12071" firstAttribute="trailing" secondItem="24349" secondAttribute="trailing" constant="10"/>
+                                                <constraint id="24351" firstItem="24349" firstAttribute="leading" secondItem="12071" secondAttribute="leading" constant="10"/>
+                                                <constraint id="24352" firstItem="12071" firstAttribute="bottom" secondItem="24349" secondAttribute="bottom" constant="10"/>
+                                                <constraint id="24354" firstItem="24349" firstAttribute="top" secondItem="12099" secondAttribute="bottom" constant="10"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -572,25 +574,27 @@
                                             <rect key="frame" x="0.0" y="0.0" width="500" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Why not take the bus? (optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12145" misplaced="YES">
-                                                    <rect key="frame" x="15" y="13" width="259" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Why not take the bus? (optional)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12145">
+                                                    <rect key="frame" x="15" y="29.5" width="259.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="12146" misplaced="YES">
-                                                    <rect key="frame" x="15" y="34" width="370" height="65"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="21729" translatesAutoresizingMaskIntoConstraints="NO">
+                                                    <rect key="frame" x="10" y="60" width="480" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="65" id="12147"/>
+                                                        <constraint id="22650" firstItem="21729" firstAttribute="height" constant="30"/>
                                                     </constraints>
-                                                </pickerView>
+                                                </textField>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="12145" firstAttribute="leading" secondItem="12144" secondAttribute="leading" constant="15" id="12148"/>
-                                                <constraint firstAttribute="bottom" secondItem="12146" secondAttribute="bottom" id="12149"/>
-                                                <constraint firstItem="12146" firstAttribute="leading" secondItem="12144" secondAttribute="leading" constant="15" id="12150"/>
-                                                <constraint firstAttribute="trailing" secondItem="12146" secondAttribute="trailing" constant="15" id="12151"/>
-                                                <constraint firstItem="12146" firstAttribute="top" secondItem="12145" secondAttribute="bottom" id="12152"/>
+                                                <constraint id="21730" firstItem="12144" firstAttribute="bottom" secondItem="21729" secondAttribute="bottom" constant="10"/>
+                                                <constraint id="21731" firstItem="21729" firstAttribute="leading" secondItem="12144" secondAttribute="leading" constant="10"/>
+                                                <constraint id="21732" firstItem="12144" firstAttribute="trailing" secondItem="21729" secondAttribute="trailing" constant="10"/>
+                                                <constraint id="21733" firstItem="21729" firstAttribute="top" secondItem="12145" secondAttribute="bottom" constant="10"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -617,7 +621,7 @@
                                                         <constraint firstAttribute="width" constant="100" id="12182"/>
                                                         <constraint firstAttribute="height" constant="30" id="12490"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
@@ -640,17 +644,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="500" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="12191">
-                                                    <rect key="frame" x="15" y="34" width="370" height="65"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="26332" translatesAutoresizingMaskIntoConstraints="NO">
+                                                    <rect key="frame" x="10" y="30" width="480" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="65" id="12192"/>
+                                                        <constraint id="26337" firstItem="26332" firstAttribute="height" constant="30"/>
                                                     </constraints>
-                                                </pickerView>
+                                                </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="12191" secondAttribute="bottom" id="12194"/>
-                                                <constraint firstItem="12191" firstAttribute="leading" secondItem="12189" secondAttribute="leading" constant="15" id="12195"/>
-                                                <constraint firstAttribute="trailing" secondItem="12191" secondAttribute="trailing" constant="15" id="12196"/>
+                                                <constraint id="26334" firstItem="12189" firstAttribute="bottom" secondItem="26332" secondAttribute="bottom" constant="10"/>
+                                                <constraint id="26335" firstItem="26332" firstAttribute="leading" secondItem="12189" secondAttribute="leading" constant="10"/>
+                                                <constraint id="26336" firstItem="12189" firstAttribute="trailing" secondItem="26332" secondAttribute="trailing" constant="10"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -664,9 +670,9 @@
                     </tableView>
                     <connections>
                         <outlet property="HoursTextView" destination="12177" id="name-outlet-12177"/>
-                        <outlet property="OrderByPicker" destination="12191" id="name-outlet-12191"/>
-                        <outlet property="PurposePicker" destination="12146" id="name-outlet-12146"/>
-                        <outlet property="TimeframePicker" destination="12103" id="name-outlet-12103"/>
+                        <outlet property="WhyFlyTextField" destination="21729" id="name-outlet-21729"/>
+                        <outlet property="TimeFrameTextField" destination="24349" id="name-outlet-24349"/>
+                        <outlet property="OrderByTextField" destination="26332" id="name-outlet-26332"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="11572" userLabel="First Responder" sceneMemberID="firstResponder"/>

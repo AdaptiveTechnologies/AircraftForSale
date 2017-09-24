@@ -6,6 +6,7 @@ using AircraftForSale.PCL.Helpers;
 using System.Drawing;
 using CoreAnimation;
 using CoreGraphics;
+using System.Linq;
 
 namespace AircraftForSale
 {
@@ -35,21 +36,136 @@ namespace AircraftForSale
 
 			this.NavigationItem.SetRightBarButtonItem(finishButton, true);
 
-			TimeframePicker.Model = new TimeframeViewModel();
-			PurposePicker.Model = new PurposeViewModel();
-			OrderByPicker.Model = new SortOptionsViewModel();
+			//TimeframePicker.Model = new TimeframeViewModel();
+			//PurposePicker.Model = new PurposeViewModel();
+			// OrderByPicker.Model = new SortOptionsViewModel();
+
+			var orderByPicker = new UIPickerView();
+			orderByPicker.Model = new SortOptionsViewModel();
+			orderByPicker.ShowSelectionIndicator = true;
+
+			UIToolbar orderByToolbar = new UIToolbar();
+			orderByToolbar.BarStyle = UIBarStyle.Black;
+			orderByToolbar.Translucent = true;
+			orderByToolbar.SizeToFit();
+
+			UIBarButtonItem orderByDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
+			{
+				UITextField textview = OrderByTextField;
+
+                textview.Text = Settings.SortOptions;
+				textview.ResignFirstResponder();
+			});
+			orderByToolbar.SetItems(new UIBarButtonItem[] { orderByDoneButton }, true);
+
+
+			OrderByTextField.InputView = orderByPicker;
+			OrderByTextField.InputAccessoryView = orderByToolbar;
+
+			var timeframePicker = new UIPickerView();
+			timeframePicker.Model = new TimeframeViewModel();
+			timeframePicker.ShowSelectionIndicator = true;
+
+			UIToolbar timeframeToolbar = new UIToolbar();
+			timeframeToolbar.BarStyle = UIBarStyle.Black;
+			timeframeToolbar.Translucent = true;
+			timeframeToolbar.SizeToFit();
+
+			UIBarButtonItem timeframeDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
+			{
+				UITextField textview = TimeFrameTextField;
+
+                textview.Text = Settings.PurchaseTimeFrame + " months";
+				textview.ResignFirstResponder();
+			});
+			timeframeToolbar.SetItems(new UIBarButtonItem[] { timeframeDoneButton }, true);
+
+
+			TimeFrameTextField.InputView = timeframePicker;
+			TimeFrameTextField.InputAccessoryView = timeframeToolbar;
+
+            var whyFlyPicker = new UIPickerView();
+			whyFlyPicker.Model = new PurposeViewModel();
+			whyFlyPicker.ShowSelectionIndicator = true;
+
+            UIToolbar whyFlyToolbar = new UIToolbar();
+			whyFlyToolbar.BarStyle = UIBarStyle.Black;
+			whyFlyToolbar.Translucent = true;
+			whyFlyToolbar.SizeToFit();
+
+            UIBarButtonItem whyFlyDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
+			{
+				UITextField textview = WhyFlyTextField;
+
+                var selected = Settings.LocationResponse.PurposeForFlying.FirstOrDefault(row => row.FlyingPurposeId == Settings.PurposeId);
+
+                textview.Text = selected.Purpose;
+				textview.ResignFirstResponder();
+			});
+			whyFlyToolbar.SetItems(new UIBarButtonItem[] { whyFlyDoneButton }, true);
+
+
+			WhyFlyTextField.InputView = whyFlyPicker;
+			WhyFlyTextField.InputAccessoryView = whyFlyToolbar;
+
+
+
+
+			
 
 			//TimeframePicker.Layer.BorderColor = UIColor.Gray.CGColor;
 			//TimeframePicker.Layer.BorderWidth = 1;
 
-			var borderFrameHeight = HoursTextView.Frame.Size.Height - 1;
-			var borderFrameWidth = HoursTextView.Frame.Size.Width;
+			var borderFrameHeight = WhyFlyTextField.Frame.Size.Height - 1;
+			var borderFrameWidth = WhyFlyTextField.Frame.Size.Width;
 			var borderBackgroundColor = UIColor.Gray.CGColor;
 
 			// create CALayer
 			var bottomBorder1 = new CALayer();
 			bottomBorder1.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
 			bottomBorder1.BackgroundColor = borderBackgroundColor;
+
+			var bottomBorder2 = new CALayer();
+			bottomBorder2.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
+			bottomBorder2.BackgroundColor = borderBackgroundColor;
+
+			var bottomBorder3 = new CALayer();
+			bottomBorder3.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
+			bottomBorder3.BackgroundColor = borderBackgroundColor;
+
+			var bottomBorder4 = new CALayer();
+			bottomBorder4.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
+			bottomBorder4.BackgroundColor = borderBackgroundColor;
+
+
+			WhyFlyTextField.Layer.AddSublayer(bottomBorder2);
+			WhyFlyTextField.Layer.MasksToBounds = true;
+			WhyFlyTextField.AttributedPlaceholder = new NSAttributedString(
+				"Select from list",
+				font: UIFont.FromName("System-Regular", 22.0f),
+				foregroundColor: UIColor.DarkGray
+			//strokeWidth: 4
+			);
+
+			TimeFrameTextField.Layer.AddSublayer(bottomBorder3);
+			TimeFrameTextField.Layer.MasksToBounds = true;
+			TimeFrameTextField.AttributedPlaceholder = new NSAttributedString(
+				"Select from list",
+				font: UIFont.FromName("System-Regular", 22.0f),
+				foregroundColor: UIColor.DarkGray
+			//strokeWidth: 4
+			);
+
+			OrderByTextField.Layer.AddSublayer(bottomBorder4);
+			OrderByTextField.Layer.MasksToBounds = true;
+			OrderByTextField.AttributedPlaceholder = new NSAttributedString(
+				"Select from list",
+				font: UIFont.FromName("System-Regular", 22.0f),
+				foregroundColor: UIColor.DarkGray
+			//strokeWidth: 4
+			);
+
+
 
 			// add to UITextField
 			HoursTextView.Layer.AddSublayer(bottomBorder1);

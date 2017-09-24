@@ -20,15 +20,15 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIPickerView OrderByPicker { get; set; }
+        UIKit.UITextField OrderByTextField { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIPickerView PurposePicker { get; set; }
+        UIKit.UITextField TimeFrameTextField { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIPickerView TimeframePicker { get; set; }
+        UIKit.UITextField WhyFlyTextField { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
@@ -37,19 +37,19 @@ namespace AircraftForSale
                 HoursTextView = null;
             }
 
-            if (OrderByPicker != null) {
-                OrderByPicker.Dispose ();
-                OrderByPicker = null;
+            if (OrderByTextField != null) {
+                OrderByTextField.Dispose ();
+                OrderByTextField = null;
             }
 
-            if (PurposePicker != null) {
-                PurposePicker.Dispose ();
-                PurposePicker = null;
+            if (TimeFrameTextField != null) {
+                TimeFrameTextField.Dispose ();
+                TimeFrameTextField = null;
             }
 
-            if (TimeframePicker != null) {
-                TimeframePicker.Dispose ();
-                TimeframePicker = null;
+            if (WhyFlyTextField != null) {
+                WhyFlyTextField.Dispose ();
+                WhyFlyTextField = null;
             }
         }
     }
