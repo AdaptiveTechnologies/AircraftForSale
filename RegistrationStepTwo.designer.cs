@@ -56,6 +56,10 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel PilotLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField PilotRatingTextField { get; set; }
 
         [Outlet]
@@ -128,6 +132,11 @@ namespace AircraftForSale
             if (PasswordTextView != null) {
                 PasswordTextView.Dispose ();
                 PasswordTextView = null;
+            }
+
+            if (PilotLabel != null) {
+                PilotLabel.Dispose ();
+                PilotLabel = null;
             }
 
             if (PilotRatingTextField != null) {

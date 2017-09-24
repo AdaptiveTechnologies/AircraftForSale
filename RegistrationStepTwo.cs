@@ -39,13 +39,10 @@ namespace AircraftForSale
         {
             NavigationItem.Title = "Registration";
 
-            //this.TableView.BackgroundView = new UIImageView(UIImage.FromBundle("new_home_bg1"));
-
             NavigationItem.BackBarButtonItem = new UIBarButtonItem("Back", UIBarButtonItemStyle.Plain, null);
 
             var nextBarButtonItem = new UIBarButtonItem("Next", UIBarButtonItemStyle.Plain, (sender, args) =>
             {
-                //StepTwoSeque
                 PerformSegue("StepThreeSeque", this);
             });
             UITextAttributes icoFontAttribute = new UITextAttributes();
@@ -54,17 +51,11 @@ namespace AircraftForSale
 
             nextBarButtonItem.SetTitleTextAttributes(icoFontAttribute, UIControlState.Normal);
 
-			//UITextAttributes icoFontAttribute = new UITextAttributes();
-			//icoFontAttribute.Font = UIFont.BoldSystemFontOfSize(20);
-			//icoFontAttribute.TextColor = UIColor.White;
+            NavigationItem.BackBarButtonItem = new UIBarButtonItem("Back", UIBarButtonItemStyle.Plain, null);
+            NavigationItem.BackBarButtonItem.SetTitleTextAttributes(icoFontAttribute, UIControlState.Normal);
+            NavigationItem.BackBarButtonItem.TintColor = UIColor.White;
 
-			NavigationItem.BackBarButtonItem = new UIBarButtonItem("Back", UIBarButtonItemStyle.Plain, null);
-			NavigationItem.BackBarButtonItem.SetTitleTextAttributes(icoFontAttribute, UIControlState.Normal);
-			NavigationItem.BackBarButtonItem.TintColor = UIColor.White;
-
-
-
-			this.NavigationItem.SetRightBarButtonItem(nextBarButtonItem, true);
+            this.NavigationItem.SetRightBarButtonItem(nextBarButtonItem, true);
 
             await Task.Run(async () =>
             {
@@ -131,32 +122,31 @@ namespace AircraftForSale
             });
 
 
-			var classificationPicker = new UIPickerView();
+            var classificationPicker = new UIPickerView();
             var classificationPickerViewModel = new ClassificationPickerViewModel();
-			classificationPicker.Model = classificationPickerViewModel;
-			classificationPicker.ShowSelectionIndicator = true;
+            classificationPicker.Model = classificationPickerViewModel;
+            classificationPicker.ShowSelectionIndicator = true;
 
-			UIToolbar classificationToolbar = new UIToolbar();
-			classificationToolbar.BarStyle = UIBarStyle.Black;
-			classificationToolbar.Translucent = true;
-			classificationToolbar.SizeToFit();
+            UIToolbar classificationToolbar = new UIToolbar();
+            classificationToolbar.BarStyle = UIBarStyle.Black;
+            classificationToolbar.Translucent = true;
+            classificationToolbar.SizeToFit();
 
-			UIBarButtonItem classificationDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
-			{
+            UIBarButtonItem classificationDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
+            {
                 UITextField textview = ClassificationTextField;
-                //textview.Text = Settings.LocationResponse.PilotRating.FirstOrDefault(row => row.PilotTypeId == Settings.PilotTypeId).Title;
                 textview.Text = classificationPickerViewModel.SelectedItem.ClassificationName;
-				textview.ResignFirstResponder();
-			});
-			classificationToolbar.SetItems(new UIBarButtonItem[] { classificationDoneButton }, true);
+                textview.ResignFirstResponder();
+            });
+            classificationToolbar.SetItems(new UIBarButtonItem[] { classificationDoneButton }, true);
 
 
-			ClassificationTextField.InputView = classificationPicker;
-			ClassificationTextField.InputAccessoryView = classificationToolbar;
+            ClassificationTextField.InputView = classificationPicker;
+            ClassificationTextField.InputAccessoryView = classificationToolbar;
 
 
 
-			classificationPickerViewModel.ValueChanged += async (sender, e) =>
+            classificationPickerViewModel.ValueChanged += async (sender, e) =>
             {
                 if (classificationPickerViewModel.selectedIndex == 0)
                 {
@@ -174,28 +164,28 @@ namespace AircraftForSale
                         InvokeOnMainThread(() =>
                         {
 
-							var manufacturerPicker = new UIPickerView();
-							manufacturerPickerViewModel = new ManufacturerPickerViewModel(cmmdResponse.MfgLst);
-							manufacturerPicker.Model = manufacturerPickerViewModel;
-							manufacturerPicker.ShowSelectionIndicator = true;
+                            var manufacturerPicker = new UIPickerView();
+                            manufacturerPickerViewModel = new ManufacturerPickerViewModel(cmmdResponse.MfgLst);
+                            manufacturerPicker.Model = manufacturerPickerViewModel;
+                            manufacturerPicker.ShowSelectionIndicator = true;
 
-							UIToolbar manufacturerToolbar = new UIToolbar();
-							manufacturerToolbar.BarStyle = UIBarStyle.Black;
-							manufacturerToolbar.Translucent = true;
-							manufacturerToolbar.SizeToFit();
+                            UIToolbar manufacturerToolbar = new UIToolbar();
+                            manufacturerToolbar.BarStyle = UIBarStyle.Black;
+                            manufacturerToolbar.Translucent = true;
+                            manufacturerToolbar.SizeToFit();
 
-							UIBarButtonItem manufacturerDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s2, e2) =>
-							{
+                            UIBarButtonItem manufacturerDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s2, e2) =>
+                            {
                                 UITextField textview = ManufacturerTextField;
                                 //textview.Text = Settings.LocationResponse.PilotRating.FirstOrDefault(row => row.PilotTypeId == Settings.PilotTypeId).Title;
                                 textview.Text = manufacturerPickerViewModel.SelectedItem.Manufacturer;
-								textview.ResignFirstResponder();
-							});
-							manufacturerToolbar.SetItems(new UIBarButtonItem[] { manufacturerDoneButton }, true);
+                                textview.ResignFirstResponder();
+                            });
+                            manufacturerToolbar.SetItems(new UIBarButtonItem[] { manufacturerDoneButton }, true);
 
 
-							ManufacturerTextField.InputView = manufacturerPicker;
-							ManufacturerTextField.InputAccessoryView = manufacturerToolbar;
+                            ManufacturerTextField.InputView = manufacturerPicker;
+                            ManufacturerTextField.InputAccessoryView = manufacturerToolbar;
 
                             manufacturerPickerViewModel.ValueChanged += async (sender2, e2) =>
                             {
@@ -216,28 +206,28 @@ namespace AircraftForSale
                                             //modelPickerViewModel = new ModelPickerViewModel(modelList.ToList());
                                             //ModelPicker.Model = modelPickerViewModel;
 
-											var modelPicker = new UIPickerView();
-											modelPickerViewModel = new ModelPickerViewModel(modelList.ToList());
-											modelPicker.Model = modelPickerViewModel;
-											modelPicker.ShowSelectionIndicator = true;
+                                            var modelPicker = new UIPickerView();
+                                            modelPickerViewModel = new ModelPickerViewModel(modelList.ToList());
+                                            modelPicker.Model = modelPickerViewModel;
+                                            modelPicker.ShowSelectionIndicator = true;
 
-											UIToolbar modelToolbar = new UIToolbar();
-											modelToolbar.BarStyle = UIBarStyle.Black;
-											modelToolbar.Translucent = true;
-											modelToolbar.SizeToFit();
+                                            UIToolbar modelToolbar = new UIToolbar();
+                                            modelToolbar.BarStyle = UIBarStyle.Black;
+                                            modelToolbar.Translucent = true;
+                                            modelToolbar.SizeToFit();
 
-											UIBarButtonItem modelDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s3, e3) =>
-											{
-												UITextField textview = ModelTextField;
+                                            UIBarButtonItem modelDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s3, e3) =>
+                                            {
+                                                UITextField textview = ModelTextField;
                                                 //textview.Text = Settings.LocationResponse.PilotRating.FirstOrDefault(row => row.PilotTypeId == Settings.PilotTypeId).Title;
                                                 textview.Text = modelPickerViewModel.SelectedItem.Designation;
-												textview.ResignFirstResponder();
-											});
-											modelToolbar.SetItems(new UIBarButtonItem[] { modelDoneButton }, true);
+                                                textview.ResignFirstResponder();
+                                            });
+                                            modelToolbar.SetItems(new UIBarButtonItem[] { modelDoneButton }, true);
 
 
-											ModelTextField.InputView = modelPicker;
-											ModelTextField.InputAccessoryView = modelToolbar;
+                                            ModelTextField.InputView = modelPicker;
+                                            ModelTextField.InputAccessoryView = modelToolbar;
                                         });
                                     }
 
@@ -268,7 +258,7 @@ namespace AircraftForSale
             {
                 UITextField textview = PilotTypeTextField;
                 //textview.Text = Settings.LocationResponse.PilotRating.FirstOrDefault(row => row.PilotTypeId == Settings.PilotTypeId).Title;
-                textview.Text = "Selected Value";
+                textview.Text = Settings.PilotStatusString;
                 textview.ResignFirstResponder();
             });
             pilotTypeToolbar.SetItems(new UIBarButtonItem[] { pilotTypeDoneButton }, true);
@@ -281,23 +271,22 @@ namespace AircraftForSale
             ratingPicker.Model = new RatingPickerViewModel();
             ratingPicker.ShowSelectionIndicator = true;
 
-			UIToolbar pilotRatingToolbar = new UIToolbar();
-			pilotRatingToolbar.BarStyle = UIBarStyle.Black;
-			pilotRatingToolbar.Translucent = true;
-			pilotRatingToolbar.SizeToFit();
+            UIToolbar pilotRatingToolbar = new UIToolbar();
+            pilotRatingToolbar.BarStyle = UIBarStyle.Black;
+            pilotRatingToolbar.Translucent = true;
+            pilotRatingToolbar.SizeToFit();
 
-			UIBarButtonItem pilotRatingDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
-			{
-				UITextField textview = PilotRatingTextField;
-				//textview.Text = Settings
-				textview.Text = "Selected Value";
-				textview.ResignFirstResponder();
-			});
-			pilotRatingToolbar.SetItems(new UIBarButtonItem[] { pilotRatingDoneButton }, true);
+            UIBarButtonItem pilotRatingDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
+            {
+                UITextField textview = PilotRatingTextField;
+                textview.Text = Settings.LocationResponse.PilotRating.FirstOrDefault(row => row.PilotTypeId == Settings.PilotTypeId).Title;
+                textview.ResignFirstResponder();
+            });
+            pilotRatingToolbar.SetItems(new UIBarButtonItem[] { pilotRatingDoneButton }, true);
 
 
-			PilotRatingTextField.InputView = ratingPicker;
-			PilotRatingTextField.InputAccessoryView = pilotRatingToolbar;
+            PilotRatingTextField.InputView = ratingPicker;
+            PilotRatingTextField.InputAccessoryView = pilotRatingToolbar;
 
 
 
@@ -308,10 +297,12 @@ namespace AircraftForSale
                 if (PilotSwitch.On)
                 {
                     hidePilotRows = false;
+                    Settings.IsPilot = true;
                 }
                 else
                 {
                     hidePilotRows = true;
+                    Settings.IsPilot = false;
                 }
                 TableView.BeginUpdates();
                 TableView.EndUpdates();
@@ -360,184 +351,261 @@ namespace AircraftForSale
             bottomBorder9.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
             bottomBorder9.BackgroundColor = borderBackgroundColor;
 
-			var bottomBorder10 = new CALayer();
-			bottomBorder10.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
-			bottomBorder10.BackgroundColor = borderBackgroundColor;
+            var bottomBorder10 = new CALayer();
+            bottomBorder10.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
+            bottomBorder10.BackgroundColor = borderBackgroundColor;
 
-			var bottomBorder11 = new CALayer();
-			bottomBorder11.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
-			bottomBorder11.BackgroundColor = borderBackgroundColor;
+            var bottomBorder11 = new CALayer();
+            bottomBorder11.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
+            bottomBorder11.BackgroundColor = borderBackgroundColor;
 
-			var bottomBorder12 = new CALayer();
-			bottomBorder12.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
-			bottomBorder12.BackgroundColor = borderBackgroundColor;
+            var bottomBorder12 = new CALayer();
+            bottomBorder12.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
+            bottomBorder12.BackgroundColor = borderBackgroundColor;
 
-			var bottomBorder13 = new CALayer();
-			bottomBorder13.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
-			bottomBorder13.BackgroundColor = borderBackgroundColor;
+            var bottomBorder13 = new CALayer();
+            bottomBorder13.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
+            bottomBorder13.BackgroundColor = borderBackgroundColor;
 
-			var bottomBorder14 = new CALayer();
-			bottomBorder14.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
-			bottomBorder14.BackgroundColor = borderBackgroundColor;
+            var bottomBorder14 = new CALayer();
+            bottomBorder14.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
+            bottomBorder14.BackgroundColor = borderBackgroundColor;
 
             var bottomBorderLabel = new CALayer();
             bottomBorderLabel.Frame = new CGRect(0.0f, LocationLabel.Frame.Height - 1, LocationLabel.Frame.Width, 1.0f);
             bottomBorderLabel.BackgroundColor = borderBackgroundColor;
 
-			PilotTypeTextField.Layer.AddSublayer(bottomBorder10);
-			PilotTypeTextField.Layer.MasksToBounds = true;
-			PilotTypeTextField.AttributedPlaceholder = new NSAttributedString(
-				"Select a Type",
-				font: UIFont.FromName("System-Regular", 22.0f),
-				foregroundColor: UIColor.DarkGray
-			//strokeWidth: 4
-			);
 
-			PilotRatingTextField.Layer.AddSublayer(bottomBorder11);
-			PilotRatingTextField.Layer.MasksToBounds = true;
-			PilotRatingTextField.AttributedPlaceholder = new NSAttributedString(
-				"Select a Rating",
-				font: UIFont.FromName("System-Regular", 22.0f),
-				foregroundColor: UIColor.DarkGray
-			//strokeWidth: 4
-			);
+            var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
+            var fontObject = UIFont.SystemFontOfSize(fontSize);
 
-            ClassificationTextField.Layer.AddSublayer(bottomBorder12);
-			ClassificationTextField.Layer.MasksToBounds = true;
-			ClassificationTextField.AttributedPlaceholder = new NSAttributedString(
-				"Select a Classification",
-				font: UIFont.FromName("System-Regular", 22.0f),
-				foregroundColor: UIColor.DarkGray
-			//strokeWidth: 4
-			);
-
-            ManufacturerTextField.Layer.AddSublayer(bottomBorder13);
-			ManufacturerTextField.Layer.MasksToBounds = true;
-			ManufacturerTextField.AttributedPlaceholder = new NSAttributedString(
-				"Select a Manufacturer",
-				font: UIFont.FromName("System-Regular", 22.0f),
-				foregroundColor: UIColor.DarkGray
-			//strokeWidth: 4
-			);
-
-			ModelTextField.Layer.AddSublayer(bottomBorder14);
-			ModelTextField.Layer.MasksToBounds = true;
-			ModelTextField.AttributedPlaceholder = new NSAttributedString(
-				"Select a Model",
-				font: UIFont.FromName("System-Regular", 22.0f),
-				foregroundColor: UIColor.DarkGray
-			//strokeWidth: 4
-			);
-
-
-			// add to UITextField
-			UsernameTextView.Layer.AddSublayer(bottomBorder1);
-            UsernameTextView.Layer.MasksToBounds = true;
-            UsernameTextView.AttributedPlaceholder = new NSAttributedString(
-                "Username (Your Email Address)",
-                font: UIFont.FromName("System-Regular", 22.0f),
+            PilotTypeTextField.Layer.AddSublayer(bottomBorder10);
+            PilotTypeTextField.Layer.MasksToBounds = true;
+            PilotTypeTextField.AttributedPlaceholder = new NSAttributedString(
+                "Select a Type",
+                font: fontObject,
                 foregroundColor: UIColor.DarkGray
             //strokeWidth: 4
             );
+            PilotTypeTextField.Font = fontObject;
+
+            PilotRatingTextField.Layer.AddSublayer(bottomBorder11);
+            PilotRatingTextField.Layer.MasksToBounds = true;
+            PilotRatingTextField.AttributedPlaceholder = new NSAttributedString(
+                "Select a Rating",
+                font: fontObject,
+                foregroundColor: UIColor.DarkGray
+            //strokeWidth: 4
+            );
+            PilotRatingTextField.Font = fontObject;
+
+            ClassificationTextField.Layer.AddSublayer(bottomBorder12);
+            ClassificationTextField.Layer.MasksToBounds = true;
+            ClassificationTextField.AttributedPlaceholder = new NSAttributedString(
+                "Select a Classification",
+                font: fontObject,
+                foregroundColor: UIColor.DarkGray
+            //strokeWidth: 4
+            );
+            ClassificationTextField.Font = fontObject;
+
+            ManufacturerTextField.Layer.AddSublayer(bottomBorder13);
+            ManufacturerTextField.Layer.MasksToBounds = true;
+            ManufacturerTextField.AttributedPlaceholder = new NSAttributedString(
+                "Select a Manufacturer",
+                font: fontObject,
+                foregroundColor: UIColor.DarkGray
+            //strokeWidth: 4
+            );
+            ManufacturerTextField.Font = fontObject;
+
+            ModelTextField.Layer.AddSublayer(bottomBorder14);
+            ModelTextField.Layer.MasksToBounds = true;
+            ModelTextField.AttributedPlaceholder = new NSAttributedString(
+                "Select a Model",
+                font: fontObject,
+                foregroundColor: UIColor.DarkGray
+            //strokeWidth: 4
+            );
+            ModelTextField.Font = fontObject;
+
+            UsernameTextView.Layer.AddSublayer(bottomBorder1);
+            UsernameTextView.Layer.MasksToBounds = true;
+            UsernameTextView.AttributedPlaceholder = new NSAttributedString(
+                "Username (Your Email Address)",
+                font: fontObject,
+                foregroundColor: UIColor.DarkGray
+            );
+            UsernameTextView.Font = fontObject;
+
+            UsernameTextView.KeyboardType = UIKeyboardType.EmailAddress;
+            UsernameTextView.EditingDidEnd += (sender, e) => {
+                var emailAddress = UsernameTextView.Text;
+				//validate email address
+				if (!HelperMethods.IsValidEmail(emailAddress, UsernameTextView))
+				{
+					HelperMethods.SendBasicAlert("Validation", "Please input a valid email address");
+				}
+            };
+
 
             ReEnterUsernameTextView.Layer.AddSublayer(bottomBorder2);
             ReEnterUsernameTextView.Layer.MasksToBounds = true;
             ReEnterUsernameTextView.AttributedPlaceholder = new NSAttributedString(
               "Re-Enter (Your Email Address)",
-              font: UIFont.FromName("System-Regular", 22.0f),
+              font: fontObject,
               foregroundColor: UIColor.DarkGray
-          //strokeWidth: 4
           );
+            ReEnterUsernameTextView.Font = fontObject;
+            ReEnterUsernameTextView.EditingDidEnd += (sender, e) => {
+                if(!HelperMethods.ReEnterEmail(ReEnterUsernameTextView.Text, ReEnterUsernameTextView))
+                {
+                    HelperMethods.SendBasicAlert("Validation", "Usernames must match");
+                }
+            };
 
             PasswordTextView.Layer.AddSublayer(bottomBorder3);
             PasswordTextView.Layer.MasksToBounds = true;
             PasswordTextView.AttributedPlaceholder = new NSAttributedString(
               "Password",
-              font: UIFont.FromName("System-Regular", 22.0f),
+              font: fontObject,
               foregroundColor: UIColor.DarkGray
-          //strokeWidth: 4
           );
+            PasswordTextView.Font = fontObject;
+            PasswordTextView.EditingDidEnd += (sender, e) => {
+                if(!HelperMethods.IsValidPassword(PasswordTextView.Text, PasswordTextView))
+                {
+                    HelperMethods.SendBasicAlert("Validation", "Passwords should contain letters and numbers and be less than 15 characters.");
+                }
+            };
 
             ReEnterPasswordTextView.Layer.AddSublayer(bottomBorder4);
             ReEnterPasswordTextView.Layer.MasksToBounds = true;
             ReEnterPasswordTextView.AttributedPlaceholder = new NSAttributedString(
               "Re-Enter Password",
-              font: UIFont.FromName("System-Regular", 22.0f),
+              font: fontObject,
               foregroundColor: UIColor.DarkGray
-          //strokeWidth: 4
           );
-
+            ReEnterPasswordTextView.Font = fontObject;
+			ReEnterPasswordTextView.EditingDidEnd += (sender, e) => {
+				if (!HelperMethods.ReEnterPassword(ReEnterPasswordTextView.Text, ReEnterPasswordTextView))
+				{
+					HelperMethods.SendBasicAlert("Validation", "Passwords must match");
+				}
+			};
             FirstNameTextView.Layer.AddSublayer(bottomBorder5);
             FirstNameTextView.Layer.MasksToBounds = true;
             FirstNameTextView.AttributedPlaceholder = new NSAttributedString(
-              "First Name",
-              font: UIFont.FromName("System-Regular", 22.0f),
-              foregroundColor: UIColor.DarkGray
-          //strokeWidth: 4
-          );
+             "First Name",
+               font: fontObject,
+             foregroundColor: UIColor.DarkGray
+         );
+            FirstNameTextView.Font = fontObject;
+			FirstNameTextView.EditingDidEnd += (sender, e) => {
+				if (FirstNameTextView.Text == string.Empty)
+				{
+                    HelperMethods.AnimateValidationBorder(FirstNameTextView);
+					HelperMethods.SendBasicAlert("Validation", "First name is required");
+                    Settings.FirstName = string.Empty;
+                }else{
+                    HelperMethods.RemoveValidationBorder(FirstNameTextView);
+                    Settings.FirstName = FirstNameTextView.Text;
+                }
+			};
 
             LastNameTextView.Layer.AddSublayer(bottomBorder6);
             LastNameTextView.Layer.MasksToBounds = true;
             LastNameTextView.AttributedPlaceholder = new NSAttributedString(
               "Last Name",
-              font: UIFont.FromName("System-Regular", 22.0f),
+              font: fontObject,
               foregroundColor: UIColor.DarkGray
-          //strokeWidth: 4
           );
+            LastNameTextView.Font = fontObject;
+			LastNameTextView.EditingDidEnd += (sender, e) => {
+				if (LastNameTextView.Text == string.Empty)
+				{
+					HelperMethods.AnimateValidationBorder(LastNameTextView);
+					HelperMethods.SendBasicAlert("Validation", "Last name is required");
+                    Settings.LastName = string.Empty;
+				}
+				else
+				{
+					HelperMethods.RemoveValidationBorder(LastNameTextView);
+                    Settings.LastName = LastNameTextView.Text;
+				}
+			};
 
             MobilePhoneTextView.Layer.AddSublayer(bottomBorder7);
             MobilePhoneTextView.Layer.MasksToBounds = true;
             MobilePhoneTextView.AttributedPlaceholder = new NSAttributedString(
               "Mobile Phone",
-              font: UIFont.FromName("System-Regular", 22.0f),
+              font: fontObject,
               foregroundColor: UIColor.DarkGray
-          //strokeWidth: 4
           );
 
-
-
-
-
+            MobilePhoneTextView.Font = fontObject;
+            MobilePhoneTextView.KeyboardType = UIKeyboardType.PhonePad;
+            MobilePhoneTextView.EditingDidEnd += (sender, e) => {
+                if(!HelperMethods.IsValidPhoneNumber(MobilePhoneTextView.Text, MobilePhoneTextView)){
+                    HelperMethods.SendBasicAlert("Validation", "Phone number is required");
+                }
+            };
 
             CompanyTextView.Layer.AddSublayer(bottomBorder8);
             CompanyTextView.Layer.MasksToBounds = true;
             CompanyTextView.AttributedPlaceholder = new NSAttributedString(
                 "Company (optional)",
-              font: UIFont.FromName("System-Regular", 22.0f),
+              font: fontObject,
               foregroundColor: UIColor.DarkGray
           //strokeWidth: 4
           );
+            CompanyTextView.Font = fontObject;
+            CompanyTextView.EditingDidEnd += (sender, e) => {
+                if(CompanyTextView.Text != string.Empty){
+                    Settings.Company = CompanyTextView.Text;
+                }
+            };
 
             HomeAirportTextView.Layer.AddSublayer(bottomBorder9);
             HomeAirportTextView.Layer.MasksToBounds = true;
             HomeAirportTextView.AttributedPlaceholder = new NSAttributedString(
                 "Home Airpot ID ex SDF (optional)",
-              font: UIFont.FromName("System-Regular", 22.0f),
+              font: fontObject,
               foregroundColor: UIColor.DarkGray
-          //strokeWidth: 4
           );
+            HomeAirportTextView.Font = fontObject;
+            HomeAirportTextView.EditingDidEnd += (sender, e) => {
+                if(!HelperMethods.ValidateHomeAirport(HomeAirportTextView.Text, HomeAirportTextView))
+                {
+					HelperMethods.SendBasicAlert("Validation", "Home airport must be 5 characters or less");
+                };
+                HomeAirportTextView.Text = HomeAirportTextView.Text.ToUpper();
+            };
 
             LocationLabel.Layer.AddSublayer(bottomBorderLabel);
             LocationLabel.Layer.MasksToBounds = true;
+            LocationLabel.Font = fontObject;
+            //Start here
 
 
-
-
+            PilotLabel.Font = fontObject;
+         
         }
 
         public override UIView GetViewForHeader(UITableView tableView, nint section)
         {
+            var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 55.0f : 40.0f;
 
-
-            UIView view = new UIView(new System.Drawing.RectangleF(0, 0, (float)this.View.Frame.Width, 40));
+            UIView view = new UIView(new System.Drawing.RectangleF(0, 0, (float)this.View.Frame.Width, viewHeight));
             view.BackgroundColor = UIColor.White;
 
             UILabel label = new UILabel();
             label.Opaque = false;
             label.TextColor = HelperMethods.GetLime();
-            label.Font = UIFont.BoldSystemFontOfSize(25);
+            var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 35.0f : 25.0f;
+            label.Font = UIFont.BoldSystemFontOfSize(fontSize);
 
-            label.Frame = new System.Drawing.RectangleF(0, 0, (float)view.Frame.Width - 30, 30);
+            label.Frame = new System.Drawing.RectangleF(0, 0, (float)view.Frame.Width - 30, viewHeight);
             label.Center = view.Center;
 
             view.AddSubview(label);
@@ -565,6 +633,7 @@ namespace AircraftForSale
 
         public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
         {
+            var rowHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 80.0f : 50.0f;
             if (hidePilotRows)
             {
                 if (indexPath.Section == 1 && (indexPath.Row == 7 || indexPath.Row == 8))
@@ -586,19 +655,15 @@ namespace AircraftForSale
                     return 0;
                 }
             }
-            return 50;
+            return rowHeight;
         }
 
     }
 
     public class PilotTypePickerViewModel : UIPickerViewModel
     {
-        //List<string> pilotTypeList;
-
         public PilotTypePickerViewModel()
         {
-            //pilotTypeList = new List<string>();
-            //pilotTypeList.Add("Select a Type");
         }
         public override nint GetComponentCount(UIPickerView picker)
         {
@@ -610,59 +675,44 @@ namespace AircraftForSale
             return Settings.LocationResponse.AreYouAPilot.Count;
         }
 
-        public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
+		public override void Selected(UIPickerView pickerView, nint row, nint component)
+		{
+            Settings.PilotStatusId = Settings.LocationResponse.AreYouAPilot[(int)row].PilotStatusId;
+            Settings.PilotStatusString = Settings.LocationResponse.AreYouAPilot[(int)row].Title;
+		}
+
+
+
+		public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
         {
-            //UILabel lbl = new UILabel();
 
-            //lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, 40f);
+            var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
 
-            //lbl.Font = UIFont.SystemFontOfSize(17f);
-
-            //lbl.TextColor = UIColor.DarkGray;
-
-            //lbl.TextAlignment = UITextAlignment.Center;
-
-            //lbl.Text = Settings.LocationResponse.AreYouAPilot[(int)row].Title;
-            //return lbl;
-
-            UIView containerView = new UIView(new System.Drawing.RectangleF(0, 0, (float)pickerView.Frame.Width, 31));
-            containerView.BackgroundColor = UIColor.Gray;
+			var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
+			var fontObject = UIFont.SystemFontOfSize(fontSize);
 
             UILabel lbl = new UILabel();
 
-            lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, 30f);
+            lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, viewHeight);
 
-            lbl.Font = UIFont.SystemFontOfSize(17f);
+            lbl.Font = UIFont.SystemFontOfSize(fontSize);
 
             lbl.TextColor = UIColor.DarkGray;
 
-            lbl.TextAlignment = UITextAlignment.Left;
-
-            //if (row == 0)
-            //{
-            //	lbl.Text = "Select from list";
-            //}
-            //else
-            //{
+            lbl.TextAlignment = UITextAlignment.Center;
 
             lbl.Text = Settings.LocationResponse.AreYouAPilot[(int)row].Title;
-            //}
 
             lbl.BackgroundColor = UIColor.White;
 
-            containerView.AddSubview(lbl);
-            return containerView;
+            return lbl;
         }
     }
 
     public class RatingPickerViewModel : UIPickerViewModel
     {
-        //List<string> ratingList;
-
         public RatingPickerViewModel()
         {
-            //ratingList = new List<string>();
-            //ratingList.Add("Select a Rating");
         }
         public override nint GetComponentCount(UIPickerView picker)
         {
@@ -674,49 +724,34 @@ namespace AircraftForSale
             return Settings.LocationResponse.PilotRating.Count;
         }
 
+		public override void Selected(UIPickerView pickerView, nint row, nint component)
+		{
+            Settings.PilotTypeId = Settings.LocationResponse.PilotRating[(int)row].PilotTypeId;
+		}
+
         public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
         {
-            //UILabel lbl = new UILabel();
 
-            //lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, 40f);
+			var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
 
-            //lbl.Font = UIFont.SystemFontOfSize(17f);
-
-            //lbl.TextColor = UIColor.DarkGray;
-
-            //lbl.TextAlignment = UITextAlignment.Center;
-
-            ////lbl.Text = Settings.LocationResponse.AreYouAPilot[(int)row].Title;
-            //lbl.Text = Settings.LocationResponse.PilotRating[(int)row].Title;
-            //return lbl;
-
-            UIView containerView = new UIView(new System.Drawing.RectangleF(0, 0, (float)pickerView.Frame.Width, 31));
-            containerView.BackgroundColor = UIColor.Gray;
+			var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
+			var fontObject = UIFont.SystemFontOfSize(fontSize);
 
             UILabel lbl = new UILabel();
 
-            lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, 30f);
+            lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, viewHeight);
 
-            lbl.Font = UIFont.SystemFontOfSize(17f);
+            lbl.Font = fontObject;
 
             lbl.TextColor = UIColor.DarkGray;
 
-            lbl.TextAlignment = UITextAlignment.Left;
-
-            //if (row == 0)
-            //{
-            //	lbl.Text = "Select from list";
-            //}
-            //else
-            //{
+            lbl.TextAlignment = UITextAlignment.Center;
 
             lbl.Text = Settings.LocationResponse.PilotRating[(int)row].Title;
-            //}
 
             lbl.BackgroundColor = UIColor.White;
 
-            containerView.AddSubview(lbl);
-            return containerView;
+            return lbl;
         }
     }
 
@@ -749,7 +784,9 @@ namespace AircraftForSale
             if (ValueChanged != null)
             {
                 ValueChanged(this, new EventArgs());
+
             }
+            Settings.ClassificationId = Settings.ClassificationList[(int)row].ClassificationId;
         }
 
         public override nint GetRowsInComponent(UIPickerView picker, nint component)
@@ -759,47 +796,27 @@ namespace AircraftForSale
 
         public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
         {
-            //UILabel lbl = new UILabel();
+			var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
 
-            //lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, 40f);
-
-            //lbl.Font = UIFont.SystemFontOfSize(17f);
-
-            //lbl.TextColor = UIColor.DarkGray;
-
-            //lbl.TextAlignment = UITextAlignment.Center;
-
-            ////lbl.Text = Settings.LocationResponse.AreYouAPilot[(int)row].Title;
-            //lbl.Text = Settings.ClassificationList[(int)row].ClassificationName;
-            //return lbl;
-
-            UIView containerView = new UIView(new System.Drawing.RectangleF(0, 0, (float)pickerView.Frame.Width, 31));
-            containerView.BackgroundColor = UIColor.Gray;
+			var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
+			var fontObject = UIFont.SystemFontOfSize(fontSize);
 
             UILabel lbl = new UILabel();
 
-            lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, 30f);
+            lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, viewHeight);
 
-            lbl.Font = UIFont.SystemFontOfSize(17f);
+            lbl.Font = fontObject;
 
             lbl.TextColor = UIColor.DarkGray;
 
-            lbl.TextAlignment = UITextAlignment.Left;
-
-            //if (row == 0)
-            //{
-            //	lbl.Text = "Select from list";
-            //}
-            //else
-            //{
+            lbl.TextAlignment = UITextAlignment.Center;
 
             lbl.Text = Settings.ClassificationList[(int)row].ClassificationName;
-            //}
+
 
             lbl.BackgroundColor = UIColor.White;
 
-            containerView.AddSubview(lbl);
-            return containerView;
+            return lbl;
         }
     }
 
@@ -830,12 +847,9 @@ namespace AircraftForSale
                 ValueChanged(this, new EventArgs());
 
             }
+            Settings.ManufacturerId = manufacturerList[(int)row].ManufacturerId;
         }
-        //public ManufacturerPickerViewModel()
-        //{
-        //	manufacturerList = new List<string>();
-        //	manufacturerList.Add("Select a Manufacturer");
-        //}
+
         public override nint GetComponentCount(UIPickerView picker)
         {
             return 1;
@@ -848,47 +862,27 @@ namespace AircraftForSale
 
         public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
         {
-            //UILabel lbl = new UILabel();
 
-            //lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, 40f);
+			var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
 
-            //lbl.Font = UIFont.SystemFontOfSize(17f);
-
-            //lbl.TextColor = UIColor.DarkGray;
-
-            //lbl.TextAlignment = UITextAlignment.Center;
-
-            ////lbl.Text = Settings.LocationResponse.AreYouAPilot[(int)row].Title;
-            //lbl.Text = manufacturerList[(int)row].Manufacturer;
-            //return lbl;
-
-            UIView containerView = new UIView(new System.Drawing.RectangleF(0, 0, (float)pickerView.Frame.Width, 31));
-            containerView.BackgroundColor = UIColor.Gray;
+			var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
+			var fontObject = UIFont.SystemFontOfSize(fontSize);
 
             UILabel lbl = new UILabel();
 
-            lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, 30f);
+            lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, viewHeight);
 
-            lbl.Font = UIFont.SystemFontOfSize(17f);
+            lbl.Font = fontObject;
 
             lbl.TextColor = UIColor.DarkGray;
 
-            lbl.TextAlignment = UITextAlignment.Left;
-
-            //if (row == 0)
-            //{
-            //	lbl.Text = "Select from list";
-            //}
-            //else
-            //{
+            lbl.TextAlignment = UITextAlignment.Center;
 
             lbl.Text = manufacturerList[(int)row].Manufacturer;
-            //}
 
             lbl.BackgroundColor = UIColor.White;
 
-            containerView.AddSubview(lbl);
-            return containerView;
+            return lbl;
         }
     }
 
@@ -919,39 +913,40 @@ namespace AircraftForSale
             return modelList.Count;
         }
 
-		public override void Selected(UIPickerView pickerView, nint row, nint component)
-		{
-			selectedIndex = (int)row;
-			if (ValueChanged != null)
-			{
-				ValueChanged(this, new EventArgs());
+        public override void Selected(UIPickerView pickerView, nint row, nint component)
+        {
+            selectedIndex = (int)row;
+            if (ValueChanged != null)
+            {
+                ValueChanged(this, new EventArgs());
+               
 
-			}
-		}
+            }
+			Settings.DesignationId = modelList[(int)row].DesignationId;
+        }
 
         public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
         {
+			var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
 
+			var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
+			var fontObject = UIFont.SystemFontOfSize(fontSize);
 
-            UIView containerView = new UIView(new System.Drawing.RectangleF(0, 0, (float)pickerView.Frame.Width, 31));
-            containerView.BackgroundColor = UIColor.Gray;
-
+           
             UILabel lbl = new UILabel();
 
-            lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, 30f);
+            lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, viewHeight);
 
-            lbl.Font = UIFont.SystemFontOfSize(17f);
+            lbl.Font = fontObject;
 
             lbl.TextColor = UIColor.DarkGray;
 
-            lbl.TextAlignment = UITextAlignment.Left;
+            lbl.TextAlignment = UITextAlignment.Center;
 
             lbl.Text = modelList[(int)row].Designation;
 
             lbl.BackgroundColor = UIColor.White;
-
-            containerView.AddSubview(lbl);
-            return containerView;
+            return lbl;
         }
     }
 }

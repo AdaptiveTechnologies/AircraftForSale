@@ -431,61 +431,185 @@ namespace AircraftForSale
 		}
 
 		#region login helpers
-		public static bool IsValidEmail(string email)
+		public static bool IsValidEmail(string email, UIView view = null)
 		{
+            bool isValid = false;
 			try
 			{
 				var addr = new System.Net.Mail.MailAddress(email);
-				return addr.Address == email;
+				isValid = addr.Address == email;
 			}
 			catch
 			{
-				return false;
+				isValid = false;
 			}
+
+            if(view != null)
+            {
+                if(!isValid){
+                    HelperMethods.AnimateValidationBorder(view);
+                }else{
+                    HelperMethods.RemoveValidationBorder(view);
+                }
+            }
+
+            if(isValid){
+                Settings.Email = email;
+            }else{
+                Settings.Email = string.Empty;
+            }
+
+            return isValid;
+
 		}
 
-		public static bool IsValidPassword(string password)
-		{
-			//regex "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{10,}$"
+        public static bool ReEnterEmail(string secondEmail, UIView view){
 
+            if(secondEmail.ToLower() == Settings.Email.ToLower()){
+                HelperMethods.RemoveValidationBorder(view);
+                return true;
+            }else{
+                
+				HelperMethods.AnimateValidationBorder(view);
+                return false;
+            }
+        }
+
+		public static bool IsValidPassword(string password, UIView view = null)
+		{
+            //regex "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{10,}$"
+            bool isValid = false;
 			Regex regex = new Regex(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$");
 			Match match = regex.Match(password);
 			if (match.Success)
 			{
 				if (password.Length > 15)
-					return false;
-				return true;
+					isValid = false;
+                
+				isValid = true;
 			}
 			else {
-				return false;
+				isValid = false;
 			}
+
+            if(view != null){
+                if(isValid){
+                    HelperMethods.RemoveValidationBorder(view);
+                }else{
+                    HelperMethods.AnimateValidationBorder(view);
+                }
+            }
+
+            if(isValid){
+                Settings.Password = password;
+            }else{
+                Settings.Password = string.Empty;
+            }
+
+            return isValid;
 
 		}
 
-		public static bool IsValidPhoneNumber(string phoneNumber)
+        public static bool ReEnterPassword(string secondPassword, UIView view)
 		{
-			//Regex regex = new Regex(@"^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$");
-			//Match match = regex.Match(phoneNumber);
-			//if (match.Success)
-			//{
-			//	return true;
-			//}
-			//else {
-			//	return false;
-			//}
-			if (phoneNumber == null || phoneNumber == string.Empty)
+
+			if (secondPassword.ToLower() == Settings.Password.ToLower())
 			{
-				return false;
-			}
-			else {
+				HelperMethods.RemoveValidationBorder(view);
 				return true;
 			}
+			else
+			{
 
+				HelperMethods.AnimateValidationBorder(view);
+				return false;
+			}
+		}
+
+		public static bool IsValidPhoneNumber(string phoneNumber, UIView view = null)
+		{
+            //Regex regex = new Regex(@"^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$");
+            //Match match = regex.Match(phoneNumber);
+            //if (match.Success)
+            //{
+            //	return true;
+            //}
+            //else {
+            //	return false;
+            //}
+            bool isValid = false;
+			if (phoneNumber == null || phoneNumber == string.Empty)
+			{
+				isValid = false;
+			}
+			else {
+				isValid = true;
+			}
+
+            if(view != null){
+                if(isValid){
+                    HelperMethods.RemoveValidationBorder(view);
+                }else{
+                    HelperMethods.AnimateValidationBorder(view);
+                }
+            }
+
+            if(isValid){
+                Settings.Phone = phoneNumber;
+            }else{
+                Settings.Phone = string.Empty;
+            }
+
+
+            return isValid;
+
+		}
+
+		public static bool ValidateHomeAirport(string homeAirport, UIView view)
+		{
+            //homeAirport = homeAirport.ToUpper();
+			if (homeAirport.Count() < 6)
+			{
+				HelperMethods.RemoveValidationBorder(view);
+                Settings.HomeAirport = homeAirport;
+				return true;
+			}
+			else
+			{
+
+				HelperMethods.AnimateValidationBorder(view);
+                Settings.HomeAirport = string.Empty;
+				return false;
+			}
 		}
 
 
 
 		#endregion
 
+		public static void AnimateValidationBorder(UIView view)
+		{
+			view.Layer.BorderColor = UIColor.Red.CGColor;
+
+			var orignalCenter = view.Center;
+			UIView.Animate(.1, 0, UIViewAnimationOptions.CurveEaseInOut | UIViewAnimationOptions.Autoreverse,
+				() => {
+					view.Center =
+						new CGPoint(orignalCenter.X + 3f, view.Center.Y);
+
+					view.Layer.BorderWidth = 4f;
+				},
+				() => {
+					view.Center = orignalCenter;
+					view.Layer.BorderWidth = 2f;
+
+				}
+			);
+		}
+
+        public static void RemoveValidationBorder(UIView view){
+			view.Layer.BorderColor = UIColor.Clear.CGColor;
+			view.Layer.BorderWidth = 0f;
+        }
 	}
 }

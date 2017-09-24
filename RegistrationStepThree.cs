@@ -117,7 +117,8 @@ namespace AircraftForSale
 			//TimeframePicker.Layer.BorderWidth = 1;
 
 			var borderFrameHeight = WhyFlyTextField.Frame.Size.Height - 1;
-			var borderFrameWidth = WhyFlyTextField.Frame.Size.Width;
+            //var borderFrameWidth = WhyFlyTextField.Frame.Size.Width;
+            var borderFrameWidth = this.View.Bounds.Width - 20;
 			var borderBackgroundColor = UIColor.Gray.CGColor;
 
 			// create CALayer
@@ -137,54 +138,68 @@ namespace AircraftForSale
 			bottomBorder4.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
 			bottomBorder4.BackgroundColor = borderBackgroundColor;
 
+			var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
+			var fontObject = UIFont.SystemFontOfSize(fontSize);
 
 			WhyFlyTextField.Layer.AddSublayer(bottomBorder2);
 			WhyFlyTextField.Layer.MasksToBounds = true;
 			WhyFlyTextField.AttributedPlaceholder = new NSAttributedString(
 				"Select from list",
-				font: UIFont.FromName("System-Regular", 22.0f),
+				font: fontObject,
 				foregroundColor: UIColor.DarkGray
-			//strokeWidth: 4
 			);
+            WhyFlyTextField.Font = fontObject;
 
 			TimeFrameTextField.Layer.AddSublayer(bottomBorder3);
 			TimeFrameTextField.Layer.MasksToBounds = true;
 			TimeFrameTextField.AttributedPlaceholder = new NSAttributedString(
 				"Select from list",
-				font: UIFont.FromName("System-Regular", 22.0f),
+				font: fontObject,
 				foregroundColor: UIColor.DarkGray
-			//strokeWidth: 4
 			);
+            TimeFrameTextField.Font = fontObject;
 
 			OrderByTextField.Layer.AddSublayer(bottomBorder4);
 			OrderByTextField.Layer.MasksToBounds = true;
 			OrderByTextField.AttributedPlaceholder = new NSAttributedString(
 				"Select from list",
-				font: UIFont.FromName("System-Regular", 22.0f),
+				font: fontObject,
 				foregroundColor: UIColor.DarkGray
-			//strokeWidth: 4
 			);
+            OrderByTextField.Font = fontObject;
 
 
 
 			// add to UITextField
 			HoursTextView.Layer.AddSublayer(bottomBorder1);
 			HoursTextView.Layer.MasksToBounds = true;
+            HoursTextView.Font = fontObject;
+            HoursTextView.KeyboardType = UIKeyboardType.NumberPad;
+            HoursTextView.EditingDidEnd += (sender, e) => {
+                if(HoursTextView.Text != string.Empty){
+                    int hours = 0;
+                    if(int.TryParse(HoursTextView.Text, out hours) && hours > 0);
+                    {
+                        Settings.Hours = hours;
+                    }
+                }
+            };
 		}
 
 		public override UIView GetViewForHeader(UITableView tableView, nint section)
 		{
+            var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 55.0f : 40.0f;
 
-
-			UIView view = new UIView(new System.Drawing.RectangleF(0, 0, (float)this.View.Frame.Width, 40));
+			UIView view = new UIView(new System.Drawing.RectangleF(0, 0, (float)this.View.Frame.Width, viewHeight));
 			view.BackgroundColor = UIColor.White;
 
 			UILabel label = new UILabel();
 			label.Opaque = false;
 			label.TextColor = HelperMethods.GetLime();
-			label.Font = UIFont.BoldSystemFontOfSize(25);
+            var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 35.0f : 25.0f;
+			label.Font = UIFont.BoldSystemFontOfSize(fontSize);
 
-			label.Frame = new System.Drawing.RectangleF(0, 0, (float)view.Frame.Width - 30, 30);
+			label.Frame = new System.Drawing.RectangleF(0, 0, (float)view.Frame.Width - 30, viewHeight);
 			label.Center = view.Center;
 
 			view.AddSubview(label);
@@ -208,7 +223,7 @@ namespace AircraftForSale
 					}
 				case 3:
 					{
-						label.Text = "Order By";
+                        label.Text = "Order By (optional)";
 						break;
 					}
 			}
@@ -276,43 +291,27 @@ namespace AircraftForSale
 
 		public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
 		{
-			//UILabel lbl = new UILabel();
 
-			//lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, 40f);
-			//if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone)
-			//{
-			//	lbl.Font = UIFont.SystemFontOfSize(10f);
-			//}
-			//else
-			//{
+			var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
 
-			//	lbl.Font = UIFont.SystemFontOfSize(18f);
-			//}
-
-			//lbl.TextColor = UIColor.White;
-
-			//lbl.TextAlignment = UITextAlignment.Center;
-			//lbl.Text = TimeFramePickerOptions[(int)row].Item1;
-
-			UIView containerView = new UIView(new System.Drawing.RectangleF(0, 0, (float)pickerView.Frame.Width, 31));
-			containerView.BackgroundColor = UIColor.Gray;
+			var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
+			var fontObject = UIFont.SystemFontOfSize(fontSize);
 
 			UILabel lbl = new UILabel();
 
-			lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, 30f);
+			lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, viewHeight);
 
-			lbl.Font = UIFont.SystemFontOfSize(17f);
+            lbl.Font = fontObject;
 
 			lbl.TextColor = UIColor.DarkGray;
 
-			lbl.TextAlignment = UITextAlignment.Left;
+			lbl.TextAlignment = UITextAlignment.Center;
 
 			lbl.Text = TimeFramePickerOptions[(int)row].Item1;
 
 			lbl.BackgroundColor = UIColor.White;
 
-			containerView.AddSubview(lbl);
-			return containerView;
+            return lbl;
 
 		}
 	}
@@ -357,37 +356,21 @@ namespace AircraftForSale
 
 		public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
 		{
-			//UILabel lbl = new UILabel();
 
-			//lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, 40f);
-			//if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone)
-			//{
-			//	lbl.Font = UIFont.SystemFontOfSize(10f);
-			//}
-			//else
-			//{
+			var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
 
-			//	lbl.Font = UIFont.SystemFontOfSize(18f);
-			//}
-
-			//lbl.TextColor = UIColor.White;
-
-			//lbl.TextAlignment = UITextAlignment.Center;
-			//lbl.Text = Settings.LocationResponse.PurposeForFlying[(int)row].Purpose;
-			//return lbl;
-
-			UIView containerView = new UIView(new System.Drawing.RectangleF(0, 0, (float)pickerView.Frame.Width, 31));
-			containerView.BackgroundColor = UIColor.Gray;
+			var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
+			var fontObject = UIFont.SystemFontOfSize(fontSize);
 
 			UILabel lbl = new UILabel();
 
-			lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, 30f);
+			lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, viewHeight);
 
-			lbl.Font = UIFont.SystemFontOfSize(17f);
+            lbl.Font = fontObject;
 
 			lbl.TextColor = UIColor.DarkGray;
 
-			lbl.TextAlignment = UITextAlignment.Left;
+			lbl.TextAlignment = UITextAlignment.Center;
 
 			if (row == 0)
 			{
@@ -401,8 +384,7 @@ namespace AircraftForSale
 
 			lbl.BackgroundColor = UIColor.White;
 
-			containerView.AddSubview(lbl);
-			return containerView;
+            return lbl;
 		}
 	}
 
@@ -451,37 +433,20 @@ namespace AircraftForSale
 
 		public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
 		{
-			//UILabel lbl = new UILabel();
+			var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
 
-			//lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, 40f);
-			//if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone)
-			//{
-			//	lbl.Font = UIFont.SystemFontOfSize(10f);
-			//}
-			//else
-			//{
-
-			//	lbl.Font = UIFont.SystemFontOfSize(18f);
-			//}
-
-			//lbl.TextColor = UIColor.White;
-
-			//lbl.TextAlignment = UITextAlignment.Center;
-			//lbl.Text = SortOptionsList[(int)row];
-			//return lbl;
-
-			UIView containerView = new UIView(new System.Drawing.RectangleF(0, 0, (float)pickerView.Frame.Width, 31));
-			containerView.BackgroundColor = UIColor.Gray;
+			var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
+			var fontObject = UIFont.SystemFontOfSize(fontSize);
 
 			UILabel lbl = new UILabel();
 
-			lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, 30f);
+			lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, viewHeight);
 
-			lbl.Font = UIFont.SystemFontOfSize(17f);
+            lbl.Font = fontObject;
 
 			lbl.TextColor = UIColor.DarkGray;
 
-			lbl.TextAlignment = UITextAlignment.Left;
+			lbl.TextAlignment = UITextAlignment.Center;
 
 			if (row == 0)
 			{
@@ -495,8 +460,7 @@ namespace AircraftForSale
 
 			lbl.BackgroundColor = UIColor.White;
 
-			containerView.AddSubview(lbl);
-			return containerView;
+            return lbl;
 		}
 	}
 
