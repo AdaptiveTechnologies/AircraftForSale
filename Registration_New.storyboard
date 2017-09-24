@@ -405,28 +405,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="500" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="11463">
-                                                    <rect key="frame" x="165" y="0.0" width="225" height="65"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="65" id="12470"/>
-                                                    </constraints>
-                                                </pickerView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Select a Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11511">
-                                                    <rect key="frame" x="10" y="19" width="150" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="150" id="11514"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="16065" translatesAutoresizingMaskIntoConstraints="NO">
+                                                    <rect key="frame" x="10" y="10" width="480" height="50"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="11463" secondAttribute="trailing" constant="10" id="11467"/>
-                                                <constraint firstItem="11511" firstAttribute="centerY" secondItem="11462" secondAttribute="centerY" id="11512"/>
-                                                <constraint firstItem="11511" firstAttribute="leading" secondItem="11462" secondAttribute="leading" constant="10" id="11513"/>
-                                                <constraint firstItem="11463" firstAttribute="leading" secondItem="11511" secondAttribute="trailing" constant="5" id="11515"/>
-                                                <constraint firstAttribute="centerY" secondItem="11463" secondAttribute="centerY" id="12479"/>
+                                                <constraint id="16066" firstItem="16065" firstAttribute="leading" secondItem="11462" secondAttribute="leading" constant="10"/>
+                                                <constraint id="16067" firstItem="16065" firstAttribute="top" secondItem="11462" secondAttribute="top" constant="10"/>
+                                                <constraint id="16068" firstItem="11462" firstAttribute="bottom" secondItem="16065" secondAttribute="bottom" constant="10"/>
+                                                <constraint id="16069" firstItem="11462" firstAttribute="trailing" secondItem="16065" secondAttribute="trailing" constant="10"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -441,17 +430,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="500" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="11448">
-                                                    <rect key="frame" x="10" y="0.0" width="380" height="65"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="65" id="12471"/>
-                                                    </constraints>
-                                                </pickerView>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="17362" translatesAutoresizingMaskIntoConstraints="NO">
+                                                    <rect key="frame" x="10" y="10" width="480" height="50"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="11448" firstAttribute="leading" secondItem="11443" secondAttribute="leading" constant="10" id="11450"/>
-                                                <constraint firstAttribute="trailing" secondItem="11448" secondAttribute="trailing" constant="10" id="11452"/>
-                                                <constraint firstAttribute="centerY" secondItem="11448" secondAttribute="centerY" id="12480"/>
+                                                <constraint id="17363" firstItem="17362" firstAttribute="top" secondItem="11443" secondAttribute="top" constant="10"/>
+                                                <constraint id="17364" firstItem="11443" firstAttribute="bottom" secondItem="17362" secondAttribute="bottom" constant="10"/>
+                                                <constraint id="17365" firstItem="17362" firstAttribute="leading" secondItem="11443" secondAttribute="leading" constant="10"/>
+                                                <constraint id="17366" firstItem="11443" firstAttribute="trailing" secondItem="17362" secondAttribute="trailing" constant="10"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -462,17 +451,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="500" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="11470">
-                                                    <rect key="frame" x="10" y="0.0" width="380" height="65"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="65" id="12472"/>
-                                                    </constraints>
-                                                </pickerView>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="18286" translatesAutoresizingMaskIntoConstraints="NO">
+                                                    <rect key="frame" x="10" y="10" width="480" height="50"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="11470" firstAttribute="leading" secondItem="11469" secondAttribute="leading" constant="10" id="11472"/>
-                                                <constraint firstAttribute="trailing" secondItem="11470" secondAttribute="trailing" constant="10" id="11474"/>
-                                                <constraint firstAttribute="centerY" secondItem="11470" secondAttribute="centerY" id="12481"/>
+                                                <constraint id="18287" firstItem="18286" firstAttribute="top" secondItem="11469" secondAttribute="top" constant="10"/>
+                                                <constraint id="18288" firstItem="11469" firstAttribute="bottom" secondItem="18286" secondAttribute="bottom" constant="10"/>
+                                                <constraint id="18289" firstItem="18286" firstAttribute="leading" secondItem="11469" secondAttribute="leading" constant="10"/>
+                                                <constraint id="18290" firstItem="11469" firstAttribute="trailing" secondItem="18286" secondAttribute="trailing" constant="10"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -483,17 +472,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="500" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="11477">
-                                                    <rect key="frame" x="10" y="0.0" width="380" height="65"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="65" id="12473"/>
-                                                    </constraints>
-                                                </pickerView>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="20432" translatesAutoresizingMaskIntoConstraints="NO">
+                                                    <rect key="frame" x="10" y="10" width="480" height="50"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="11477" firstAttribute="leading" secondItem="11476" secondAttribute="leading" constant="10" id="11479"/>
-                                                <constraint firstAttribute="trailing" secondItem="11477" secondAttribute="trailing" constant="10" id="11481"/>
-                                                <constraint firstAttribute="centerY" secondItem="11477" secondAttribute="centerY" id="12482"/>
+                                                <constraint id="20433" firstItem="20432" firstAttribute="top" secondItem="11476" secondAttribute="top" constant="10"/>
+                                                <constraint id="20434" firstItem="20432" firstAttribute="leading" secondItem="11476" secondAttribute="leading" constant="10"/>
+                                                <constraint id="20435" firstItem="11476" firstAttribute="bottom" secondItem="20432" secondAttribute="bottom" constant="10"/>
+                                                <constraint id="20436" firstItem="11476" firstAttribute="trailing" secondItem="20432" secondAttribute="trailing" constant="10"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -508,23 +497,23 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="500" height="1200"/>
                     <connections>
-                        <outlet property="ClassificationPicker" destination="11448" id="name-outlet-11448"/>
                         <outlet property="CompanyTextView" destination="11389" id="name-outlet-11389"/>
                         <outlet property="FirstNameTextView" destination="11357" id="name-outlet-11357"/>
                         <outlet property="HomeAirportTextView" destination="11397" id="name-outlet-11397"/>
                         <outlet property="LastNameTextView" destination="11373" id="name-outlet-11373"/>
                         <outlet property="LocationLabel" destination="12212" id="name-outlet-12212"/>
-                        <outlet property="ManufacturerPicker" destination="11470" id="name-outlet-11470"/>
                         <outlet property="MobilePhoneTextView" destination="11381" id="name-outlet-11381"/>
-                        <outlet property="ModelPicker" destination="11477" id="name-outlet-11477"/>
                         <outlet property="PasswordTextView" destination="11309" id="name-outlet-11309"/>
                         <outlet property="PilotSwitch" destination="11436" id="name-outlet-11436"/>
-                        <outlet property="RatingPicker" destination="11463" id="name-outlet-11463"/>
                         <outlet property="ReEnterPasswordTextView" destination="11317" id="name-outlet-11317"/>
                         <outlet property="ReEnterUsernameTextView" destination="11301" id="name-outlet-11301"/>
                         <outlet property="UsernameTextView" destination="11282" id="name-outlet-11282"/>
                         <segue destination="11566" kind="show" identifier="StepThreeSeque" id="12062"/>
                         <outlet property="PilotTypeTextField" destination="14758" id="name-outlet-14758"/>
+                        <outlet property="PilotRatingTextField" destination="16065" id="name-outlet-16065"/>
+                        <outlet property="ClassificationTextField" destination="17362" id="name-outlet-17362"/>
+                        <outlet property="ManufacturerTextField" destination="18286" id="name-outlet-18286"/>
+                        <outlet property="ModelTextField" destination="20432" id="name-outlet-20432"/>
                     </connections>
                     <navigationItem title="Title" id="13447" key="navigationItem"/>
                 </tableViewController>

@@ -54,8 +54,17 @@ namespace AircraftForSale
 
             nextBarButtonItem.SetTitleTextAttributes(icoFontAttribute, UIControlState.Normal);
 
+			//UITextAttributes icoFontAttribute = new UITextAttributes();
+			//icoFontAttribute.Font = UIFont.BoldSystemFontOfSize(20);
+			//icoFontAttribute.TextColor = UIColor.White;
 
-            this.NavigationItem.SetRightBarButtonItem(nextBarButtonItem, true);
+			NavigationItem.BackBarButtonItem = new UIBarButtonItem("Back", UIBarButtonItemStyle.Plain, null);
+			NavigationItem.BackBarButtonItem.SetTitleTextAttributes(icoFontAttribute, UIControlState.Normal);
+			NavigationItem.BackBarButtonItem.TintColor = UIColor.White;
+
+
+
+			this.NavigationItem.SetRightBarButtonItem(nextBarButtonItem, true);
 
             await Task.Run(async () =>
             {
@@ -121,12 +130,33 @@ namespace AircraftForSale
                 }
             });
 
+
+			var classificationPicker = new UIPickerView();
             var classificationPickerViewModel = new ClassificationPickerViewModel();
-            ClassificationPicker.Model = classificationPickerViewModel;
-            //ClassificationPicker.key
+			classificationPicker.Model = classificationPickerViewModel;
+			classificationPicker.ShowSelectionIndicator = true;
+
+			UIToolbar classificationToolbar = new UIToolbar();
+			classificationToolbar.BarStyle = UIBarStyle.Black;
+			classificationToolbar.Translucent = true;
+			classificationToolbar.SizeToFit();
+
+			UIBarButtonItem classificationDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
+			{
+                UITextField textview = ClassificationTextField;
+                //textview.Text = Settings.LocationResponse.PilotRating.FirstOrDefault(row => row.PilotTypeId == Settings.PilotTypeId).Title;
+                textview.Text = classificationPickerViewModel.SelectedItem.ClassificationName;
+				textview.ResignFirstResponder();
+			});
+			classificationToolbar.SetItems(new UIBarButtonItem[] { classificationDoneButton }, true);
 
 
-            classificationPickerViewModel.ValueChanged += async (sender, e) =>
+			ClassificationTextField.InputView = classificationPicker;
+			ClassificationTextField.InputAccessoryView = classificationToolbar;
+
+
+
+			classificationPickerViewModel.ValueChanged += async (sender, e) =>
             {
                 if (classificationPickerViewModel.selectedIndex == 0)
                 {
@@ -143,8 +173,29 @@ namespace AircraftForSale
                     {
                         InvokeOnMainThread(() =>
                         {
-                            manufacturerPickerViewModel = new ManufacturerPickerViewModel(cmmdResponse.MfgLst);
-                            ManufacturerPicker.Model = manufacturerPickerViewModel;
+
+							var manufacturerPicker = new UIPickerView();
+							manufacturerPickerViewModel = new ManufacturerPickerViewModel(cmmdResponse.MfgLst);
+							manufacturerPicker.Model = manufacturerPickerViewModel;
+							manufacturerPicker.ShowSelectionIndicator = true;
+
+							UIToolbar manufacturerToolbar = new UIToolbar();
+							manufacturerToolbar.BarStyle = UIBarStyle.Black;
+							manufacturerToolbar.Translucent = true;
+							manufacturerToolbar.SizeToFit();
+
+							UIBarButtonItem manufacturerDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s2, e2) =>
+							{
+                                UITextField textview = ManufacturerTextField;
+                                //textview.Text = Settings.LocationResponse.PilotRating.FirstOrDefault(row => row.PilotTypeId == Settings.PilotTypeId).Title;
+                                textview.Text = manufacturerPickerViewModel.SelectedItem.Manufacturer;
+								textview.ResignFirstResponder();
+							});
+							manufacturerToolbar.SetItems(new UIBarButtonItem[] { manufacturerDoneButton }, true);
+
+
+							ManufacturerTextField.InputView = manufacturerPicker;
+							ManufacturerTextField.InputAccessoryView = manufacturerToolbar;
 
                             manufacturerPickerViewModel.ValueChanged += async (sender2, e2) =>
                             {
@@ -162,8 +213,31 @@ namespace AircraftForSale
                                         InvokeOnMainThread(() =>
                                         {
                                             var modelList = cmmdResponse.ModDesLst.Where(row => row.ManufacturerId == manufacturerPickerViewModel.SelectedItem.ManufacturerId);
-                                            modelPickerViewModel = new ModelPickerViewModel(modelList.ToList());
-                                            ModelPicker.Model = modelPickerViewModel;
+                                            //modelPickerViewModel = new ModelPickerViewModel(modelList.ToList());
+                                            //ModelPicker.Model = modelPickerViewModel;
+
+											var modelPicker = new UIPickerView();
+											modelPickerViewModel = new ModelPickerViewModel(modelList.ToList());
+											modelPicker.Model = modelPickerViewModel;
+											modelPicker.ShowSelectionIndicator = true;
+
+											UIToolbar modelToolbar = new UIToolbar();
+											modelToolbar.BarStyle = UIBarStyle.Black;
+											modelToolbar.Translucent = true;
+											modelToolbar.SizeToFit();
+
+											UIBarButtonItem modelDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s3, e3) =>
+											{
+												UITextField textview = ModelTextField;
+                                                //textview.Text = Settings.LocationResponse.PilotRating.FirstOrDefault(row => row.PilotTypeId == Settings.PilotTypeId).Title;
+                                                textview.Text = modelPickerViewModel.SelectedItem.Designation;
+												textview.ResignFirstResponder();
+											});
+											modelToolbar.SetItems(new UIBarButtonItem[] { modelDoneButton }, true);
+
+
+											ModelTextField.InputView = modelPicker;
+											ModelTextField.InputAccessoryView = modelToolbar;
                                         });
                                     }
 
@@ -185,25 +259,47 @@ namespace AircraftForSale
             pilotTypePicker.Model = new PilotTypePickerViewModel();
             pilotTypePicker.ShowSelectionIndicator = true;
 
-            UIToolbar toolbar = new UIToolbar();
-            toolbar.BarStyle = UIBarStyle.Black;
-            toolbar.Translucent = true;
-            toolbar.SizeToFit();
+            UIToolbar pilotTypeToolbar = new UIToolbar();
+            pilotTypeToolbar.BarStyle = UIBarStyle.Black;
+            pilotTypeToolbar.Translucent = true;
+            pilotTypeToolbar.SizeToFit();
 
-            UIBarButtonItem doneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
+            UIBarButtonItem pilotTypeDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
             {
                 UITextField textview = PilotTypeTextField;
                 //textview.Text = Settings.LocationResponse.PilotRating.FirstOrDefault(row => row.PilotTypeId == Settings.PilotTypeId).Title;
                 textview.Text = "Selected Value";
                 textview.ResignFirstResponder();
             });
-            toolbar.SetItems(new UIBarButtonItem[] { doneButton }, true);
+            pilotTypeToolbar.SetItems(new UIBarButtonItem[] { pilotTypeDoneButton }, true);
 
 
             PilotTypeTextField.InputView = pilotTypePicker;
-            PilotTypeTextField.InputAccessoryView = toolbar;
+            PilotTypeTextField.InputAccessoryView = pilotTypeToolbar;
 
-            RatingPicker.Model = new RatingPickerViewModel();
+            var ratingPicker = new UIPickerView();
+            ratingPicker.Model = new RatingPickerViewModel();
+            ratingPicker.ShowSelectionIndicator = true;
+
+			UIToolbar pilotRatingToolbar = new UIToolbar();
+			pilotRatingToolbar.BarStyle = UIBarStyle.Black;
+			pilotRatingToolbar.Translucent = true;
+			pilotRatingToolbar.SizeToFit();
+
+			UIBarButtonItem pilotRatingDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
+			{
+				UITextField textview = PilotRatingTextField;
+				//textview.Text = Settings
+				textview.Text = "Selected Value";
+				textview.ResignFirstResponder();
+			});
+			pilotRatingToolbar.SetItems(new UIBarButtonItem[] { pilotRatingDoneButton }, true);
+
+
+			PilotRatingTextField.InputView = ratingPicker;
+			PilotRatingTextField.InputAccessoryView = pilotRatingToolbar;
+
+
 
             PilotSwitch.On = false;
 
@@ -268,6 +364,22 @@ namespace AircraftForSale
 			bottomBorder10.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
 			bottomBorder10.BackgroundColor = borderBackgroundColor;
 
+			var bottomBorder11 = new CALayer();
+			bottomBorder11.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
+			bottomBorder11.BackgroundColor = borderBackgroundColor;
+
+			var bottomBorder12 = new CALayer();
+			bottomBorder12.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
+			bottomBorder12.BackgroundColor = borderBackgroundColor;
+
+			var bottomBorder13 = new CALayer();
+			bottomBorder13.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
+			bottomBorder13.BackgroundColor = borderBackgroundColor;
+
+			var bottomBorder14 = new CALayer();
+			bottomBorder14.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
+			bottomBorder14.BackgroundColor = borderBackgroundColor;
+
             var bottomBorderLabel = new CALayer();
             bottomBorderLabel.Frame = new CGRect(0.0f, LocationLabel.Frame.Height - 1, LocationLabel.Frame.Width, 1.0f);
             bottomBorderLabel.BackgroundColor = borderBackgroundColor;
@@ -281,8 +393,45 @@ namespace AircraftForSale
 			//strokeWidth: 4
 			);
 
-            // add to UITextField
-            UsernameTextView.Layer.AddSublayer(bottomBorder1);
+			PilotRatingTextField.Layer.AddSublayer(bottomBorder11);
+			PilotRatingTextField.Layer.MasksToBounds = true;
+			PilotRatingTextField.AttributedPlaceholder = new NSAttributedString(
+				"Select a Rating",
+				font: UIFont.FromName("System-Regular", 22.0f),
+				foregroundColor: UIColor.DarkGray
+			//strokeWidth: 4
+			);
+
+            ClassificationTextField.Layer.AddSublayer(bottomBorder12);
+			ClassificationTextField.Layer.MasksToBounds = true;
+			ClassificationTextField.AttributedPlaceholder = new NSAttributedString(
+				"Select a Classification",
+				font: UIFont.FromName("System-Regular", 22.0f),
+				foregroundColor: UIColor.DarkGray
+			//strokeWidth: 4
+			);
+
+            ManufacturerTextField.Layer.AddSublayer(bottomBorder13);
+			ManufacturerTextField.Layer.MasksToBounds = true;
+			ManufacturerTextField.AttributedPlaceholder = new NSAttributedString(
+				"Select a Manufacturer",
+				font: UIFont.FromName("System-Regular", 22.0f),
+				foregroundColor: UIColor.DarkGray
+			//strokeWidth: 4
+			);
+
+			ModelTextField.Layer.AddSublayer(bottomBorder14);
+			ModelTextField.Layer.MasksToBounds = true;
+			ModelTextField.AttributedPlaceholder = new NSAttributedString(
+				"Select a Model",
+				font: UIFont.FromName("System-Regular", 22.0f),
+				foregroundColor: UIColor.DarkGray
+			//strokeWidth: 4
+			);
+
+
+			// add to UITextField
+			UsernameTextView.Layer.AddSublayer(bottomBorder1);
             UsernameTextView.Layer.MasksToBounds = true;
             UsernameTextView.AttributedPlaceholder = new NSAttributedString(
                 "Username (Your Email Address)",
@@ -770,21 +919,19 @@ namespace AircraftForSale
             return modelList.Count;
         }
 
+		public override void Selected(UIPickerView pickerView, nint row, nint component)
+		{
+			selectedIndex = (int)row;
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, new EventArgs());
+
+			}
+		}
+
         public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
         {
-            //UILabel lbl = new UILabel();
 
-            //lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, 40f);
-
-            //lbl.Font = UIFont.SystemFontOfSize(17f);
-
-            //lbl.TextColor = UIColor.DarkGray;
-
-            //lbl.TextAlignment = UITextAlignment.Center;
-
-            ////lbl.Text = Settings.LocationResponse.AreYouAPilot[(int)row].Title;
-            //lbl.Text = modelList[(int)row].Designation;
-            //return lbl;
 
             UIView containerView = new UIView(new System.Drawing.RectangleF(0, 0, (float)pickerView.Frame.Width, 31));
             containerView.BackgroundColor = UIColor.Gray;
@@ -799,15 +946,7 @@ namespace AircraftForSale
 
             lbl.TextAlignment = UITextAlignment.Left;
 
-            //if (row == 0)
-            //{
-            //	lbl.Text = "Select from list";
-            //}
-            //else
-            //{
-
             lbl.Text = modelList[(int)row].Designation;
-            //}
 
             lbl.BackgroundColor = UIColor.White;
 
