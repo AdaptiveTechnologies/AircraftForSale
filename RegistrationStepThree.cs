@@ -7,6 +7,7 @@ using System.Drawing;
 using CoreAnimation;
 using CoreGraphics;
 using System.Linq;
+using AircraftForSale.PCL;
 
 namespace AircraftForSale
 {
@@ -23,9 +24,55 @@ namespace AircraftForSale
 
 			NavigationItem.BackBarButtonItem = new UIBarButtonItem("Back", UIBarButtonItemStyle.Plain, null);
 
-			var finishButton = new UIBarButtonItem("Finish", UIBarButtonItemStyle.Plain, (sender, args) =>
+			var finishButton = new UIBarButtonItem("Finish", UIBarButtonItemStyle.Plain, async (sender, args) =>
 			{
-				this.DismissViewController(true, null);
+				if (Reachability.IsHostReachable(Settings._baseDomain))
+				{
+					LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, "Loading ...");
+					this.View.AddSubview(loadingIndicator);
+					//Attempt to register in the API
+					var response = await MagAppRegisterResponse.RegisterAsync();
+
+					if (response.Status == "Success")
+					{
+                        loadingIndicator.Hide();
+						Settings.IsRegistered = true;
+
+						var alert = UIAlertController.Create("Congratulations!", "You have successfully registered.", UIAlertControllerStyle.Alert);
+
+						alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Cancel, (obj) =>
+						{
+                            this.DismissViewController(true, null);
+                            var loginViewController = this.PresentingViewController as LoginViewController;
+                            this.NavigationController.DismissViewController(true, null);
+                            if (loginViewController != null)
+                            {
+                                loginViewController.PerformSegue("LoadTabBarControllerSeque", loginViewController);
+                            }
+
+						}));
+
+						PresentViewController(alert, animated: true, completionHandler: () =>
+						{
+
+						});
+
+
+
+					}
+					else
+					{
+						loadingIndicator.Hide();
+						HelperMethods.SendBasicAlert("Oops.", "There was a problem registering. Please try again.");
+					}
+
+
+				}
+				else
+				{
+					HelperMethods.SendBasicAlert("Please connect to the internet", "Internet access is required.");
+				}
+				
 			});
 			UITextAttributes icoFontAttribute = new UITextAttributes();
 			icoFontAttribute.Font = UIFont.BoldSystemFontOfSize(20);
@@ -33,12 +80,7 @@ namespace AircraftForSale
 
 			finishButton.SetTitleTextAttributes(icoFontAttribute, UIControlState.Normal);
 
-
 			this.NavigationItem.SetRightBarButtonItem(finishButton, true);
-
-			//TimeframePicker.Model = new TimeframeViewModel();
-			//PurposePicker.Model = new PurposeViewModel();
-			// OrderByPicker.Model = new SortOptionsViewModel();
 
 			var orderByPicker = new UIPickerView();
 			orderByPicker.Model = new SortOptionsViewModel();
@@ -97,9 +139,9 @@ namespace AircraftForSale
 			{
 				UITextField textview = WhyFlyTextField;
 
-                var selected = Settings.LocationResponse.PurposeForFlying.FirstOrDefault(row => row.FlyingPurposeId == Settings.PurposeId);
+                //var selected = Settings.LocationResponse.PurposeForFlying.FirstOrDefault(row => row.FlyingPurposeId == Settings.PurposeId);
 
-                textview.Text = selected.Purpose;
+                textview.Text = Settings.PurposeString;
 				textview.ResignFirstResponder();
 			});
 			whyFlyToolbar.SetItems(new UIBarButtonItem[] { whyFlyDoneButton }, true);
@@ -109,15 +151,7 @@ namespace AircraftForSale
 			WhyFlyTextField.InputAccessoryView = whyFlyToolbar;
 
 
-
-
-			
-
-			//TimeframePicker.Layer.BorderColor = UIColor.Gray.CGColor;
-			//TimeframePicker.Layer.BorderWidth = 1;
-
 			var borderFrameHeight = WhyFlyTextField.Frame.Size.Height - 1;
-            //var borderFrameWidth = WhyFlyTextField.Frame.Size.Width;
             var borderFrameWidth = this.View.Bounds.Width - 20;
 			var borderBackgroundColor = UIColor.Gray.CGColor;
 
@@ -149,6 +183,7 @@ namespace AircraftForSale
 				foregroundColor: UIColor.DarkGray
 			);
             WhyFlyTextField.Font = fontObject;
+            WhyFlyTextField.Text = Settings.PurposeString ?? string.Empty;
 
 			TimeFrameTextField.Layer.AddSublayer(bottomBorder3);
 			TimeFrameTextField.Layer.MasksToBounds = true;
@@ -158,6 +193,7 @@ namespace AircraftForSale
 				foregroundColor: UIColor.DarkGray
 			);
             TimeFrameTextField.Font = fontObject;
+            TimeFrameTextField.Text = Settings.PurchaseTimeFrame != 0 ? Settings.PurchaseTimeFrame + " months" : string.Empty;
 
 			OrderByTextField.Layer.AddSublayer(bottomBorder4);
 			OrderByTextField.Layer.MasksToBounds = true;
@@ -167,7 +203,7 @@ namespace AircraftForSale
 				foregroundColor: UIColor.DarkGray
 			);
             OrderByTextField.Font = fontObject;
-
+            OrderByTextField.Text = Settings.SortOptions ?? string.Empty;
 
 
 			// add to UITextField
@@ -178,12 +214,13 @@ namespace AircraftForSale
             HoursTextView.EditingDidEnd += (sender, e) => {
                 if(HoursTextView.Text != string.Empty){
                     int hours = 0;
-                    if(int.TryParse(HoursTextView.Text, out hours) && hours > 0);
+                    if(int.TryParse(HoursTextView.Text, out hours) && hours > 0)
                     {
                         Settings.Hours = hours;
                     }
                 }
             };
+            HoursTextView.Text = Settings.Hours != 0 ? Settings.Hours.ToString() : string.Empty;
 		}
 
 		public override UIView GetViewForHeader(UITableView tableView, nint section)
@@ -352,6 +389,7 @@ namespace AircraftForSale
 			var selected = Settings.LocationResponse.PurposeForFlying[(int)picker.SelectedRowInComponent(0)];
 
 			Settings.PurposeId = selected.FlyingPurposeId;
+            Settings.PurposeString = selected.Purpose;
 		}
 
 		public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)

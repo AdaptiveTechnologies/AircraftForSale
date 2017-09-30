@@ -43,7 +43,10 @@ namespace AircraftForSale
 
             var nextBarButtonItem = new UIBarButtonItem("Next", UIBarButtonItemStyle.Plain, (sender, args) =>
             {
-                PerformSegue("StepThreeSeque", this);
+                if (HelperMethods.ValidateRequiredRegistrationFieldExceptClassifications(ReEnterUsernameTextView.Text, ReEnterPasswordTextView.Text))
+                {
+                    PerformSegue("StepThreeSeque", this);
+                }
             });
             UITextAttributes icoFontAttribute = new UITextAttributes();
             icoFontAttribute.Font = UIFont.BoldSystemFontOfSize(20);
@@ -91,8 +94,32 @@ namespace AircraftForSale
                             //Save to settings file to use object during the rest of the registration process
                             Settings.LocationResponse = location;
 
+                            if (Settings.IsRegistered)
+                            {
 
+                                if (Settings.PilotStatusId != 0)
+                                {
+                                    Settings.PilotStatusString = Settings.LocationResponse.AreYouAPilot.FirstOrDefault(row => row.PilotStatusId == Settings.PilotStatusId).Title;
+                                }
 
+                                if (Settings.PilotTypeId != 0)
+                                {
+                                    Settings.PilotTypeString = Settings.LocationResponse.PilotRating.FirstOrDefault(row => row.PilotTypeId == Settings.PilotTypeId).Title;
+                                }
+
+                                if (Settings.PurposeId != 0)
+                                {
+                                    Settings.PurposeString = Settings.LocationResponse.PurposeForFlying.FirstOrDefault(row => row.FlyingPurposeId == Settings.PurposeId).Purpose;
+                                }
+
+                                if (Settings.PilotStatusId != 0 || Settings.PilotTypeId != 0)
+                                {
+                                    Settings.IsPilot = true;
+                                }
+
+                                var specificLocation = Settings.LocationResponse.Locations.FirstOrDefault(row => row.LocationId == Settings.LocationPickerSelectedId);
+                                Settings.LocationPickerSelectedName = specificLocation != null ? specificLocation.LocName : string.Empty;
+                            }
 
                         });
                     }
@@ -279,7 +306,8 @@ namespace AircraftForSale
             UIBarButtonItem pilotRatingDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
             {
                 UITextField textview = PilotRatingTextField;
-                textview.Text = Settings.LocationResponse.PilotRating.FirstOrDefault(row => row.PilotTypeId == Settings.PilotTypeId).Title;
+                //textview.Text = Settings.LocationResponse.PilotRating.FirstOrDefault(row => row.PilotTypeId == Settings.PilotTypeId).Title;
+                textview.Text = Settings.PilotTypeString;
                 textview.ResignFirstResponder();
             });
             pilotRatingToolbar.SetItems(new UIBarButtonItem[] { pilotRatingDoneButton }, true);
@@ -290,7 +318,11 @@ namespace AircraftForSale
 
 
 
-            PilotSwitch.On = false;
+            PilotSwitch.On = Settings.IsPilot;
+            if (Settings.IsPilot)
+            {
+                hidePilotRows = false;
+            }
 
             PilotSwitch.ValueChanged += (sender, e) =>
             {
@@ -308,7 +340,6 @@ namespace AircraftForSale
                 TableView.EndUpdates();
             };
 
-            // textFieldEmail is your UITextField
 
             var borderFrameHeight = UsernameTextView.Frame.Size.Height - 1;
             var borderFrameWidth = UsernameTextView.Frame.Size.Width;
@@ -388,6 +419,7 @@ namespace AircraftForSale
             //strokeWidth: 4
             );
             PilotTypeTextField.Font = fontObject;
+            PilotTypeTextField.Text = Settings.PilotStatusString ?? string.Empty;
 
             PilotRatingTextField.Layer.AddSublayer(bottomBorder11);
             PilotRatingTextField.Layer.MasksToBounds = true;
@@ -398,6 +430,7 @@ namespace AircraftForSale
             //strokeWidth: 4
             );
             PilotRatingTextField.Font = fontObject;
+            PilotRatingTextField.Text = Settings.PilotTypeString ?? string.Empty;
 
             ClassificationTextField.Layer.AddSublayer(bottomBorder12);
             ClassificationTextField.Layer.MasksToBounds = true;
@@ -408,6 +441,8 @@ namespace AircraftForSale
             //strokeWidth: 4
             );
             ClassificationTextField.Font = fontObject;
+            ClassificationTextField.Text = Settings.ClassificationString ?? string.Empty;
+
 
             ManufacturerTextField.Layer.AddSublayer(bottomBorder13);
             ManufacturerTextField.Layer.MasksToBounds = true;
@@ -418,6 +453,11 @@ namespace AircraftForSale
             //strokeWidth: 4
             );
             ManufacturerTextField.Font = fontObject;
+            ManufacturerTextField.Text = Settings.ManufacturerString ?? string.Empty;
+            if (Settings.ManufacturerId != 0)
+            {
+                hideManufacturerAndModelRow = false;
+            }
 
             ModelTextField.Layer.AddSublayer(bottomBorder14);
             ModelTextField.Layer.MasksToBounds = true;
@@ -428,6 +468,11 @@ namespace AircraftForSale
             //strokeWidth: 4
             );
             ModelTextField.Font = fontObject;
+            ModelTextField.Text = Settings.DesignationString ?? string.Empty;
+            if (Settings.DesignationId != 0)
+            {
+                hideModelRow = false;
+            }
 
             UsernameTextView.Layer.AddSublayer(bottomBorder1);
             UsernameTextView.Layer.MasksToBounds = true;
@@ -437,15 +482,17 @@ namespace AircraftForSale
                 foregroundColor: UIColor.DarkGray
             );
             UsernameTextView.Font = fontObject;
+            UsernameTextView.Text = Settings.Email ?? string.Empty;
 
             UsernameTextView.KeyboardType = UIKeyboardType.EmailAddress;
-            UsernameTextView.EditingDidEnd += (sender, e) => {
+            UsernameTextView.EditingDidEnd += (sender, e) =>
+            {
                 var emailAddress = UsernameTextView.Text;
-				//validate email address
-				if (!HelperMethods.IsValidEmail(emailAddress, UsernameTextView))
-				{
-					HelperMethods.SendBasicAlert("Validation", "Please input a valid email address");
-				}
+                //validate email address
+                if (!HelperMethods.IsValidEmail(emailAddress, UsernameTextView))
+                {
+                    HelperMethods.SendBasicAlert("Validation", "Please input a valid email address");
+                }
             };
 
 
@@ -457,12 +504,14 @@ namespace AircraftForSale
               foregroundColor: UIColor.DarkGray
           );
             ReEnterUsernameTextView.Font = fontObject;
-            ReEnterUsernameTextView.EditingDidEnd += (sender, e) => {
-                if(!HelperMethods.ReEnterEmail(ReEnterUsernameTextView.Text, ReEnterUsernameTextView))
+            ReEnterUsernameTextView.EditingDidEnd += (sender, e) =>
+            {
+                if (!HelperMethods.ReEnterEmail(ReEnterUsernameTextView.Text, ReEnterUsernameTextView))
                 {
                     HelperMethods.SendBasicAlert("Validation", "Usernames must match");
                 }
             };
+            ReEnterUsernameTextView.Text = UsernameTextView.Text ?? string.Empty;
 
             PasswordTextView.Layer.AddSublayer(bottomBorder3);
             PasswordTextView.Layer.MasksToBounds = true;
@@ -472,12 +521,14 @@ namespace AircraftForSale
               foregroundColor: UIColor.DarkGray
           );
             PasswordTextView.Font = fontObject;
-            PasswordTextView.EditingDidEnd += (sender, e) => {
-                if(!HelperMethods.IsValidPassword(PasswordTextView.Text, PasswordTextView))
+            PasswordTextView.EditingDidEnd += (sender, e) =>
+            {
+                if (!HelperMethods.IsValidPassword(PasswordTextView.Text, PasswordTextView))
                 {
                     HelperMethods.SendBasicAlert("Validation", "Passwords should contain letters and numbers and be less than 15 characters.");
                 }
             };
+            PasswordTextView.Text = Settings.Password ?? string.Empty;
 
             ReEnterPasswordTextView.Layer.AddSublayer(bottomBorder4);
             ReEnterPasswordTextView.Layer.MasksToBounds = true;
@@ -487,12 +538,15 @@ namespace AircraftForSale
               foregroundColor: UIColor.DarkGray
           );
             ReEnterPasswordTextView.Font = fontObject;
-			ReEnterPasswordTextView.EditingDidEnd += (sender, e) => {
-				if (!HelperMethods.ReEnterPassword(ReEnterPasswordTextView.Text, ReEnterPasswordTextView))
-				{
-					HelperMethods.SendBasicAlert("Validation", "Passwords must match");
-				}
-			};
+            ReEnterPasswordTextView.EditingDidEnd += (sender, e) =>
+            {
+                if (!HelperMethods.ReEnterPassword(ReEnterPasswordTextView.Text, ReEnterPasswordTextView))
+                {
+                    HelperMethods.SendBasicAlert("Validation", "Passwords must match");
+                }
+            };
+            ReEnterPasswordTextView.Text = PasswordTextView.Text ?? string.Empty;
+
             FirstNameTextView.Layer.AddSublayer(bottomBorder5);
             FirstNameTextView.Layer.MasksToBounds = true;
             FirstNameTextView.AttributedPlaceholder = new NSAttributedString(
@@ -501,17 +555,21 @@ namespace AircraftForSale
              foregroundColor: UIColor.DarkGray
          );
             FirstNameTextView.Font = fontObject;
-			FirstNameTextView.EditingDidEnd += (sender, e) => {
-				if (FirstNameTextView.Text == string.Empty)
-				{
+            FirstNameTextView.EditingDidEnd += (sender, e) =>
+            {
+                if (FirstNameTextView.Text == string.Empty)
+                {
                     HelperMethods.AnimateValidationBorder(FirstNameTextView);
-					HelperMethods.SendBasicAlert("Validation", "First name is required");
+                    HelperMethods.SendBasicAlert("Validation", "First name is required");
                     Settings.FirstName = string.Empty;
-                }else{
+                }
+                else
+                {
                     HelperMethods.RemoveValidationBorder(FirstNameTextView);
                     Settings.FirstName = FirstNameTextView.Text;
                 }
-			};
+            };
+            FirstNameTextView.Text = Settings.FirstName ?? string.Empty;
 
             LastNameTextView.Layer.AddSublayer(bottomBorder6);
             LastNameTextView.Layer.MasksToBounds = true;
@@ -521,19 +579,21 @@ namespace AircraftForSale
               foregroundColor: UIColor.DarkGray
           );
             LastNameTextView.Font = fontObject;
-			LastNameTextView.EditingDidEnd += (sender, e) => {
-				if (LastNameTextView.Text == string.Empty)
-				{
-					HelperMethods.AnimateValidationBorder(LastNameTextView);
-					HelperMethods.SendBasicAlert("Validation", "Last name is required");
+            LastNameTextView.EditingDidEnd += (sender, e) =>
+            {
+                if (LastNameTextView.Text == string.Empty)
+                {
+                    HelperMethods.AnimateValidationBorder(LastNameTextView);
+                    HelperMethods.SendBasicAlert("Validation", "Last name is required");
                     Settings.LastName = string.Empty;
-				}
-				else
-				{
-					HelperMethods.RemoveValidationBorder(LastNameTextView);
+                }
+                else
+                {
+                    HelperMethods.RemoveValidationBorder(LastNameTextView);
                     Settings.LastName = LastNameTextView.Text;
-				}
-			};
+                }
+            };
+            LastNameTextView.Text = Settings.LastName ?? string.Empty;
 
             MobilePhoneTextView.Layer.AddSublayer(bottomBorder7);
             MobilePhoneTextView.Layer.MasksToBounds = true;
@@ -545,11 +605,14 @@ namespace AircraftForSale
 
             MobilePhoneTextView.Font = fontObject;
             MobilePhoneTextView.KeyboardType = UIKeyboardType.PhonePad;
-            MobilePhoneTextView.EditingDidEnd += (sender, e) => {
-                if(!HelperMethods.IsValidPhoneNumber(MobilePhoneTextView.Text, MobilePhoneTextView)){
+            MobilePhoneTextView.EditingDidEnd += (sender, e) =>
+            {
+                if (!HelperMethods.IsValidPhoneNumber(MobilePhoneTextView.Text, MobilePhoneTextView))
+                {
                     HelperMethods.SendBasicAlert("Validation", "Phone number is required");
                 }
             };
+            MobilePhoneTextView.Text = Settings.Phone ?? string.Empty;
 
             CompanyTextView.Layer.AddSublayer(bottomBorder8);
             CompanyTextView.Layer.MasksToBounds = true;
@@ -560,11 +623,14 @@ namespace AircraftForSale
           //strokeWidth: 4
           );
             CompanyTextView.Font = fontObject;
-            CompanyTextView.EditingDidEnd += (sender, e) => {
-                if(CompanyTextView.Text != string.Empty){
+            CompanyTextView.EditingDidEnd += (sender, e) =>
+            {
+                if (CompanyTextView.Text != string.Empty)
+                {
                     Settings.Company = CompanyTextView.Text;
                 }
             };
+            CompanyTextView.Text = Settings.Company ?? string.Empty;
 
             HomeAirportTextView.Layer.AddSublayer(bottomBorder9);
             HomeAirportTextView.Layer.MasksToBounds = true;
@@ -574,22 +640,24 @@ namespace AircraftForSale
               foregroundColor: UIColor.DarkGray
           );
             HomeAirportTextView.Font = fontObject;
-            HomeAirportTextView.EditingDidEnd += (sender, e) => {
-                if(!HelperMethods.ValidateHomeAirport(HomeAirportTextView.Text, HomeAirportTextView))
+            HomeAirportTextView.EditingDidEnd += (sender, e) =>
+            {
+                if (!HelperMethods.ValidateHomeAirport(HomeAirportTextView.Text, HomeAirportTextView))
                 {
-					HelperMethods.SendBasicAlert("Validation", "Home airport must be 5 characters or less");
+                    HelperMethods.SendBasicAlert("Validation", "Home airport must be 5 characters or less");
                 };
                 HomeAirportTextView.Text = HomeAirportTextView.Text.ToUpper();
             };
+            HomeAirportTextView.Text = Settings.HomeAirport ?? string.Empty;
 
             LocationLabel.Layer.AddSublayer(bottomBorderLabel);
             LocationLabel.Layer.MasksToBounds = true;
             LocationLabel.Font = fontObject;
-            //Start here
+
 
 
             PilotLabel.Font = fontObject;
-         
+
         }
 
         public override UIView GetViewForHeader(UITableView tableView, nint section)
@@ -675,21 +743,21 @@ namespace AircraftForSale
             return Settings.LocationResponse.AreYouAPilot.Count;
         }
 
-		public override void Selected(UIPickerView pickerView, nint row, nint component)
-		{
+        public override void Selected(UIPickerView pickerView, nint row, nint component)
+        {
             Settings.PilotStatusId = Settings.LocationResponse.AreYouAPilot[(int)row].PilotStatusId;
             Settings.PilotStatusString = Settings.LocationResponse.AreYouAPilot[(int)row].Title;
-		}
+        }
 
 
 
-		public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
+        public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
         {
 
             var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
 
-			var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
-			var fontObject = UIFont.SystemFontOfSize(fontSize);
+            var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
+            var fontObject = UIFont.SystemFontOfSize(fontSize);
 
             UILabel lbl = new UILabel();
 
@@ -724,18 +792,20 @@ namespace AircraftForSale
             return Settings.LocationResponse.PilotRating.Count;
         }
 
-		public override void Selected(UIPickerView pickerView, nint row, nint component)
-		{
-            Settings.PilotTypeId = Settings.LocationResponse.PilotRating[(int)row].PilotTypeId;
-		}
+        public override void Selected(UIPickerView pickerView, nint row, nint component)
+        {
+            var location = Settings.LocationResponse.PilotRating[(int)row];
+            Settings.PilotTypeId = location.PilotTypeId;
+            Settings.PilotTypeString = location.Title;
+        }
 
         public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
         {
 
-			var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
+            var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
 
-			var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
-			var fontObject = UIFont.SystemFontOfSize(fontSize);
+            var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
+            var fontObject = UIFont.SystemFontOfSize(fontSize);
 
             UILabel lbl = new UILabel();
 
@@ -786,7 +856,10 @@ namespace AircraftForSale
                 ValueChanged(this, new EventArgs());
 
             }
-            Settings.ClassificationId = Settings.ClassificationList[(int)row].ClassificationId;
+            var classification = Settings.ClassificationList[(int)row];
+            Settings.ClassificationId = classification.ClassificationId;
+            Settings.ClassificationString = classification.ClassificationName;
+
         }
 
         public override nint GetRowsInComponent(UIPickerView picker, nint component)
@@ -796,10 +869,10 @@ namespace AircraftForSale
 
         public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
         {
-			var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
+            var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
 
-			var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
-			var fontObject = UIFont.SystemFontOfSize(fontSize);
+            var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
+            var fontObject = UIFont.SystemFontOfSize(fontSize);
 
             UILabel lbl = new UILabel();
 
@@ -847,7 +920,9 @@ namespace AircraftForSale
                 ValueChanged(this, new EventArgs());
 
             }
-            Settings.ManufacturerId = manufacturerList[(int)row].ManufacturerId;
+            var manufacturer = manufacturerList[(int)row];
+            Settings.ManufacturerId = manufacturer.ManufacturerId;
+            Settings.ManufacturerString = manufacturer.Manufacturer;
         }
 
         public override nint GetComponentCount(UIPickerView picker)
@@ -863,10 +938,10 @@ namespace AircraftForSale
         public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
         {
 
-			var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
+            var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
 
-			var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
-			var fontObject = UIFont.SystemFontOfSize(fontSize);
+            var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
+            var fontObject = UIFont.SystemFontOfSize(fontSize);
 
             UILabel lbl = new UILabel();
 
@@ -919,20 +994,22 @@ namespace AircraftForSale
             if (ValueChanged != null)
             {
                 ValueChanged(this, new EventArgs());
-               
+
 
             }
-			Settings.DesignationId = modelList[(int)row].DesignationId;
+            var model = modelList[(int)row];
+            Settings.DesignationId = model.DesignationId;
+            Settings.DesignationString = model.Designation;
         }
 
         public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
         {
-			var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
+            var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
 
-			var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
-			var fontObject = UIFont.SystemFontOfSize(fontSize);
+            var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
+            var fontObject = UIFont.SystemFontOfSize(fontSize);
 
-           
+
             UILabel lbl = new UILabel();
 
             lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, viewHeight);

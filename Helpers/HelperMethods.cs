@@ -430,7 +430,7 @@ namespace AircraftForSale
 			}
 		}
 
-		#region login helpers
+		#region validation helpers
 		public static bool IsValidEmail(string email, UIView view = null)
 		{
             bool isValid = false;
@@ -585,7 +585,7 @@ namespace AircraftForSale
 
 
 
-		#endregion
+		
 
 		public static void AnimateValidationBorder(UIView view)
 		{
@@ -611,5 +611,59 @@ namespace AircraftForSale
 			view.Layer.BorderColor = UIColor.Clear.CGColor;
 			view.Layer.BorderWidth = 0f;
         }
+
+        public static bool ValidateRequiredRegistrationFieldExceptClassifications(string reEnterEmail, string reEnterPassword){
+			//Ensure required fields are input
+			if (Settings.Email == null || Settings.Email == string.Empty)
+			{
+				HelperMethods.SendBasicAlert("Validation", "Please input a valid email address");
+                return false;
+			}
+			if (Settings.Password == null || Settings.Password == string.Empty)
+			{
+				HelperMethods.SendBasicAlert("Validation", "Please input a valid password");
+				return false;
+			}
+
+			if (Settings.Email != reEnterEmail)
+			{
+				HelperMethods.SendBasicAlert("Validation", "Email doesn't match");
+				return false;
+			}
+
+			if (Settings.Password != reEnterPassword)
+			{
+				HelperMethods.SendBasicAlert("Validation", "Password doesn't match");
+				return false;
+			}
+
+
+			if (Settings.FirstName == null || Settings.FirstName == string.Empty)
+			{
+				HelperMethods.SendBasicAlert("Validation", "Please input your first name");
+				return false;
+			}
+			if (Settings.LastName == null || Settings.LastName == string.Empty)
+			{
+				HelperMethods.SendBasicAlert("Validation", "Please input your last name");
+				return false;
+			}
+			if (Settings.Phone == null || Settings.Phone == string.Empty)
+			{
+				HelperMethods.SendBasicAlert("Validation", "Please input your phone number");
+				return false;
+			}
+
+			if (Settings.LocationPickerSelectedId == 0)
+			{
+				HelperMethods.SendBasicAlert("Validation", "Please select your location");
+				return false;
+			}
+
+            return true;
+
+		}
+
+		#endregion
 	}
 }

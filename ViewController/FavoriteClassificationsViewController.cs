@@ -98,6 +98,34 @@ namespace AircraftForSale
         {
             base.ViewDidLoad();
 
+			var nextBarButtonItem = new UIBarButtonItem("Next", UIBarButtonItemStyle.Plain, (sender, args) =>
+			{
+				//if (Settings.IsRegistered)
+				//{
+				//	RegistrationProfileViewController myInterestsVC = (RegistrationProfileViewController)UIStoryboard.FromName(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? "Main_ipad" : "Main", null).InstantiateViewController("MyProfileViewController");
+
+				//	PresentModalViewController(myInterestsVC, true);
+
+				//	return;
+				//}
+
+                if (Settings.AnyClassificationChosen())
+                {
+                    var testStoryBoard = UIStoryboard.FromName("Registration_New", NSBundle.MainBundle);
+                    var regViewController = testStoryBoard.InstantiateViewController("RegistrationStepTwo");
+                    this.ShowViewController(regViewController, this);
+                }else{
+                    //Display message here
+                    HelperMethods.SendBasicAlert("Alert", "Please select at least one aircraft classification");
+                }
+			});
+			UITextAttributes icoFontAttribute = new UITextAttributes();
+			icoFontAttribute.Font = UIFont.BoldSystemFontOfSize(20);
+			icoFontAttribute.TextColor = UIColor.White;
+
+			nextBarButtonItem.SetTitleTextAttributes(icoFontAttribute, UIControlState.Normal);
+
+            NavigationItem.SetRightBarButtonItem(nextBarButtonItem, true);
 
 			CollectionView.RegisterClassForCell(typeof(ClassificationCell), classificationCellID);
 			CollectionView.RegisterClassForSupplementaryView(typeof(Header), UICollectionElementKindSection.Header, headerId);
@@ -122,9 +150,9 @@ namespace AircraftForSale
 
 
 
-			UIButton nextButton = new UIButton();
-            nextButton.SetTitle("Next", UIControlState.Normal);
-            nextButton.BackgroundColor = HelperMethods.GetLime();
+			//UIButton nextButton = new UIButton();
+            //nextButton.SetTitle("Next", UIControlState.Normal);
+            //nextButton.BackgroundColor = HelperMethods.GetLime();
 
 			
 			UIButton cancelButton = new UIButton();
@@ -139,83 +167,83 @@ namespace AircraftForSale
 
             CGPoint point = new CGPoint((UIScreen.MainScreen.Bounds.Width / 2) + 100, UIScreen.MainScreen.Bounds.Height - 60);
             var frame = new CGRect(point, new CGSize(100, 50));
-            nextButton.Frame = frame;
-            nextButton.Font = UIFont.BoldSystemFontOfSize(22);
+   //         nextButton.Frame = frame;
+   //         nextButton.Font = UIFont.BoldSystemFontOfSize(22);
 
-            nextButton.TouchUpInside += (sender, e) =>
-            {
-                if (Settings.IsRegistered)
-                {
-                    RegistrationProfileViewController myInterestsVC = (RegistrationProfileViewController)UIStoryboard.FromName(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? "Main_ipad" : "Main", null).InstantiateViewController("MyProfileViewController");
+   //         nextButton.TouchUpInside += (sender, e) =>
+   //         {
+   //             if (Settings.IsRegistered)
+   //             {
+   //                 RegistrationProfileViewController myInterestsVC = (RegistrationProfileViewController)UIStoryboard.FromName(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? "Main_ipad" : "Main", null).InstantiateViewController("MyProfileViewController");
 
-                    //this.Storyboard.InstantiateViewController("MyProfileViewController") as RegistrationProfileViewController;
+   //                 //this.Storyboard.InstantiateViewController("MyProfileViewController") as RegistrationProfileViewController;
 
-                    PresentModalViewController(myInterestsVC, true);
+   //                 PresentModalViewController(myInterestsVC, true);
 
-                    return;
-                }
+   //                 return;
+   //             }
 
-				var testStoryBoard = UIStoryboard.FromName("Registration_New", NSBundle.MainBundle);
-                var regViewController = testStoryBoard.InstantiateViewController("RegistrationStepTwo");
-				this.ShowViewController(regViewController, this);
+			//	var testStoryBoard = UIStoryboard.FromName("Registration_New", NSBundle.MainBundle);
+   //             var regViewController = testStoryBoard.InstantiateViewController("RegistrationStepTwo");
+			//	this.ShowViewController(regViewController, this);
 
 
-			};
+			//};
 
             cancelButton.TouchUpInside += (sender, e) =>
             {
                 this.DismissViewController(true, null);
             };
 
-            View.Add(nextButton);
+            //         View.Add(nextButton);
 
-			nextButton.TranslatesAutoresizingMaskIntoConstraints = false;
+            //nextButton.TranslatesAutoresizingMaskIntoConstraints = false;
 
-			var topConstraint = NSLayoutConstraint.Create(
-			  nextButton,
-			  NSLayoutAttribute.Top,
-			  NSLayoutRelation.Equal,
-			  this.View,
-			  NSLayoutAttribute.Top,
-			  1,
-			  UIScreen.MainScreen.Bounds.Height - 75
-		  );
+            //var topConstraint = NSLayoutConstraint.Create(
+            //  nextButton,
+            //  NSLayoutAttribute.Top,
+            //  NSLayoutRelation.Equal,
+            //  this.View,
+            //  NSLayoutAttribute.Top,
+            //  1,
+            //  UIScreen.MainScreen.Bounds.Height - 75
+            // );
 
-			var leftConstraint = NSLayoutConstraint.Create(
-              nextButton,
-              NSLayoutAttribute.Left,
-              NSLayoutRelation.Equal,
-              this.View,
-              NSLayoutAttribute.Left,
-			  1,
-			  UIScreen.MainScreen.Bounds.Width - 130
-		  );
+            //var leftConstraint = NSLayoutConstraint.Create(
+            //           nextButton,
+            //           NSLayoutAttribute.Left,
+            //           NSLayoutRelation.Equal,
+            //           this.View,
+            //           NSLayoutAttribute.Left,
+            //  1,
+            //  UIScreen.MainScreen.Bounds.Width - 130
+            // );
 
-			var widthConstaint = NSLayoutConstraint.Create(
-			   nextButton,
-			   NSLayoutAttribute.Width,
-			   NSLayoutRelation.Equal,
-				1,
-				100
-		   );
+            //var widthConstaint = NSLayoutConstraint.Create(
+            //  nextButton,
+            //  NSLayoutAttribute.Width,
+            //  NSLayoutRelation.Equal,
+            //1,
+            //100
+            //);
 
-            var heightConstraint = NSLayoutConstraint.Create(
-             nextButton,
-             NSLayoutAttribute.Height,
-             NSLayoutRelation.Equal,
-              1,
-               50
-            );
-
-
-
-			this.View.AddConstraint(topConstraint);
-			this.View.AddConstraint(heightConstraint);
-			this.View.AddConstraint(widthConstaint);
-			this.View.AddConstraint(leftConstraint);
+            //var heightConstraint = NSLayoutConstraint.Create(
+            // nextButton,
+            // NSLayoutAttribute.Height,
+            // NSLayoutRelation.Equal,
+            //  1,
+            //   50
+            //);
 
 
-			if (Settings.IsRegistered)
+
+            //this.View.AddConstraint(topConstraint);
+            //this.View.AddConstraint(heightConstraint);
+            //this.View.AddConstraint(widthConstaint);
+            //this.View.AddConstraint(leftConstraint);
+
+
+            if (Settings.IsRegistered)
                 View.Add(cancelButton);
 
 

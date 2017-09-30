@@ -32,7 +32,7 @@ namespace AircraftForSale
 			locations.Remove(locations.First(row => row.LocName == "USA"));
 			locations = locations.OrderBy(row => row.DisplayOrder).ToList();
 
-			//TableView.ContentInset = new UIEdgeInsets(20, 0, 0, 0);
+			
 			searchController = new UISearchController((UIViewController)null);
 
 			searchController.DimsBackgroundDuringPresentation = false;
@@ -44,9 +44,13 @@ namespace AircraftForSale
 				"USA", "Canada", "World"
 			};
 
+            //searchController.SearchBar.CancelButtonClicked += (sender, e) => {
+            //    TableView.ContentInset = new UIEdgeInsets(0, 0, 0, 0);
+            //};
+
 			//searchController.SearchBar.ShowsScopeBar = true;
 
-			DefinesPresentationContext = true;
+			//DefinesPresentationContext = true;
 
 			searchController.SearchResultsUpdater = this;
 
@@ -73,8 +77,13 @@ namespace AircraftForSale
 						scopeShortForm = "US";
 					}
 
+
+
 					FilterContentForSearchText(txt, scopeShortForm);
-				}
+				},
+                CancelClicked = () => {
+                    TableView.ContentInset = new UIEdgeInsets(0, 0, 0, 0);
+                }
 			};
 
 			//TableView.ReloadData();
@@ -115,8 +124,8 @@ namespace AircraftForSale
 
 		void FilterContentForSearchText(string text, string scope)
 		{
-			//InvokeOnMainThread(() =>
-			//{
+			InvokeOnMainThread(() =>
+			{
 				if (filteredLocations != null)
 				{
 					filteredLocations.Clear();
@@ -126,9 +135,9 @@ namespace AircraftForSale
 									(string.IsNullOrEmpty(scope) || e.MapCCode.ToUpper() == scope.ToUpper())
 					 ));
 				}
-
+                TableView.ContentInset = new UIEdgeInsets(30, 0, 0, 0);
 				TableView.ReloadData();
-			//});
+			});
 		}
 
 		public override nint RowsInSection(UITableView tableview, nint section)
@@ -164,15 +173,7 @@ namespace AircraftForSale
 			}
 			cell.DetailTextLabel.Text = mapCCodeFriendly;
 
-			//if (location.Billable)
-			//{
-			//	cell.TextLabel.TextColor = UIColor.Blue;
-			//}
-			//else
-			//{
-			//	cell.TextLabel.TextColor = UIColor.Black;
-			//}
-
+			
 			return cell;
 
 		}
@@ -188,17 +189,18 @@ namespace AircraftForSale
 			Settings.LocationPickerSelectedId = location.LocationId;
 			Settings.LocationPickerSelectedName = location.LocName;
 
-			//if (searchController.Active)
-			//{
-			//	searchController.DismissViewController(true, null);
-			//}
-			//this.pare
+			if (searchController.Active)
+			{
+				searchController.DismissViewController(true, null);
+			}
+
 			this.NavigationController.PopViewController(true);
 		}
 	}
 	class SearchDelegate : UISearchBarDelegate
 	{
 		public Action<string, string> DoFilter { get; set; }
+        public Action CancelClicked { get; set; }
 
 		public override void SelectedScopeButtonIndexChanged(UISearchBar searchBar, nint selectedScope)
 		{
@@ -207,6 +209,13 @@ namespace AircraftForSale
 
 			DoFilter(text, scope);
 		}
+
+        public override void CancelButtonClicked(UISearchBar searchBar)
+        {
+            if(CancelClicked != null){
+                CancelClicked();
+            }
+        }
 
 	}
 }

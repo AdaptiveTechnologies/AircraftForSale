@@ -95,26 +95,40 @@ namespace AircraftForSale
 					//AuthResponse auResponse = await AuthResponse.GetAuthResponseAsync(Settings.AppID, Settings.Username, Settings.Password);
 					try
 					{
-						var reponseProfile = await manager.getUserProfile(Settings.AppID, Settings.Username, Settings.AuthToken, Settings.Password);
+                        var responseProfile = await manager.getUserProfile(Settings.AppID, Settings.Username, Settings.AuthToken, Settings.Password);
 
-						Settings.IsAmphibian = reponseProfile.C1 == 1;
-						Settings.IsCommercial = reponseProfile.C2 == 1;
-						Settings.IsExperimental = reponseProfile.C3 == 1;
-						Settings.IsHelicopter = reponseProfile.C4 == 1;
-						Settings.IsJets = reponseProfile.C5 == 1;
-						Settings.IsSingles = reponseProfile.C7 == 1;
-						Settings.IsSingleEngine = reponseProfile.C6 == 1;
-						Settings.IsTwinPistons = reponseProfile.C8 == 1;
-						Settings.IsTwinTurbines = reponseProfile.C9 == 1;
-						Settings.IsVintage = reponseProfile.C10 == 1;
-						Settings.IsWarbirds = reponseProfile.C11 == 1;
-						Settings.IsLightSport = reponseProfile.C12 == 1;
+						Settings.IsAmphibian = responseProfile.C1 == 1;
+						Settings.IsCommercial = responseProfile.C2 == 1;
+						Settings.IsExperimental = responseProfile.C3 == 1;
+						Settings.IsHelicopter = responseProfile.C4 == 1;
+						Settings.IsJets = responseProfile.C5 == 1;
+						Settings.IsSingles = responseProfile.C7 == 1;
+						Settings.IsSingleEngine = responseProfile.C6 == 1;
+						Settings.IsTwinPistons = responseProfile.C8 == 1;
+						Settings.IsTwinTurbines = responseProfile.C9 == 1;
+						Settings.IsVintage = responseProfile.C10 == 1;
+						Settings.IsWarbirds = responseProfile.C11 == 1;
+						Settings.IsLightSport = responseProfile.C12 == 1;
 
 						Settings.Email = Settings.Username;
 
-						Settings.FirstName = reponseProfile.FirstName;
-						Settings.LastName = reponseProfile.LastName;
-						Settings.Phone = reponseProfile.CellPhone;
+						Settings.FirstName = responseProfile.FirstName;
+						Settings.LastName = responseProfile.LastName;
+						Settings.Phone = responseProfile.CellPhone;
+
+                        Settings.Company = responseProfile.Company;
+                        Settings.Hours = responseProfile.HourPerMonth;
+                        Settings.ManufacturerId = responseProfile.DesignationId;
+                        Settings.LocationPickerSelectedId = responseProfile.CountryId;
+                        Settings.Phone = responseProfile.CellPhone;
+                        Settings.DesignationId = responseProfile.DesignationId;
+                        Settings.PurposeId = responseProfile.FlyingPurposeId;
+                        Settings.HomeAirport = responseProfile.HomeAirport;
+                        Settings.Password = responseProfile.Password;
+                        Settings.PilotStatusId = responseProfile.PilotStatusId;
+                        Settings.PilotTypeId = responseProfile.PilotTypeId;
+                        Settings.PurchaseTimeFrame = responseProfile.PurchaseTimeFrame;
+
 						loadingIndicator.Hide();
 						this.PerformSegue("LoadTabBarControllerSeque", this);
 					}
@@ -236,18 +250,9 @@ namespace AircraftForSale
 				classificationsGridLayout.SectionInset = new UIEdgeInsets(insetTop, insetLeftBottomRight, insetLeftBottomRight, insetLeftBottomRight);
 				classificationsGridLayout.HeaderReferenceSize = new CoreGraphics.CGSize(UIScreen.MainScreen.Bounds.Width - 100, 0);
 
-
 				FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(classificationsGridLayout);
-				favClassificationsVC.CollectionView.BackgroundView = new UIImageView(UIImage.FromBundle("new_home_bg1"));
-				favClassificationsVC.CollectionView.AllowsMultipleSelection = true;
 
-				//this.PresentViewController(favClassificationsVC, true, null);
-				PresentModalViewController(favClassificationsVC, true);
-
-				//this.PerformSegue("RegisterSegue", this);
-
-				//RegistrationViewController registrationViewController = (RegistrationViewController)ParentViewController.Storyboard.InstantiateViewController("RegistrationViewController");
-				//NavigationController.PushViewController(registrationViewController, true);
+				this.ShowViewController(new UINavigationController(favClassificationsVC), this);
 			};
 
 
