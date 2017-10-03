@@ -9,7 +9,6 @@ using AircraftForSale.PCL.Helpers;
 using System.Globalization;
 using Google.Analytics;
 
-using Google.Analytics;
 
 namespace AircraftForSale
 {

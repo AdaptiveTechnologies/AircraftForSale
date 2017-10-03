@@ -20,13 +20,16 @@ namespace AircraftForSale
 				CommentsTextView.Layer.BorderWidth = 0f;
 
 				NameTextField.Layer.BorderColor = UIColor.Clear.CGColor;
-				NameTextField.Layer.BorderWidth = 0f;
+                NameTextField.Layer.BorderWidth = 0f;
 
-                //this.DismissViewController(true, null);
+                //TODO: Uncomment. This is commented for testing
+                //Send Inquiry
+                var response = await AdInquiryResponse.AdInquiry(int.Parse(AdProperty.ID), NameTextField.Text, EmailAddressTextField.Text, string.Empty, CommentsTextView.Text
+                , AdProperty.BrokerId, AdInquirySource.Email, "Inquiry about " + AdProperty.Name + " from GlobalAir.com Showcase Magazine");
 
-				////Send Inquiry
-				var response = await AdInquiryResponse.AdInquiry(int.Parse(AdProperty.ID), NameTextField.Text, EmailAddressTextField.Text, string.Empty, CommentsTextView.Text
-														   , AdProperty.BrokerId, AdInquirySource.Email, "Inquiry about " + AdProperty.Name + " from GlobalAir.com Showcase Magazine");
+                //AdInquiryResponse response = new AdInquiryResponse();
+                //response.Status = "Success";
+
 				if (response.Status != "Success")
 				{
 					//var alert = UIAlertController.Create("Oops", "There was a problem sending your email to the aircraft broker. Please try again", UIAlertControllerStyle.Alert);
@@ -44,8 +47,18 @@ namespace AircraftForSale
 				}
 				else
 				{
-					HelperMethods.SendBasicAlert("Success", "Email sent successfully");
-					//this.DismissViewController(true, null);
+					var alert = UIAlertController.Create("Congratulations!", "Email sent successfully.", UIAlertControllerStyle.Alert);
+
+					alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Cancel, (obj) =>
+					{
+						this.PresentingViewController.DismissViewController(true, null);
+
+					}));
+
+					PresentViewController(alert, animated: true, completionHandler: () =>
+					{
+
+					});
 				}
 
 			}

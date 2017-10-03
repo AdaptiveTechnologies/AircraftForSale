@@ -70,6 +70,9 @@ namespace AircraftForSale
 		// resize the image to be contained within a maximum width and height, keeping aspect ratio
 		public static UIImage MaxResizeImage(this UIImage sourceImage, float maxWidth, float maxHeight)
 		{
+            //if(sourceImage == null){
+            //    return new UIImage();
+            //}
 			var sourceSize = sourceImage.Size;
 			var maxResizeFactor = Math.Min(maxWidth / sourceSize.Width, maxHeight / sourceSize.Height);
 			if (maxResizeFactor > 1) return sourceImage;

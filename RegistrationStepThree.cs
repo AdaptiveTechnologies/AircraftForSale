@@ -17,6 +17,22 @@ namespace AircraftForSale
 		{
 		}
 
+		public UITapGestureRecognizer HideKeyboardGesture
+		{
+			get;
+			set;
+		}
+
+		public override void ViewDidAppear(bool animated)
+		{
+			View.AddGestureRecognizer(HideKeyboardGesture);
+		
+		}
+		public override void ViewDidDisappear(bool animated)
+		{
+			View.RemoveGestureRecognizer(HideKeyboardGesture);
+		}
+
 		public override void ViewDidLoad()
 		{
 
@@ -24,7 +40,13 @@ namespace AircraftForSale
 
 			NavigationItem.BackBarButtonItem = new UIBarButtonItem("Back", UIBarButtonItemStyle.Plain, null);
 
-			var finishButton = new UIBarButtonItem("Finish", UIBarButtonItemStyle.Plain, async (sender, args) =>
+			HideKeyboardGesture = new UITapGestureRecognizer(() =>
+			{
+				View.EndEditing(true);
+
+			});
+
+            var finishButton = new UIBarButtonItem("Finish", UIBarButtonItemStyle.Plain, async (sender, args) =>
 			{
 				if (Reachability.IsHostReachable(Settings._baseDomain))
 				{

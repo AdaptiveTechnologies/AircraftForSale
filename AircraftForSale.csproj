@@ -163,16 +163,17 @@
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\IconSmall%403x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\IconSmall-40%403x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon%403x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\IconSmall%403x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\IconSmall%402x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\IconSmall.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\IconSmall%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\IconSmall-40.png" />
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\IconSmall-40%402x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-76.png" />
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-76%402x.png" />
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-83.5%402x.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\IconSmall-20%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\app-logo2flat.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -204,10 +205,6 @@
     <Compile Include="ViewController\FavoritesViewController.cs" />
     <Compile Include="ViewController\FavoritesViewController.designer.cs">
       <DependentUpon>FavoritesViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewController\RegistrationViewController.cs" />
-    <Compile Include="ViewController\RegistrationViewController.designer.cs">
-      <DependentUpon>RegistrationViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewController\SettingsViewController.cs" />
     <Compile Include="ViewController\SettingsViewController.designer.cs">
@@ -269,10 +266,6 @@
     <Compile Include="ViewController\AdLayoutPhoneViewController.designer.cs">
       <DependentUpon>AdLayoutPhoneViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewController\RegistrationProfileViewController.cs" />
-    <Compile Include="ViewController\RegistrationProfileViewController.designer.cs">
-      <DependentUpon>RegistrationProfileViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="MagazinePageIndicator.cs" />
     <Compile Include="PageIndicatorClass.cs" />
     <Compile Include="PageIndicatorClass.designer.cs">
@@ -290,23 +283,11 @@
     <Compile Include="ViewController\EmailInquiryViewController.designer.cs">
       <DependentUpon>EmailInquiryViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewController\MainRegistrationViewController.cs" />
-    <Compile Include="ViewController\MainRegistrationViewController.designer.cs">
-      <DependentUpon>MainRegistrationViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="ViewController\MapViewController.cs" />
     <Compile Include="ViewController\MapViewController.designer.cs">
       <DependentUpon>MapViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewController\FavoriteClassificationsViewController.cs" />
-    <Compile Include="ViewController\Page2RegistrationViewController.cs" />
-    <Compile Include="ViewController\Page2RegistrationViewController.designer.cs">
-      <DependentUpon>Page2RegistrationViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewController\Page3RegistrationViewController.cs" />
-    <Compile Include="ViewController\Page3RegistrationViewController.designer.cs">
-      <DependentUpon>Page3RegistrationViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="ViewController\BanManProViewController.cs" />
     <Compile Include="ViewController\BanManProViewController.designer.cs">
       <DependentUpon>BanManProViewController.cs</DependentUpon>

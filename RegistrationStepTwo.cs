@@ -24,8 +24,15 @@ namespace AircraftForSale
         ManufacturerPickerViewModel manufacturerPickerViewModel;
         ModelPickerViewModel modelPickerViewModel;
 
+		//public UITapGestureRecognizer HideKeyboardGesture
+		//{
+		//	get;
+		//	set;
+		//}
+
         public override void ViewDidAppear(bool animated)
         {
+			//View.AddGestureRecognizer(HideKeyboardGesture);
             if (Settings.LocationPickerSelectedId == 0)
             {
                 LocationLabel.Text = "Touch to Add Location";
@@ -35,8 +42,22 @@ namespace AircraftForSale
                 LocationLabel.Text = "Location: " + Settings.LocationPickerSelectedName;
             }
         }
+        public override void ViewDidDisappear(bool animated)
+        {
+            //View.RemoveGestureRecognizer(HideKeyboardGesture);
+        }
+
         public async override void ViewDidLoad()
         {
+			this.TableView.KeyboardDismissMode = UIScrollViewKeyboardDismissMode.OnDrag;
+			//this.TableView.EndEditing(true);
+
+			//HideKeyboardGesture = new UITapGestureRecognizer(() =>
+			//{
+			//	View.EndEditing(true);
+
+			//});
+
             NavigationItem.Title = "Registration";
 
             NavigationItem.BackBarButtonItem = new UIBarButtonItem("Back", UIBarButtonItemStyle.Plain, null);

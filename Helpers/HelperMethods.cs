@@ -336,8 +336,24 @@ namespace AircraftForSale
 													 //returnedViewController.NavigationController.PushViewController(registrationViewController, true);
 
 													 //var returnedViewController = viewController.NavigationController.PopViewController(true);
-													 RegistrationViewController registrationViewController = (RegistrationViewController)viewController.Storyboard.InstantiateViewController("RegistrationViewController");
-													 viewController.ShowViewController(registrationViewController, viewController);
+													 //RegistrationViewController registrationViewController = (RegistrationViewController)viewController.Storyboard.InstantiateViewController("RegistrationViewController");
+													 //viewController.ShowViewController(registrationViewController, viewController);
+
+													 GridLayout classificationsGridLayout = new GridLayout();
+													 int classificationItemWidth = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 200 : 100;
+													 int classificationItemHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 150 : 100;
+
+													 classificationsGridLayout.ItemSize = new CoreGraphics.CGSize(classificationItemWidth, classificationItemHeight);
+
+													 int insetTop = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 125 : 75;
+													 int insetLeftBottomRight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 50 : 5;
+
+													 classificationsGridLayout.SectionInset = new UIEdgeInsets(insetTop, insetLeftBottomRight, insetLeftBottomRight, insetLeftBottomRight);
+													 classificationsGridLayout.HeaderReferenceSize = new CoreGraphics.CGSize(UIScreen.MainScreen.Bounds.Width - 100, 0);
+
+													 FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(classificationsGridLayout);
+
+													 viewController.ShowViewController(new UINavigationController(favClassificationsVC), viewController);
 												 }));
 
 
@@ -364,8 +380,24 @@ namespace AircraftForSale
 													 //returnedViewController.NavigationController.PushViewController(registrationViewController, true);
 
 													 //var returnedViewController = viewController.NavigationController.PopViewController(true);
-													 RegistrationViewController registrationViewController = (RegistrationViewController)viewController.Storyboard.InstantiateViewController("RegistrationViewController");
-													 viewController.ShowViewController(registrationViewController, viewController);
+													 //RegistrationViewController registrationViewController = (RegistrationViewController)viewController.Storyboard.InstantiateViewController("RegistrationViewController");
+													 //viewController.ShowViewController(registrationViewController, viewController);
+
+													 GridLayout classificationsGridLayout = new GridLayout();
+													 int classificationItemWidth = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 200 : 100;
+													 int classificationItemHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 150 : 100;
+
+													 classificationsGridLayout.ItemSize = new CoreGraphics.CGSize(classificationItemWidth, classificationItemHeight);
+
+													 int insetTop = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 125 : 75;
+													 int insetLeftBottomRight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 50 : 5;
+
+													 classificationsGridLayout.SectionInset = new UIEdgeInsets(insetTop, insetLeftBottomRight, insetLeftBottomRight, insetLeftBottomRight);
+													 classificationsGridLayout.HeaderReferenceSize = new CoreGraphics.CGSize(UIScreen.MainScreen.Bounds.Width - 100, 0);
+
+													 FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(classificationsGridLayout);
+
+													 viewController.ShowViewController(new UINavigationController(favClassificationsVC), viewController);
 												 }));
 
 
@@ -392,8 +424,24 @@ namespace AircraftForSale
 													 //returnedViewController.NavigationController.PushViewController(registrationViewController, true);
 
 													 //var returnedViewController = viewController.NavigationController.PopViewController(true);
-													 RegistrationViewController registrationViewController = (RegistrationViewController)viewController.Storyboard.InstantiateViewController("RegistrationViewController");
-													 viewController.ShowViewController(registrationViewController, viewController);
+													 //RegistrationViewController registrationViewController = (RegistrationViewController)viewController.Storyboard.InstantiateViewController("RegistrationViewController");
+													 //viewController.ShowViewController(registrationViewController, viewController);
+
+													 GridLayout classificationsGridLayout = new GridLayout();
+													 int classificationItemWidth = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 200 : 100;
+													 int classificationItemHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 150 : 100;
+
+													 classificationsGridLayout.ItemSize = new CoreGraphics.CGSize(classificationItemWidth, classificationItemHeight);
+
+													 int insetTop = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 125 : 75;
+													 int insetLeftBottomRight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 50 : 5;
+
+													 classificationsGridLayout.SectionInset = new UIEdgeInsets(insetTop, insetLeftBottomRight, insetLeftBottomRight, insetLeftBottomRight);
+													 classificationsGridLayout.HeaderReferenceSize = new CoreGraphics.CGSize(UIScreen.MainScreen.Bounds.Width - 100, 0);
+
+													 FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(classificationsGridLayout);
+
+													 viewController.ShowViewController(new UINavigationController(favClassificationsVC), viewController);
 												 }));
 
 

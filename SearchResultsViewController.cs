@@ -10,277 +10,291 @@ using System.Linq;
 
 namespace AircraftForSale
 {
-	public partial class SearchResultsViewController : UIViewController, IUISearchResultsUpdating
-	{
+    public partial class SearchResultsViewController : UIViewController, IUISearchResultsUpdating
+    {
 
-		public List<Ad> SearchResultsAdList
-		{
-			get;
-			set;
-		}
+        public List<Ad> SearchResultsAdList
+        {
+            get;
+            set;
+        }
 
-		public string Classification
-		{
-			get;
-			set;
-		}
+        public string Classification
+        {
+            get;
+            set;
+        }
 
 
 
-		public UITableView SearchResultsTableView
-		{
-			get;
-			set;
-		}
+        public UITableView SearchResultsTableView
+        {
+            get;
+            set;
+        }
 
-		public UISearchController searchController;
-		public SearchResultsViewController()
-		{
-			//this.AdSelectedAction = addSelectedAction;
-		}
+        public UISearchController searchController;
+        public SearchResultsViewController()
+        {
+            //this.AdSelectedAction = addSelectedAction;
+        }
 
-		public Ad SelectedAd
-		{
-			get;
-			set;
-		}
+        public Ad SelectedAd
+        {
+            get;
+            set;
+        }
 
-		public Action AdSelectedAction
-		{
-			get;
-			set;
-		}
+        public Action AdSelectedAction
+        {
+            get;
+            set;
+        }
 
-		//~SearchResultsViewController()
-		//{
-		//  Console.WriteLine("SearchResultsViewController is about to be garbage collected");
-		//}
+        //~SearchResultsViewController()
+        //{
+        //  Console.WriteLine("SearchResultsViewController is about to be garbage collected");
+        //}
 
-		public override void ViewDidLoad()
-		{
-			base.ViewDidLoad();
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
 
-			var titleString = "";
-			if (Classification != null)
-			{
-				titleString = Classification + " " + "Search";
-			}
-			else
-			{
+            var titleString = "";
+            if (Classification != null)
+            {
+                titleString = Classification + " " + "Search";
+            }
+            else
+            {
 
-				titleString = "Aircraft Search";
-			}
+                titleString = "Aircraft Search";
+            }
 
-			View.BackgroundColor = UIColor.Black;
+            View.BackgroundColor = UIColor.Black;
 
-			var statusBarHeight = UIApplication.SharedApplication.StatusBarFrame.Height;
+            var statusBarHeight = UIApplication.SharedApplication.StatusBarFrame.Height;
 
-			var closeButton = new UIButton(new CGRect(View.Bounds.Width - 110, statusBarHeight, 100, 25));
-			closeButton.SetTitle("Close", UIControlState.Normal);
-			closeButton.SetTitleColor(UIColor.White, UIControlState.Normal);
+            var closeButton = new UIButton(new CGRect(View.Bounds.Width - 110, statusBarHeight, 100, 25));
+            closeButton.SetTitle("Close", UIControlState.Normal);
+            closeButton.SetTitleColor(UIColor.White, UIControlState.Normal);
 
-			View.Add(closeButton);
+            View.Add(closeButton);
 
 
-			//var titleView = new UITextView(titleRect);
+            //var titleView = new UITextView(titleRect);
 
 
 
 
 
 
-			var tableViewYValue = statusBarHeight + (closeButton.Bounds.Height + 5);
-			var tableViewHeight = this.View.Bounds.Height - tableViewYValue;
+            var tableViewYValue = statusBarHeight + (closeButton.Bounds.Height + 5);
+            var tableViewHeight = this.View.Bounds.Height - tableViewYValue;
 
 
-			SearchResultsTableView = new UITableView(new CGRect(0, tableViewYValue, this.View.Bounds.Width, tableViewHeight));
+            SearchResultsTableView = new UITableView(new CGRect(0, tableViewYValue, this.View.Bounds.Width, tableViewHeight));
 
-			var backgroundImage = UIImage.FromBundle("new_home_bg1.png").ResizeImage((float)SearchResultsTableView.Bounds.Width, (float)SearchResultsTableView.Bounds.Height);
-			SearchResultsTableView.BackgroundColor = UIColor.FromPatternImage(backgroundImage);
+            var backgroundImage = UIImage.FromBundle("new_home_bg1.png").ResizeImage((float)SearchResultsTableView.Bounds.Width, (float)SearchResultsTableView.Bounds.Height);
+            SearchResultsTableView.BackgroundColor = UIColor.FromPatternImage(backgroundImage);
 
-			View.Add(SearchResultsTableView);
+            View.Add(SearchResultsTableView);
 
-			searchController = new UISearchController((UIViewController)null);
+            searchController = new UISearchController((UIViewController)null);
 
-			searchController.DimsBackgroundDuringPresentation = false;
+            searchController.DimsBackgroundDuringPresentation = false;
 
-			SearchResultsTableView.TableHeaderView = searchController.SearchBar;
-			searchController.SearchBar.SizeToFit();
+            SearchResultsTableView.TableHeaderView = searchController.SearchBar;
+            searchController.SearchBar.SizeToFit();
 
-			this.DefinesPresentationContext = true;
+            this.DefinesPresentationContext = true;
 
-			searchController.SearchResultsUpdater = this;
+            searchController.SearchResultsUpdater = this;
 
-			var titleViewHeight = this.View.Bounds.Height - (this.SearchResultsTableView.Bounds.Height + statusBarHeight);
-			var titleView = new UITextView(new CGRect(0, 0, this.View.Bounds.Width * .4f, titleViewHeight));
+            var titleViewHeight = this.View.Bounds.Height - (this.SearchResultsTableView.Bounds.Height + statusBarHeight);
+            var titleView = new UITextView(new CGRect(0, 0, this.View.Bounds.Width * .4f, titleViewHeight));
 
-			titleView.Center = new CGPoint(View.Frame.Size.Width / 2, (titleViewHeight + statusBarHeight) / 2f);
+            titleView.Center = new CGPoint(View.Frame.Size.Width / 2, (titleViewHeight + statusBarHeight) / 2f);
 
-			titleView.Text = titleString;
-			titleView.TextAlignment = UITextAlignment.Center;
-			titleView.TextColor = UIColor.White;
-			titleView.BackgroundColor = UIColor.Clear;
-			titleView.Font = UIFont.BoldSystemFontOfSize(UIKit.UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone ? 15f : 20f);
-			titleView.AdjustsFontForContentSizeCategory = true;
+            titleView.Text = titleString;
+            titleView.TextAlignment = UITextAlignment.Center;
+            titleView.TextColor = UIColor.White;
+            titleView.BackgroundColor = UIColor.Clear;
+            titleView.Font = UIFont.BoldSystemFontOfSize(UIKit.UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone ? 15f : 20f);
+            titleView.AdjustsFontForContentSizeCategory = true;
 
 
-			this.View.Add(titleView);
+            this.View.Add(titleView);
 
-			closeButton.TouchUpInside += (sender, e) =>
-			{
-				this.DismissViewController(true, null);
-			};
+            closeButton.TouchUpInside += (sender, e) =>
+            {
+                this.DismissViewController(true, null);
+            };
 
-			SearchResultsTableView.Source = new SearchResultsTableSource(this);
+            SearchResultsTableView.Source = new SearchResultsTableSource(this);
 
-		}
+        }
 
 
-		public List<Ad> filteredAds { get; set; }
+        public List<Ad> filteredAds { get; set; }
 
-		public void UpdateSearchResultsForSearchController(UISearchController searchController)
-		{
-			if (searchController.Active)
-				filteredAds = new List<Ad>();
-			else
-				filteredAds = null;
+        public void UpdateSearchResultsForSearchController(UISearchController searchController)
+        {
+            if (searchController.Active)
+                filteredAds = new List<Ad>();
+            else
+                filteredAds = null;
 
-			var textToSearchFor = searchController.SearchBar.Text;
-			var index = searchController.SearchBar.SelectedScopeButtonIndex;
+            var textToSearchFor = searchController.SearchBar.Text;
+            var index = searchController.SearchBar.SelectedScopeButtonIndex;
 
 
 
 
-			FilterContentForSearchText(searchController.SearchBar.Text);
-		}
+            FilterContentForSearchText(searchController.SearchBar.Text);
+        }
 
-		void FilterContentForSearchText(string text)
-		{
-			//InvokeOnMainThread(() =>
-			//{
-			if (filteredAds != null)
-			{
-				filteredAds.Clear();
-				filteredAds.AddRange(
-						this.SearchResultsAdList.Where(e =>
-										(string.IsNullOrWhiteSpace(text) || e.Name.ToUpper().Contains(text.ToUpper()))
-						 ));
-			}
+        void FilterContentForSearchText(string text)
+        {
+            //InvokeOnMainThread(() =>
+            //{
+            if (filteredAds != null)
+            {
+                filteredAds.Clear();
+                filteredAds.AddRange(
+                        this.SearchResultsAdList.Where(e =>
+                                        (string.IsNullOrWhiteSpace(text) || e.Name.ToUpper().Contains(text.ToUpper()))
+                         ));
+            }
 
-			SearchResultsTableView.ReloadData();
-			//}
-		}
+            SearchResultsTableView.ReloadData();
+            //}
+        }
 
-	}
+    }
 
 
 
-	public class SearchResultsTableSource : UITableViewSource
-	{
+    public class SearchResultsTableSource : UITableViewSource
+    {
+       
 
-		WeakReference parent;
-		public SearchResultsViewController Owner
-		{
-			get
-			{
-				return parent.Target as SearchResultsViewController;
-			}
-			set
-			{
-				parent = new WeakReference(value);
-			}
-		}
+        WeakReference parent;
+        public SearchResultsViewController Owner
+        {
+            get
+            {
+                return parent.Target as SearchResultsViewController;
+            }
+            set
+            {
+                parent = new WeakReference(value);
+            }
+        }
 
-		NSString CellIdentifier = (NSString)"searchResultsPrototypeCell";
+        NSString CellIdentifier = (NSString)"searchResultsPrototypeCell";
 
-		public SearchResultsTableSource(SearchResultsViewController owner)
-		{
-			Owner = owner;
-		}
+        public SearchResultsTableSource(SearchResultsViewController owner)
+        {
+            Owner = owner;
+        }
 
-		public override nint RowsInSection(UITableView tableview, nint section)
-		{
-			if (Owner.filteredAds != null)
-				return Owner.filteredAds.Count;
+        public override nint RowsInSection(UITableView tableview, nint section)
+        {
+            if (Owner.filteredAds != null)
+                return Owner.filteredAds.Count;
 
-			return Owner.SearchResultsAdList.Count;
-		}
+            return Owner.SearchResultsAdList.Count;
+        }
 
-		public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
-		{
+        public override UITableViewCell GetCell(UITableView tableView, NSIndexPath indexPath)
+        {
 
-			UITableViewCell cell = tableView.DequeueReusableCell(CellIdentifier);
+            UITableViewCell cell = tableView.DequeueReusableCell(CellIdentifier);
 
-			if (cell == null)
-			{
+            if (cell == null)
+            {
 
-				cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
-				cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
-				var backgroundColor = UIColor.FromWhiteAlpha(1f, .3f);
-				cell.BackgroundColor = backgroundColor;
-			}
+                cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
+                cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
+                var backgroundColor = UIColor.FromWhiteAlpha(1f, .3f);
+                cell.BackgroundColor = backgroundColor;
+            }
 
 
 
 
-			//Ad ad = Owner.SearchResultsAdList[indexPath.Row];
+            //Ad ad = Owner.SearchResultsAdList[indexPath.Row];
 
-			Ad ad = (Owner.filteredAds != null)
-				? Owner.filteredAds[indexPath.Row]
-				: Owner.SearchResultsAdList[indexPath.Row];
+            Ad ad = (Owner.filteredAds != null)
+                ? Owner.filteredAds[indexPath.Row]
+                : Owner.SearchResultsAdList[indexPath.Row];
 
-			//cell.UpdateCell(item, this);
-			cell.TextLabel.Text = ad.Name;
-			cell.DetailTextLabel.Text = ad.Teaser;
+            //cell.UpdateCell(item, this);
+            cell.TextLabel.Text = ad.Name;
+            cell.DetailTextLabel.Text = ad.Teaser;
 
-			var image = SDImageCache.SharedImageCache.ImageFromDiskCache(ad.ImageURL);
-			var maxWidth = UIKit.UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone ? 100f : 150f;
-			image = image.MaxResizeImage(maxWidth, maxWidth);
+            var image = SDImageCache.SharedImageCache.ImageFromDiskCache(ad.ImageURL);
 
-			cell.ImageView.Image = image;
+           // var image = HelperMethods.GetImageFromCacheOrDefault(ad.ImageURL);
 
-			//cell.ImageView.SetImage(
-			//	url: new NSUrl(item.ImageURL),
-			//	placeholder: UIImage.FromBundle("ad_placeholder.jpg")
-			//);
 
-			return cell;
-		}
 
-		public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
-		{
-			var maxWidth = UIKit.UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone ? 100f : 150f;
-			return maxWidth;
-		}
+            if (image == null)
+            {
+                try
+                {
+                    image = HelperMethods.FromUrl(ad.ImageURL);
 
-		public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
-		{
-			
-			var cell = tableView.CellAt(indexPath);
+                }catch(Exception e)
+                {
+                    image = UIImage.FromBundle("ad_placeholder.jpg");
+                }
+            }
+           var maxWidth = UIKit.UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone ? 100f : 150f;
+               
+         image = image.MaxResizeImage(maxWidth, maxWidth);
 
-			Ad ad = (Owner.filteredAds != null)
-				? Owner.filteredAds[indexPath.Row]
-				: Owner.SearchResultsAdList[indexPath.Row];
+           cell.ImageView.Image = image;
 
-			if (Owner.searchController.Active)
-			{
-				Owner.searchController.DismissViewController(true, null);
-			}
 
-			Owner.SelectedAd = ad;
+            return cell;
+        }
 
-			if (Owner.AdSelectedAction != null)
-			{
-				Owner.AdSelectedAction.Invoke();
-			}
+        public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
+        {
+            var maxWidth = UIKit.UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone ? 100f : 150f;
+            return maxWidth;
+        }
 
-			Owner.DismissViewController(true, null);
+        public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
+        {
 
+            var cell = tableView.CellAt(indexPath);
 
-			tableView.DeselectRow(indexPath, true);
-		}
+            Ad ad = (Owner.filteredAds != null)
+                ? Owner.filteredAds[indexPath.Row]
+                : Owner.SearchResultsAdList[indexPath.Row];
 
+            if (Owner.searchController.Active)
+            {
+                Owner.searchController.DismissViewController(true, null);
+            }
 
-	}
+            Owner.SelectedAd = ad;
+
+            if (Owner.AdSelectedAction != null)
+            {
+                Owner.AdSelectedAction.Invoke();
+            }
+
+            Owner.DismissViewController(true, null);
+
+
+            tableView.DeselectRow(indexPath, true);
+        }
+
+
+    }
 
 }

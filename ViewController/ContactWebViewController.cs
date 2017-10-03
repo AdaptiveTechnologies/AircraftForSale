@@ -47,7 +47,7 @@ namespace AircraftForSale
                 nameEdt.Layer.BorderWidth = 0f;
 
 
-                this.DismissViewController(true, null);
+                //this.DismissViewController(true, null);
 
                 ////Send Inquiry
                 var response = await AdInquiryResponse.AdInquiry(0, nameEdt.Text, addressEdt.Text, string.Empty, commentsEdt.Text
@@ -56,14 +56,25 @@ namespace AircraftForSale
                 {
                     //var alert = UIAlertController.Create("Oops", "There was a problem sending your email to the aircraft broker. Please try again", UIAlertControllerStyle.Alert);
 
-                    HelperMethods.SendBasicAlert("Oops", "There was a problem sending your email to the aircraft broker. Please try again");
+                    HelperMethods.SendBasicAlert("Oops", "There was a problem sending your email. Please try again");
 
                 }
                 else
                 {
-                    HelperMethods.SendBasicAlert("Success", "Email sent successfully");
+					var alert = UIAlertController.Create("Congratulations!", "Email sent successfully.", UIAlertControllerStyle.Alert);
 
-                    //this.DismissViewController(true, null);
+					alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Cancel, (obj) =>
+					{
+                        MainTabBarController controller = this.ParentViewController as MainTabBarController;
+                        //Navigate to the main magazine tab
+                        controller.SelectedIndex = 0;
+
+					}));
+
+					PresentViewController(alert, animated: true, completionHandler: () =>
+					{
+
+					});
                 }
 
             }
