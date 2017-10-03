@@ -95,8 +95,11 @@ namespace AircraftForSale
 
             SearchResultsTableView = new UITableView(new CGRect(0, tableViewYValue, this.View.Bounds.Width, tableViewHeight));
 
-            var backgroundImage = UIImage.FromBundle("new_home_bg1.png").ResizeImage((float)SearchResultsTableView.Bounds.Width, (float)SearchResultsTableView.Bounds.Height);
-            SearchResultsTableView.BackgroundColor = UIColor.FromPatternImage(backgroundImage);
+            var backgroundImage = UIImage.FromBundle("new_home_bg1.png").ResizeImage((float)this.View.Bounds.Width, (float)this.View.Bounds.Height);
+            //SearchResultsTableView.BackgroundColor = UIColor.FromPatternImage(backgroundImage);
+            //var imageView = new UIImageView()
+            this.View.BackgroundColor = UIColor.FromPatternImage(backgroundImage);
+            SearchResultsTableView.BackgroundColor = UIColor.Clear;
 
             View.Add(SearchResultsTableView);
 
@@ -111,10 +114,10 @@ namespace AircraftForSale
 
             searchController.SearchResultsUpdater = this;
 
-            var titleViewHeight = this.View.Bounds.Height - (this.SearchResultsTableView.Bounds.Height + statusBarHeight);
+            var titleViewHeight = this.View.Bounds.Height - (this.SearchResultsTableView.Bounds.Height);
             var titleView = new UITextView(new CGRect(0, 0, this.View.Bounds.Width * .4f, titleViewHeight));
 
-            titleView.Center = new CGPoint(View.Frame.Size.Width / 2, (titleViewHeight + statusBarHeight) / 2f);
+            titleView.Center = new CGPoint(View.Frame.Size.Width / 2, titleViewHeight / 1.8f);
 
             titleView.Text = titleString;
             titleView.TextAlignment = UITextAlignment.Center;

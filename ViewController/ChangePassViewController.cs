@@ -27,11 +27,11 @@ namespace AircraftForSale
 
 		async void SubmitButton_TouchUpInside(object sender, EventArgs e) { 
 
-			if (Settings.Password != oldPassEdt.Text)
-			{
-				HelperMethods.SendBasicAlert("Validation", "Invalid Password");
-				return;
-			}
+			//if (Settings.Password != oldPassEdt.Text)
+			//{
+			//	HelperMethods.SendBasicAlert("Validation", "Invalid Password");
+			//	return;
+			//}
 
 
 			if (confirmpassEdt.Text != nPassEdt.Text)

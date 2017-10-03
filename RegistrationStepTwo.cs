@@ -18,7 +18,8 @@ namespace AircraftForSale
         {
         }
 
-        bool hidePilotRows = true;
+        bool showRatingPicker = false;
+        bool showPilotTypePicker = false;
         bool hideManufacturerAndModelRow = true;
         bool hideModelRow = true;
         ManufacturerPickerViewModel manufacturerPickerViewModel;
@@ -35,7 +36,7 @@ namespace AircraftForSale
 			//View.AddGestureRecognizer(HideKeyboardGesture);
             if (Settings.LocationPickerSelectedId == 0)
             {
-                LocationLabel.Text = "Touch to Add Location";
+                LocationLabel.Text = "Where do you live?";
             }
             else
             {
@@ -133,9 +134,21 @@ namespace AircraftForSale
                                     Settings.PurposeString = Settings.LocationResponse.PurposeForFlying.FirstOrDefault(row => row.FlyingPurposeId == Settings.PurposeId).Purpose;
                                 }
 
-                                if (Settings.PilotStatusId != 0 || Settings.PilotTypeId != 0)
+								List<int> notAPilotList = new List<int>();
+							
+									notAPilotList.Add(7);
+									notAPilotList.Add(8);
+									notAPilotList.Add(9);
+									notAPilotList.Add(10);
+									notAPilotList.Add(11);
+									notAPilotList.Add(12);
+									notAPilotList.Add(13);
+								
+                                if (Settings.PilotStatusId != 0 && !notAPilotList.Contains(Settings.PilotStatusId) || Settings.PilotTypeId != 0)
                                 {
                                     Settings.IsPilot = true;
+                                }else{
+                                    Settings.IsPilot = false;
                                 }
 
                                 var specificLocation = Settings.LocationResponse.Locations.FirstOrDefault(row => row.LocationId == Settings.LocationPickerSelectedId);
@@ -168,6 +181,42 @@ namespace AircraftForSale
                     });
                 }
             });
+
+			var areYouPilotPicker = new UIPickerView();
+            areYouPilotPicker.Model = new AreYouPilotViewModel();
+			areYouPilotPicker.ShowSelectionIndicator = true;
+
+			UIToolbar areYouPilotToolbar = new UIToolbar();
+			areYouPilotToolbar.BarStyle = UIBarStyle.Black;
+			areYouPilotToolbar.Translucent = true;
+			areYouPilotToolbar.SizeToFit();
+
+            UIBarButtonItem areYouPilotDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
+			{
+				UITextField textview = AreYouPilotTextField;
+
+                textview.Text = Settings.IsPilot ? "Yes" : "No";
+
+                if(Settings.IsPilot){
+                    showRatingPicker = true;
+                    showPilotTypePicker = true;
+                }else{
+                    showRatingPicker = false;
+                    showPilotTypePicker = true;
+
+                    Settings.PilotTypeId = 0;
+                    Settings.PilotTypeString = string.Empty;
+                }
+				
+                textview.ResignFirstResponder();
+				TableView.BeginUpdates();
+				TableView.EndUpdates();
+			});
+			areYouPilotToolbar.SetItems(new UIBarButtonItem[] { areYouPilotDoneButton }, true);
+
+
+			AreYouPilotTextField.InputView = areYouPilotPicker;
+			AreYouPilotTextField.InputAccessoryView = areYouPilotToolbar;
 
 
             var classificationPicker = new UIPickerView();
@@ -338,28 +387,18 @@ namespace AircraftForSale
             PilotRatingTextField.InputAccessoryView = pilotRatingToolbar;
 
 
-
-            PilotSwitch.On = Settings.IsPilot;
             if (Settings.IsPilot)
             {
-                hidePilotRows = false;
+                showRatingPicker = true;
+                showPilotTypePicker = true;
+            }else{
+                showRatingPicker = false;
+				if (Settings.PilotStatusId != 0)
+				{
+                    showPilotTypePicker = true;
+				}
             }
 
-            PilotSwitch.ValueChanged += (sender, e) =>
-            {
-                if (PilotSwitch.On)
-                {
-                    hidePilotRows = false;
-                    Settings.IsPilot = true;
-                }
-                else
-                {
-                    hidePilotRows = true;
-                    Settings.IsPilot = false;
-                }
-                TableView.BeginUpdates();
-                TableView.EndUpdates();
-            };
 
 
             var borderFrameHeight = UsernameTextView.Frame.Size.Height - 1;
@@ -423,6 +462,10 @@ namespace AircraftForSale
             bottomBorder14.Frame = new CGRect(0.0f, borderFrameHeight, borderFrameWidth, 1.0f);
             bottomBorder14.BackgroundColor = borderBackgroundColor;
 
+			var bottomBorder15 = new CALayer();
+			bottomBorder15.Frame = new CGRect(0.0f, AreYouPilotTextField.Frame.Size.Height - 1, AreYouPilotTextField.Frame.Size.Width, 1.0f);
+			bottomBorder15.BackgroundColor = borderBackgroundColor;
+
             var bottomBorderLabel = new CALayer();
             bottomBorderLabel.Frame = new CGRect(0.0f, LocationLabel.Frame.Height - 1, LocationLabel.Frame.Width, 1.0f);
             bottomBorderLabel.BackgroundColor = borderBackgroundColor;
@@ -430,11 +473,12 @@ namespace AircraftForSale
 
             var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
             var fontObject = UIFont.SystemFontOfSize(fontSize);
+            var boldFontObject = UIFont.BoldSystemFontOfSize(fontSize);
 
             PilotTypeTextField.Layer.AddSublayer(bottomBorder10);
             PilotTypeTextField.Layer.MasksToBounds = true;
             PilotTypeTextField.AttributedPlaceholder = new NSAttributedString(
-                "Select a Type",
+                "What do you do?",
                 font: fontObject,
                 foregroundColor: UIColor.DarkGray
             //strokeWidth: 4
@@ -676,8 +720,28 @@ namespace AircraftForSale
             LocationLabel.Font = fontObject;
 
 
+			AreYouPilotTextField.Layer.AddSublayer(bottomBorder15);
+			AreYouPilotTextField.Layer.MasksToBounds = true;
+			AreYouPilotTextField.AttributedPlaceholder = new NSAttributedString(
+				"Touch to select",
+				font: fontObject,
+				foregroundColor: UIColor.DarkGray
+			//strokeWidth: 4
+			);
+			AreYouPilotTextField.Font = fontObject;
 
-            PilotLabel.Font = fontObject;
+            var initialAreYouPilotText = string.Empty;
+            if(Settings.IsPilot)
+            {
+                initialAreYouPilotText = "Yes";
+            }else{
+                if(Settings.PilotStatusId != 0){
+                    initialAreYouPilotText = "No";
+                }
+            }
+            AreYouPilotTextField.Text = initialAreYouPilotText;
+
+            AreYouPilotLabel.Font = boldFontObject;
 
         }
 
@@ -723,13 +787,20 @@ namespace AircraftForSale
         public override nfloat GetHeightForRow(UITableView tableView, NSIndexPath indexPath)
         {
             var rowHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 80.0f : 50.0f;
-            if (hidePilotRows)
+            if (!showRatingPicker)
             {
-                if (indexPath.Section == 1 && (indexPath.Row == 7 || indexPath.Row == 8))
+                if (indexPath.Section == 1 && indexPath.Row == 8)
                 {
                     return 0;
                 }
             }
+			if (!showPilotTypePicker)
+			{
+				if (indexPath.Section == 1 && indexPath.Row == 7)
+				{
+					return 0;
+				}
+			}
             if (hideManufacturerAndModelRow)
             {
                 if (indexPath.Section == 2 && (indexPath.Row == 1 || indexPath.Row == 2))
@@ -744,6 +815,10 @@ namespace AircraftForSale
                     return 0;
                 }
             }
+			if (indexPath.Section == 1 && indexPath.Row == 6)
+			{
+				return 115;
+			}
             return rowHeight;
         }
 
@@ -751,8 +826,16 @@ namespace AircraftForSale
 
     public class PilotTypePickerViewModel : UIPickerViewModel
     {
+        List<int> notAPilotList = new List<int>();
         public PilotTypePickerViewModel()
         {
+            notAPilotList.Add(7);
+			notAPilotList.Add(8);
+			notAPilotList.Add(9);
+			notAPilotList.Add(10);
+			notAPilotList.Add(11);
+			notAPilotList.Add(12);
+			notAPilotList.Add(13);
         }
         public override nint GetComponentCount(UIPickerView picker)
         {
@@ -761,13 +844,30 @@ namespace AircraftForSale
 
         public override nint GetRowsInComponent(UIPickerView picker, nint component)
         {
-            return Settings.LocationResponse.AreYouAPilot.Count;
+            var pilotTypeList = Settings.LocationResponse.AreYouAPilot;
+            if(Settings.IsPilot)
+            {
+                pilotTypeList = pilotTypeList.Where(row => !notAPilotList.Contains(row.PilotStatusId)).ToList();
+            }else{
+                pilotTypeList = pilotTypeList.Where(row => notAPilotList.Contains(row.PilotStatusId)).ToList();
+            }
+            return pilotTypeList.Count;
         }
 
         public override void Selected(UIPickerView pickerView, nint row, nint component)
         {
-            Settings.PilotStatusId = Settings.LocationResponse.AreYouAPilot[(int)row].PilotStatusId;
-            Settings.PilotStatusString = Settings.LocationResponse.AreYouAPilot[(int)row].Title;
+			var pilotTypeList = Settings.LocationResponse.AreYouAPilot;
+			if (Settings.IsPilot)
+			{
+				pilotTypeList = pilotTypeList.Where(r => !notAPilotList.Contains(r.PilotStatusId)).ToList();
+			}
+			else
+			{
+				pilotTypeList = pilotTypeList.Where(r => notAPilotList.Contains(r.PilotStatusId)).ToList();
+			}
+
+            Settings.PilotStatusId = pilotTypeList[(int)row].PilotStatusId;
+            Settings.PilotStatusString = pilotTypeList[(int)row].Title;
         }
 
 
@@ -790,7 +890,17 @@ namespace AircraftForSale
 
             lbl.TextAlignment = UITextAlignment.Center;
 
-            lbl.Text = Settings.LocationResponse.AreYouAPilot[(int)row].Title;
+			var pilotTypeList = Settings.LocationResponse.AreYouAPilot;
+			if (Settings.IsPilot)
+			{
+				pilotTypeList = pilotTypeList.Where(r => !notAPilotList.Contains(r.PilotStatusId)).ToList();
+			}
+			else
+			{
+				pilotTypeList = pilotTypeList.Where(r => notAPilotList.Contains(r.PilotStatusId)).ToList();
+			}
+
+            lbl.Text = pilotTypeList[(int)row].Title;
 
             lbl.BackgroundColor = UIColor.White;
 
@@ -1047,4 +1157,77 @@ namespace AircraftForSale
             return lbl;
         }
     }
+
+	public class AreYouPilotViewModel : UIPickerViewModel
+	{
+
+        List<string> AreYouPilotOptionsList { get; set; }
+
+		public AreYouPilotViewModel()
+		{
+			AreYouPilotOptionsList = new List<string>();
+			AreYouPilotOptionsList.Add("Yes");
+			AreYouPilotOptionsList.Add("No");
+
+		}
+
+		public override nint GetComponentCount(UIPickerView v)
+		{
+			return 1;
+		}
+
+		public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
+		{
+			return AreYouPilotOptionsList.Count;
+		}
+
+		public override string GetTitle(UIPickerView picker, nint row, nint component)
+		{
+			switch (component)
+			{
+				case 0:
+					return AreYouPilotOptionsList[(int)row];
+				default:
+					throw new NotImplementedException();
+			}
+		}
+
+		public override void Selected(UIPickerView picker, nint row, nint component)
+		{
+			var selected = AreYouPilotOptionsList[(int)picker.SelectedRowInComponent(0)];
+
+            if(selected == "Yes"){
+                Settings.IsPilot = true;
+            }else{
+                Settings.IsPilot = false;
+            }
+		}
+
+		public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
+		{
+			var viewHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 60.0f : 40.0f;
+
+			var fontSize = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 22.0f : 16.0f;
+			var fontObject = UIFont.SystemFontOfSize(fontSize);
+
+			UILabel lbl = new UILabel();
+
+			lbl.Frame = new RectangleF(0, 0, (float)pickerView.Frame.Width, viewHeight);
+
+			lbl.Font = fontObject;
+
+			lbl.TextColor = UIColor.DarkGray;
+
+			lbl.TextAlignment = UITextAlignment.Center;
+
+
+			lbl.Text = AreYouPilotOptionsList[(int)row];
+		
+
+			lbl.BackgroundColor = UIColor.White;
+
+			return lbl;
+		}
+	}
+
 }

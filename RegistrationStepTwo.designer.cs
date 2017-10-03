@@ -16,6 +16,14 @@ namespace AircraftForSale
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UILabel AreYouPilotLabel { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UITextField AreYouPilotTextField { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField ClassificationTextField { get; set; }
 
         [Outlet]
@@ -56,15 +64,7 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel PilotLabel { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UITextField PilotRatingTextField { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UISwitch PilotSwitch { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -84,6 +84,16 @@ namespace AircraftForSale
 
         void ReleaseDesignerOutlets ()
         {
+            if (AreYouPilotLabel != null) {
+                AreYouPilotLabel.Dispose ();
+                AreYouPilotLabel = null;
+            }
+
+            if (AreYouPilotTextField != null) {
+                AreYouPilotTextField.Dispose ();
+                AreYouPilotTextField = null;
+            }
+
             if (ClassificationTextField != null) {
                 ClassificationTextField.Dispose ();
                 ClassificationTextField = null;
@@ -134,19 +144,9 @@ namespace AircraftForSale
                 PasswordTextView = null;
             }
 
-            if (PilotLabel != null) {
-                PilotLabel.Dispose ();
-                PilotLabel = null;
-            }
-
             if (PilotRatingTextField != null) {
                 PilotRatingTextField.Dispose ();
                 PilotRatingTextField = null;
-            }
-
-            if (PilotSwitch != null) {
-                PilotSwitch.Dispose ();
-                PilotSwitch = null;
             }
 
             if (PilotTypeTextField != null) {

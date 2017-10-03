@@ -324,27 +324,27 @@ namespace AircraftForSale
             });
         }
 
-        public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
-        {
-            // Get current device token
-            var DeviceToken = deviceToken.Description;
-            if (!string.IsNullOrWhiteSpace(DeviceToken))
-            {
-                DeviceToken = DeviceToken.Trim('<').Trim('>');
-            }
+        //public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+        //{
+        //    // Get current device token
+        //    var DeviceToken = deviceToken.Description;
+        //    if (!string.IsNullOrWhiteSpace(DeviceToken))
+        //    {
+        //        DeviceToken = DeviceToken.Trim('<').Trim('>');
+        //    }
 
-            // Get previous device token
-            var oldDeviceToken = NSUserDefaults.StandardUserDefaults.StringForKey("PushDeviceToken");
+        //    // Get previous device token
+        //    var oldDeviceToken = NSUserDefaults.StandardUserDefaults.StringForKey("PushDeviceToken");
 
-            // Has the token changed?
-            if (string.IsNullOrEmpty(oldDeviceToken) || !oldDeviceToken.Equals(DeviceToken))
-            {
-                //TODO: Put your own logic here to notify your server that the device token has changed/been created!
-            }
+        //    // Has the token changed?
+        //    if (string.IsNullOrEmpty(oldDeviceToken) || !oldDeviceToken.Equals(DeviceToken))
+        //    {
+        //        //TODO: Put your own logic here to notify your server that the device token has changed/been created!
+        //    }
 
-            // Save new device token 
-            NSUserDefaults.StandardUserDefaults.SetString(DeviceToken, "PushDeviceToken");
-        }
+        //    // Save new device token 
+        //    NSUserDefaults.StandardUserDefaults.SetString(DeviceToken, "PushDeviceToken");
+        //}
 
         //perform data fetch here for the ads
         public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
