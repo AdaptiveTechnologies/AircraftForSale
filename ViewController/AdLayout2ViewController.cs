@@ -445,6 +445,8 @@ namespace AircraftForSale
 	);
 
 			AdName1.Text = ad1.Name;
+			
+
 			AdPrice1.Text = ad1.Price;
 
 			if (ad1.Price.Length == 0)
@@ -452,6 +454,8 @@ namespace AircraftForSale
 
 
 			Ad1NameButton.SetTitle(ad1.Name, UIControlState.Normal);
+			Ad1NameButton.Layer.BorderColor = UIColor.White.CGColor;
+			Ad1NameButton.Layer.BorderWidth = 1f;
 
 
 
@@ -466,6 +470,8 @@ namespace AircraftForSale
 				Ad2PriceLabel.Text = "Call";
 
 			Ad2NameButton.SetTitle(ad2.Name, UIControlState.Normal);
+			Ad2NameButton.Layer.BorderColor = UIColor.White.CGColor;
+			Ad2NameButton.Layer.BorderWidth = 1f;
 
 
 			var labelAttribute = new UIStringAttributes

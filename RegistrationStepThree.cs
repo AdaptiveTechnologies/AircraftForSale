@@ -85,7 +85,7 @@ namespace AircraftForSale
 					else
 					{
 						loadingIndicator.Hide();
-						HelperMethods.SendBasicAlert("Oops.", "There was a problem registering. Please try again.");
+						HelperMethods.SendBasicAlert("Oops.", response.ResponseMsg);
 					}
 
 

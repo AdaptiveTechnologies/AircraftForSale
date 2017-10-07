@@ -555,6 +555,8 @@ namespace AircraftForSale
 			Ad3BrokerLabel.Text = "" + ad3.BrokerName;
 
 			Ad1NameButton.SetTitle(ad1.Name, UIControlState.Normal);
+			Ad1NameButton.Layer.BorderColor = UIColor.White.CGColor;
+			Ad1NameButton.Layer.BorderWidth = 1f;
 			//Increase the touch area of the button
 			//var oldButtonHeight = (float)Ad1NameButton.Frame.Height;
 			//var newButtonHeight = (float)Ad1NameButton.Frame.Height + 20f;
@@ -576,7 +578,8 @@ namespace AircraftForSale
 			//Ad2TeaserLabel.Text = ad2.Teaser == string.Empty ? "Inquire for Details" : "" + ad2.Teaser;
 
 			Ad2NameButton.SetTitle(ad2.Name, UIControlState.Normal);
-
+			Ad2NameButton.Layer.BorderColor = UIColor.White.CGColor;
+			Ad2NameButton.Layer.BorderWidth = 1f;
 
 			AdImage3.SetImage(
 				url: new NSUrl(ad3.ImageURL),
@@ -589,6 +592,8 @@ namespace AircraftForSale
 			Ad3TeaserLabel.Text = ad3.Teaser == string.Empty ? "Inquire for Details" : "" + ad3.Teaser;
 
 			Ad3NameButton.SetTitle(ad3.Name, UIControlState.Normal);
+			Ad3NameButton.Layer.BorderColor = UIColor.White.CGColor;
+			Ad3NameButton.Layer.BorderWidth = 1f;
 
 			var labelAttribute = new UIStringAttributes
 			{

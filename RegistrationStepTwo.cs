@@ -195,6 +195,16 @@ namespace AircraftForSale
 			{
 				UITextField textview = AreYouPilotTextField;
 
+                var viewModel = areYouPilotPicker.Model as AreYouPilotViewModel;
+                var selectedItem = viewModel.SelectedItem;
+
+                if(selectedItem == "Yes")
+                {
+                    Settings.IsPilot = true;
+                }else{
+                    Settings.IsPilot = false;
+                }
+                                 
                 textview.Text = Settings.IsPilot ? "Yes" : "No";
 
                 if(Settings.IsPilot){
@@ -232,6 +242,7 @@ namespace AircraftForSale
             UIBarButtonItem classificationDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
             {
                 UITextField textview = ClassificationTextField;
+
                 textview.Text = classificationPickerViewModel.SelectedItem.ClassificationName;
                 textview.ResignFirstResponder();
             });
@@ -354,7 +365,12 @@ namespace AircraftForSale
             UIBarButtonItem pilotTypeDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
             {
                 UITextField textview = PilotTypeTextField;
-                //textview.Text = Settings.LocationResponse.PilotRating.FirstOrDefault(row => row.PilotTypeId == Settings.PilotTypeId).Title;
+
+                PilotTypePickerViewModel viewModel = pilotTypePicker.Model as PilotTypePickerViewModel;
+
+                Settings.PilotStatusString = viewModel.SelectedItem.Title;
+                Settings.PilotStatusId = viewModel.SelectedItem.PilotStatusId;
+
                 textview.Text = Settings.PilotStatusString;
                 textview.ResignFirstResponder();
             });
@@ -376,7 +392,11 @@ namespace AircraftForSale
             UIBarButtonItem pilotRatingDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
             {
                 UITextField textview = PilotRatingTextField;
-                //textview.Text = Settings.LocationResponse.PilotRating.FirstOrDefault(row => row.PilotTypeId == Settings.PilotTypeId).Title;
+
+                RatingPickerViewModel viewModel = ratingPicker.Model as RatingPickerViewModel;
+                Settings.PilotTypeId = viewModel.SelectedItem.PilotTypeId;
+                Settings.PilotTypeString = viewModel.SelectedItem.Title;
+
                 textview.Text = Settings.PilotTypeString;
                 textview.ResignFirstResponder();
             });
@@ -826,6 +846,29 @@ namespace AircraftForSale
 
     public class PilotTypePickerViewModel : UIPickerViewModel
     {
+		public event EventHandler<EventArgs> ValueChanged;
+
+		/// <summary>
+		/// The current selected item
+		/// </summary>
+		public AreYouAPilot SelectedItem
+		{
+			get {
+                var pilotTypeList = Settings.LocationResponse.AreYouAPilot;
+				if (Settings.IsPilot)
+				{
+					pilotTypeList = pilotTypeList.Where(row => !notAPilotList.Contains(row.PilotStatusId)).ToList();
+				}
+				else
+				{
+					pilotTypeList = pilotTypeList.Where(row => notAPilotList.Contains(row.PilotStatusId)).ToList();
+				}
+                return pilotTypeList[selectedIndex]; 
+            }
+		}
+
+		public int selectedIndex = 0;
+
         List<int> notAPilotList = new List<int>();
         public PilotTypePickerViewModel()
         {
@@ -856,6 +899,13 @@ namespace AircraftForSale
 
         public override void Selected(UIPickerView pickerView, nint row, nint component)
         {
+			selectedIndex = (int)row;
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, new EventArgs());
+
+			}
+
 			var pilotTypeList = Settings.LocationResponse.AreYouAPilot;
 			if (Settings.IsPilot)
 			{
@@ -910,7 +960,22 @@ namespace AircraftForSale
 
     public class RatingPickerViewModel : UIPickerViewModel
     {
-        public RatingPickerViewModel()
+        public event EventHandler<EventArgs> ValueChanged;
+		/// <summary>
+		/// The current selected item
+		/// </summary>
+		public PilotRating SelectedItem
+		{
+			get
+			{
+			
+				return Settings.LocationResponse.PilotRating[selectedIndex];
+			}
+		}
+
+		public int selectedIndex = 0;
+
+		public RatingPickerViewModel()
         {
         }
         public override nint GetComponentCount(UIPickerView picker)
@@ -925,6 +990,12 @@ namespace AircraftForSale
 
         public override void Selected(UIPickerView pickerView, nint row, nint component)
         {
+			selectedIndex = (int)row;
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, new EventArgs());
+
+			}
             var location = Settings.LocationResponse.PilotRating[(int)row];
             Settings.PilotTypeId = location.PilotTypeId;
             Settings.PilotTypeString = location.Title;
@@ -1160,8 +1231,19 @@ namespace AircraftForSale
 
 	public class AreYouPilotViewModel : UIPickerViewModel
 	{
+		/// <summary>
+		/// The current selected item
+		/// </summary>
+		public string SelectedItem
+		{
+			get { return AreYouPilotOptionsList[selectedIndex]; }
+		}
 
-        List<string> AreYouPilotOptionsList { get; set; }
+		public int selectedIndex = 0;
+
+		public event EventHandler<EventArgs> ValueChanged;
+
+		List<string> AreYouPilotOptionsList { get; set; }
 
 		public AreYouPilotViewModel()
 		{
@@ -1194,6 +1276,13 @@ namespace AircraftForSale
 
 		public override void Selected(UIPickerView picker, nint row, nint component)
 		{
+			selectedIndex = (int)row;
+			if (ValueChanged != null)
+			{
+				ValueChanged(this, new EventArgs());
+
+			}
+
 			var selected = AreYouPilotOptionsList[(int)picker.SelectedRowInComponent(0)];
 
             if(selected == "Yes"){
