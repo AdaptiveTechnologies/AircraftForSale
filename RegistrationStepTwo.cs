@@ -242,7 +242,8 @@ namespace AircraftForSale
             UIBarButtonItem classificationDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s, e) =>
             {
                 UITextField textview = ClassificationTextField;
-
+                Settings.ClassificationId = classificationPickerViewModel.SelectedItem.ClassificationId;
+                Settings.ClassificationString = classificationPickerViewModel.SelectedItem.ClassificationName;
                 textview.Text = classificationPickerViewModel.SelectedItem.ClassificationName;
                 textview.ResignFirstResponder();
             });
@@ -285,7 +286,8 @@ namespace AircraftForSale
                             UIBarButtonItem manufacturerDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s2, e2) =>
                             {
                                 UITextField textview = ManufacturerTextField;
-                                //textview.Text = Settings.LocationResponse.PilotRating.FirstOrDefault(row => row.PilotTypeId == Settings.PilotTypeId).Title;
+                                Settings.ManufacturerId = manufacturerPickerViewModel.SelectedItem.ManufacturerId;
+                                Settings.ManufacturerString = manufacturerPickerViewModel.SelectedItem.Manufacturer;
                                 textview.Text = manufacturerPickerViewModel.SelectedItem.Manufacturer;
                                 textview.ResignFirstResponder();
                             });
@@ -327,7 +329,10 @@ namespace AircraftForSale
                                             UIBarButtonItem modelDoneButton = new UIBarButtonItem("Done", UIBarButtonItemStyle.Done, (s3, e3) =>
                                             {
                                                 UITextField textview = ModelTextField;
-                                                //textview.Text = Settings.LocationResponse.PilotRating.FirstOrDefault(row => row.PilotTypeId == Settings.PilotTypeId).Title;
+
+                                                Settings.DesignationId = modelPickerViewModel.SelectedItem.DesignationId;
+                                                Settings.DesignationString = modelPickerViewModel.SelectedItem.Designation;
+
                                                 textview.Text = modelPickerViewModel.SelectedItem.Designation;
                                                 textview.ResignFirstResponder();
                                             });
