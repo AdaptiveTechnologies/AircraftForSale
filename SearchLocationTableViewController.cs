@@ -5,6 +5,7 @@ using AircraftForSale.PCL;
 using System.Collections.Generic;
 using System.Linq;
 using AircraftForSale.PCL.Helpers;
+using Google.Analytics;
 
 namespace AircraftForSale
 {
@@ -18,7 +19,16 @@ namespace AircraftForSale
 			
 		}
 
+        public override void ViewDidAppear(bool animated)
+        {
+            base.ViewDidAppear(animated);
 
+            // This screen name value will remain set on the tracker and sent with
+            // hits until it is set to a new value or to null.
+            Gai.SharedInstance.DefaultTracker.Set(GaiConstants.ScreenName, "SearchLocation View (Registration)");
+
+            Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateScreenView().Build());
+        }
 
 		public override void ViewDidLoad()
 		{

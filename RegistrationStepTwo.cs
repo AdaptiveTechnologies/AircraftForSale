@@ -9,6 +9,7 @@ using AircraftForSale.PCL;
 using System.Linq;
 using CoreAnimation;
 using CoreGraphics;
+using Google.Analytics;
 
 namespace AircraftForSale
 {
@@ -42,6 +43,12 @@ namespace AircraftForSale
             {
                 LocationLabel.Text = "Location: " + Settings.LocationPickerSelectedName;
             }
+
+            // This screen name value will remain set on the tracker and sent with
+            // hits until it is set to a new value or to null.
+            Gai.SharedInstance.DefaultTracker.Set(GaiConstants.ScreenName, "RegistrationStepTwo View (Registration)");
+
+            Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateScreenView().Build());
         }
         public override void ViewDidDisappear(bool animated)
         {

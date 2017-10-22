@@ -178,7 +178,7 @@ public UITapGestureRecognizer HideKeyboardGesture
 // hits until it is set to a new value or to null.
 Gai.SharedInstance.DefaultTracker.Set(GaiConstants.ScreenName, "EmailEnquiry View");
 
-	Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateAppView().Build());
+            Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateScreenView().Build());
 
 			CloseButton.TouchUpInside += CloseButton_TouchUpInside;
 			EmailAddressTextField.ShouldReturn += EmailAddressTextField_ShouldReturn;

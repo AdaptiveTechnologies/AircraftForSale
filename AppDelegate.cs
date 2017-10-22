@@ -35,45 +35,21 @@ namespace AircraftForSale
             set;
         }
 
-        //public static UIWebView BanManProWebView
-        //{
-        //	get;
-        //	set;
-        //}
-
-
-        //static readonly object failedTestLock = new object();
-
-        //see if this property is being used anywhere... if not remove it.
-        //static Ad _firstAd;
-        //public static Ad FirstAd
-        //{
-        //    get
-        //    {
-        //        lock (failedTestLock)
-        //        {
-        //            return _firstAd;
-        //        }
-        //    }
-        //    set
-        //    {
-        //        lock (failedTestLock)
-        //        {
-        //            _firstAd = value;
-        //        }
-        //    }
-        //}
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
 
-
-
+            //Clay Martin 10/22/17: Don't actually need this identifier, just proving the linked libraries required are there
+            //var advertisingIdentifer = ASIdentifierManager.SharedManager.AdvertisingIdentifier;
+                               
             Gai.SharedInstance.DispatchInterval = 20;
             Gai.SharedInstance.TrackUncaughtExceptions = true;
             Tracker = Gai.SharedInstance.GetTracker(TrackingId);
+
+            //Clay Martin 10/21/17: Allowing IDFA collection for more sophisticated analytics
+            Tracker.SetAllowIdfaCollection(true);
 
             // Code to start the Xamarin Test Cloud Agent
 #if ENABLE_TEST_CLOUD

@@ -98,7 +98,7 @@ namespace AircraftForSale
             // hits until it is set to a new value or to null.
             Gai.SharedInstance.DefaultTracker.Set(GaiConstants.ScreenName, "BanMan View");
 
-            Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateAppView().Build());
+            Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateScreenView().Build());
         }
 
         UITapGestureRecognizer tapGesture1;

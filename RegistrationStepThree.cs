@@ -8,6 +8,7 @@ using CoreAnimation;
 using CoreGraphics;
 using System.Linq;
 using AircraftForSale.PCL;
+using Google.Analytics;
 
 namespace AircraftForSale
 {
@@ -26,6 +27,12 @@ namespace AircraftForSale
 		public override void ViewDidAppear(bool animated)
 		{
 			View.AddGestureRecognizer(HideKeyboardGesture);
+
+            // This screen name value will remain set on the tracker and sent with
+            // hits until it is set to a new value or to null.
+            Gai.SharedInstance.DefaultTracker.Set(GaiConstants.ScreenName, "RegistrationStepThree View (Registration)");
+
+            Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateScreenView().Build());
 		
 		}
 		public override void ViewDidDisappear(bool animated)

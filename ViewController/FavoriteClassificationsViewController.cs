@@ -66,7 +66,11 @@ namespace AircraftForSale
         {
             base.ViewDidAppear(animated);
 
+            // This screen name value will remain set on the tracker and sent with
+            // hits until it is set to a new value or to null.
+            Gai.SharedInstance.DefaultTracker.Set(GaiConstants.ScreenName, "FavoriteClassifications View (Registration)");
 
+            Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateScreenView().Build());
         
 
 		}

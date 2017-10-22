@@ -719,7 +719,7 @@ namespace AircraftForSale
 			// hits until it is set to a new value or to null.
 			Gai.SharedInstance.DefaultTracker.Set(GaiConstants.ScreenName, "AdLayout1 View");
 
-			Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateAppView().Build());
+			Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateScreenView().Build());
 		}
 
 		public override void ViewWillAppear(bool animated)

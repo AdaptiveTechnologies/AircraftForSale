@@ -24,16 +24,16 @@ namespace AircraftForSale
 			// Release any cached data, images, etc that aren't in use.
 		}
 
-public override void ViewDidAppear(bool animated)
-{
-	base.ViewDidAppear(animated);
+        public override void ViewDidAppear(bool animated)
+        {
+        	base.ViewDidAppear(animated);
 
-	// This screen name value will remain set on the tracker and sent with
-	// hits until it is set to a new value or to null.
-	Gai.SharedInstance.DefaultTracker.Set(GaiConstants.ScreenName, "View Controller");
+            // This screen name value will remain set on the tracker and sent with
+            // hits until it is set to a new value or to null.
+            Gai.SharedInstance.DefaultTracker.Set(GaiConstants.ScreenName, "View Controller");
 
-	Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateAppView().Build());
-}
+            Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateScreenView().Build());
+        }
 	}
 }
 
