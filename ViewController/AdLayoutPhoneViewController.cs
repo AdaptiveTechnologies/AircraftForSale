@@ -73,7 +73,8 @@ namespace AircraftForSale
             {
                 //UIApplication.SharedApplication.OpenUrl(smsTo);
 
-                string textMessageBody = "Inquiry about " + ad.Name + " from GlobalAir.com Showcase Magazine";
+                //Clay Martin 1/1/18: Change app name to BuyPlane
+                string textMessageBody = "Inquiry about " + ad.Name + " from GlobalAir.com BuyPlane Magazine";
 
                 Action successCallBack = async () =>
                 {
@@ -121,8 +122,9 @@ namespace AircraftForSale
             else
             {
                 //Send Inquiry
+                //Clay Martin 1/1/18: Change app name to BuyPlane
                 var response = await AdInquiryResponse.AdInquiry(int.Parse(ad.ID), string.Empty, string.Empty, ad.BrokerPhone, string.Empty
-                                                           , ad.BrokerId, AdInquirySource.Call, "Inquiry about " + ad.Name + " from GlobalAir.com Showcase Magazine");
+                                                           , ad.BrokerId, AdInquirySource.Call, "Inquiry about " + ad.Name + " from GlobalAir.com BuyPlane Magazine");
                 if (response.Status != "Success")
                 {
 
@@ -299,7 +301,8 @@ namespace AircraftForSale
         void AdShare_TouchUpInside(object sender, EventArgs e)
         {
             UIButton senderButton = sender as UIButton;
-            var title = "GlobalAir.com Showcase Magazine";
+            //Clay Martin 1/1/18: Change app name to BuyPlane
+            var title = "GlobalAir.com BuyPlane Magazine";
             var message = "Check out ";
             var url = string.Empty;
 

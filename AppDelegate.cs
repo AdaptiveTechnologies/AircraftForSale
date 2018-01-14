@@ -11,6 +11,7 @@ using Foundation;
 using SDWebImage;
 using UIKit;
 using Google.Analytics;
+using AdSupport;
 
 namespace AircraftForSale
 {

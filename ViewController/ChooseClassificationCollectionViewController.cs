@@ -320,8 +320,9 @@ namespace AircraftForSale
 
             LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, "Loading Aircraft...");
             this.View.AddSubview(loadingIndicator);
-            string magazineTitle = "GlobalAir.com Showcase (" + classification.Name + ")";
-            NavigationItem.BackBarButtonItem = new UIBarButtonItem("Back to Showcase", UIBarButtonItemStyle.Plain, null);
+            //Clay Martin 1/1/18: Change app name to BuyPlane
+            string magazineTitle = "GlobalAir.com BuyPlane (" + classification.Name + ")";
+            NavigationItem.BackBarButtonItem = new UIBarButtonItem("Back to BuyPlane", UIBarButtonItemStyle.Plain, null);
             Task.Run(async () =>
             {
                 List<Ad> ads;

@@ -55,7 +55,8 @@ namespace AircraftForSale
 				));
 			solicitLabel.Lines = 0;
 			solicitLabel.TextColor = UIColor.Black;
-			solicitLabel.Text = "Registering for GlobalAir.com Showcase Magazine will help us optimize and refine your experience.";
+            //Clay Martin 1/1/18: Change app name to BuyPlane
+			solicitLabel.Text = "Registering for GlobalAir.com BuyPlane Magazine will help us optimize and refine your experience.";
 			solicitLabel.TextAlignment = UITextAlignment.Center;
 			solicitLabel.Font = UIFont.BoldSystemFontOfSize(fontSizeForSolicitLabel);
 			solicitLabel.AutoresizingMask = UIViewAutoresizing.All;

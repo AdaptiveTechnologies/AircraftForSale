@@ -35,7 +35,7 @@
     <MtouchProfiling>false</MtouchProfiling>
     <MtouchFloat32>true</MtouchFloat32>
     <CodesignKey>iPhone Developer: Clay Martin (83H34G7LM2)</CodesignKey>
-    <CodesignProvision>Showcase-dev</CodesignProvision>
+    <CodesignProvision>VS: com.globalair.aircraftforsale Development</CodesignProvision>
 <MtouchSdkVersion>10.3</MtouchSdkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
@@ -53,8 +53,9 @@
     <PlatformTarget>x86</PlatformTarget>
     <OptimizePNGs>false</OptimizePNGs>
     <MtouchUseLlvm>true</MtouchUseLlvm>
-    <CodesignProvision></CodesignProvision>
+    <CodesignProvision>VS: com.globalair.aircraftforsale Development</CodesignProvision>
     <CodesignKey>iPhone Developer: Clay Martin (83H34G7LM2)</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <Optimize>true</Optimize>
@@ -67,7 +68,7 @@
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <MtouchTlsProvider>Default</MtouchTlsProvider>
     <PlatformTarget>x86</PlatformTarget>
-    <CodesignProvision></CodesignProvision>
+    <CodesignProvision>VS: com.globalair.aircraftforsale Development</CodesignProvision>
     <CodesignKey>iPhone Developer: Clay Martin (83H34G7LM2)</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
@@ -91,7 +92,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <OptimizePNGs>false</OptimizePNGs>
     <MtouchSdkVersion>10.2</MtouchSdkVersion>
-    <CodesignProvision></CodesignProvision>
+    <CodesignProvision>VS: com.globalair.aircraftforsale Development</CodesignProvision>
     <CodesignKey>iPhone Developer: Clay Martin (83H34G7LM2)</CodesignKey>
   </PropertyGroup>
   <ItemGroup>

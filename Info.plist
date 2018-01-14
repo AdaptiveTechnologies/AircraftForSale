@@ -5,9 +5,9 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.globalair.aircraftforsale</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.4</string>
+	<string>1.2.9</string>
 	<key>CFBundleVersion</key>
-	<string>1.8.9</string>
+	<string>1.9.3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
@@ -42,13 +42,13 @@
 	</dict>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcons.appiconset</string>
-	<key>CFBundleName</key>
-	<string>Globalair.com Showcase</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Let&apos;s Globalair.com show you the range of aircraft on a map.</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+	<key>CFBundleName</key>
+	<string>BuyPlane</string>
 </dict>
 </plist>

@@ -24,8 +24,9 @@ namespace AircraftForSale
 
                 //TODO: Uncomment. This is commented for testing
                 //Send Inquiry
+                //Clay Martin 1/1/18: Change app name to BuyPlane
                 var response = await AdInquiryResponse.AdInquiry(int.Parse(AdProperty.ID), NameTextField.Text, EmailAddressTextField.Text, string.Empty, CommentsTextView.Text
-                , AdProperty.BrokerId, AdInquirySource.Email, "Inquiry about " + AdProperty.Name + " from GlobalAir.com Showcase Magazine");
+                , AdProperty.BrokerId, AdInquirySource.Email, "Inquiry about " + AdProperty.Name + " from GlobalAir.com BuyPlane Magazine");
 
                 //AdInquiryResponse response = new AdInquiryResponse();
                 //response.Status = "Success";
@@ -155,7 +156,8 @@ public UITapGestureRecognizer HideKeyboardGesture
 			base.ViewDidLoad();
 
 			ContactBrokerLabel.Text =  AdProperty.BrokerName;
-			CommentsTextView.Text = "Inquiry about " + AdProperty.Name + " Serial Number: "+AdProperty.SerialNumber+" from GlobalAir.com Showcase Magazine";
+            //Clay Martin 1/1/18: Change app name to BuyPlane
+			CommentsTextView.Text = "Inquiry about " + AdProperty.Name + " Serial Number: "+AdProperty.SerialNumber+" from GlobalAir.com BuyPlane Magazine";
 
 			//hide keyboard when touch anywhere
 			HideKeyboardGesture = new UITapGestureRecognizer(() =>

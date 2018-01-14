@@ -147,7 +147,8 @@ namespace AircraftForSale
 			var smsTo = NSUrl.FromString("sms:" + brokerPhoneNumber);
 			if (UIApplication.SharedApplication.CanOpenUrl(smsTo))
 			{
-				string textMessageBody = "Inquiry about " + ad.Name + " from GlobalAir.com Showcase Magazine";
+                //Clay Martin 1/1/18: Change app name to BuyPlane
+				string textMessageBody = "Inquiry about " + ad.Name + " from GlobalAir.com BuyPlane Magazine";
 
 				Action successCallBack = async () =>
 				{
@@ -375,7 +376,8 @@ namespace AircraftForSale
 		void AdShare_TouchUpInside(object sender, EventArgs e)
 		{
 			UIButton senderButton = sender as UIButton;
-			var title = "GlobalAir.com Showcase Magazine";
+            //Clay Martin 1/1/18: Change app name to BuyPlane
+			var title = "GlobalAir.com BuyPlane Magazine";
 			var message = "Check out ";
 			var url = string.Empty;
 
