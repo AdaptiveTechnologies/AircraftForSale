@@ -23,8 +23,8 @@ namespace AircraftForSale
 			ItemSize = new CGSize(itemSize, itemSize);
 			ScrollDirection = UICollectionViewScrollDirection.Horizontal;
 
-			var topInset = remainingScreenHeight * .9f;
-			var bottomInset = remainingScreenHeight * .1f;
+			var topInset = remainingScreenHeight * .89f;
+			var bottomInset = remainingScreenHeight * .11f;
 
 			var leftRightInset = (UIScreen.MainScreen.Bounds.Width - (itemSize * 3f)) / 4f;
 			        

@@ -198,17 +198,15 @@ namespace AircraftForSale
         {
             base.ViewDidLoad();
 
-            //Comment this if we decide it is important to support login
-            //LoginButton.RemoveFromSuperview();
-            //UsernameTextField.RemoveFromSuperview();
-            //PasswordTextField.RemoveFromSuperview();
-
             HideKeyboardGesture = new UITapGestureRecognizer(() =>
             {
                 View.EndEditing(true);
 
             });
 
+            int cornerRadius = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 25 : 20;
+
+            UsernameTextField.Layer.CornerRadius = cornerRadius;
             UsernameTextField.Layer.BorderColor = UIColor.White.CGColor;
             UsernameTextField.Layer.BorderWidth = 1f;
             UsernameTextField.AttributedPlaceholder = new NSAttributedString(
@@ -217,6 +215,7 @@ namespace AircraftForSale
                             foregroundColor: UIColor.White
             );
 
+            PasswordTextField.Layer.CornerRadius = cornerRadius;
             PasswordTextField.Layer.BorderColor = UIColor.White.CGColor;
             PasswordTextField.Layer.BorderWidth = 1f;
             PasswordTextField.AttributedPlaceholder = new NSAttributedString(
@@ -225,9 +224,11 @@ namespace AircraftForSale
                             foregroundColor: UIColor.White
             );
 
+            LoginButton.Layer.CornerRadius = cornerRadius;
             LoginButton.Layer.BorderColor = UIColor.White.CGColor;
             LoginButton.Layer.BorderWidth = 0f;
 
+            LaterButton.Layer.CornerRadius = cornerRadius;
             LaterButton.Layer.BorderColor = UIColor.White.CGColor;
             LaterButton.Layer.BorderWidth = 0f;
 
@@ -235,7 +236,7 @@ namespace AircraftForSale
 
 
 
-
+            UpdateMyProfileButton.Layer.CornerRadius = cornerRadius;
             UpdateMyProfileButton.TouchUpInside += (sender, e) =>
             {
                 GridLayout classificationsGridLayout = new GridLayout();
@@ -255,7 +256,7 @@ namespace AircraftForSale
                 this.ShowViewController(new UINavigationController(favClassificationsVC), this);
             };
 
-
+            LogoutButton.Layer.CornerRadius = cornerRadius;
             LogoutButton.TouchUpInside += (sender, e) =>
             {
                 UIView.Animate(

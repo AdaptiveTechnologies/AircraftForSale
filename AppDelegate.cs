@@ -20,15 +20,11 @@ namespace AircraftForSale
     [Register("AppDelegate")]
     public class AppDelegate : UIApplicationDelegate
     {
+        // class-level declarations
 
         public ITracker Tracker;
 
-        //my id : "UA-101868397-1";//
         public static readonly string TrackingId = "UA-101868397-1";//"UA-204701-5";
-
-        //https://analytics.google.com/analytics/web/?authuser=2#realtime/rt-overview/a101868397w149212860p154116158/
-
-        // class-level declarations
 
         public override UIWindow Window
         {
@@ -40,11 +36,6 @@ namespace AircraftForSale
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             // Override point for customization after application launch.
-            // If not required for your application you can safely delete this method
-
-            //Clay Martin 10/22/17: Don't actually need this identifier, just proving the linked libraries required are there
-            //var advertisingIdentifer = ASIdentifierManager.SharedManager.AdvertisingIdentifier;
-                               
             Gai.SharedInstance.DispatchInterval = 20;
             Gai.SharedInstance.TrackUncaughtExceptions = true;
             Tracker = Gai.SharedInstance.GetTracker(TrackingId);
@@ -60,10 +51,10 @@ namespace AircraftForSale
             BlobCache.ApplicationName = "AircraftForSaleAkavache";
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
-            var storyboard = UIStoryboard.FromName(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? "Main_ipad" : "Main", NSBundle.MainBundle);
+            //var storyboard = UIStoryboard.FromName(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? "Main_ipad" : "Main", NSBundle.MainBundle);
+            var storyboard = UIStoryboard.FromName("Main_ipad", NSBundle.MainBundle);
 
             bool skipFirstStep = Settings.IsRegistered;
-
 
             UIViewController rootViewController;
             if (skipFirstStep)

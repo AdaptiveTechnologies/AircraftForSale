@@ -191,8 +191,8 @@
     <InterfaceDefinition Include="Interfaces\Registration_ipad.storyboard" />
     <InterfaceDefinition Include="Registration_New.storyboard" />
     <InterfaceDefinition Include="Main_ipad.storyboard" />
-    <InterfaceDefinition Include="Main.storyboard" />
     <InterfaceDefinition Include="Registration.storyboard" />
+    <InterfaceDefinition Include="Main.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -344,6 +344,14 @@
       <DependentUpon>SearchLocationTableViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="RegistrationProfileViewController.cs" />
+    <Compile Include="RegistrationProfileViewController.designer.cs">
+      <DependentUpon>RegistrationProfileViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RegistrationViewController.cs" />
+    <Compile Include="RegistrationViewController.designer.cs">
+      <DependentUpon>RegistrationViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\profile.png" />
@@ -522,12 +530,6 @@
       <Project>{5C8CFE42-ADD0-4253-9399-F2C497E8DD9B}</Project>
       <Name>AircraftForSale.PCL</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <XamarinComponentReference Include="sdwebimage">
-      <Version>3.7.5</Version>
-      <Visible>False</Visible>
-    </XamarinComponentReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets')" />

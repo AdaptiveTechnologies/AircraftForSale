@@ -381,8 +381,10 @@ namespace AircraftForSale
 
 					case 1:
 					{ 
-                        var phoneLayout = (IAdLayoutInterface)UIStoryboard.FromName(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? "Main_ipad" : "Main", null).InstantiateViewController(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? "AdLayoutPhoneViewController_iPad" : "AdLayoutPhoneViewController");
-						//AdLayoutPhoneViewController phoneLayout = (AdLayoutPhoneViewController)UIStoryboard.FromName("Main", null).InstantiateViewController("AdLayoutPhoneViewController");
+                        //var phoneLayout = (IAdLayoutInterface)UIStoryboard.FromName(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? "Main_ipad" : "Main", null).InstantiateViewController(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? "AdLayoutPhoneViewController_iPad" : "AdLayoutPhoneViewController");
+                        var phoneLayout = (IAdLayoutInterface)UIStoryboard.FromName("Main_ipad", null).InstantiateViewController("AdLayoutPhoneViewController_iPad");
+
+
 						phoneLayout.DataObject = magPageList[index];
 						//phoneLayout.AdList = magPageList[index].Ads;
 

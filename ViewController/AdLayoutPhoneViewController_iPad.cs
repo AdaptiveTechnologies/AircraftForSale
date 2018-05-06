@@ -103,32 +103,32 @@ namespace AircraftForSale
 
 		}
 
-		async void AdPhone1_TouchUpInside(object sender, EventArgs e)
-		{
-			var ad = DataObject.Ads[0];
-			var brokerPhoneNumber = ad.BrokerPhone;
-			var url = new NSUrl("tel:" + brokerPhoneNumber);
-			if (!UIApplication.SharedApplication.OpenUrl(url))
-			{
-				var av = new UIAlertView("Not supported",
-				  "Phone calls are not supported on this device",
-				  null,
-				  "OK",
-				  null);
-				av.Show();
-			}
-			else {
-				//Send Inquiry
-                //Clay Martin 1/1/18: Change app name to BuyPlane
-				var response = await AdInquiryResponse.AdInquiry(int.Parse(ad.ID), string.Empty, string.Empty, ad.BrokerPhone, string.Empty
-														   , ad.BrokerId, AdInquirySource.Call, "Inquiry about " + ad.Name + " from GlobalAir.com BuyPlane Magazine");
-				if (response.Status != "Success")
-				{
+		//async void AdPhone1_TouchUpInside(object sender, EventArgs e)
+		//{
+		//	var ad = DataObject.Ads[0];
+		//	var brokerPhoneNumber = ad.BrokerPhone;
+		//	var url = new NSUrl("tel:" + brokerPhoneNumber);
+		//	if (!UIApplication.SharedApplication.OpenUrl(url))
+		//	{
+		//		var av = new UIAlertView("Not supported",
+		//		  "Phone calls are not supported on this device",
+		//		  null,
+		//		  "OK",
+		//		  null);
+		//		av.Show();
+		//	}
+		//	else {
+		//		//Send Inquiry
+  //              //Clay Martin 1/1/18: Change app name to BuyPlane
+		//		var response = await AdInquiryResponse.AdInquiry(int.Parse(ad.ID), string.Empty, string.Empty, ad.BrokerPhone, string.Empty
+		//												   , ad.BrokerId, AdInquirySource.Call, "Inquiry about " + ad.Name + " from GlobalAir.com BuyPlane Magazine");
+		//		if (response.Status != "Success")
+		//		{
 
-					HelperMethods.SendBasicAlert("Oops", "There was a problem sending your email to the aircraft broker. Please try again");
-				}
-			}
-		}
+		//			HelperMethods.SendBasicAlert("Oops", "There was a problem sending your email to the aircraft broker. Please try again");
+		//		}
+		//	}
+		//}
 
 		void AdSortButton_TouchUpInside(object sender, EventArgs e)
 		{
@@ -389,7 +389,7 @@ void RunDemo(NSString arg)
 
 
 
-			AdPhone1.TouchUpInside += AdPhone1_TouchUpInside;
+			//AdPhone1.TouchUpInside += AdPhone1_TouchUpInside;
 			AdMessages1.TouchUpInside += AdMessages1_TouchUpInside;
 
 			AdImage1.AddGestureRecognizer(tapGesture1);
@@ -409,7 +409,7 @@ void RunDemo(NSString arg)
 			//Ad1NameButton.TouchUpInside -= AdSortButton_TouchUpInside;
 			//Ad1BrokerButton.TouchUpInside -= AdSortButton_TouchUpInside;
 
-			AdPhone1.TouchUpInside -= AdPhone1_TouchUpInside;
+			//AdPhone1.TouchUpInside -= AdPhone1_TouchUpInside;
 			AdMessages1.TouchUpInside -= AdMessages1_TouchUpInside;
 
 			AdImage1.RemoveGestureRecognizer(tapGesture1);
@@ -438,10 +438,10 @@ UIImage.FromFile("new_home.png"), UIBarButtonItemStyle.Plain, (sender, args) => 
 				AdMessages1.Alpha = 0f;
 			};
 			//Hide text button if broker doesn't have a cell phone
-			if (string.IsNullOrEmpty(DataObject.Ads[0].BrokerPhone))
-			{
-				AdPhone1.Alpha = 0f;
-			}
+			//if (string.IsNullOrEmpty(DataObject.Ads[0].BrokerPhone))
+			//{
+			//	AdPhone1.Alpha = 0f;
+			//}
 
 			var ad1 = DataObject.Ads[0];
 
@@ -492,11 +492,14 @@ placeholder: UIImage.FromBundle("ad_placeholder.jpg")
 
 			Ad1TeaserLabel.Text = ad1.Teaser == string.Empty ? "Inquire for Details" : ad1.Teaser;
 
-			//Ad1NameButton.SetTitle(ad1.Name, UIControlState.Normal);
+			Ad1NameButton.SetTitle(ad1.Name, UIControlState.Normal);
+            Ad1NameButton.Layer.BorderWidth = 1;
+            Ad1NameButton.Layer.BorderColor = UIColor.White.CGColor;
+            Ad1NameButton.Layer.CornerRadius = 5;
 
-			Ad1NameLabel.Text = ad1.Name;
-Ad1NameLabel.Layer.BorderColor = UIColor.White.CGColor;
-            Ad1NameLabel.Layer.BorderWidth = 1f;
+//			Ad1NameLabel.Text = ad1.Name;
+//Ad1NameLabel.Layer.BorderColor = UIColor.White.CGColor;
+            //Ad1NameLabel.Layer.BorderWidth = 1f;
 
 			#region attributed labels
 

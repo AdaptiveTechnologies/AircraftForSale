@@ -134,11 +134,6 @@ namespace AircraftForSale
                 Ad1NameButton = null;
             }
 
-            if (Ad1NameLabel != null) {
-                Ad1NameLabel.Dispose ();
-                Ad1NameLabel = null;
-            }
-
             if (Ad1PriceChangeLabel != null) {
                 Ad1PriceChangeLabel.Dispose ();
                 Ad1PriceChangeLabel = null;
@@ -197,11 +192,6 @@ namespace AircraftForSale
             if (AdName1 != null) {
                 AdName1.Dispose ();
                 AdName1 = null;
-            }
-
-            if (AdPhone1 != null) {
-                AdPhone1.Dispose ();
-                AdPhone1 = null;
             }
 
             if (AdPrice1 != null) {

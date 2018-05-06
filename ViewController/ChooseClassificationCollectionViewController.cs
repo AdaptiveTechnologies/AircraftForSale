@@ -75,9 +75,6 @@ namespace AircraftForSale
                     }
                 }
             }
-            //this.CollectionView.DataSource.
-            //CollectionView.DataSource = this;
-            //this.CollectionView.ReloadData();
 
         }
 
