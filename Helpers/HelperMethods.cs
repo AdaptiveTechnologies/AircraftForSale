@@ -38,15 +38,16 @@ namespace AircraftForSale
 
 						if (adLikeResponse.Status != "Success")
 						{
-							if(adLikeResponse.ResponseMsg.Equals("E1000"))
-                            SendBasicAlert("Oops", "Auth token invalid or expired");
+							if (adLikeResponse.ResponseMsg.Equals("E1000"))
+								SendBasicAlert("Oops", "Auth token invalid or expired");
 
 							ad.IsLiked = true;
 							senderButton.SetImage(UIImage.FromBundle("like_selected"), UIControlState.Normal);
 						}
 					}
 				}
-				else {
+				else
+				{
 					//attempt to record like in the API
 
 					if (adID != 0)
@@ -58,8 +59,8 @@ namespace AircraftForSale
 
 						if (adLikeResponse.Status != "Success")
 						{
-							if(adLikeResponse.ResponseMsg.Equals("E1000"))
-							SendBasicAlert("Oops", "Auth token invalid or expired");
+							if (adLikeResponse.ResponseMsg.Equals("E1000"))
+								SendBasicAlert("Oops", "Auth token invalid or expired");
 
 							ad.IsLiked = false;
 							senderButton.SetImage(UIImage.FromBundle("like"), UIControlState.Normal);
@@ -68,7 +69,8 @@ namespace AircraftForSale
 
 				}
 			}
-			else {
+			else
+			{
 				SendBasicAlert("Connect to a Network", "Please connect to a network to like this ad");
 			}
 		}
@@ -78,7 +80,8 @@ namespace AircraftForSale
 			{
 				senderButton.SetImage(UIImage.FromBundle("like_selected"), UIControlState.Normal);
 			}
-			else {
+			else
+			{
 				senderButton.SetImage(UIImage.FromBundle("like"), UIControlState.Normal);
 			}
 		}
@@ -211,7 +214,8 @@ namespace AircraftForSale
 
 				UIView.CommitAnimations();
 			}
-			else {
+			else
+			{
 				SendBasicAlert("Connect to a Network", "Please connect to a network to view this ad");
 			}
 		}
@@ -250,28 +254,28 @@ namespace AircraftForSale
 			string plainRegistrationNumberText = ad.RegistrationNumber == string.Empty ? "N/A" : "" + ad.RegistrationNumber;
 			//var registrationNumberString = new NSMutableAttributedString(plainRegistrationNumberText);
 			//registrationNumberString.SetAttributes(labelAttribute.Dictionary, new NSRange(0, 0));
-            return plainRegistrationNumberText;
+			return plainRegistrationNumberText;
 		}
 		public static String GetSerialString(Ad ad, UIStringAttributes labelAttribute)
 		{
 			string plainSerialNumberText = ad.SerialNumber == string.Empty ? " N/A" : "" + ad.SerialNumber;
 			//var serialNumberString = new NSMutableAttributedString(plainSerialNumberText);
 			//serialNumberString.SetAttributes(labelAttribute.Dictionary, new NSRange(0, 0));
-            return plainSerialNumberText;
+			return plainSerialNumberText;
 		}
 		public static String GetTotalTimeString(Ad ad, UIStringAttributes labelAttribute)
 		{
 			string plainTotalTimeText = ad.TotalTime == "0" ? "0 hours" : "" + ad.TotalTime;
 			//var totalTimeString = new NSMutableAttributedString(plainTotalTimeText);
 			//totalTimeString.SetAttributes(labelAttribute.Dictionary, new NSRange(0, 0));
-            return plainTotalTimeText;
+			return plainTotalTimeText;
 		}
 		//public static NSAttributedString GetLocationAttributedString(Ad ad, UIStringAttributes labelAttribute)
 		//{
 		//	string simpleLocationText = "" + ad.Location;
 		//	//var locationString = new NSMutableAttributedString(simpleLocationText);
 		//	//locationString.SetAttributes(labelAttribute.Dictionary, new NSRange(0, 0));
-  //          return simpleLocationText;
+		//          return simpleLocationText;
 		//}
 
 
@@ -410,6 +414,44 @@ namespace AircraftForSale
 			viewController.PresentViewController(alert, animated: true, completionHandler: null);
 		}
 
+		public static void SellerRegistrationRequiredSmallPrompt(UIViewController viewController, UIButton button)
+		{
+			var alert = UIAlertController.Create("The Order by feature requires registration", "This feature will order the inventory a seller has (example: All of the listings Jetcraft has). Would you like to register now?", UIAlertControllerStyle.ActionSheet);
+
+			alert.AddAction(UIAlertAction.Create("Not Yet", UIAlertActionStyle.Default, null));
+
+			alert.AddAction(UIAlertAction.Create("Register Now", UIAlertActionStyle.Default,
+												 (action) =>
+												 {
+
+
+													 GridLayout classificationsGridLayout = new GridLayout();
+													 int classificationItemWidth = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 200 : 100;
+													 int classificationItemHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 150 : 100;
+
+													 classificationsGridLayout.ItemSize = new CoreGraphics.CGSize(classificationItemWidth, classificationItemHeight);
+
+													 int insetTop = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 125 : 75;
+													 int insetLeftBottomRight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 50 : 5;
+
+													 classificationsGridLayout.SectionInset = new UIEdgeInsets(insetTop, insetLeftBottomRight, insetLeftBottomRight, insetLeftBottomRight);
+													 classificationsGridLayout.HeaderReferenceSize = new CoreGraphics.CGSize(UIScreen.MainScreen.Bounds.Width - 100, 0);
+
+													 FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(classificationsGridLayout);
+
+													 viewController.ShowViewController(new UINavigationController(favClassificationsVC), viewController);
+												 }));
+
+
+
+			if (alert.PopoverPresentationController != null)
+			{
+				alert.PopoverPresentationController.SourceView = button;
+				alert.PopoverPresentationController.PermittedArrowDirections = UIPopoverArrowDirection.Any;
+			}
+			viewController.PresentViewController(alert, animated: true, completionHandler: null);
+		}
+
 		public static void LikeRegistrationRequiredPrompt(UIViewController viewController, UIButton button)
 		{
 			var alert = UIAlertController.Create("The Like feature requires registration", "This feature will allow you to “Like” your favorite aircraft and write notes.\nWould you like to register now?", UIAlertControllerStyle.ActionSheet);
@@ -481,7 +523,7 @@ namespace AircraftForSale
 		#region validation helpers
 		public static bool IsValidEmail(string email, UIView view = null)
 		{
-            bool isValid = false;
+			bool isValid = false;
 			try
 			{
 				var addr = new System.Net.Mail.MailAddress(email);
@@ -492,73 +534,91 @@ namespace AircraftForSale
 				isValid = false;
 			}
 
-            if(view != null)
-            {
-                if(!isValid){
-                    HelperMethods.AnimateValidationBorder(view);
-                }else{
-                    HelperMethods.RemoveValidationBorder(view);
-                }
-            }
+			if (view != null)
+			{
+				if (!isValid)
+				{
+					HelperMethods.AnimateValidationBorder(view);
+				}
+				else
+				{
+					HelperMethods.RemoveValidationBorder(view);
+				}
+			}
 
-            if(isValid){
-                Settings.Email = email;
-            }else{
-                Settings.Email = string.Empty;
-            }
+			if (isValid)
+			{
+				Settings.Email = email;
+			}
+			else
+			{
+				Settings.Email = string.Empty;
+			}
 
-            return isValid;
+			return isValid;
 
 		}
 
-        public static bool ReEnterEmail(string secondEmail, UIView view){
+		public static bool ReEnterEmail(string secondEmail, UIView view)
+		{
 
-            if(secondEmail.ToLower() == Settings.Email.ToLower()){
-                HelperMethods.RemoveValidationBorder(view);
-                return true;
-            }else{
-                
+			if (secondEmail.ToLower() == Settings.Email.ToLower())
+			{
+				HelperMethods.RemoveValidationBorder(view);
+				return true;
+			}
+			else
+			{
+
 				HelperMethods.AnimateValidationBorder(view);
-                return false;
-            }
-        }
+				return false;
+			}
+		}
 
 		public static bool IsValidPassword(string password, UIView view = null)
 		{
-            //regex "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{10,}$"
-            bool isValid = false;
+			//regex "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{10,}$"
+			bool isValid = false;
 			Regex regex = new Regex(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$");
 			Match match = regex.Match(password);
 			if (match.Success)
 			{
 				if (password.Length > 15)
 					isValid = false;
-                
+
 				isValid = true;
 			}
-			else {
+			else
+			{
 				isValid = false;
 			}
 
-            if(view != null){
-                if(isValid){
-                    HelperMethods.RemoveValidationBorder(view);
-                }else{
-                    HelperMethods.AnimateValidationBorder(view);
-                }
-            }
+			if (view != null)
+			{
+				if (isValid)
+				{
+					HelperMethods.RemoveValidationBorder(view);
+				}
+				else
+				{
+					HelperMethods.AnimateValidationBorder(view);
+				}
+			}
 
-            if(isValid){
-                Settings.Password = password;
-            }else{
-                Settings.Password = string.Empty;
-            }
+			if (isValid)
+			{
+				Settings.Password = password;
+			}
+			else
+			{
+				Settings.Password = string.Empty;
+			}
 
-            return isValid;
+			return isValid;
 
 		}
 
-        public static bool ReEnterPassword(string secondPassword, UIView view)
+		public static bool ReEnterPassword(string secondPassword, UIView view)
 		{
 
 			if (secondPassword.ToLower() == Settings.Password.ToLower())
@@ -576,64 +636,72 @@ namespace AircraftForSale
 
 		public static bool IsValidPhoneNumber(string phoneNumber, UIView view = null)
 		{
-            //Regex regex = new Regex(@"^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$");
-            //Match match = regex.Match(phoneNumber);
-            //if (match.Success)
-            //{
-            //	return true;
-            //}
-            //else {
-            //	return false;
-            //}
-            bool isValid = false;
+			//Regex regex = new Regex(@"^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]*$");
+			//Match match = regex.Match(phoneNumber);
+			//if (match.Success)
+			//{
+			//	return true;
+			//}
+			//else {
+			//	return false;
+			//}
+			bool isValid = false;
 			if (phoneNumber == null || phoneNumber == string.Empty)
 			{
 				isValid = false;
 			}
-			else {
+			else
+			{
 				isValid = true;
 			}
 
-            if(view != null){
-                if(isValid){
-                    HelperMethods.RemoveValidationBorder(view);
-                }else{
-                    HelperMethods.AnimateValidationBorder(view);
-                }
-            }
+			if (view != null)
+			{
+				if (isValid)
+				{
+					HelperMethods.RemoveValidationBorder(view);
+				}
+				else
+				{
+					HelperMethods.AnimateValidationBorder(view);
+				}
+			}
 
-            if(isValid){
-                Settings.Phone = phoneNumber;
-            }else{
-                Settings.Phone = string.Empty;
-            }
+			if (isValid)
+			{
+				Settings.Phone = phoneNumber;
+			}
+			else
+			{
+				Settings.Phone = string.Empty;
+			}
 
 
-            return isValid;
+			return isValid;
 
 		}
 
 		public static bool ValidateHomeAirport(string homeAirport, UIView view)
 		{
-            //homeAirport = homeAirport.ToUpper();
+			//homeAirport = homeAirport.ToUpper();
 			if (homeAirport.Count() < 6)
 			{
 				HelperMethods.RemoveValidationBorder(view);
-                Settings.HomeAirport = homeAirport;
+				Settings.HomeAirport = homeAirport;
 				return true;
 			}
 			else
 			{
 
 				HelperMethods.AnimateValidationBorder(view);
-                Settings.HomeAirport = string.Empty;
+				Settings.HomeAirport = string.Empty;
 				return false;
 			}
 		}
 
 
 
-		
+
 
 		public static void AnimateValidationBorder(UIView view)
 		{
@@ -641,13 +709,15 @@ namespace AircraftForSale
 
 			var orignalCenter = view.Center;
 			UIView.Animate(.1, 0, UIViewAnimationOptions.CurveEaseInOut | UIViewAnimationOptions.Autoreverse,
-				() => {
+				() =>
+				{
 					view.Center =
 						new CGPoint(orignalCenter.X + 3f, view.Center.Y);
 
 					view.Layer.BorderWidth = 4f;
 				},
-				() => {
+				() =>
+				{
 					view.Center = orignalCenter;
 					view.Layer.BorderWidth = 2f;
 
@@ -655,17 +725,19 @@ namespace AircraftForSale
 			);
 		}
 
-        public static void RemoveValidationBorder(UIView view){
+		public static void RemoveValidationBorder(UIView view)
+		{
 			view.Layer.BorderColor = UIColor.Clear.CGColor;
 			view.Layer.BorderWidth = 0f;
-        }
+		}
 
-        public static bool ValidateRequiredRegistrationFieldExceptClassifications(string reEnterEmail, string reEnterPassword){
+		public static bool ValidateRequiredRegistrationFieldExceptClassifications(string reEnterEmail, string reEnterPassword)
+		{
 			//Ensure required fields are input
 			if (Settings.Email == null || Settings.Email == string.Empty)
 			{
 				HelperMethods.SendBasicAlert("Validation", "Please input a valid email address");
-                return false;
+				return false;
 			}
 			if (Settings.Password == null || Settings.Password == string.Empty)
 			{
@@ -708,7 +780,7 @@ namespace AircraftForSale
 				return false;
 			}
 
-            return true;
+			return true;
 
 		}
 

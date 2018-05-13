@@ -1,14 +1,12 @@
 ﻿<Properties StartupConfiguration="{B8C03836-A778-482E-8FC3-92267A01DFDA}|Default">
   <MonoDevelop.Ide.ItemProperties.AircraftForSale PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.C36511A6-5E67-4419-BAC7-A409182E0FD7" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="AircraftDetails/AircraftDetailsTableSource.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ModelController.cs">
     <Files>
-      <File FileName="ModelController.cs" Line="347" Column="13" />
-      <File FileName="ViewController/AdLayout1ViewController.cs" Line="256" Column="7" />
-      <File FileName="ViewController/AdLayoutPhoneViewController_iPad.cs" Line="511" Column="26" />
-      <File FileName="AircraftDetails/AircraftDetailsTableSource.cs" Line="154" Column="66" />
-      <File FileName="AircraftDetails/AircraftDetailsLabelCell.cs" Line="14" Column="21" />
-      <File FileName="AircraftDetails/AircraftDetailsJustButtonCell.cs" Line="15" Column="4" />
-      <File FileName="Main_ipad.storyboard" />
+      <File FileName="ModelController.cs" Line="357" Column="7" />
+      <File FileName="ViewController/AdLayout1ViewController.cs" Line="410" Column="34" />
+      <File FileName="AircraftDetails/AircraftDetailsTableSource.cs" Line="73" Column="55" />
+      <File FileName="Helpers/HelperMethods.cs" Line="449" Column="60" />
+      <File FileName="Main.cs" Line="12" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />

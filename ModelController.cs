@@ -344,7 +344,7 @@ namespace AircraftForSale
 			var ad1 = magPageList[index];
 
             //TODO: Remove after testing
-            layout = 2;
+            layout = 0;
 
 
 			switch (layout)
@@ -352,7 +352,7 @@ namespace AircraftForSale
 
 				case 0:
 					{
-						AdLayout2ViewController adLayout1 = (AdLayout2ViewController)UIStoryboard.FromName(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? "Main_ipad" : "Main", null).InstantiateViewController("AdLayout2ViewController");
+						AdLayout2ViewController adLayout1 = (AdLayout2ViewController)UIStoryboard.FromName("Main_ipad", null).InstantiateViewController("AdLayout2ViewController");
 
 
 						if (isPrev)
