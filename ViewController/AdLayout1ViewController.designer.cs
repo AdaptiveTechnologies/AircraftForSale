@@ -7,13 +7,15 @@
 using Foundation;
 using System;
 using System.CodeDom.Compiler;
-using UIKit;
 
 namespace AircraftForSale
 {
     [Register ("AdLayout1ViewController")]
     partial class AdLayout1ViewController
     {
+        [Outlet]
+        UIKit.UITableView Ad2TableView { get; set; }
+
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton Ad1BrokerButton { get; set; }
@@ -72,22 +74,6 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton Ad2BrokerButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextView Ad2BrokerLabel { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIView Ad2DetailView { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel Ad2LocationLabel { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton Ad2MessageButton { get; set; }
 
         [Outlet]
@@ -97,26 +83,6 @@ namespace AircraftForSale
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel Ad2PriceChangeLabel { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel Ad2RegistrationNumberLabel { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton Ad2RGButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel Ad2SerialNumberLabel { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton Ad2TechnicalSpecButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel Ad2TotalTimeLabel { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -208,23 +174,11 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel AdName1 { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel AdName2 { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel AdName3 { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel AdPrice1 { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel AdPrice2 { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -241,10 +195,6 @@ namespace AircraftForSale
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton AdShare3 { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIScrollView myScrollView1 { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -326,26 +276,6 @@ namespace AircraftForSale
                 Ad1TimeLabel = null;
             }
 
-            if (Ad2BrokerButton != null) {
-                Ad2BrokerButton.Dispose ();
-                Ad2BrokerButton = null;
-            }
-
-            if (Ad2BrokerLabel != null) {
-                Ad2BrokerLabel.Dispose ();
-                Ad2BrokerLabel = null;
-            }
-
-            if (Ad2DetailView != null) {
-                Ad2DetailView.Dispose ();
-                Ad2DetailView = null;
-            }
-
-            if (Ad2LocationLabel != null) {
-                Ad2LocationLabel.Dispose ();
-                Ad2LocationLabel = null;
-            }
-
             if (Ad2MessageButton != null) {
                 Ad2MessageButton.Dispose ();
                 Ad2MessageButton = null;
@@ -361,29 +291,9 @@ namespace AircraftForSale
                 Ad2PriceChangeLabel = null;
             }
 
-            if (Ad2RegistrationNumberLabel != null) {
-                Ad2RegistrationNumberLabel.Dispose ();
-                Ad2RegistrationNumberLabel = null;
-            }
-
-            if (Ad2RGButton != null) {
-                Ad2RGButton.Dispose ();
-                Ad2RGButton = null;
-            }
-
-            if (Ad2SerialNumberLabel != null) {
-                Ad2SerialNumberLabel.Dispose ();
-                Ad2SerialNumberLabel = null;
-            }
-
-            if (Ad2TechnicalSpecButton != null) {
-                Ad2TechnicalSpecButton.Dispose ();
-                Ad2TechnicalSpecButton = null;
-            }
-
-            if (Ad2TotalTimeLabel != null) {
-                Ad2TotalTimeLabel.Dispose ();
-                Ad2TotalTimeLabel = null;
+            if (Ad2TableView != null) {
+                Ad2TableView.Dispose ();
+                Ad2TableView = null;
             }
 
             if (Ad3BrokerButton != null) {
@@ -496,16 +406,6 @@ namespace AircraftForSale
                 AdLike3 = null;
             }
 
-            if (AdName1 != null) {
-                AdName1.Dispose ();
-                AdName1 = null;
-            }
-
-            if (AdName2 != null) {
-                AdName2.Dispose ();
-                AdName2 = null;
-            }
-
             if (AdName3 != null) {
                 AdName3.Dispose ();
                 AdName3 = null;
@@ -514,11 +414,6 @@ namespace AircraftForSale
             if (AdPrice1 != null) {
                 AdPrice1.Dispose ();
                 AdPrice1 = null;
-            }
-
-            if (AdPrice2 != null) {
-                AdPrice2.Dispose ();
-                AdPrice2 = null;
             }
 
             if (AdPrice3 != null) {
@@ -539,11 +434,6 @@ namespace AircraftForSale
             if (AdShare3 != null) {
                 AdShare3.Dispose ();
                 AdShare3 = null;
-            }
-
-            if (myScrollView1 != null) {
-                myScrollView1.Dispose ();
-                myScrollView1 = null;
             }
 
             if (myScrollView2 != null) {

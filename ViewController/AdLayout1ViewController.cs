@@ -25,10 +25,10 @@ namespace AircraftForSale
 				ad = DataObject.Ads[2];
 			}
 
-			if (sender == Ad2RGButton)
-			{
-				ad = DataObject.Ads[1];
-			}
+			//if (sender == Ad2RGButton)
+			//{
+			//	ad = DataObject.Ads[1];
+			//}
 
 			if (sender == Ad3RGButton)
 			{
@@ -64,17 +64,13 @@ namespace AircraftForSale
 			}
 		}
 
-		bool isAd1ImageUp;
-
-		NSLayoutConstraint ad1ImageOriginalConstraint;
-		NSLayoutConstraint ad1ImageNewConstraint;
 
 
-		void Ad2DetailButton_TouchUpInside(object sender, EventArgs e)
-		{
-			Ad2DetailView.Hidden = !Ad2DetailView.Hidden;
+		//void Ad2DetailButton_TouchUpInside(object sender, EventArgs e)
+		//{
+		//	Ad2DetailView.Hidden = !Ad2DetailView.Hidden;
 
-		}
+		//}
 
 		void Ad1DetailButton_TouchUpInside(object sender, EventArgs e)
 		{
@@ -89,41 +85,6 @@ namespace AircraftForSale
 
 		}
 
-		//void AdSlideUpButton_TouchUpInside(object sender, EventArgs e)
-		//{
-		//	if (sender == Ad1SlideUpButton)
-		//	{
-		//		if (!isAd1ImageUp)
-		//		{
-
-		//			AdImage1.RemoveConstraint(ad1ImageOriginalConstraint);
-		//			AdImage1.AddConstraint(ad1ImageNewConstraint);
-
-		//			UIView.Animate(1, () =>
-		//			{
-
-		//				this.View.LayoutIfNeeded();
-		//			});
-
-		//			Ad1SlideUpButton.SetTitle("Detail", UIControlState.Normal);
-		//			isAd1ImageUp = true;
-		//		}
-		//		else
-		//		{
-
-		//			AdImage1.RemoveConstraint(ad1ImageNewConstraint);
-		//			AdImage1.AddConstraint(ad1ImageOriginalConstraint);
-
-		//			UIView.Animate(1, () =>
-		//			{
-
-		//				this.View.LayoutIfNeeded();
-		//			});
-		//			Ad1SlideUpButton.SetTitle("Detail", UIControlState.Normal);
-		//			isAd1ImageUp = false;
-		//		}
-		//	}
-		//}
 		void AdMessages_TouchUpInside(object sender, EventArgs e)
 		{
 			Ad ad = new Ad();
@@ -185,7 +146,7 @@ namespace AircraftForSale
 				{
 					HelperMethods.MakeModelRegistrationRequiredPrompt(this, sender as UIButton);
 				}
-				if (sender == Ad1BrokerButton || sender == Ad2BrokerButton || sender == Ad3BrokerButton)
+				if (sender == Ad1BrokerButton || sender == Ad3BrokerButton)
 				{
 					HelperMethods.SellerRegistrationRequiredPrompt(this, sender as UIButton);
 				}
@@ -221,11 +182,11 @@ namespace AircraftForSale
 				ad = DataObject.Ads[2];
 				isAdNameSort = false;
 			}
-			if (sender == Ad2BrokerButton)
-			{
-				ad = DataObject.Ads[1];
-				isAdNameSort = false;
-			}
+			//if (sender == Ad2BrokerButton)
+			//{
+			//	ad = DataObject.Ads[1];
+			//	isAdNameSort = false;
+			//}
 			if (sender == Ad3BrokerButton)
 			{
 				ad = DataObject.Ads[0];
@@ -289,10 +250,10 @@ namespace AircraftForSale
 			}
 
 
-			if (sender == Ad2TechnicalSpecButton)
-			{
-				ad = DataObject.Ads[1];
-			}
+			//if (sender == Ad2TechnicalSpecButton)
+			//{
+			//	ad = DataObject.Ads[1];
+			//}
 
 			if (sender == Ad3TechnicalSpecButton)
 			{
@@ -485,35 +446,18 @@ namespace AircraftForSale
 		{
 			base.ViewDidLoad();
 
+			//View.BringSubviewToFront(Ad1DetailButton);
 
-			SizeF size = new SizeF(310, 520);
-			myScrollView1.ContentSize = size;
-			myScrollView2.ContentSize = size;
+
+           
+			               
+			//SizeF size = new SizeF(310, 520);
+			//myScrollView1.ContentSize = size;
+			//myScrollView2.ContentSize = size;
 
 			Random rnd = new Random();
 			var randomDouble = rnd.NextDouble();
-			//CGRect rect1 = upperView.Frame;
-			//CGRect rect2 = lowerView.Frame;
 
-
-
-			//condition will be met 35% of the time
-			//if (randomDouble > 0 && randomDouble <= .5)
-			//          {
-			//              //rect1.Y = 390;
-			//              //rect2.Y = 0;
-			//
-			//              upperView.Frame = rect2;
-			//              lowerView.Frame = rect1;
-			//          }
-
-
-
-
-			//Hide MT buttons
-			//Ad1MTButton.Alpha = 0f;
-			//Ad2MTButton.Alpha = 0f;
-			//Ad3MTButton.Alpha = 0f;
 
 			var ad3 = DataObject.Ads[0];
 			var ad2 = DataObject.Ads[1];
@@ -532,13 +476,7 @@ namespace AircraftForSale
 			{
 				Ad3MessageButton.Alpha = 0f;
 			};
-
-
-
-
-			//Ad ad1 = new Ad();
-			//Ad ad2 = new Ad();
-			//Ad ad3 = new Ad();
+            
 
 			AdImage1.SetImage(
 				url: new NSUrl(ad1.ImageURL),
@@ -549,36 +487,63 @@ namespace AircraftForSale
 			AdName3.TextColor = UIColor.White;
 			AdPrice3.TextColor = UIColor.White;
 			Ad1BrokerButton.SetTitle("", UIControlState.Normal);
-			Ad2BrokerButton.SetTitle("", UIControlState.Normal);
-			Ad3BrokerButton.SetTitle("", UIControlState.Normal);
 
+            //Add to tableview
+			//Ad2BrokerButton.SetTitle("", UIControlState.Normal);
+			//Ad3BrokerButton.SetTitle("", UIControlState.Normal);
+
+			//Ad2BrokerLabel.Text = "" + ad2.BrokerName;
+            //Ad3BrokerLabel.Text = "" + ad3.BrokerName;
+
+			//Ad2RegistrationNumberLabel.Text = "" + ad2.RegistrationNumber;
+            //Ad3RegistrationNumberLabel.Text = "" + ad3.RegistrationNumber;
+            //Ad2SerialNumberLabel.Text = "" + ad2.SerialNumber;
+            //Ad3SerialNumberLabel.Text = "" + ad3.SerialNumber;
+
+            //Ad2TotalTimeLabel.Text = "" + ad2.TotalTime;
+            //Ad3TotalTimeLabel.Text = "" + ad3.TotalTime;
+
+            //Ad2LocationLabel.Text = "" + ad2.Location;
+            //Ad3LocationLabel.Text = "" + ad3.Location;
+
+			//AdPrice2.Text = "" + (ad2.Price.Length == 0 ? "Call" : ad2.Price);
+
+			//AdPrice3.Text = "" + (ad3.Price.Length == 0 ? "Call" : ad3.Price);
+            //Ad3TeaserLabel.Text = ad3.Teaser == string.Empty ? "Inquire for Details" : "" + ad3.Teaser;
+
+			//Ad1TeaserLabel.Text = ad1.Teaser == string.Empty ? "Inquire for Details" : ad1.Teaser;
+            
+			//AdName2.Text = ad2.Name;
+
+			var ad2AircraftDetails = new AircraftDetails[]{
+				new AircraftDetails("", "Technical Specifications", false, true, false),
+				new AircraftDetails("", "Aircraft Range", false, false, true),
+				new AircraftDetails("Price:", (ad2.Price.Length == 0 ? "Call" : ad2.Price), false),
+				new AircraftDetails("Offered by:", ad2.BrokerName, true),
+				new AircraftDetails("Registration:", ad2.RegistrationNumber, false),
+				new AircraftDetails("Serial Number:", ad2.SerialNumber, false),
+				new AircraftDetails("Time:", ad2.TotalTime, false),
+				new AircraftDetails("Location:", ad2.Location, false),
+                new AircraftDetails("Summary:", ad2.Teaser == string.Empty ? "Inquire for Details" : ad2.Teaser, false),
+            };
+
+			Ad2TableView.Source = new AircraftDetailsTableSource(ad2AircraftDetails, ad2);
+                
 			Ad1BrokerLabel.Text = ad1.BrokerName;
-			Ad2BrokerLabel.Text = "" + ad2.BrokerName;
-			Ad3BrokerLabel.Text = "" + ad3.BrokerName;
+		
 
 			Ad1NameButton.SetTitle(ad1.Name, UIControlState.Normal);
 			Ad1NameButton.Layer.BorderColor = UIColor.White.CGColor;
 			Ad1NameButton.Layer.BorderWidth = 1f;
-			//Increase the touch area of the button
-			//var oldButtonHeight = (float)Ad1NameButton.Frame.Height;
-			//var newButtonHeight = (float)Ad1NameButton.Frame.Height + 20f;
-			//var newHeightDifference = newButtonHeight - oldButtonHeight;
-
-			//Ad1NameButton.Frame = new RectangleF(0f, 0f, (float)Ad1NameButton.Frame.Width, newButtonHeight);
-
-			//Ad1NameButton.ImageEdgeInsets = new UIEdgeInsets(newHeightDifference/2f, 0f, newHeightDifference / 2f, 0f);
-
-
-
+         
 			AdImage2.SetImage(
 				url: new NSUrl(ad2.ImageURL),
 				placeholder: UIImage.FromBundle("ad_placeholder.jpg")
 			);
 
-			AdName2.Text = ad2.Name;
-			AdPrice2.Text = "" + (ad2.Price.Length == 0 ? "Call" : ad2.Price);
-			//Ad2TeaserLabel.Text = ad2.Teaser == string.Empty ? "Inquire for Details" : "" + ad2.Teaser;
 
+
+         
 			Ad2NameButton.SetTitle(ad2.Name, UIControlState.Normal);
 			Ad2NameButton.Layer.BorderColor = UIColor.White.CGColor;
 			Ad2NameButton.Layer.BorderWidth = 1f;
@@ -590,8 +555,7 @@ namespace AircraftForSale
 
 
 			AdName3.Text = ad3.Name;
-			AdPrice3.Text = "" + (ad3.Price.Length == 0 ? "Call" : ad3.Price);
-			Ad3TeaserLabel.Text = ad3.Teaser == string.Empty ? "Inquire for Details" : "" + ad3.Teaser;
+
 
 			Ad3NameButton.SetTitle(ad3.Name, UIControlState.Normal);
 			Ad3NameButton.Layer.BorderColor = UIColor.White.CGColor;
@@ -613,42 +577,18 @@ namespace AircraftForSale
 				ForegroundColor = UIColor.Blue
 			};
 
-			Ad1TeaserLabel.Text = ad1.Teaser == string.Empty ? "Inquire for Details" : ad1.Teaser;
-
-			#region Attributed Labels
-
-			Ad1RegistrationLabel.AttributedText = HelperMethods.GetRegistrationAttributedString(ad1, labelAttribute);
-			Ad1SerialLabel.AttributedText = HelperMethods.GetSerialAttributedString(ad1, labelAttribute);
-			Ad1TimeLabel.AttributedText = HelperMethods.GetTotalTimeAttributedString(ad1, labelAttribute);
-			Ad1LocationLabel.AttributedText = HelperMethods.GetLocationAttributedString(ad1, labelAttribute);
 
 
-			Ad2RegistrationNumberLabel.Text = "" + ad2.RegistrationNumber;
-			Ad3RegistrationNumberLabel.Text = "" + ad3.RegistrationNumber;
-			Ad2SerialNumberLabel.Text = "" + ad2.SerialNumber;
-			Ad3SerialNumberLabel.Text = "" + ad3.SerialNumber;
+			//#region Attributed Labels
 
-			Ad2TotalTimeLabel.Text = "" + ad2.TotalTime;
-			Ad3TotalTimeLabel.Text = "" + ad3.TotalTime;
-
-			Ad2LocationLabel.Text = "" + ad2.Location;
-			Ad3LocationLabel.Text = "" + ad3.Location;
+			Ad1RegistrationLabel.Text = HelperMethods.GetRegistrationString(ad1, labelAttribute);
+            Ad1SerialLabel.Text = HelperMethods.GetSerialString(ad1, labelAttribute);
+            Ad1TimeLabel.Text = HelperMethods.GetTotalTimeString(ad1, labelAttribute);
+            Ad1LocationLabel.Text = ad1.Location;
 
 
-			//Ad2RegistrationNumberLabel.AttributedText = HelperMethods.GetRegistrationAttributedString(ad2, labelAttribute);
-			//Ad3RegistrationNumberLabel.AttributedText = HelperMethods.GetRegistrationAttributedString(ad3, labelAttribute);
 
-			//Ad2SerialNumberLabel.AttributedText = HelperMethods.GetSerialAttributedString(ad2, labelAttribute);
-			//Ad3SerialNumberLabel.AttributedText = HelperMethods.GetSerialAttributedString(ad3, labelAttribute);
-
-			//Ad2TotalTimeLabel.AttributedText = HelperMethods.GetTotalTimeAttributedString(ad2, labelAttribute);
-			//Ad3TotalTimeLabel.AttributedText = HelperMethods.GetTotalTimeAttributedString(ad3, labelAttribute);
-
-			//Ad2LocationLabel.AttributedText = HelperMethods.GetLocationAttributedString(ad2, labelAttribute);
-			//Ad3LocationLabel.AttributedText = HelperMethods.GetLocationAttributedString(ad3, labelAttribute);
-			#endregion
-
-
+                     
 
 			#region price changed
 			if (!HelperMethods.ShowPriceChangedLabel(ad1.PriceLastUpdated))
@@ -675,18 +615,7 @@ namespace AircraftForSale
 			{
 				HelperMethods.SetInitialLikeButtonState(AdLike1, DataObject.Ads[0]);
 			}
-
-			//if (DataObject.Ads[1].IsLiked)
-			//{
-			//  HelperMethods.SetInitialLikeButtonState(AdLike2, DataObject.Ads[1]);
-			//}
-
-			//if (DataObject.Ads[2].IsLiked)
-			//{
-			//  HelperMethods.SetInitialLikeButtonState(AdLike3, DataObject.Ads[2]);
-			//}
-
-
+         
 
 			//webview image tap gestures
 			AdImage1.UserInteractionEnabled = true;
@@ -703,13 +632,7 @@ namespace AircraftForSale
 			int totalPages = this.DataObject.TotalPages;
 
 			PageIndicator.SetIndicatorState(currentIndex, totalPages);
-
-			//ad1ImageOriginalConstraint = Ad1AspectRatioConstraint;
-
-			ad1ImageNewConstraint = NSLayoutConstraint.Create(AdImage1, NSLayoutAttribute.Height, NSLayoutRelation.Equal, AdImage1, NSLayoutAttribute.Width, 2f / 4f, 0);
-
-			//Randomly load banmanproo
-			//HelperMethods.LoadWebBanManPro(this.View);
+         
 
 		}
 
@@ -745,16 +668,24 @@ namespace AircraftForSale
 
 
 			Ad1TechnicalSpecButton.TouchUpInside += TechnicalSpecButton_TouchUpInside;
-			Ad2TechnicalSpecButton.TouchUpInside += TechnicalSpecButton_TouchUpInside;
-			Ad3TechnicalSpecButton.TouchUpInside += TechnicalSpecButton_TouchUpInside;
+
+            //Add to tableview
+			//Ad2TechnicalSpecButton.TouchUpInside += TechnicalSpecButton_TouchUpInside;
+			//Ad3TechnicalSpecButton.TouchUpInside += TechnicalSpecButton_TouchUpInside;
+
+			//Ad2BrokerButton.TouchUpInside += AdSortButton_TouchUpInside;
+            //Ad3BrokerButton.TouchUpInside += AdSortButton_TouchUpInside;
+
+			//Ad2RGButton.TouchUpInside += AdRGButton_TouchUpInside;
+            //Ad3RGButton.TouchUpInside += AdRGButton_TouchUpInside;
+
 
 			Ad1NameButton.TouchUpInside += AdSortButton_TouchUpInside;
 			Ad2NameButton.TouchUpInside += AdSortButton_TouchUpInside;
 			Ad3NameButton.TouchUpInside += AdSortButton_TouchUpInside;
 
 			Ad1BrokerButton.TouchUpInside += AdSortButton_TouchUpInside;
-			Ad2BrokerButton.TouchUpInside += AdSortButton_TouchUpInside;
-			Ad3BrokerButton.TouchUpInside += AdSortButton_TouchUpInside;
+		
 
 
 			AdImage1.AddGestureRecognizer(tapGesture1);
@@ -768,8 +699,7 @@ namespace AircraftForSale
 
 
 			Ad1RGButton.TouchUpInside += AdRGButton_TouchUpInside;
-			Ad2RGButton.TouchUpInside += AdRGButton_TouchUpInside;
-			Ad3RGButton.TouchUpInside += AdRGButton_TouchUpInside;
+
 		}
 
 		UITapGestureRecognizer tapGesture1;
@@ -797,16 +727,21 @@ namespace AircraftForSale
 
 
 			Ad1TechnicalSpecButton.TouchUpInside -= TechnicalSpecButton_TouchUpInside;
-			Ad2TechnicalSpecButton.TouchUpInside -= TechnicalSpecButton_TouchUpInside;
-			Ad3TechnicalSpecButton.TouchUpInside -= TechnicalSpecButton_TouchUpInside;
+
+            //Add to tableview
+			//Ad2TechnicalSpecButton.TouchUpInside -= TechnicalSpecButton_TouchUpInside;
+			//Ad3TechnicalSpecButton.TouchUpInside -= TechnicalSpecButton_TouchUpInside;
+			//Ad2BrokerButton.TouchUpInside -= AdSortButton_TouchUpInside;
+            //Ad3BrokerButton.TouchUpInside -= AdSortButton_TouchUpInside;
+			//Ad2RGButton.TouchUpInside -= AdRGButton_TouchUpInside;
+            //Ad3RGButton.TouchUpInside -= AdRGButton_TouchUpInside;
 
 			Ad1NameButton.TouchUpInside -= AdSortButton_TouchUpInside;
 			Ad2NameButton.TouchUpInside -= AdSortButton_TouchUpInside;
 			Ad3NameButton.TouchUpInside -= AdSortButton_TouchUpInside;
 
 			Ad1BrokerButton.TouchUpInside -= AdSortButton_TouchUpInside;
-			Ad2BrokerButton.TouchUpInside -= AdSortButton_TouchUpInside;
-			Ad3BrokerButton.TouchUpInside -= AdSortButton_TouchUpInside;
+
 
 			AdImage1.RemoveGestureRecognizer(tapGesture1);
 			AdImage2.RemoveGestureRecognizer(tapGesture2);
@@ -819,8 +754,7 @@ namespace AircraftForSale
 
 
 			Ad1RGButton.TouchUpInside -= AdRGButton_TouchUpInside;
-			Ad2RGButton.TouchUpInside -= AdRGButton_TouchUpInside;
-			Ad3RGButton.TouchUpInside -= AdRGButton_TouchUpInside;
+
 		}
 	}
 }

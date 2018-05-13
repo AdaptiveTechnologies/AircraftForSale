@@ -490,19 +490,19 @@ namespace AircraftForSale
 			Ad1BrokerLabel.Text = ad1.BrokerName;
 			Ad2BrokerLabel.Text = ad2.BrokerName;
 
-			#region attributed labels
-			Ad1RegistrationLabel.AttributedText = HelperMethods.GetRegistrationAttributedString(ad1, labelAttribute);
-			Ad2RegistrationLabel.AttributedText = HelperMethods.GetRegistrationAttributedString(ad2, labelAttribute);
+			//#region attributed labels
+            Ad1RegistrationLabel.Text = HelperMethods.GetRegistrationString(ad1, labelAttribute);
+            Ad2RegistrationLabel.Text = HelperMethods.GetRegistrationString(ad2, labelAttribute);
 
-			Ad1SerialLabel.AttributedText = HelperMethods.GetSerialAttributedString(ad1, labelAttribute);
-			Ad2SerialLabel.AttributedText = HelperMethods.GetSerialAttributedString(ad2, labelAttribute);
+            Ad1SerialLabel.Text = HelperMethods.GetSerialString(ad1, labelAttribute);
+            Ad2SerialLabel.Text = HelperMethods.GetSerialString(ad2, labelAttribute);
 
-			Ad1TimeLabel.AttributedText = HelperMethods.GetTotalTimeAttributedString(ad1, labelAttribute);
-			Ad2TimeLabel.AttributedText = HelperMethods.GetTotalTimeAttributedString(ad2, labelAttribute);
+            Ad1TimeLabel.Text = HelperMethods.GetTotalTimeString(ad1, labelAttribute);
+            Ad2TimeLabel.Text = HelperMethods.GetTotalTimeString(ad2, labelAttribute);
 
-			Ad1LocationLabel.AttributedText = HelperMethods.GetLocationAttributedString(ad1, labelAttribute);
-			Ad2LocationLabel.AttributedText = HelperMethods.GetLocationAttributedString(ad2, labelAttribute);
-			#endregion
+            Ad1LocationLabel.Text = ad1.Location;
+            Ad2LocationLabel.Text = ad2.Location;
+			//#endregion
 
 			#region price changed
 			if (!HelperMethods.ShowPriceChangedLabel(ad1.PriceLastUpdated))

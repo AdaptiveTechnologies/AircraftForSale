@@ -38,6 +38,8 @@ namespace AircraftForSale
             // Override point for customization after application launch.
             Gai.SharedInstance.DispatchInterval = 20;
             Gai.SharedInstance.TrackUncaughtExceptions = true;
+
+			//TODO: Remove commenting after development to resume tracking
             Tracker = Gai.SharedInstance.GetTracker(TrackingId);
 
             //Clay Martin 10/21/17: Allowing IDFA collection for more sophisticated analytics

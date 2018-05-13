@@ -504,22 +504,22 @@ placeholder: UIImage.FromBundle("ad_placeholder.jpg")
             Ad1NameLabel.Layer.BorderColor = UIColor.White.CGColor;
             Ad1NameLabel.Layer.BorderWidth = 1f;
 
-            #region attributed labels
+           // #region attributed labels
 
             //Ad1BrokerButton.SetTitle(ad1.BrokerName, UIControlState.Normal);
             Ad1BrokerLabel.Text = ad1.BrokerName;
 
             //Ad1BrokerButton.SetAttributedTitle(HelperMethods.GetBrokerAttributedString(ad1, brokerLabelAttribute, brokerValueAttribute), UIControlState.Normal);
 
-            Ad1RegistrationLabel.AttributedText = HelperMethods.GetRegistrationAttributedString(ad1, labelAttribute);
+            Ad1RegistrationLabel.Text = HelperMethods.GetRegistrationString(ad1, labelAttribute);
 
-            Ad1SerialLabel.AttributedText = HelperMethods.GetSerialAttributedString(ad1, labelAttribute);
+            Ad1SerialLabel.Text = HelperMethods.GetSerialString(ad1, labelAttribute);
 
-            Ad1TimeLabel.AttributedText = HelperMethods.GetTotalTimeAttributedString(ad1, labelAttribute);
+            Ad1TimeLabel.Text = HelperMethods.GetTotalTimeString(ad1, labelAttribute);
 
-            Ad1LocationLabel.AttributedText = HelperMethods.GetLocationAttributedString(ad1, labelAttribute);
+            Ad1LocationLabel.Text = ad1.Location;
 
-            #endregion
+            //#endregion
 
             #region price changed
             if (!HelperMethods.ShowPriceChangedLabel(ad1.PriceLastUpdated))

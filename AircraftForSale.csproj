@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\Xamarin.Build.Download.0.4.11\build\Xamarin.Build.Download.props" Condition="Exists('packages\Xamarin.Build.Download.0.4.11\build\Xamarin.Build.Download.props')" />
   <Import Project="..\packages\Xamarin.Build.Download.0.4.6\build\Xamarin.Build.Download.props" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.6\build\Xamarin.Build.Download.props')" />
   <Import Project="..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.props" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.props')" />
   <PropertyGroup>
@@ -29,7 +30,7 @@
     <MtouchTlsProvider>Legacy</MtouchTlsProvider>
     <PlatformTarget>x86</PlatformTarget>
     <OptimizePNGs>false</OptimizePNGs>
-    <MtouchExtraArgs></MtouchExtraArgs>
+    <MtouchExtraArgs>--registrar:static</MtouchExtraArgs>
     <DeviceSpecificBuild>false</DeviceSpecificBuild>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <MtouchProfiling>false</MtouchProfiling>
@@ -149,18 +150,16 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.IO.Compression" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Google.Analytics">
       <HintPath>..\packages\Xamarin.Google.iOS.Analytics.3.17.0.2\lib\Xamarin.iOS10\Google.Analytics.dll</HintPath>
     </Reference>
-    <Reference Include="Plugin.Settings.Abstractions">
-      <HintPath>..\packages\Xam.Plugins.Settings.3.1.1\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.11.0.2\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Plugin.Settings">
-      <HintPath>..\packages\Xam.Plugins.Settings.3.1.1\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
+      <HintPath>packages\Xam.Plugins.Settings.4.0.0.7\lib\xamarinios10\Plugin.Settings.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json" />
@@ -184,6 +183,7 @@
     <Folder Include="CustomControls\" />
     <Folder Include="Resources\New Folder\" />
     <Folder Include="Resources\slider\" />
+    <Folder Include="AircraftDetails\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -343,7 +343,6 @@
     <Compile Include="SearchLocationTableViewController.designer.cs">
       <DependentUpon>SearchLocationTableViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="RegistrationProfileViewController.cs" />
     <Compile Include="RegistrationProfileViewController.designer.cs">
       <DependentUpon>RegistrationProfileViewController.cs</DependentUpon>
@@ -351,6 +350,19 @@
     <Compile Include="RegistrationViewController.cs" />
     <Compile Include="RegistrationViewController.designer.cs">
       <DependentUpon>RegistrationViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AircraftDetails\AircraftDetailsButtonCell_.cs" />
+    <Compile Include="AircraftDetails\AircraftDetailsCell_.designer.cs">
+      <DependentUpon>AircraftDetailsButtonCell_.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AircraftDetails\AircraftDetailsLabelCell.cs" />
+    <Compile Include="AircraftDetails\AircraftDetailsLabelCell.designer.cs">
+      <DependentUpon>AircraftDetailsLabelCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AircraftDetails\AircraftDetailsTableSource.cs" />
+    <Compile Include="AircraftDetails\AircraftDetailsJustButtonCell.cs" />
+    <Compile Include="AircraftDetails\AircraftDetailsJustButtonCell.designer.cs">
+      <DependentUpon>AircraftDetailsJustButtonCell.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -536,4 +548,6 @@
   <Import Project="..\packages\Xamarin.Google.iOS.Analytics.3.17.0.2\build\Xamarin.Google.iOS.Analytics.targets" Condition="Exists('..\packages\Xamarin.Google.iOS.Analytics.3.17.0.2\build\Xamarin.Google.iOS.Analytics.targets')" />
   <Import Project="..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" />
   <Import Project="..\packages\Xamarin.Build.Download.0.4.6\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.6\build\Xamarin.Build.Download.targets')" />
+  <Import Project="packages\NETStandard.Library.2.0.2\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('packages\NETStandard.Library.2.0.2\build\netstandard2.0\NETStandard.Library.targets')" />
+  <Import Project="packages\Xamarin.Build.Download.0.4.11\build\Xamarin.Build.Download.targets" Condition="Exists('packages\Xamarin.Build.Download.0.4.11\build\Xamarin.Build.Download.targets')" />
 </Project>

@@ -245,45 +245,45 @@ namespace AircraftForSale
 				return UIImage.LoadFromData(data);
 		}
 
-		public static NSAttributedString GetRegistrationAttributedString(Ad ad, UIStringAttributes labelAttribute)
+		public static String GetRegistrationString(Ad ad, UIStringAttributes labelAttribute)
 		{
 			string plainRegistrationNumberText = ad.RegistrationNumber == string.Empty ? "N/A" : "" + ad.RegistrationNumber;
-			var registrationNumberString = new NSMutableAttributedString(plainRegistrationNumberText);
-			registrationNumberString.SetAttributes(labelAttribute.Dictionary, new NSRange(0, 0));
-			return registrationNumberString;
+			//var registrationNumberString = new NSMutableAttributedString(plainRegistrationNumberText);
+			//registrationNumberString.SetAttributes(labelAttribute.Dictionary, new NSRange(0, 0));
+            return plainRegistrationNumberText;
 		}
-		public static NSAttributedString GetSerialAttributedString(Ad ad, UIStringAttributes labelAttribute)
+		public static String GetSerialString(Ad ad, UIStringAttributes labelAttribute)
 		{
 			string plainSerialNumberText = ad.SerialNumber == string.Empty ? " N/A" : "" + ad.SerialNumber;
-			var serialNumberString = new NSMutableAttributedString(plainSerialNumberText);
-			serialNumberString.SetAttributes(labelAttribute.Dictionary, new NSRange(0, 0));
-			return serialNumberString;
+			//var serialNumberString = new NSMutableAttributedString(plainSerialNumberText);
+			//serialNumberString.SetAttributes(labelAttribute.Dictionary, new NSRange(0, 0));
+            return plainSerialNumberText;
 		}
-		public static NSAttributedString GetTotalTimeAttributedString(Ad ad, UIStringAttributes labelAttribute)
+		public static String GetTotalTimeString(Ad ad, UIStringAttributes labelAttribute)
 		{
 			string plainTotalTimeText = ad.TotalTime == "0" ? "0 hours" : "" + ad.TotalTime;
-			var totalTimeString = new NSMutableAttributedString(plainTotalTimeText);
-			totalTimeString.SetAttributes(labelAttribute.Dictionary, new NSRange(0, 0));
-			return totalTimeString;
+			//var totalTimeString = new NSMutableAttributedString(plainTotalTimeText);
+			//totalTimeString.SetAttributes(labelAttribute.Dictionary, new NSRange(0, 0));
+            return plainTotalTimeText;
 		}
-		public static NSAttributedString GetLocationAttributedString(Ad ad, UIStringAttributes labelAttribute)
-		{
-			string simpleLocationText = "" + ad.Location;
-			var locationString = new NSMutableAttributedString(simpleLocationText);
-			locationString.SetAttributes(labelAttribute.Dictionary, new NSRange(0, 0));
-			return locationString;
-		}
+		//public static NSAttributedString GetLocationAttributedString(Ad ad, UIStringAttributes labelAttribute)
+		//{
+		//	string simpleLocationText = "" + ad.Location;
+		//	//var locationString = new NSMutableAttributedString(simpleLocationText);
+		//	//locationString.SetAttributes(labelAttribute.Dictionary, new NSRange(0, 0));
+  //          return simpleLocationText;
+		//}
 
 
 
-		public static NSAttributedString GetBrokerAttributedString(Ad ad, UIStringAttributes labelAttribute, UIStringAttributes valueAttribute)
-		{
-			string plainBrokerText = "" + ad.BrokerName;
-			var brokerString = new NSMutableAttributedString(plainBrokerText);
-			brokerString.SetAttributes(labelAttribute.Dictionary, new NSRange(0, 0));
-			brokerString.SetAttributes(valueAttribute.Dictionary, new NSRange(0, ad.BrokerName.Count()));
-			return brokerString;
-		}
+		//public static NSAttributedString GetBrokerAttributedString(Ad ad, UIStringAttributes labelAttribute, UIStringAttributes valueAttribute)
+		//{
+		//	string plainBrokerText = "" + ad.BrokerName;
+		//	var brokerString = new NSMutableAttributedString(plainBrokerText);
+		//	//brokerString.SetAttributes(labelAttribute.Dictionary, new NSRange(0, 0));
+		//	//brokerString.SetAttributes(valueAttribute.Dictionary, new NSRange(0, ad.BrokerName.Count()));
+		//	return brokerString;
+		//}
 
 		public static bool ShowPriceChangedLabel(string stringLastUpdated)
 		{

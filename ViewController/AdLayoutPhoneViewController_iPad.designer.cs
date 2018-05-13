@@ -114,21 +114,6 @@ namespace AircraftForSale
 
         void ReleaseDesignerOutlets ()
         {
-            if (Ad1BrokerButton != null) {
-                Ad1BrokerButton.Dispose ();
-                Ad1BrokerButton = null;
-            }
-
-            if (Ad1BrokerLabel != null) {
-                Ad1BrokerLabel.Dispose ();
-                Ad1BrokerLabel = null;
-            }
-
-            if (Ad1LocationLabel != null) {
-                Ad1LocationLabel.Dispose ();
-                Ad1LocationLabel = null;
-            }
-
             if (Ad1NameButton != null) {
                 Ad1NameButton.Dispose ();
                 Ad1NameButton = null;
@@ -139,34 +124,14 @@ namespace AircraftForSale
                 Ad1PriceChangeLabel = null;
             }
 
-            if (Ad1RegistrationLabel != null) {
-                Ad1RegistrationLabel.Dispose ();
-                Ad1RegistrationLabel = null;
-            }
-
             if (Ad1RGButton != null) {
                 Ad1RGButton.Dispose ();
                 Ad1RGButton = null;
             }
 
-            if (Ad1SerialLabel != null) {
-                Ad1SerialLabel.Dispose ();
-                Ad1SerialLabel = null;
-            }
-
-            if (Ad1TeaserLabel != null) {
-                Ad1TeaserLabel.Dispose ();
-                Ad1TeaserLabel = null;
-            }
-
             if (Ad1TechnicalSpecButton != null) {
                 Ad1TechnicalSpecButton.Dispose ();
                 Ad1TechnicalSpecButton = null;
-            }
-
-            if (Ad1TimeLabel != null) {
-                Ad1TimeLabel.Dispose ();
-                Ad1TimeLabel = null;
             }
 
             if (AdEmail1 != null) {
@@ -187,21 +152,6 @@ namespace AircraftForSale
             if (AdMessages1 != null) {
                 AdMessages1.Dispose ();
                 AdMessages1 = null;
-            }
-
-            if (AdName1 != null) {
-                AdName1.Dispose ();
-                AdName1 = null;
-            }
-
-            if (AdPrice1 != null) {
-                AdPrice1.Dispose ();
-                AdPrice1 = null;
-            }
-
-            if (AdPriceLabel != null) {
-                AdPriceLabel.Dispose ();
-                AdPriceLabel = null;
             }
 
             if (AdShare1 != null) {

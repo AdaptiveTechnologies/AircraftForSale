@@ -144,7 +144,9 @@ namespace AircraftForSale
 
 				int layout = 1;
 
-				var randomDouble = rnd.NextDouble();
+
+                var randomDouble = rnd.NextDouble();
+                //var randomDouble = .4;
 
 				if (device.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
 				{
@@ -341,7 +343,8 @@ namespace AircraftForSale
 
 			var ad1 = magPageList[index];
 
-
+            //TODO: Remove after testing
+            layout = 2;
 
 
 			switch (layout)
@@ -399,7 +402,7 @@ namespace AircraftForSale
                    var randomDouble = rnd.NextDouble();
 
 
-						AdLayout1ViewController adLayout1 = (AdLayout1ViewController)UIStoryboard.FromName(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? "Main_ipad" : "Main", null).InstantiateViewController((randomDouble > 0 && randomDouble <= .5)?"AdLayout11ViewController":"AdLayout11ViewController");
+						AdLayout1ViewController adLayout1 = (AdLayout1ViewController)UIStoryboard.FromName("Main_ipad", null).InstantiateViewController("AdLayout11ViewController");
 
 
 						if (isPrev)
