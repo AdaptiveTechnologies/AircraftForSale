@@ -7,7 +7,6 @@
 using Foundation;
 using System;
 using System.CodeDom.Compiler;
-using UIKit;
 
 namespace AircraftForSale
 {
@@ -17,10 +16,6 @@ namespace AircraftForSale
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton Ad1BrokerButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel Ad1BrokerLabel { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -76,10 +71,6 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel Ad2BrokerLabel { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton Ad2DetailButton { get; set; }
 
         [Outlet]
@@ -109,10 +100,6 @@ namespace AircraftForSale
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton Ad2NameButton { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel Ad2NameLabel { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -164,10 +151,6 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UILabel AdName1 { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UILabel AdPrice1 { get; set; }
 
         [Outlet]
@@ -183,11 +166,6 @@ namespace AircraftForSale
             if (Ad1BrokerButton != null) {
                 Ad1BrokerButton.Dispose ();
                 Ad1BrokerButton = null;
-            }
-
-            if (Ad1BrokerLabel != null) {
-                Ad1BrokerLabel.Dispose ();
-                Ad1BrokerLabel = null;
             }
 
             if (Ad1DetailButton != null) {
@@ -255,11 +233,6 @@ namespace AircraftForSale
                 Ad2BrokerButton = null;
             }
 
-            if (Ad2BrokerLabel != null) {
-                Ad2BrokerLabel.Dispose ();
-                Ad2BrokerLabel = null;
-            }
-
             if (Ad2DetailButton != null) {
                 Ad2DetailButton.Dispose ();
                 Ad2DetailButton = null;
@@ -298,11 +271,6 @@ namespace AircraftForSale
             if (Ad2NameButton != null) {
                 Ad2NameButton.Dispose ();
                 Ad2NameButton = null;
-            }
-
-            if (Ad2NameLabel != null) {
-                Ad2NameLabel.Dispose ();
-                Ad2NameLabel = null;
             }
 
             if (Ad2PriceChangeLabel != null) {
@@ -363,11 +331,6 @@ namespace AircraftForSale
             if (AdLike1 != null) {
                 AdLike1.Dispose ();
                 AdLike1 = null;
-            }
-
-            if (AdName1 != null) {
-                AdName1.Dispose ();
-                AdName1 = null;
             }
 
             if (AdPrice1 != null) {

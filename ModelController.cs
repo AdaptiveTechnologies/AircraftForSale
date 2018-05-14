@@ -344,7 +344,7 @@ namespace AircraftForSale
 			var ad1 = magPageList[index];
 
             //TODO: Remove after testing
-            layout = 0;
+            //layout = 0;
 
 
 			switch (layout)
@@ -373,8 +373,7 @@ namespace AircraftForSale
 							adLayout1.DataObject = data2;
 							adLayout1.DataObject.Ads.Add(data1.Ads[0]);
 						}
-						//adLayout1.AdList = magPageList[index].Ads;
-
+                  
 						returnViewController = adLayout1 as UIViewController;
 						break;
 					}
@@ -384,13 +383,11 @@ namespace AircraftForSale
 
 					case 1:
 					{ 
-                        //var phoneLayout = (IAdLayoutInterface)UIStoryboard.FromName(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? "Main_ipad" : "Main", null).InstantiateViewController(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? "AdLayoutPhoneViewController_iPad" : "AdLayoutPhoneViewController");
                         var phoneLayout = (IAdLayoutInterface)UIStoryboard.FromName("Main_ipad", null).InstantiateViewController("AdLayoutPhoneViewController_iPad");
 
 
 						phoneLayout.DataObject = magPageList[index];
-						//phoneLayout.AdList = magPageList[index].Ads;
-
+                  
 						returnViewController = phoneLayout as UIViewController;
 						break;
 					}
@@ -398,8 +395,8 @@ namespace AircraftForSale
 					case 2:
 					{
 
-                   Random rnd = new Random();
-                   var randomDouble = rnd.NextDouble();
+                   //Random rnd = new Random();
+                   //var randomDouble = rnd.NextDouble();
 
 
 						AdLayout1ViewController adLayout1 = (AdLayout1ViewController)UIStoryboard.FromName("Main_ipad", null).InstantiateViewController("AdLayout11ViewController");
@@ -427,9 +424,7 @@ namespace AircraftForSale
 							adLayout1.DataObject.Ads.Add(data1.Ads[0]);
 						}
 
-
-						//adLayout1.AdList = magPageList[index].Ads;
-
+                  
 						returnViewController = adLayout1 as UIViewController;
 						break;
 					}
@@ -437,7 +432,7 @@ namespace AircraftForSale
 					case 3:
 
 					{
-						BanManProViewController banManProLayout = (BanManProViewController)UIStoryboard.FromName(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? "Registration_ipad" : "Registration", null).InstantiateViewController("BanManProViewController");
+						BanManProViewController banManProLayout = (BanManProViewController)UIStoryboard.FromName("Registration_ipad", null).InstantiateViewController("BanManProViewController");
 
 						banManProLayout.DataObject = magPageList[index];
 

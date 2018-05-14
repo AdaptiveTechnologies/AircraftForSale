@@ -106,35 +106,7 @@ namespace AircraftForSale
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            //if (Reachability.IsHostReachable(Settings._baseDomain))
-            //{
-            //LoadingOverlay loadingOverlay = new LoadingOverlay(View.Frame);
-
-            //BanManPropWebView.LoadFinished += (sender, e) =>
-            //{
-            //	//CGSize contentSize = BanManPropWebView.ScrollView.ContentSize;
-            //	//CGSize viewSize = BanManPropWebView.Bounds.Size;
-
-            //	////float rw = (float)viewSize.Width / (float)contentSize.Width;
-            //	//float rw = .5f;
-
-            //	// BanManPropWebView.ScrollView.MinimumZoomScale = rw;
-            //	//BanManPropWebView.ScrollView.MaximumZoomScale = rw;
-            //	//BanManPropWebView.ScrollView.ZoomScale = rw;
-
-            //	//BanManPropWebView.ScalesPageToFit = true;
-            //	//string html2 = BanManPropWebView.EvaluateJavascript("document.body.innerHTML");
-            //	loadingOverlay.Hide();
-            //};
-
-            //var banManProURL = "https://www.globalair.com/banmanpro/ad.aspx?ZoneID=94&Task=Get&Mode=HTML&SiteID=1&PageID=78751";
-            //var banManProHREF = banManProURL.Replace("Task=Get", "Task=Click");
-
-            //BanManProImageView.SetImage(
-            //	url: new NSUrl(banManProURL),
-            //	placeholder: UIImage.FromBundle("ad_placeholder.jpg")
-            //);
-
+         
             if (Reachability.IsHostReachable(Settings._baseDomain))
             {
                 LoadingOverlay loadingOverlay = new LoadingOverlay(View.Frame);

@@ -1,17 +1,17 @@
 ﻿<Properties StartupConfiguration="{B8C03836-A778-482E-8FC3-92267A01DFDA}|Default">
   <MonoDevelop.Ide.ItemProperties.AircraftForSale PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.C36511A6-5E67-4419-BAC7-A409182E0FD7" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ModelController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Registration.storyboard">
     <Files>
-      <File FileName="ModelController.cs" Line="357" Column="7" />
-      <File FileName="ViewController/AdLayout1ViewController.cs" Line="410" Column="34" />
-      <File FileName="AircraftDetails/AircraftDetailsTableSource.cs" Line="73" Column="55" />
-      <File FileName="Helpers/HelperMethods.cs" Line="449" Column="60" />
-      <File FileName="Main.cs" Line="12" Column="1" />
+      <File FileName="ViewController/BanManProViewController.cs" Line="127" Column="35" />
+      <File FileName="ModelController.cs" Line="435" Column="73" />
+      <File FileName="Registration.storyboard" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/ViewController/BanManProViewController.cs" relfile="ViewController/BanManProViewController.cs" line="110" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />

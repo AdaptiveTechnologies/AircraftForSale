@@ -51,13 +51,7 @@ namespace AircraftForSale
 				var specification = await specResponse.GetSpecBySpecIDDesignationIDAsync(ad.SpecId, ad.DesignationId);
 
 				if (specification.SpecId != 0)
-				{
-					//var specTableViewController = this.Storyboard.InstantiateViewController("SpecViewController_") as SpecViewController_;
-
-					//specTableViewController.Spec = specification;
-
-					//this.PresentViewController(specTableViewController, true, null);
-
+				{               
 					MapViewController mapViewController = (MapViewController)Storyboard.InstantiateViewController("MapViewController");
 					mapViewController.SpecFieldList = specification.SpecFieldDictionary[SpecTableViewSource._rangeSection];
 					ShowDetailViewController(mapViewController, this);
@@ -209,30 +203,6 @@ namespace AircraftForSale
 
 
 
-
-		void AdSlideUpButton_TouchUpInside(object sender, EventArgs e)
-		{
-			if (sender == Ad1DetailButton)
-			{
-				
-			}
-
-			if (sender == Ad2DetailButton)
-			{
-				
-			}
-		}
-
-		bool isAd1ImageUp;
-
-		bool isAd2ImageUp;
-
-		NSLayoutConstraint ad1ImageOriginalConstraint;
-		NSLayoutConstraint ad1ImageNewConstraint;
-
-		NSLayoutConstraint ad2ImageOriginalConstraint;
-		NSLayoutConstraint ad2ImageNewConstraint;
-
 		async void TechnicalSpecButton_TouchUpInside(object sender, EventArgs e)
 		{
 			Ad ad = new Ad();
@@ -270,7 +240,6 @@ namespace AircraftForSale
 					var alert = UIAlertController.Create("Connect to a Network", "Please connect to a network to retrieve these aircraft specs", UIAlertControllerStyle.Alert);
 
 					alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Cancel, null));
-					//alert.AddAction(UIAlertAction.Create("Snooze", UIAlertActionStyle.Default, action => Snooze()));
 					if (alert.PopoverPresentationController != null)
 					{
 						alert.PopoverPresentationController.SourceView = this.View;
@@ -387,10 +356,6 @@ namespace AircraftForSale
 		//	Console.WriteLine("AdLayout2ViewController is about to be collected");
 		//}
 
-		//public List<Ad> AdList
-		//{
-		//	get; set;
-		//}
 
 			protected override void Dispose(bool disposing)
 		{
@@ -415,16 +380,10 @@ namespace AircraftForSale
 		}
 
 
-
-		//MFMailComposeViewController mailController;
-
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
 
-			//Hide MT Buttons
-			//Ad1MTButton.Alpha = 0f;
-			//Ad2MTButton.Alpha = 0f;
 
 			var ad1 = DataObject.Ads[0];
 			var ad2 = DataObject.Ads[1];
@@ -446,14 +405,19 @@ namespace AircraftForSale
 		placeholder: UIImage.FromBundle("ad_placeholder.jpg")
 	);
 
-			AdName1.Text = ad1.Name;
-			
+            //Commenting out for new detail view
+			//AdName1.Text = ad1.Name;
 
 			AdPrice1.Text = ad1.Price;
 
 			if (ad1.Price.Length == 0)
 				AdPrice1.Text = "Call";
 
+			Ad1BrokerButton.SetTitle(ad1.BrokerName, UIControlState.Normal);
+			//Ad1BrokerButton.SetTitleColor(UIColor.Green, UIControlState.Normal);
+		
+			Ad2BrokerButton.SetTitle(ad2.BrokerName, UIControlState.Normal);
+            
 
 			Ad1NameButton.SetTitle(ad1.Name, UIControlState.Normal);
 			Ad1NameButton.Layer.BorderColor = UIColor.White.CGColor;
@@ -466,7 +430,7 @@ namespace AircraftForSale
 		placeholder: UIImage.FromBundle("ad_placeholder.jpg")
 	);
 
-			Ad2NameLabel.Text = ad2.Name;
+			//Ad2NameLabel.Text = ad2.Name;
 			Ad2PriceLabel.Text = ad2.Price;
 			if (ad2.Price.Length == 0)
 				Ad2PriceLabel.Text = "Call";
@@ -481,24 +445,24 @@ namespace AircraftForSale
 				Font = UIFont.BoldSystemFontOfSize(18)
 			};
 
+	
 			Ad1TeaserLabel.Text = ad1.Teaser == string.Empty ? "Inquire for Details" : ad1.Teaser;
 			Ad2TeaserLabel.Text = ad2.Teaser == string.Empty ? "Inquire for Details" : ad2.Teaser;
-
-			//Ad1BrokerButton.SetTitle("" + ad1.BrokerName, UIControlState.Normal);
-			//Ad2BrokerButton.SetTitle("" + ad2.BrokerName, UIControlState.Normal);
-
-			Ad1BrokerLabel.Text = ad1.BrokerName;
-			Ad2BrokerLabel.Text = ad2.BrokerName;
+            
 
 			//#region attributed labels
+
             Ad1RegistrationLabel.Text = HelperMethods.GetRegistrationString(ad1, labelAttribute);
             Ad2RegistrationLabel.Text = HelperMethods.GetRegistrationString(ad2, labelAttribute);
 
-            Ad1SerialLabel.Text = HelperMethods.GetSerialString(ad1, labelAttribute);
+
+			Ad1SerialLabel.Text = HelperMethods.GetSerialString(ad1, labelAttribute);
             Ad2SerialLabel.Text = HelperMethods.GetSerialString(ad2, labelAttribute);
+
 
             Ad1TimeLabel.Text = HelperMethods.GetTotalTimeString(ad1, labelAttribute);
             Ad2TimeLabel.Text = HelperMethods.GetTotalTimeString(ad2, labelAttribute);
+
 
             Ad1LocationLabel.Text = ad1.Location;
             Ad2LocationLabel.Text = ad2.Location;
@@ -550,16 +514,7 @@ namespace AircraftForSale
 			int totalPages = this.DataObject.TotalPages;
 
 			PageIndicator.SetIndicatorState(currentIndex, totalPages);
-
-
-			//ad1ImageOriginalConstraint = Ad1AspectRatioConstraint;
-			//ad2ImageOriginalConstraint = Ad2AspectRatioConstraint;
-
-			ad1ImageNewConstraint = NSLayoutConstraint.Create(AdImage1, NSLayoutAttribute.Height, NSLayoutRelation.Equal, AdImage1, NSLayoutAttribute.Width, 2f / 4f, 0);
-			ad2ImageNewConstraint = NSLayoutConstraint.Create(Ad2Image, NSLayoutAttribute.Height, NSLayoutRelation.Equal, Ad2Image, NSLayoutAttribute.Width, 2f / 4f, 0);
-
-			//Randomly load banmanpro
-			//HelperMethods.LoadWebBanManPro(this.View);
+         
 		}
 
 		UITapGestureRecognizer tapGesture1;
@@ -578,6 +533,7 @@ namespace AircraftForSale
 
 			AdLike1.TouchUpInside += AdLike_TouchUpInside;
 			Ad2LikeButton.TouchUpInside += AdLike_TouchUpInside;
+
 
 			Ad1TechnicalSpecButton.TouchUpInside += TechnicalSpecButton_TouchUpInside;
 			Ad2TechnicalSpecButton.TouchUpInside += TechnicalSpecButton_TouchUpInside;
@@ -600,6 +556,7 @@ namespace AircraftForSale
 
 			Ad1MessageButton.TouchUpInside += AdMessages_TouchUpInside;
 			Ad2MessageButton.TouchUpInside += AdMessages_TouchUpInside;
+
 
 			Ad1RGButton.TouchUpInside += AdRGButton_TouchUpInside;
 			Ad2RGButton.TouchUpInside += AdRGButton_TouchUpInside;
@@ -627,14 +584,14 @@ namespace AircraftForSale
 			AdLike1.TouchUpInside -= AdLike_TouchUpInside;
 			Ad2LikeButton.TouchUpInside -= AdLike_TouchUpInside;
 
+
 			Ad1TechnicalSpecButton.TouchUpInside -= TechnicalSpecButton_TouchUpInside;
 			Ad2TechnicalSpecButton.TouchUpInside -= TechnicalSpecButton_TouchUpInside;
 
 			Ad1NameButton.TouchUpInside -= AdSortButton_TouchUpInside;
 			Ad2NameButton.TouchUpInside -= AdSortButton_TouchUpInside;
 
-
-
+            
 			Ad1BrokerButton.TouchUpInside -= AdSortButton_TouchUpInside;
 			Ad2BrokerButton.TouchUpInside -= AdSortButton_TouchUpInside;
 
@@ -643,6 +600,7 @@ namespace AircraftForSale
 
 			Ad1MessageButton.TouchUpInside -= AdMessages_TouchUpInside;
 			Ad2MessageButton.TouchUpInside -= AdMessages_TouchUpInside;
+
 
 			Ad1RGButton.TouchUpInside -= AdRGButton_TouchUpInside;
 			Ad2RGButton.TouchUpInside -= AdRGButton_TouchUpInside;
