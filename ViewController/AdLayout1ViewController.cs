@@ -108,10 +108,14 @@ namespace AircraftForSale
 				{
 					HelperMethods.MakeModelRegistrationRequiredPrompt(this, sender as UIButton);
 				}
-				if (sender == Ad1BrokerButton || sender == Ad3BrokerButton)
-				{
-					HelperMethods.SellerRegistrationRequiredPrompt(this, sender as UIButton);
-				}
+				//if (sender == Ad1BrokerButton || sender == Ad3BrokerButton)
+				//{
+				//	HelperMethods.SellerRegistrationRequiredPrompt(this, sender as UIButton);
+				//}
+				if (sender == Ad1BrokerButton)
+                {
+                    HelperMethods.SellerRegistrationRequiredPrompt(this, sender as UIButton);
+                }
 				return;
 			}
 

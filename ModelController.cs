@@ -432,7 +432,7 @@ namespace AircraftForSale
 					case 3:
 
 					{
-						BanManProViewController banManProLayout = (BanManProViewController)UIStoryboard.FromName("Registration_ipad", null).InstantiateViewController("BanManProViewController");
+						BanManProViewController banManProLayout = (BanManProViewController)UIStoryboard.FromName("Registration_New", null).InstantiateViewController("BanManProViewController");
 
 						banManProLayout.DataObject = magPageList[index];
 
