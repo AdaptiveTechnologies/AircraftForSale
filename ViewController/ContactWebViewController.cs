@@ -29,7 +29,8 @@ namespace AircraftForSale
                 View.EndEditing(true);
 
             });
-            // Perform any additional setup after loading the view, typically from a nib.
+			// Perform any additional setup after loading the view, typically from a nib.
+			submitButton.Layer.CornerRadius = 25;
         }
 
 

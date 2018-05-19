@@ -328,8 +328,7 @@ namespace AircraftForSale
                     ads = (await Ad.GetAdsByClassificationAsync(classification.Name)).ToList();
                 }
                 else
-                {
-                    ;
+				{
                     IEnumerable<Ad> adListEnumerable = await Ad.GetAdsByClassificationAsync(classification.Name);
                     switch (Settings.SortOptions)
                     {

@@ -227,10 +227,17 @@ namespace AircraftForSale
             LoginButton.Layer.CornerRadius = cornerRadius;
             LoginButton.Layer.BorderColor = UIColor.White.CGColor;
             LoginButton.Layer.BorderWidth = 0f;
-
+            
             LaterButton.Layer.CornerRadius = cornerRadius;
             LaterButton.Layer.BorderColor = UIColor.White.CGColor;
             LaterButton.Layer.BorderWidth = 0f;
+            
+			changePassButton.Layer.CornerRadius = cornerRadius;
+			changePassButton.Layer.BorderColor = UIColor.White.CGColor;
+			changePassButton.Layer.BorderWidth = 0f;
+
+            
+            
 
             LoginButton.TouchUpInside += SubmitButton_TouchUpInside;
 

@@ -18,6 +18,7 @@ namespace AircraftForSale
 		{
 			base.ViewDidLoad();
 			// Perform any additional setup after loading the view, typically from a nib.
+			submitBtn.Layer.CornerRadius = 20;
 		}
 
 		partial void closeAction(Foundation.NSObject sender)
@@ -99,6 +100,7 @@ namespace AircraftForSale
 
 
 			submitBtn.TouchUpInside += SubmitButton_TouchUpInside;
+
 		}
 
 		public override void ViewWillDisappear(bool animated)

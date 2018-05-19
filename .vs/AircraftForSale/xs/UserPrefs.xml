@@ -1,12 +1,12 @@
 ﻿<Properties StartupConfiguration="{B8C03836-A778-482E-8FC3-92267A01DFDA}|Default">
   <MonoDevelop.Ide.ItemProperties.AircraftForSale PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.C36511A6-5E67-4419-BAC7-A409182E0FD7" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ViewController/ChooseClassificationCollectionViewController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ViewController/ContactWebViewController.cs">
     <Files>
-      <File FileName="ViewController/BanManProViewController.cs" Line="35" Column="1" />
-      <File FileName="ModelController.cs" Line="280" Column="1" />
-      <File FileName="ViewController/AdLayout1ViewController.cs" Line="189" Column="51" />
-      <File FileName="UIPageViewControllerDataSource.cs" Line="71" Column="36" />
-      <File FileName="ViewController/ChooseClassificationCollectionViewController.cs" Line="329" Column="18" />
+      <File FileName="../AircraftForSale.PCL/Model/API/APIManager.cs" Line="418" Column="1" />
+      <File FileName="ViewController/LoginViewController.cs" Line="231" Column="55" />
+      <File FileName="ViewController/ChangePassViewController.cs" Line="21" Column="38" />
+      <File FileName="ViewController/ContactViewController.cs" Line="13" Column="34" />
+      <File FileName="ViewController/ContactWebViewController.cs" Line="33" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />

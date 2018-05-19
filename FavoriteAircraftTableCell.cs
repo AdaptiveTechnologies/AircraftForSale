@@ -40,7 +40,9 @@ namespace AircraftForSale
 
 					if (Owner != null && Owner.Owner != null)
 					{
-						Owner.Owner.FavoritesTableViewProperty.ReloadData();
+						//Owner.Owner.FavoritesTableViewProperty.ReloadData();
+						Owner.Owner.FavoritesTableViewProperty.BeginUpdates();
+						Owner.Owner.FavoritesTableViewProperty.EndUpdates();   
 					}
 
 					//this.SetNeedsUpdateConstraints();
@@ -68,13 +70,14 @@ namespace AircraftForSale
 		public override void AwakeFromNib()
 		{
 			base.AwakeFromNib();
-			if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
-			{
-				int fontsize = 15;
-				this.AircraftNameLabel.Font = UIFont.BoldSystemFontOfSize(fontsize);
-				this.AircraftDetailsLabel.Font = UIFont.SystemFontOfSize(fontsize);
-				this.NotesLabel.Font = UIFont.SystemFontOfSize(fontsize);
-			}
+			//if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+			//{
+			//	int fontsize = 15;
+			//	this.AircraftNameLabel.Font = UIFont.BoldSystemFontOfSize(fontsize);
+			//	this.AircraftDetailsLabel.Font = UIFont.SystemFontOfSize(fontsize);
+			//	this.NotesLabel.Font = UIFont.SystemFontOfSize(fontsize);
+			//}
+            
 		}
 
 		public Ad AdProperty

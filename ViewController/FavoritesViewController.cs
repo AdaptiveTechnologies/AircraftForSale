@@ -84,16 +84,16 @@ namespace AircraftForSale
 			EditTableButton.SetTitle("Edit", UIControlState.Normal);
 			EditTableButton.SetTitleColor(UIColor.Blue, UIControlState.Normal);
 
-			FavoritesTableView.RowHeight = UITableView.AutomaticDimension;
-			FavoritesTableView.EstimatedRowHeight = 100f;
+			//FavoritesTableView.RowHeight = UITableView.AutomaticDimension
+			//FavoritesTableView.EstimatedRowHeight = 100f;
 
-
+            
 
 
 			View.Add(EditTableButton);
 
 
-
+            
 
 
 		}
