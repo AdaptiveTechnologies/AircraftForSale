@@ -102,17 +102,9 @@ namespace AircraftForSale
         {
             base.ViewDidLoad();
 
+            //Next toolbar button item
 			var nextBarButtonItem = new UIBarButtonItem("Next", UIBarButtonItemStyle.Plain, (sender, args) =>
-			{
-				//if (Settings.IsRegistered)
-				//{
-				//	RegistrationProfileViewController myInterestsVC = (RegistrationProfileViewController)UIStoryboard.FromName(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? "Main_ipad" : "Main", null).InstantiateViewController("MyProfileViewController");
-
-				//	PresentModalViewController(myInterestsVC, true);
-
-				//	return;
-				//}
-
+			{            
                 if (Settings.AnyClassificationChosen())
                 {
                     var testStoryBoard = UIStoryboard.FromName("Registration_New", NSBundle.MainBundle);
@@ -129,35 +121,45 @@ namespace AircraftForSale
 
 			nextBarButtonItem.SetTitleTextAttributes(icoFontAttribute, UIControlState.Normal);
 
-            NavigationItem.SetRightBarButtonItem(nextBarButtonItem, true);
+			NavigationItem.SetRightBarButtonItem(nextBarButtonItem, true);
+
+            //Cancel toolbar button item
+			var cancelBarButtonItem = new UIBarButtonItem("Cancel", UIBarButtonItemStyle.Plain, (sender, args) =>
+            {
+				DismissViewController(true, null);
+            });
+
+            //UITextAttributes icoFontAttribute = new UITextAttributes();
+            //icoFontAttribute.Font = UIFont.BoldSystemFontOfSize(20);
+            //icoFontAttribute.TextColor = UIColor.White;
+
+			cancelBarButtonItem.SetTitleTextAttributes(icoFontAttribute, UIControlState.Normal);
+                     
+			NavigationItem.SetLeftBarButtonItem(cancelBarButtonItem, true);
 
 			CollectionView.RegisterClassForCell(typeof(ClassificationCell), classificationCellID);
 			CollectionView.RegisterClassForSupplementaryView(typeof(Header), UICollectionElementKindSection.Header, headerId);
-
-            //CollectionView.BackgroundView = new UIImageView(UIImage.FromBundle("new_home_bg1"));
+            
             CollectionView.BackgroundColor = UIColor.White;
 			CollectionView.AllowsMultipleSelection = true;
 
 			UIFont font = UIFont.BoldSystemFontOfSize(20);
-			var headerFrame = new CGRect(0, 60, UIScreen.MainScreen.Bounds.Width, 50);
 			var headerLabel = new UILabel()
 			{
-				Frame = headerFrame,
 				Font = font,
 				TextAlignment = UITextAlignment.Center,
 				TextColor = UIColor.White,
-				BackgroundColor = UIColor.Gray
+				BackgroundColor = UIColor.Gray,
+				TranslatesAutoresizingMaskIntoConstraints = false
 			};
 			headerLabel.Text = "Select Your Favorite Classifications";
 			this.View.Add(headerLabel);
-
-
-
-
-			//UIButton nextButton = new UIButton();
-            //nextButton.SetTitle("Next", UIControlState.Normal);
-            //nextButton.BackgroundColor = HelperMethods.GetLime();
-
+            
+			headerLabel.TopAnchor.ConstraintEqualTo(this.View.SafeAreaLayoutGuide.TopAnchor).Active = true;
+			headerLabel.LeftAnchor.ConstraintEqualTo(this.View.SafeAreaLayoutGuide.LeftAnchor).Active = true;
+			headerLabel.RightAnchor.ConstraintEqualTo(this.View.SafeAreaLayoutGuide.RightAnchor).Active = true;
+			headerLabel.HeightAnchor.ConstraintEqualTo((System.nfloat)50).Active = true;
+			headerLabel.AdjustsFontSizeToFitWidth = true;
 			
 			UIButton cancelButton = new UIButton();
             cancelButton.SetTitle("Finish", UIControlState.Normal);
@@ -247,7 +249,7 @@ namespace AircraftForSale
             //this.View.AddConstraint(leftConstraint);
 
 
-            if (Settings.IsRegistered)
+            //if (Settings.IsRegistered)
                 View.Add(cancelButton);
 
 

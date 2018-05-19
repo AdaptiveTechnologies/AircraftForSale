@@ -28,8 +28,8 @@ namespace AircraftForSale
 			//}
 
 
-			TabBar.TintColor = UIKit.UIColor.Green;   
-			TabBar.BarTintColor = UIKit.UIColor.Black;         
+			TabBar.TintColor = UIKit.UIColor.Green;
+			TabBar.BarTintColor = UIKit.UIColor.Black;        
 			TabBar.BackgroundColor = UIKit.UIColor.White;
 
 		}
