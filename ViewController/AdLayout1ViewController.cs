@@ -63,6 +63,16 @@ namespace AircraftForSale
 			{
 				ad = DataObject.Ads[2];
 			}
+
+			if (sender == Ad2MessageButton)
+            {
+                ad = DataObject.Ads[1];
+            }
+
+			if (sender == Ad3MessageButton)
+            {
+                ad = DataObject.Ads[0];
+            }
          
 			var brokerPhoneNumber = ad.BrokerCellPhone;
 			//var brokerPhoneNumber = "5024171595";

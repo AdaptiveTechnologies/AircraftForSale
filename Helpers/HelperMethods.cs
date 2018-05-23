@@ -13,7 +13,7 @@ namespace AircraftForSale
 {
 	public class HelperMethods
 	{
-
+        
 
 		public static UIColor GetLime()
 		{
@@ -202,9 +202,25 @@ namespace AircraftForSale
 						}
 					};
 
-					UIImageView imageView = new UIImageView(new CGRect(mainView.Bounds.Width - 75, mainView.Bounds.Height / 2, 75, 50));
+					int width, height;
+
+					if(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad){
+						width = 110;
+						height = 75;
+					}else{
+						width = 60;
+                        height = 40;
+					}
+
+					UIImageView imageView = new UIImageView(new CGRect(mainView.Bounds.Width - width, mainView.Bounds.Height / 2, width, height));
 					imageView.Image = UIImage.FromBundle("swipe_left");
 					imageView.Alpha = .5f;
+					imageView.UserInteractionEnabled = true;
+					imageView.BackgroundColor = UIColor.Gray;
+					imageView.ContentMode = UIViewContentMode.ScaleAspectFit;
+					imageView.Layer.CornerRadius = 20;
+                    
+					//imageView.MultipleTouchEnabled = true;
 
 					webView.AddSubview(imageView);
 					webView.AddSubview(closeButton);
@@ -335,27 +351,9 @@ namespace AircraftForSale
 			alert.AddAction(UIAlertAction.Create("Register Now", UIAlertActionStyle.Default,
 												 (action) =>
 												 {
-													 //var returnedViewController = viewController.NavigationController.PopViewController(true);
-													 //RegistrationViewController registrationViewController = (RegistrationViewController)viewController.Storyboard.InstantiateViewController("RegistrationViewController");
-													 //returnedViewController.NavigationController.PushViewController(registrationViewController, true);
+							
 
-													 //var returnedViewController = viewController.NavigationController.PopViewController(true);
-													 //RegistrationViewController registrationViewController = (RegistrationViewController)viewController.Storyboard.InstantiateViewController("RegistrationViewController");
-													 //viewController.ShowViewController(registrationViewController, viewController);
-
-													 GridLayout classificationsGridLayout = new GridLayout();
-													 int classificationItemWidth = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 200 : 100;
-													 int classificationItemHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 150 : 100;
-
-													 classificationsGridLayout.ItemSize = new CoreGraphics.CGSize(classificationItemWidth, classificationItemHeight);
-
-													 int insetTop = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 125 : 75;
-													 int insetLeftBottomRight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 50 : 5;
-
-													 classificationsGridLayout.SectionInset = new UIEdgeInsets(insetTop, insetLeftBottomRight, insetLeftBottomRight, insetLeftBottomRight);
-													 classificationsGridLayout.HeaderReferenceSize = new CoreGraphics.CGSize(UIScreen.MainScreen.Bounds.Width - 100, 0);
-
-													 FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(classificationsGridLayout);
+				FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(new AircraftGridLayout(viewController));
 
 													 viewController.ShowViewController(new UINavigationController(favClassificationsVC), viewController);
 												 }));
@@ -379,27 +377,9 @@ namespace AircraftForSale
 			alert.AddAction(UIAlertAction.Create("Register Now", UIAlertActionStyle.Default,
 												 (action) =>
 												 {
-													 //var returnedViewController = viewController.NavigationController.PopViewController(true);
-													 //RegistrationViewController registrationViewController = (RegistrationViewController)viewController.Storyboard.InstantiateViewController("RegistrationViewController");
-													 //returnedViewController.NavigationController.PushViewController(registrationViewController, true);
+									
 
-													 //var returnedViewController = viewController.NavigationController.PopViewController(true);
-													 //RegistrationViewController registrationViewController = (RegistrationViewController)viewController.Storyboard.InstantiateViewController("RegistrationViewController");
-													 //viewController.ShowViewController(registrationViewController, viewController);
-
-													 GridLayout classificationsGridLayout = new GridLayout();
-													 int classificationItemWidth = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 200 : 100;
-													 int classificationItemHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 150 : 100;
-
-													 classificationsGridLayout.ItemSize = new CoreGraphics.CGSize(classificationItemWidth, classificationItemHeight);
-
-													 int insetTop = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 125 : 75;
-													 int insetLeftBottomRight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 50 : 5;
-
-													 classificationsGridLayout.SectionInset = new UIEdgeInsets(insetTop, insetLeftBottomRight, insetLeftBottomRight, insetLeftBottomRight);
-													 classificationsGridLayout.HeaderReferenceSize = new CoreGraphics.CGSize(UIScreen.MainScreen.Bounds.Width - 100, 0);
-
-													 FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(classificationsGridLayout);
+				FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(new AircraftGridLayout(viewController));
 
 													 viewController.ShowViewController(new UINavigationController(favClassificationsVC), viewController);
 												 }));
@@ -425,19 +405,7 @@ namespace AircraftForSale
 												 {
 
 
-													 GridLayout classificationsGridLayout = new GridLayout();
-													 int classificationItemWidth = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 200 : 100;
-													 int classificationItemHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 150 : 100;
-
-													 classificationsGridLayout.ItemSize = new CoreGraphics.CGSize(classificationItemWidth, classificationItemHeight);
-
-													 int insetTop = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 125 : 75;
-													 int insetLeftBottomRight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 50 : 5;
-
-													 classificationsGridLayout.SectionInset = new UIEdgeInsets(insetTop, insetLeftBottomRight, insetLeftBottomRight, insetLeftBottomRight);
-													 classificationsGridLayout.HeaderReferenceSize = new CoreGraphics.CGSize(UIScreen.MainScreen.Bounds.Width - 100, 0);
-
-													 FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(classificationsGridLayout);
+				FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(new AircraftGridLayout(viewController));
 
 													 viewController.ShowViewController(new UINavigationController(favClassificationsVC), viewController);
 												 }));
@@ -461,27 +429,8 @@ namespace AircraftForSale
 			alert.AddAction(UIAlertAction.Create("Register Now", UIAlertActionStyle.Default,
 												 (action) =>
 												 {
-													 //var returnedViewController = viewController.NavigationController.PopViewController(true);
-													 //RegistrationViewController registrationViewController = (RegistrationViewController)viewController.Storyboard.InstantiateViewController("RegistrationViewController");
-													 //returnedViewController.NavigationController.PushViewController(registrationViewController, true);
-
-													 //var returnedViewController = viewController.NavigationController.PopViewController(true);
-													 //RegistrationViewController registrationViewController = (RegistrationViewController)viewController.Storyboard.InstantiateViewController("RegistrationViewController");
-													 //viewController.ShowViewController(registrationViewController, viewController);
-
-													 GridLayout classificationsGridLayout = new GridLayout();
-													 int classificationItemWidth = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 200 : 100;
-													 int classificationItemHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 150 : 100;
-
-													 classificationsGridLayout.ItemSize = new CoreGraphics.CGSize(classificationItemWidth, classificationItemHeight);
-
-													 int insetTop = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 125 : 75;
-													 int insetLeftBottomRight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 50 : 5;
-
-													 classificationsGridLayout.SectionInset = new UIEdgeInsets(insetTop, insetLeftBottomRight, insetLeftBottomRight, insetLeftBottomRight);
-													 classificationsGridLayout.HeaderReferenceSize = new CoreGraphics.CGSize(UIScreen.MainScreen.Bounds.Width - 100, 0);
-
-													 FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(classificationsGridLayout);
+								            
+				FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(new AircraftGridLayout(viewController));
 
 													 viewController.ShowViewController(new UINavigationController(favClassificationsVC), viewController);
 												 }));

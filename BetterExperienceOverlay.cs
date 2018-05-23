@@ -79,22 +79,9 @@ namespace AircraftForSale
 			{
 				if (ParentViewController != null)
 				{
-					//RegistrationViewController registrationViewController = (RegistrationViewController)ParentViewController.Storyboard.InstantiateViewController("RegistrationViewController");
-					//ParentViewController.NavigationController.PushViewController(registrationViewController, true);
+					
 
-					GridLayout classificationsGridLayout = new GridLayout();
-					int classificationItemWidth = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 200 : 100;
-					int classificationItemHeight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 150 : 100;
-
-					classificationsGridLayout.ItemSize = new CoreGraphics.CGSize(classificationItemWidth, classificationItemHeight);
-
-					int insetTop = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 125 : 75;
-					int insetLeftBottomRight = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 50 : 5;
-
-					classificationsGridLayout.SectionInset = new UIEdgeInsets(insetTop, insetLeftBottomRight, insetLeftBottomRight, insetLeftBottomRight);
-					classificationsGridLayout.HeaderReferenceSize = new CoreGraphics.CGSize(UIScreen.MainScreen.Bounds.Width - 100, 0);
-
-					FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(classificationsGridLayout);
+					FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(new AircraftGridLayout(ParentViewController));
 
 					ParentViewController.ShowViewController(new UINavigationController(favClassificationsVC), this);
 

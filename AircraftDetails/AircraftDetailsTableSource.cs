@@ -81,8 +81,12 @@ public class AircraftDetailsTableSource : UITableViewSource
 		LoadingOverlay loadingIndicator = new LoadingOverlay(vc.View.Frame, isAdNameSort ? "Loading Aircraft by Selected Type" : "Loading Aircraft by Selected Broker");
 		vc.View.AddSubview(loadingIndicator);
 
-		var pageViewController = vc.ParentViewController as UIPageViewController;
-		var magFlipBoardViewController = pageViewController.ParentViewController as MagazineFlipBoardViewController;
+		//var pageViewController = vc.ParentViewController as UIPageViewController;
+		var magazineNavigationViewController = vc.ChildViewControllers.First(row => row is MagazineNavigationViewController);
+		var flipboardVC = magazineNavigationViewController.ChildViewControllers.First(row => row is MagazineFlipBoardViewController);
+		//var magFlipBoardViewController = pageViewController.ParentViewController as MagazineFlipBoardViewController;
+		var magFlipBoardViewController = flipboardVC as MagazineFlipBoardViewController;
+		var pageViewController = magFlipBoardViewController.ChildViewControllers.First(row => row is UIPageViewController) as UIPageViewController; 
 
 		var modelController = magFlipBoardViewController.ModelController;
 		List<Ad> adList = new List<Ad>();
@@ -117,6 +121,8 @@ public class AircraftDetailsTableSource : UITableViewSource
 				loadingIndicator.Hide();
 				var startingViewController = modelController.GetViewController(0, false);
 				var viewControllers = new UIViewController[] { startingViewController };
+
+				//TODO: Uncomment after fixing
 				pageViewController.SetViewControllers(viewControllers, UIPageViewControllerNavigationDirection.Forward, true, null);
 
 				HelperMethods.SendBasicAlert("", "Aircraft arranged by " + (isAdNameSort ? ad.Name : ad.BrokerName));

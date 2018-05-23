@@ -1,18 +1,21 @@
 ﻿<Properties StartupConfiguration="{B8C03836-A778-482E-8FC3-92267A01DFDA}|Default">
-  <MonoDevelop.Ide.ItemProperties.AircraftForSale PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.C36511A6-5E67-4419-BAC7-A409182E0FD7" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ViewController/MagazineNavigationViewController.cs">
+  <MonoDevelop.Ide.ItemProperties.AircraftForSale PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget" automaticSigning="False" />
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="ViewController/LoginViewController.cs" Line="304" Column="54" />
-      <File FileName="ViewController/FavoriteClassificationsViewController.cs" Line="149" Column="4" />
-      <File FileName="ViewController/MagazineNavigationViewController.cs" Line="20" Column="1" />
+      <File FileName="ViewController/AdLayout2ViewController.cs" Line="256" Column="35" />
+      <File FileName="ViewController/AdLayout1ViewController.cs" Line="404" Column="1" />
+      <File FileName="Info.plist" />
+      <File FileName="ViewController/FavoritesViewController.cs" Line="115" Column="1" />
+      <File FileName="ModelController.cs" Line="62" Column="1" />
+      <File FileName="Helpers/HelperMethods.cs" Line="209" Column="16" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhone" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/ModelController.cs" relfile="ModelController.cs" line="450" column="1" />
-      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/ViewController/MagazineFlipBoardViewController.cs" relfile="ViewController/MagazineFlipBoardViewController.cs" line="57" column="1" />
-      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/ViewController/FavoritesViewController.cs" relfile="ViewController/FavoritesViewController.cs" line="77" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/SearchLocationTableViewController.cs" relfile="SearchLocationTableViewController.cs" line="37" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/ViewController/EmailInquiryViewController.cs" relfile="ViewController/EmailInquiryViewController.cs" line="16" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
