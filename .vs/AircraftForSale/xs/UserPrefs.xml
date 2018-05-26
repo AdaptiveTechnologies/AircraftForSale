@@ -1,13 +1,9 @@
 ﻿<Properties StartupConfiguration="{B8C03836-A778-482E-8FC3-92267A01DFDA}|Default">
-  <MonoDevelop.Ide.ItemProperties.AircraftForSale PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget" automaticSigning="False" />
+  <MonoDevelop.Ide.ItemProperties.AircraftForSale PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.dbe2d8d6ecb735362804806d8c0cec258fac3294" automaticSigning="False" />
   <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="ViewController/AdLayout2ViewController.cs" Line="256" Column="35" />
-      <File FileName="ViewController/AdLayout1ViewController.cs" Line="404" Column="1" />
+      <File FileName="ViewController/AdLayoutPhoneViewController_iPad.cs" Line="494" Column="28" />
       <File FileName="Info.plist" />
-      <File FileName="ViewController/FavoritesViewController.cs" Line="115" Column="1" />
-      <File FileName="ModelController.cs" Line="62" Column="1" />
-      <File FileName="Helpers/HelperMethods.cs" Line="209" Column="16" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhone" />
