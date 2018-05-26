@@ -1,15 +1,15 @@
 ﻿<Properties StartupConfiguration="{B8C03836-A778-482E-8FC3-92267A01DFDA}|Default">
-  <MonoDevelop.Ide.ItemProperties.AircraftForSale PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.dbe2d8d6ecb735362804806d8c0cec258fac3294" automaticSigning="False" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.AircraftForSale PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.C36511A6-5E67-4419-BAC7-A409182E0FD7" automaticSigning="False" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ViewController/ChooseClassificationCollectionViewController.cs">
     <Files>
-      <File FileName="ViewController/AdLayoutPhoneViewController_iPad.cs" Line="494" Column="28" />
-      <File FileName="Info.plist" />
+      <File FileName="ModelController.cs" Line="141" Column="28" />
+      <File FileName="ViewController/ChooseClassificationCollectionViewController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhone" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/ModelController.cs" relfile="ModelController.cs" line="450" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/ModelController.cs" relfile="ModelController.cs" line="370" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/SearchLocationTableViewController.cs" relfile="SearchLocationTableViewController.cs" line="37" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/ViewController/EmailInquiryViewController.cs" relfile="ViewController/EmailInquiryViewController.cs" line="16" column="1" />
     </BreakpointStore>

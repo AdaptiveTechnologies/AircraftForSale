@@ -138,6 +138,8 @@ namespace AircraftForSale
 			int adsIndex = 0;
 			int magazinePageIndex = 0;
 
+			int banManProCounter = 1;
+
 
 			Random rnd = new Random();
 			do
@@ -145,46 +147,42 @@ namespace AircraftForSale
 
 				int layout = 1;
 
-
-				var randomDouble = rnd.NextDouble();
-				//var randomDouble = .4;
-
-				if (device.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+				if (banManProCounter == 5)
 				{
-
-					//condition will be met 35% of the time
-					if (randomDouble > 0 && randomDouble <= .35)
-					{
-						layout = 1;
-					}
-
-					//condition will be met 35% of the time
-					if (randomDouble > .35 && randomDouble <= .7)
-					{
-						layout = 2;
-					}
-
-					//condition will be met 15% of the time
-					if (randomDouble > .7 && randomDouble <= .85)
-					{
-						layout = 3;
-					}
-
-					//condition will be met 10% of the time
-					if (randomDouble > .85)
-					{
-						layout = 4;
-					}
+					layout = 4;
+					banManProCounter = 1;
 				}
 				else
 				{
-					if (randomDouble <= .15)
+					banManProCounter++;
+					var randomDouble = rnd.NextDouble();
+
+					if (device.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
 					{
-						layout = 4; //banmanpro layout
+
+						//condition will be met 35% of the time
+						if (randomDouble > 0 && randomDouble <= .33)
+						{
+							layout = 1;
+						}
+
+						//condition will be met 35% of the time
+						if (randomDouble > .33 && randomDouble <= .66)
+						{
+							layout = 2;
+						}
+
+						//condition will be met 15% of the time
+						if (randomDouble > .66)
+						{
+							layout = 3;
+						}
+
+
 					}
 					else
 					{
-						layout = 5; //phone
+						layout = 2;
 					}
 				}
 
@@ -192,68 +190,74 @@ namespace AircraftForSale
 				MagazinePage magPage = new MagazinePage();
 				magPage.SelectedClassification = selectedClassification;
 
-				switch (layout)
+				var currentAd = adList[adsIndex];
+				if (currentAd.IsFeatured && layout != 4)
 				{
-					case 1:
-						{
-							int adCount = 1;
-							magPage = AssociatsAdsWithMagazinePageStruct(adList, totalAdsCount, adsIndex, magPage, adCount);
-							magPage.Layout = 1;
+					magPage.Layout = 2;
+					List<Ad> adsForThisLayout = new List<Ad>();
+					adsForThisLayout.Add(currentAd);
+					magPage.Ads = adsForThisLayout;
+					adsIndex++;
+				}
+				else
+				{
 
-							adsIndex += adCount;
-							break;
-						}
-					case 2:
-						{
-							int adCount = 1;
-							magPage = AssociatsAdsWithMagazinePageStruct(adList, totalAdsCount, adsIndex, magPage, adCount);
-							magPage.Layout = 2;
+					switch (layout)
+					{
+						case 1:
+							{
+								//int adCount = 1;
+								int adCount = 2;
+								magPage = AssociatsAdsWithMagazinePageStruct(adList, totalAdsCount, adsIndex, magPage, adCount);
+								magPage.Layout = 1;
 
-							adsIndex += adCount;
-							break;
-						}
-					case 3:
-						{
-							int adCount = 1;
-							magPage = AssociatsAdsWithMagazinePageStruct(adList, totalAdsCount, adsIndex, magPage, adCount);
-							magPage.Layout = 3;
+								adsIndex += adCount;
+								break;
+							}
+						case 2:
+							{
+								int adCount = 1;
+								magPage = AssociatsAdsWithMagazinePageStruct(adList, totalAdsCount, adsIndex, magPage, adCount);
+								magPage.Layout = 2;
 
-							adsIndex += adCount;
-							break;
-						}
-					case 4:
-						{
-							int adCount = 1;
-							magPage = AssociatsAdsWithMagazinePageStruct(adList, totalAdsCount, adsIndex, magPage, adCount);
-							magPage.Layout = 4;
+								adsIndex += adCount;
+								break;
+							}
+						case 3:
+							{
+								//int adCount = 1;
+								int adCount = 3;
+								magPage = AssociatsAdsWithMagazinePageStruct(adList, totalAdsCount, adsIndex, magPage, adCount);
+								magPage.Layout = 3;
 
-							adsIndex += adCount;
-							break;
-						}
-					case 5:
-						{
-							int adCount = 1;
-							magPage = AssociatsAdsWithMagazinePageStruct(adList, totalAdsCount, adsIndex, magPage, adCount);
-							magPage.Layout = 5;
+								adsIndex += adCount;
+								break;
+							}
+						case 4:
+							{
+								int adCount = 0;
+								magPage = AssociatsAdsWithMagazinePageStruct(adList, totalAdsCount, adsIndex, magPage, adCount);
+								magPage.Layout = 4;
 
-							adsIndex += adCount;
-							break;
-						}
-					default:
-						{
+								adsIndex += adCount;
+								break;
+							}
 
-							int adCount = 0;
-							magPage = AssociatsAdsWithMagazinePageStruct(adList, totalAdsCount, adsIndex, magPage, adCount);
-							magPage.Layout = 1;
+						default:
+							{
 
-							adsIndex += adCount;
-							break;
-						}
+								int adCount = 0;
+								magPage = AssociatsAdsWithMagazinePageStruct(adList, totalAdsCount, adsIndex, magPage, adCount);
+								magPage.Layout = 1;
+
+								adsIndex += adCount;
+								break;
+							}
+					}
 				}
 
 				magPage.MagazinePageIndex = magazinePageIndex++;
-				//magPage.TotalPages = adList.Count;
-
+            
 				magPageList.Add(magPage);
 
 				if (adsIndex < adList.Count)
@@ -264,14 +268,21 @@ namespace AircraftForSale
 				{
 					adsAvailable = false;
 				}
+
+
+
 			} while (adsAvailable);
 
 			//Assign total pages to each MagazinePageStruct
 			for (int i = 0; i < magPageList.Count; i++)
 			{
 				magPageList[i].TotalPages = magPageList.Count;
-				//magPageList[i].ModelControllerProperty = this;
+				var ads = magPageList[i].Ads;
+				Console.WriteLine("Layout: " + magPageList[i].Layout);
+				ads.ForEach(r => Console.WriteLine(r.Name + " id: " + r.ID));
 			}
+
+			Console.WriteLine("Total Ads: " + adList.Count);
 		}
 
 
@@ -281,12 +292,17 @@ namespace AircraftForSale
 				return null;
 
 			if (index == 0)
+			{
 				PageIndex = 0;
-
-			if (isPrev)
-				PageIndex -= 1;
+			}
 			else
-				PageIndex += 1;
+			{
+
+				if (isPrev)
+					PageIndex -= 1;
+				else
+					PageIndex += 1;
+			}
 
 
 
@@ -297,82 +313,22 @@ namespace AircraftForSale
 			UIViewController returnViewController;
 
 			var device = UIDevice.CurrentDevice;
+         
+			var ad = magPageList[PageIndex];
 
+            //featured ads always have to have layout 2
+            //if(ad)
 
-
-			Boolean isAd = PageIndex % 5 == 0 ? true : false;
-
-			int layout = PageIndex % 3;
-
-			if (device.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
-			{
-
-
-
-				layout = isAd ? 3 : layout;
-
-
-				if (layout == 1)
-				{
-					if (!magPageList[index].Ads[0].IsFeatured)
-						layout = 2;
-				}
-
-				if (magPageList[index].Ads[0].IsFeatured)
-					layout = 1;
-
-				if (isPrev)
-				{
-
-
-					var data2 = magPageList[index - 1 >= 0 ? index - 1 : index];
-					if (data2.Ads[0].IsFeatured)
-						layout = 1;
-					var data3 = magPageList[index - 2 >= 0 ? index - 2 : index + 1];
-					if (data3.Ads[0].IsFeatured)
-						layout = 1;
-				}
-
-			}
-			else
-			{
-				layout = isAd ? 3 : 1;
-
-			}
-
-
-			var ad1 = magPageList[index];
-
-			//TODO: Remove after testing
-			//layout = 0;
-
-
+			var layout = ad.Layout;
+                     
 			switch (layout)
 			{
 
-				case 0:
+				case 1://2 ads stacked: iPad only
 					{
 						AdLayout2ViewController adLayout1 = (AdLayout2ViewController)UIStoryboard.FromName("Main_ipad", null).InstantiateViewController("AdLayout2ViewController");
-
-
-						if (isPrev)
-						{
-
-							var data1 = magPageList[index - 1];
-							var data2 = magPageList[index - 2 >= 0 ? index - 2 : index];
-
-							adLayout1.DataObject = data2;
-							adLayout1.DataObject.Ads.Add(data1.Ads[0]);
-						}
-						else
-						{
-
-							var data1 = magPageList[index];
-							var data2 = magPageList[((index + 1) < magPageList.Count) ? index + 1 : index - 1];
-
-							adLayout1.DataObject = data2;
-							adLayout1.DataObject.Ads.Add(data1.Ads[0]);
-						}
+      
+						adLayout1.DataObject = ad;
 
 						returnViewController = adLayout1 as UIViewController;
 						break;
@@ -381,76 +337,45 @@ namespace AircraftForSale
 
 
 
-				case 1:
+				case 2://1 ad: iPad (featured) and all iPhone
 					{
 						var phoneLayout = (IAdLayoutInterface)UIStoryboard.FromName("Main_ipad", null).InstantiateViewController("AdLayoutPhoneViewController_iPad");
 
-
-						phoneLayout.DataObject = magPageList[index];
+						phoneLayout.DataObject = ad;
 
 						returnViewController = phoneLayout as UIViewController;
 						break;
 					}
 
-				case 2:
+				case 3://3 ads: iPad only
 					{
 
 						AdLayout1ViewController adLayout1 = (AdLayout1ViewController)UIStoryboard.FromName("Main_ipad", null).InstantiateViewController("AdLayout11ViewController");
-
-
-						if (isPrev)
-						{
-
-							var data1 = magPageList[index - 1];
-							var data2 = magPageList[index - 2 >= 0 ? index - 2 : index];
-							var data3 = magPageList[index - 3 >= 0 ? index - 3 : index + 1];
-
-							adLayout1.DataObject = data3;
-							adLayout1.DataObject.Ads.Add(data2.Ads[0]);
-							adLayout1.DataObject.Ads.Add(data1.Ads[0]);
-						}
-						else
-						{
-
-							var data1 = magPageList[index];
-							var data2 = magPageList[((index + 1) < magPageList.Count) ? index + 1 : index - 1];
-							var data3 = magPageList[((index + 2) < magPageList.Count) ? index + 2 : index - 2];
-
-							adLayout1.DataObject = data3;
-							adLayout1.DataObject.Ads.Add(data2.Ads[0]);
-							adLayout1.DataObject.Ads.Add(data1.Ads[0]);
-						}
+                  
+						adLayout1.DataObject = ad;
 
 
 						returnViewController = adLayout1 as UIViewController;
 						break;
 					}
 
-				case 3:
+				case 4://BanManPro
 
 					{
 						BanManProViewController banManProLayout = (BanManProViewController)UIStoryboard.FromName("Registration_New", null).InstantiateViewController("BanManProViewController");
 
-						banManProLayout.DataObject = magPageList[index];
+						banManProLayout.DataObject = ad;
 
 						returnViewController = banManProLayout as UIViewController;
 						break;
 					}
 
-					//case 5: 
-					//{
-					//	AdLayoutPhoneViewController phoneLayout = (AdLayoutPhoneViewController)UIStoryboard.FromName("Main_ipad", null).InstantiateViewController("AdLayoutPhoneViewController");
-					//	phoneLayout.DataObject = magPageList[index];
-					//	//phoneLayout.AdList = magPageList[index].Ads;
 
-					//	returnViewController = phoneLayout as UIViewController;
-					//	break;
-					//}
-				default: {
+				default: {//Should never be called
 						var phoneLayout = (IAdLayoutInterface)UIStoryboard.FromName("Main_ipad", null).InstantiateViewController("AdLayoutPhoneViewController_iPad");
 
 
-                        phoneLayout.DataObject = magPageList[index];
+						phoneLayout.DataObject = ad;
 
                         returnViewController = phoneLayout as UIViewController;
                         break;

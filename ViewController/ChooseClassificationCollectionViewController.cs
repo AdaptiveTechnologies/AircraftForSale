@@ -359,6 +359,7 @@ namespace AircraftForSale
                             }
                     }
                 }
+
                 await AppDelegate.ProactivelyDownloadImages(ads);
 
             }).ContinueWith((task) =>

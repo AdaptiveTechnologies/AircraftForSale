@@ -95,20 +95,7 @@ namespace AircraftForSale
 
 			//start implementing search feature
 			var searchButton = new UIBarButtonItem(UIBarButtonSystemItem.Search, (sender, e) =>
-			{
-				//Create Alert
-				//var searchAlertController = UIAlertController.Create("Search " + SelectedClassification + " Aircraft", "Search by manufacturer and/or model", UIAlertControllerStyle.Alert);
-
-				////Add Text Input
-				//searchAlertController.AddTextField(textField =>
-				//{
-				//});
-
-				////Add Actions
-				//var cancelAction = UIAlertAction.Create("Cancel", UIAlertActionStyle.Cancel, alertAction => Console.WriteLine("Cancel was Pressed"));
-				//var okayAction = UIAlertAction.Create("Search", UIAlertActionStyle.Default, alertAction =>
-				//{
-
+			{            
 				var errorMessage = "";
 				if (ModelController != null && ModelController.adList != null && ModelController.adList.Count > 0)
 				{
@@ -246,16 +233,12 @@ namespace AircraftForSale
 			currentViewController = pageViewController.ViewControllers[0];
 
 			int index = ModelController.IndexOf((IAdLayoutInterface)currentViewController);
-			//if (index == 0 || index % 2 == 0)
-			{
+
+
 				var nextViewController = ModelController.GetNextViewController(pageViewController, currentViewController);
 				viewControllers = new[] { currentViewController, nextViewController };
-			}
-			//else {
-			//	var previousViewController = ModelController.GetPreviousViewController(pageViewController, currentViewController);
-			//	viewControllers = new[] { previousViewController, currentViewController };
-			//}
 
+         
 			pageViewController.SetViewControllers(viewControllers, UIPageViewControllerNavigationDirection.Forward, true, null);
 
 			return UIPageViewControllerSpineLocation.Mid;
