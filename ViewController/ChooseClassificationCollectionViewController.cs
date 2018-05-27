@@ -325,7 +325,7 @@ namespace AircraftForSale
                 List<Ad> ads;
                 if (!Settings.IsRegistered)
                 {
-                    ads = (await Ad.GetAdsByClassificationAsync(classification.Name)).ToList();
+					ads = (await Ad.GetAdsByClassificationAsync(classification.Name)).OrderByDescending(r => r.IsFeatured).ToList();
                 }
                 else
 				{
@@ -334,27 +334,27 @@ namespace AircraftForSale
                     {
                         case "No Preference":
                             {
-                                ads = adListEnumerable.ToList();
+								ads = adListEnumerable.OrderByDescending(r => r.IsFeatured).ToList();
                                 break;
                             }
                         case "Recently Updated":
                             {
-                                ads = adListEnumerable.OrderByDescending(row => DateTime.Parse(row.LastUpdated)).ToList();
+								ads = adListEnumerable.OrderByDescending(row => DateTime.Parse(row.LastUpdated)).ThenByDescending(r => r.IsFeatured).ToList();
                                 break;
                             }
                         case "Price":
                             {
-                                ads = adListEnumerable.OrderBy(row => row.Price == null || row.Price == string.Empty || row.Price == "N/A" ? 999999999 : double.Parse(row.Price, NumberStyles.Currency)).ToList();
+								ads = adListEnumerable.OrderBy(row => row.Price == null || row.Price == string.Empty || row.Price == "N/A" ? 999999999 : double.Parse(row.Price, NumberStyles.Currency)).ThenByDescending(r => r.IsFeatured).ToList();
                                 break;
                             }
                         case "Total Time":
                             {
-                                ads = adListEnumerable.OrderBy(row => double.Parse(row.TotalTime)).ToList();
+								ads = adListEnumerable.OrderBy(row => double.Parse(row.TotalTime)).ThenByDescending(r => r.IsFeatured).ToList();
                                 break;
                             }
                         default:
                             {
-                                ads = adListEnumerable.ToList();
+								ads = adListEnumerable.OrderByDescending(r => r.IsFeatured).ToList();
                                 break;
                             }
                     }

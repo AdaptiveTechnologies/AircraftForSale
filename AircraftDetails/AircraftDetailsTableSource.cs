@@ -100,12 +100,12 @@ public class AircraftDetailsTableSource : UITableViewSource
 			List<Ad> similarAdList = new List<Ad>();
 
 			if (isAdNameSort)
-			{
-				similarAdList = adList.Where(row => row.Name == ad.Name).ToList();
+			{ 
+				similarAdList = adList.Where(row => row.Name == ad.Name).OrderBy(r => r.IsFeatured).ToList();
 			}
 			else
 			{
-				similarAdList = adList.Where(row => row.BrokerName == ad.BrokerName).ToList();
+				similarAdList = adList.Where(row => row.BrokerName == ad.BrokerName).OrderBy(r => r.IsFeatured).ToList();
 			}
 
 

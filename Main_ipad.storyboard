@@ -3348,8 +3348,9 @@
                                                             <constraints>
                                                                 <constraint firstItem="tUm-48-WWI" firstAttribute="centerY" secondItem="Abb-c3-F2v" secondAttribute="centerY" id="Cqm-bN-uHC"/>
                                                                 <constraint firstItem="GYC-7N-mIZ" firstAttribute="centerY" secondItem="Abb-c3-F2v" secondAttribute="centerY" id="Dt8-Ma-uPa"/>
+                                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tUm-48-WWI" secondAttribute="trailing" id="JBe-Ja-Efh"/>
                                                                 <constraint firstItem="GYC-7N-mIZ" firstAttribute="leading" secondItem="Abb-c3-F2v" secondAttribute="leadingMargin" constant="5" id="Pgc-5l-ybi"/>
-                                                                <constraint firstItem="tUm-48-WWI" firstAttribute="leading" secondItem="Abb-c3-F2v" secondAttribute="leading" constant="165" id="hLm-BF-3BQ"/>
+                                                                <constraint firstItem="tUm-48-WWI" firstAttribute="leading" secondItem="Abb-c3-F2v" secondAttribute="leading" priority="750" constant="165" id="hLm-BF-3BQ"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3545,7 +3546,8 @@
                                                                 <constraint firstItem="TEU-uf-q7K" firstAttribute="leading" secondItem="qww-cU-iy9" secondAttribute="leadingMargin" constant="5" id="8uz-cE-BgD"/>
                                                                 <constraint firstItem="TEU-uf-q7K" firstAttribute="centerY" secondItem="qww-cU-iy9" secondAttribute="centerY" id="OOi-Ln-LHe"/>
                                                                 <constraint firstItem="cdG-wx-Z3j" firstAttribute="centerY" secondItem="qww-cU-iy9" secondAttribute="centerY" id="cJ0-Fc-xqP"/>
-                                                                <constraint firstItem="cdG-wx-Z3j" firstAttribute="leading" secondItem="qww-cU-iy9" secondAttribute="leading" constant="165" id="kOi-vk-Whw"/>
+                                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cdG-wx-Z3j" secondAttribute="trailing" id="euF-KF-fcD"/>
+                                                                <constraint firstItem="cdG-wx-Z3j" firstAttribute="leading" secondItem="qww-cU-iy9" secondAttribute="leading" priority="750" constant="165" id="kOi-vk-Whw"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -133,9 +133,9 @@ namespace AircraftForSale
 									//get ads with this name and move them to the from of the liste
 									List<Ad> similarAdList = new List<Ad>();
 
-							similarAdList = searchAddList.Where(row => row.Name == ad.Name).ToList();
+							similarAdList = searchAddList.Where(row => row.Name == ad.Name).OrderBy(r => r.IsFeatured).ToList();
 
-							similarAdList.Remove(ad);
+							//similarAdList.Remove(ad);
 
 
 							for (int i = 0; i < similarAdList.Count(); i++)
@@ -144,7 +144,14 @@ namespace AircraftForSale
 								searchAddList.Insert(0, similarAdList[i]);
 							}
 
-							searchAddList.Insert(0, ad);
+							//similarAdList.Remove(ad);
+							//searchAddList.Insert(0, ad);
+
+						
+							var index = searchAddList.FindIndex(x => x.ID == ad.ID);
+							var item = searchAddList[index];
+							searchAddList[index] = searchAddList[0];
+							searchAddList[0] = item;
 
 							InvokeOnMainThread(() =>
 							{

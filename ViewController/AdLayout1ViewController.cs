@@ -118,10 +118,7 @@ namespace AircraftForSale
 				{
 					HelperMethods.MakeModelRegistrationRequiredPrompt(this, sender as UIButton);
 				}
-				//if (sender == Ad1BrokerButton || sender == Ad3BrokerButton)
-				//{
-				//	HelperMethods.SellerRegistrationRequiredPrompt(this, sender as UIButton);
-				//}
+
 				if (sender == Ad1BrokerButton)
                 {
                     HelperMethods.SellerRegistrationRequiredPrompt(this, sender as UIButton);
@@ -175,14 +172,14 @@ namespace AircraftForSale
 
 				//get ads with this name and move them to the from of the liste
 				List<Ad> similarAdList = new List<Ad>();
-
+                
 				if (isAdNameSort)
 				{
-					similarAdList = adList.Where(row => row.Name == ad.Name).ToList();
+					similarAdList = adList.Where(row => row.Name == ad.Name).OrderBy(r => r.IsFeatured).ToList();
 				}
 				else
 				{
-					similarAdList = adList.Where(row => row.BrokerName == ad.BrokerName).ToList();
+					similarAdList = adList.Where(row => row.BrokerName == ad.BrokerName).OrderBy(r => r.IsFeatured).ToList();
 				}
 
 

@@ -61,7 +61,7 @@ namespace AircraftForSale
 
 			Task.Run(async () =>
 			{
-				var adListEnumerable = (await Ad.GetAdsByClassificationAsync(selectedClassification));
+				var adListEnumerable = (await Ad.GetAdsByClassificationAsync(selectedClassification)).OrderByDescending(r => r.IsFeatured);
 				switch (Settings.SortOptions)
 				{
 					case "No Preference":
@@ -71,17 +71,17 @@ namespace AircraftForSale
 						}
 					case "Recently Updated":
 						{
-							adList = adListEnumerable.OrderByDescending(row => DateTime.Parse(row.LastUpdated)).ToList();
+							adList = adListEnumerable.OrderByDescending(row => DateTime.Parse(row.LastUpdated)).ThenByDescending(r => r.IsFeatured).ToList();
 							break;
 						}
 					case "Price":
 						{
-							adList = adListEnumerable.OrderBy(row => row.Price == null || row.Price == string.Empty || row.Price == "N/A" ? 999999999 : double.Parse(row.Price, NumberStyles.Currency)).ToList();
+							adList = adListEnumerable.OrderBy(row => row.Price == null || row.Price == string.Empty || row.Price == "N/A" ? 999999999 : double.Parse(row.Price, NumberStyles.Currency)).ThenByDescending(r => r.IsFeatured).ToList();
 							break;
 						}
 					case "Total Time":
 						{
-							adList = adListEnumerable.OrderBy(row => double.Parse(row.TotalTime)).ToList();
+							adList = adListEnumerable.OrderBy(row => double.Parse(row.TotalTime)).ThenByDescending(r => r.IsFeatured).ToList();
 							break;
 						}
 					default:
