@@ -1,18 +1,21 @@
 ﻿<Properties StartupConfiguration="{B8C03836-A778-482E-8FC3-92267A01DFDA}|Default">
-  <MonoDevelop.Ide.ItemProperties.AircraftForSale PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.C36511A6-5E67-4419-BAC7-A409182E0FD7" automaticSigning="False" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ViewController/MagazineFlipBoardViewController.cs">
+  <MonoDevelop.Ide.ItemProperties.AircraftForSale PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget" automaticSigning="False" />
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="ViewController/MagazineFlipBoardViewController.cs" Line="148" Column="8" />
-      <File FileName="ModelController.cs" Line="84" Column="113" />
-      <File FileName="ViewController/ChooseClassificationCollectionViewController.cs" Line="358" Column="1" />
+      <File FileName="AppDelegate.cs" Line="96" Column="5" />
+      <File FileName="Info.plist" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhone" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/ModelController.cs" relfile="ModelController.cs" line="375" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/SearchLocationTableViewController.cs" relfile="SearchLocationTableViewController.cs" line="37" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/ViewController/EmailInquiryViewController.cs" relfile="ViewController/EmailInquiryViewController.cs" line="16" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/Helpers/HelperMethods.cs" relfile="Helpers/HelperMethods.cs" line="62" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/Helpers/HelperMethods.cs" relfile="Helpers/HelperMethods.cs" line="25" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/Helpers/HelperMethods.cs" relfile="Helpers/HelperMethods.cs" line="60" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/Helpers/HelperMethods.cs" relfile="Helpers/HelperMethods.cs" line="39" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

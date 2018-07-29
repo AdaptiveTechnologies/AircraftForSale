@@ -52,8 +52,7 @@ namespace AircraftForSale
             // Make sure you set the application name before doing any inserts or gets
             BlobCache.ApplicationName = "AircraftForSaleAkavache";
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
-
-            //var storyboard = UIStoryboard.FromName(UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? "Main_ipad" : "Main", NSBundle.MainBundle);
+            
             var storyboard = UIStoryboard.FromName("Main_ipad", NSBundle.MainBundle);
 
             bool skipFirstStep = Settings.IsRegistered;
@@ -61,40 +60,19 @@ namespace AircraftForSale
             UIViewController rootViewController;
             if (skipFirstStep)
                 rootViewController = storyboard.InstantiateViewController("MainTabBarController") as MainTabBarController;
-            //rootViewController = (UIViewController)storyboard.InstantiateViewController("YourViewControllerId");
             else
                 rootViewController = storyboard.InstantiateInitialViewController();
-
-
-
+                         
             //Wait until need to update content in the background... once implemented let the OS decide how often to fetch new content
             UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(UIApplication.BackgroundFetchIntervalNever);
 
 
-			//changed for testing
 			Window.RootViewController = rootViewController;
-			//var testStoryBoard = UIStoryboard.FromName("Registration_New", NSBundle.MainBundle);
-			//Window.RootViewController = testStoryBoard.InstantiateInitialViewController();
+
             Window.MakeKeyAndVisible();
 
             UINavigationBar.Appearance.BarTintColor = UIColor.Black;
-            //UINavigationBar.Appearance.TintColor = UIColor.White; 
 
-
-            //if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
-            //{
-                //var pushSettings = UIUserNotificationSettings.GetSettingsForTypes(
-                //                   UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
-                //                   new NSSet());
-
-                //UIApplication.SharedApplication.RegisterUserNotificationSettings(pushSettings);
-                //UIApplication.SharedApplication.RegisterForRemoteNotifications();
-            //}
-            //else
-            //{
-                //UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound;
-                //UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(notificationTypes);
-            //}
 
             if (!Reachability.IsHostReachable(Settings._baseDomain))
             {
@@ -111,9 +89,10 @@ namespace AircraftForSale
             }
             else
             {
-                //LoadingOverlay loadingOverlay = new LoadingOverlay(rootViewController.View.Frame, "Loading Aircraft...");
-                //rootViewController.View.AddSubview(loadingOverlay);
 
+				//Clear SDImageCache
+				SDImageCache.SharedImageCache.ClearMemory();
+				SDImageCache.SharedImageCache.ClearDisk();
 
                 List<Task> taskList = new List<Task>();
                 if (Settings.IsRegistered)
