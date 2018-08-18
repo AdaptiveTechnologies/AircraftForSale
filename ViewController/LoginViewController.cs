@@ -192,6 +192,17 @@ namespace AircraftForSale
             Gai.SharedInstance.DefaultTracker.Set(GaiConstants.ScreenName, "Login View");
 
             Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateScreenView().Build());
+
+
+            if (!Settings.IsRegistered && !Settings.DisplayedMessage)
+            {
+                //In this scenario, display a modal (just once) asking if user has had trouble registering.
+                //ShowViewController(UIModalTransitionStyle.CoverVertical);
+
+                MessageViewController messageViewController = (MessageViewController)Storyboard.InstantiateViewController("MessageViewController");
+                //this.ShowViewController(messageViewController, this);
+                this.PresentViewController(messageViewController, true, () => { Settings.DisplayedMessage = true; });
+            }
         }
 
         public override void ViewDidLoad()
@@ -332,6 +343,8 @@ namespace AircraftForSale
                 UpdateMyProfileButton.Alpha = 0f;
                 LogoutButton.Alpha = 0f;
                 changePassButton.Alpha = 0f;
+
+
             }
         }
     }

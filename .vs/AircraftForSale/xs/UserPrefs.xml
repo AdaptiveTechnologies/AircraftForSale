@@ -1,8 +1,10 @@
 ﻿<Properties StartupConfiguration="{B8C03836-A778-482E-8FC3-92267A01DFDA}|Default">
-  <MonoDevelop.Ide.ItemProperties.AircraftForSale PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget" automaticSigning="False" />
+  <MonoDevelop.Ide.ItemProperties.AircraftForSale PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.dbe2d8d6ecb735362804806d8c0cec258fac3294" automaticSigning="False" />
   <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="AppDelegate.cs" Line="96" Column="5" />
+      <File FileName="ViewController/LoginViewController.cs" Line="197" Column="70" />
+      <File FileName="MessageViewController.cs" Line="24" Column="53" />
+      <File FileName="../AircraftForSale.PCL/Helpers/Settings.cs" Line="229" Column="34" />
       <File FileName="Info.plist" />
     </Files>
   </MonoDevelop.Ide.Workbench>
