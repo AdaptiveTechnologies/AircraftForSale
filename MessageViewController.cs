@@ -14,20 +14,29 @@ namespace AircraftForSale
             DismissModalViewController(true);
         }
 
+        void EmailSupport_TouchUpInside(object sender, EventArgs e)
+        {
+            ContactWebViewController contactWebViewController = (ContactWebViewController)Storyboard.InstantiateViewController("ContactWebViewController");
+            contactWebViewController.isModal = true;
+            this.PresentViewController(contactWebViewController, true, null);
+        }
 
-		public MessageViewController (IntPtr handle) : base (handle)
+
+        public MessageViewController (IntPtr handle) : base (handle)
 		{
 		}
 
         public override void ViewDidLoad()
         {
-
+           
         }
 
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
             CloseButton.TouchUpInside += CloseButton_TouchUpInside;
+            tryAgainButton.TouchUpInside += CloseButton_TouchUpInside;
+            emailSupportButton.TouchUpInside += EmailSupport_TouchUpInside;
 
         }
 
@@ -35,6 +44,8 @@ namespace AircraftForSale
         {
             base.ViewWillDisappear(animated);
             CloseButton.TouchUpInside -= CloseButton_TouchUpInside;
+            tryAgainButton.TouchUpInside -= CloseButton_TouchUpInside;
+            emailSupportButton.TouchUpInside -= EmailSupport_TouchUpInside;
         }
 
     }

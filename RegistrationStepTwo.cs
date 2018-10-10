@@ -58,6 +58,10 @@ namespace AircraftForSale
 
         public async override void ViewDidLoad()
         {
+            //if(Settings.Email == null || Settings.Email == string.Empty){
+            //    Settings.Password = string.Empty;
+            //}
+
             this.TableView.KeyboardDismissMode = UIScrollViewKeyboardDismissMode.OnDrag;
 
             NavigationItem.Title = "Registration";
@@ -654,7 +658,9 @@ namespace AircraftForSale
                                     HelperMethods.AnimateValidationBorder(PasswordTextView);
                                     PasswordTextView.Text = "";
                                     PasswordTextView.BecomeFirstResponder();
-                                    HelperMethods.SendBasicAlert("Validation", "The password does not match the email address which is already in use on Globalair.com");
+                                    //HelperMethods.SendBasicAlert("Validation", "The password does not match the email address which is already in use on Globalair.com");
+                                    MessageViewController messageViewController = (MessageViewController)Storyboard.InstantiateViewController("MessageViewController");
+                                    this.PresentViewController(messageViewController, true, null);
                                 });
 
                             }

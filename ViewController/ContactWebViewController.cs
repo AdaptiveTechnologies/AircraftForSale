@@ -9,6 +9,8 @@ namespace AircraftForSale
 {
     public partial class ContactWebViewController : UIViewController
     {
+        public bool isModal = false;
+
         protected ContactWebViewController(IntPtr handle) : base(handle)
         {
             // Note: this .ctor should not contain any initialization logic.
@@ -31,6 +33,18 @@ namespace AircraftForSale
             });
 			// Perform any additional setup after loading the view, typically from a nib.
 			submitButton.Layer.CornerRadius = 25;
+
+            if(isModal) {
+                UIButton closeButton = new UIButton(new CGRect(View.Bounds.Width - 75, 85, 75, 50));
+                closeButton.SetImage(UIImage.FromBundle("close"), UIControlState.Normal);
+               //closeButton.BackgroundColor = UIColor.White.ColorWithAlpha(.5f);
+                closeButton.TouchUpInside += (sender, e) =>
+                {
+                    DismissViewController(true, null);
+                };
+
+                View.AddSubview(closeButton);
+            }
         }
 
 
@@ -66,9 +80,12 @@ namespace AircraftForSale
 
 					alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Cancel, (obj) =>
 					{
-                        MainTabBarController controller = this.ParentViewController as MainTabBarController;
-                        //Navigate to the main magazine tab
-                        controller.SelectedIndex = 0;
+                        if (!isModal)
+                        {
+                            MainTabBarController controller = this.ParentViewController as MainTabBarController;
+                            //Navigate to the main magazine tab
+                            controller.SelectedIndex = 0;
+                        }
 
 					}));
 

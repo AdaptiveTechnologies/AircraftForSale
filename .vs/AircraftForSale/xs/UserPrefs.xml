@@ -1,15 +1,17 @@
 ﻿<Properties StartupConfiguration="{B8C03836-A778-482E-8FC3-92267A01DFDA}|Default">
-  <MonoDevelop.Ide.ItemProperties.AircraftForSale PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.37736CA4-3226-47E4-8598-ABF9E450F33C" automaticSigning="True">
+  <MonoDevelop.Ide.ItemProperties.AircraftForSale PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.557E470A-2E0F-4233-8C5E-D8225818F687" automaticSigning="True">
     <MonoDevelop.MacDev.AppleDevelopmentTeam DeveloperId="JJ6S52M66E" TeamId="24K6W497BD" />
   </MonoDevelop.Ide.ItemProperties.AircraftForSale>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Main_ipad.storyboard">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Helpers/HelperMethods.cs">
     <Files>
-      <File FileName="RegistrationStepTwo.cs" Line="657" Column="81" />
-      <File FileName="ViewController/LoginViewController.cs" Line="94" Column="25" />
+      <File FileName="RegistrationStepTwo.cs" Line="63" Column="16" />
       <File FileName="../AircraftForSale.PCL/Model/API/APIManager.cs" Line="81" Column="1" />
-      <File FileName="MessageViewController.cs" Line="24" Column="13" />
-      <File FileName="MessageViewController.designer.cs" Line="1" Column="1" />
-      <File FileName="Main_ipad.storyboard" />
+      <File FileName="ViewController/AdLayout1ViewController.cs" Line="1" Column="1" />
+      <File FileName="ViewController/BanManProViewController.cs" Line="74" Column="23" />
+      <File FileName="Main.cs" Line="11" Column="40" />
+      <File FileName="Helpers/HelperMethods.cs" Line="394" Column="55" />
+      <File FileName="Info.plist" />
+      <File FileName="../../../../Library/Frameworks/Mono.framework/Versions/5.12.0/lib/mono/msbuild/15.0/bin/Microsoft.Common.CurrentVersion.targets" Line="2126" Column="5" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />

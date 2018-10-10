@@ -601,29 +601,29 @@
                                             <rect key="frame" x="0.0" y="0.0" width="735" height="124.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="973" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="39654">
-                                                    <rect key="frame" x="191.5" y="5" width="45" height="21.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="973" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="39654">
+                                                    <rect key="frame" x="183.5" y="5" width="45" height="21.5"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                     <color key="textColor" red="0.9972351867" green="0.9972351867" blue="0.9972351867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="103" verticalHuggingPriority="85" horizontalCompressionResistancePriority="343" verticalCompressionResistancePriority="332" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39660">
-                                                    <rect key="frame" x="70" y="23" width="111.5" height="78.5"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="103" verticalHuggingPriority="85" horizontalCompressionResistancePriority="343" verticalCompressionResistancePriority="332" translatesAutoresizingMaskIntoConstraints="NO" id="39660">
+                                                    <rect key="frame" x="70" y="26" width="103.5" height="73"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="39660" secondAttribute="height" multiplier="44:31" id="WCS-Bz-HQS"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="973" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="39666">
-                                                    <rect key="frame" x="191.5" y="31.5" width="44" height="21.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="973" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="39666">
+                                                    <rect key="frame" x="183.5" y="31.5" width="44" height="21.5"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <color key="textColor" red="0.9972351867" green="0.9972351867" blue="0.9972351867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="973" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="51558">
-                                                    <rect key="frame" x="191.5" y="58" width="39.5" height="19.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="973" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="51558">
+                                                    <rect key="frame" x="183.5" y="58" width="39.5" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.9972351867" green="0.9972351867" blue="0.9972351867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -700,7 +700,7 @@
                 <tabBarController restorationIdentifier="MainTabBarController" storyboardIdentifier="MainTabBarController" definesPresentationContext="YES" id="108" customClass="MainTabBarController" sceneMemberID="viewController">
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="113">
-                        <rect key="frame" x="0.0" y="975" width="768" height="49"/>
+                        <rect key="frame" x="0.0" y="974" width="768" height="50"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.30980392159999998" green="0.54901960780000003" blue="0.074509803920000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3747,7 +3747,7 @@
                                 </constraints>
                                 <state key="normal" image="close.png"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The password does not match the email address which is already in use on Globalair.com" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gzk-Ma-uLl">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The password does not match the email address which is already in use on Globalair.com." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gzk-Ma-uLl">
                                 <rect key="frame" x="20" y="170" width="728" height="57.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3771,7 +3771,7 @@
                                     <constraint firstAttribute="width" constant="175" id="cJV-m3-zeF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Reset Password">
+                                <state key="normal" title="Email Support">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
@@ -3782,10 +3782,10 @@
                             <constraint firstItem="PWI-FT-h2i" firstAttribute="top" secondItem="SOX-23-tL5" secondAttribute="top" constant="100" id="8JZ-NX-YEw"/>
                             <constraint firstItem="XuC-Vy-mf0" firstAttribute="top" secondItem="SOX-23-tL5" secondAttribute="top" constant="25" id="LRd-q6-Lux"/>
                             <constraint firstItem="SOX-23-tL5" firstAttribute="trailing" secondItem="PWI-FT-h2i" secondAttribute="trailing" constant="25" id="MnB-m8-Gqg"/>
-                            <constraint firstItem="AZH-qc-xQk" firstAttribute="centerX" secondItem="1uP-an-MBW" secondAttribute="centerX" id="Van-oE-1tL"/>
+                            <constraint firstItem="AZH-qc-xQk" firstAttribute="centerX" secondItem="SOX-23-tL5" secondAttribute="centerX" id="Van-oE-1tL"/>
                             <constraint firstItem="g8F-Ku-h8W" firstAttribute="top" secondItem="SOX-23-tL5" secondAttribute="top" id="Wop-B2-DfT"/>
                             <constraint firstItem="SOX-23-tL5" firstAttribute="trailing" secondItem="g8F-Ku-h8W" secondAttribute="trailing" id="Z2G-48-vXf"/>
-                            <constraint firstItem="McN-As-lRk" firstAttribute="centerX" secondItem="1uP-an-MBW" secondAttribute="centerX" id="c1m-91-0LZ"/>
+                            <constraint firstItem="McN-As-lRk" firstAttribute="centerX" secondItem="SOX-23-tL5" secondAttribute="centerX" id="c1m-91-0LZ"/>
                             <constraint firstItem="AZH-qc-xQk" firstAttribute="top" secondItem="McN-As-lRk" secondAttribute="bottom" constant="25" id="dkA-fc-p5x"/>
                             <constraint firstItem="Gzk-Ma-uLl" firstAttribute="top" secondItem="PWI-FT-h2i" secondAttribute="bottom" constant="15" id="euR-UB-fzC"/>
                             <constraint firstItem="McN-As-lRk" firstAttribute="top" secondItem="Gzk-Ma-uLl" secondAttribute="bottom" constant="25" id="hRv-gi-gNF"/>
@@ -3800,7 +3800,7 @@
                     </view>
                     <connections>
                         <outlet property="CloseButton" destination="XuC-Vy-mf0" id="muj-qg-frO"/>
-                        <outlet property="resetPasswordButton" destination="AZH-qc-xQk" id="0Ba-7p-ifP"/>
+                        <outlet property="emailSupportButton" destination="AZH-qc-xQk" id="GMF-oH-nsn"/>
                         <outlet property="tryAgainButton" destination="McN-As-lRk" id="nGb-g4-LCw"/>
                     </connections>
                 </viewController>

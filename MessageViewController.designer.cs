@@ -19,7 +19,7 @@ namespace AircraftForSale
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton resetPasswordButton { get; set; }
+        UIKit.UIButton emailSupportButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -32,9 +32,9 @@ namespace AircraftForSale
                 CloseButton = null;
             }
 
-            if (resetPasswordButton != null) {
-                resetPasswordButton.Dispose ();
-                resetPasswordButton = null;
+            if (emailSupportButton != null) {
+                emailSupportButton.Dispose ();
+                emailSupportButton = null;
             }
 
             if (tryAgainButton != null) {
