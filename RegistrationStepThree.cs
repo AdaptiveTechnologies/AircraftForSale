@@ -313,7 +313,9 @@ namespace AircraftForSale
 			TimeFramePickerOptions.Add(new Tuple<string, DateTime>("Select from list", DateTime.Now));
 			TimeFramePickerOptions.Add(new Tuple<string, DateTime>("No Specific", DateTime.Now));
 			TimeFramePickerOptions.Add(new Tuple<string, DateTime>("0 - 3 months", DateTime.Now.AddMonths(3)));
-			TimeFramePickerOptions.Add(new Tuple<string, DateTime>("4 - 12 months", DateTime.Now.AddMonths(12)));
+            TimeFramePickerOptions.Add(new Tuple<string, DateTime>("3 - 6 months", DateTime.Now.AddMonths(6)));
+            TimeFramePickerOptions.Add(new Tuple<string, DateTime>("6 - 9 months", DateTime.Now.AddMonths(9)));
+            TimeFramePickerOptions.Add(new Tuple<string, DateTime>("9 - 12 months", DateTime.Now.AddMonths(12)));
 
 
 		}

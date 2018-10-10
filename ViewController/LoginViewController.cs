@@ -51,7 +51,6 @@ namespace AircraftForSale
             string username = UsernameTextField.Text;
             string password = PasswordTextField.Text;
 
-            //TODO: Perform username/password validation
 
             if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
             {
@@ -86,7 +85,22 @@ namespace AircraftForSale
                     else
                     {
                         loadingIndicator.Hide();
-                        HelperMethods.SendBasicAlert("Login", "Login Failed");
+                        String responseMessage = "";
+                        if(authResponse.ResponseMsg != null && authResponse.ResponseMsg != string.Empty){
+                            responseMessage = authResponse.ResponseMsg;
+                        }else {
+                            responseMessage = "Unable to authenticate user.";
+                        }
+
+                        if (responseMessage == "Incorrect Password")
+                        {
+                            MessageViewController messageViewController = (MessageViewController)Storyboard.InstantiateViewController("MessageViewController");
+                            this.PresentViewController(messageViewController, true, null);
+                        }
+                        else
+                        {
+                            HelperMethods.SendBasicAlert("Login", responseMessage);
+                        }
 						UsernameTextField.Enabled = true;
 						PasswordTextField.Enabled = true;
                         return;
@@ -194,15 +208,15 @@ namespace AircraftForSale
             Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateScreenView().Build());
 
 
-            if (!Settings.IsRegistered && !Settings.DisplayedMessage)
-            {
-                //In this scenario, display a modal (just once) asking if user has had trouble registering.
-                //ShowViewController(UIModalTransitionStyle.CoverVertical);
+            //if (!Settings.IsRegistered && !Settings.DisplayedMessage)
+            //{
+            //    //In this scenario, display a modal (just once) asking if user has had trouble registering.
+            //    //ShowViewController(UIModalTransitionStyle.CoverVertical);
 
-                MessageViewController messageViewController = (MessageViewController)Storyboard.InstantiateViewController("MessageViewController");
-                //this.ShowViewController(messageViewController, this);
-                this.PresentViewController(messageViewController, true, () => { Settings.DisplayedMessage = true; });
-            }
+            //    MessageViewController messageViewController = (MessageViewController)Storyboard.InstantiateViewController("MessageViewController");
+            //    //this.ShowViewController(messageViewController, this);
+            //    this.PresentViewController(messageViewController, true, () => { Settings.DisplayedMessage = true; });
+            //}
         }
 
         public override void ViewDidLoad()
@@ -297,6 +311,15 @@ namespace AircraftForSale
                 this.ShowViewController(new UINavigationController(favClassificationsVC), this);
 
             };
+
+            ////TODO: Remove after testing: testing new check username api endpoint
+            //Task.Run(async () =>
+            //{
+            //    APIManager apiManager = new APIManager();
+            //    //var authResponseInner = await apiManager.CheckUserNameAsync(Settings.AppID, Settings.AuthToken, "clay12345@me.com", Settings.Password);
+
+            //    var authResponseInner = await apiManager.ValidateLoginAsync(Settings.AppID, Settings.AuthToken, "Horseman@ganmail.com", "Showcase5");
+            //});
 
         }
 

@@ -1,23 +1,39 @@
 ﻿<Properties StartupConfiguration="{B8C03836-A778-482E-8FC3-92267A01DFDA}|Default">
-  <MonoDevelop.Ide.ItemProperties.AircraftForSale PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.dbe2d8d6ecb735362804806d8c0cec258fac3294" automaticSigning="False" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.AircraftForSale PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.37736CA4-3226-47E4-8598-ABF9E450F33C" automaticSigning="True">
+    <MonoDevelop.MacDev.AppleDevelopmentTeam DeveloperId="JJ6S52M66E" TeamId="24K6W497BD" />
+  </MonoDevelop.Ide.ItemProperties.AircraftForSale>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Main_ipad.storyboard">
     <Files>
-      <File FileName="ViewController/LoginViewController.cs" Line="197" Column="70" />
-      <File FileName="MessageViewController.cs" Line="24" Column="53" />
-      <File FileName="../AircraftForSale.PCL/Helpers/Settings.cs" Line="229" Column="34" />
-      <File FileName="Info.plist" />
+      <File FileName="RegistrationStepTwo.cs" Line="657" Column="81" />
+      <File FileName="ViewController/LoginViewController.cs" Line="94" Column="25" />
+      <File FileName="../AircraftForSale.PCL/Model/API/APIManager.cs" Line="81" Column="1" />
+      <File FileName="MessageViewController.cs" Line="24" Column="13" />
+      <File FileName="MessageViewController.designer.cs" Line="1" Column="1" />
+      <File FileName="Main_ipad.storyboard" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhone" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/ModelController.cs" relfile="ModelController.cs" line="375" column="1" />
-      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/SearchLocationTableViewController.cs" relfile="SearchLocationTableViewController.cs" line="37" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/ViewController/EmailInquiryViewController.cs" relfile="ViewController/EmailInquiryViewController.cs" line="16" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/Helpers/HelperMethods.cs" relfile="Helpers/HelperMethods.cs" line="62" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/Helpers/HelperMethods.cs" relfile="Helpers/HelperMethods.cs" line="25" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/Helpers/HelperMethods.cs" relfile="Helpers/HelperMethods.cs" line="60" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/Helpers/HelperMethods.cs" relfile="Helpers/HelperMethods.cs" line="39" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/AuthResponse.cs" relfile=".PCL/Model/API/AuthResponse.cs" line="34" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/APIManager.cs" relfile=".PCL/Model/API/APIManager.cs" line="232" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/AuthResponse.cs" relfile=".PCL/Model/API/AuthResponse.cs" line="59" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/AuthResponse.cs" relfile=".PCL/Model/API/AuthResponse.cs" line="37" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/AuthResponse.cs" relfile=".PCL/Model/API/AuthResponse.cs" line="39" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/APIManager.cs" relfile=".PCL/Model/API/APIManager.cs" line="334" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/APIManager.cs" relfile=".PCL/Model/API/APIManager.cs" line="317" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/AuthResponse.cs" relfile=".PCL/Model/API/AuthResponse.cs" line="71" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/AuthResponse.cs" relfile=".PCL/Model/API/AuthResponse.cs" line="65" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/AuthResponse.cs" relfile=".PCL/Model/API/AuthResponse.cs" line="67" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/APIManager.cs" relfile=".PCL/Model/API/APIManager.cs" line="680" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/APIManager.cs" relfile=".PCL/Model/API/APIManager.cs" line="702" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/APIManager.cs" relfile=".PCL/Model/API/APIManager.cs" line="711" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

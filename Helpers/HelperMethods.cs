@@ -86,73 +86,6 @@ namespace AircraftForSale
 			}
 		}
 
-		//public static void LoadWebBanManPro(UIView mainView)
-		//{
-		//	Random random = new Random();
-		//	var randomInt = random.Next(1, 100);
-		//	if (randomInt < 17)
-		//	{
-
-		//		if (Reachability.IsHostReachable(Settings._baseDomain))
-		//		{
-		//			LoadingOverlay loadingOverlay = new LoadingOverlay(mainView.Frame);
-
-
-		//			var frame = new CGRect(20, 20, mainView.Bounds.Width - 40, mainView.Bounds.Height - 150);
-		//			//var frame = new CGRect(0.0, 20.0, mainView.Bounds.Width, 60.0);
-		//			var webView = new UIWebView(frame);
-
-
-		//			webView.LoadFinished += (sender, e) =>
-		//			{
-		//				loadingOverlay.Hide();
-		//			};
-
-		//			var url = "https://www.globalair.com/banmanpro/ad.aspx?ZoneID=94&Task=Get&Mode=HTML&SiteID=1&PageID=78751";
-		//			webView.LoadRequest(new NSUrlRequest(new NSUrl(url)));
-
-		//			UIView.BeginAnimations("fadeflag");
-		//			UIView.Animate(1, () =>
-		//			{
-		//				mainView.Alpha = .5f;
-		//			}, () =>
-		//			{
-
-		//				mainView.AddSubview(webView);
-		//				mainView.AddSubview(loadingOverlay);
-
-		//				UIButton closeButton = new UIButton(new CGRect(mainView.Bounds.Width - 100, 10, 50, 50));
-		//				closeButton.SetImage(UIImage.FromBundle("close"), UIControlState.Normal);
-		//				closeButton.BackgroundColor = UIColor.White.ColorWithAlpha(.5f);
-		//				closeButton.TouchUpInside += (sender, e) =>
-		//				{
-		//					try
-		//					{
-		//						webView.RemoveFromSuperview();
-		//						closeButton.RemoveFromSuperview();
-		//					}
-		//					finally
-		//					{
-		//						webView.Dispose();
-		//					}
-		//				};
-
-		//				UIImageView imageView = new UIImageView(new CGRect(mainView.Bounds.Width - 75, mainView.Bounds.Height / 2, 75, 50));
-		//				imageView.Image = UIImage.FromBundle("swipe_left");
-		//				imageView.Alpha = .5f;
-		//				webView.AddSubview(closeButton);
-		//				webView.AddSubview(imageView);
-
-		//				mainView.Alpha = 1f;
-		//			});
-
-		//			UIView.CommitAnimations();
-		//		}
-		//		else {
-		//			SendBasicAlert("Connect to a Network", "Please connect to a network to view this ad");
-		//	}
-		//	}
-		//}
 
 
 		public static void LoadWebViewWithAd(UITapGestureRecognizer tap, Ad ad, UIView mainView)
@@ -286,24 +219,7 @@ namespace AircraftForSale
 			//totalTimeString.SetAttributes(labelAttribute.Dictionary, new NSRange(0, 0));
 			return plainTotalTimeText;
 		}
-		//public static NSAttributedString GetLocationAttributedString(Ad ad, UIStringAttributes labelAttribute)
-		//{
-		//	string simpleLocationText = "" + ad.Location;
-		//	//var locationString = new NSMutableAttributedString(simpleLocationText);
-		//	//locationString.SetAttributes(labelAttribute.Dictionary, new NSRange(0, 0));
-		//          return simpleLocationText;
-		//}
 
-
-
-		//public static NSAttributedString GetBrokerAttributedString(Ad ad, UIStringAttributes labelAttribute, UIStringAttributes valueAttribute)
-		//{
-		//	string plainBrokerText = "" + ad.BrokerName;
-		//	var brokerString = new NSMutableAttributedString(plainBrokerText);
-		//	//brokerString.SetAttributes(labelAttribute.Dictionary, new NSRange(0, 0));
-		//	//brokerString.SetAttributes(valueAttribute.Dictionary, new NSRange(0, ad.BrokerName.Count()));
-		//	return brokerString;
-		//}
 
 		public static bool ShowPriceChangedLabel(string stringLastUpdated)
 		{

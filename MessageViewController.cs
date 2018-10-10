@@ -21,7 +21,7 @@ namespace AircraftForSale
 
         public override void ViewDidLoad()
         {
-            MessageTextView.Layer.CornerRadius = 20;
+
         }
 
         public override void ViewWillAppear(bool animated)

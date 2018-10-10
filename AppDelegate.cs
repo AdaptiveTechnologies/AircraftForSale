@@ -39,7 +39,6 @@ namespace AircraftForSale
             Gai.SharedInstance.DispatchInterval = 20;
             Gai.SharedInstance.TrackUncaughtExceptions = true;
 
-			//TODO: Remove commenting after development to resume tracking
             Tracker = Gai.SharedInstance.GetTracker(TrackingId);
 
             //Clay Martin 10/21/17: Allowing IDFA collection for more sophisticated analytics
@@ -72,6 +71,8 @@ namespace AircraftForSale
             Window.MakeKeyAndVisible();
 
             UINavigationBar.Appearance.BarTintColor = UIColor.Black;
+
+
 
 
             if (!Reachability.IsHostReachable(Settings._baseDomain))
@@ -288,7 +289,7 @@ namespace AircraftForSale
         //    // Has the token changed?
         //    if (string.IsNullOrEmpty(oldDeviceToken) || !oldDeviceToken.Equals(DeviceToken))
         //    {
-        //        //TODO: Put your own logic here to notify your server that the device token has changed/been created!
+        //        //Put your own logic here to notify your server that the device token has changed/been created!
         //    }
 
         //    // Save new device token 

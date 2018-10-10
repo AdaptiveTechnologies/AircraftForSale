@@ -22,7 +22,6 @@ namespace AircraftForSale
 				NameTextField.Layer.BorderColor = UIColor.Clear.CGColor;
                 NameTextField.Layer.BorderWidth = 0f;
 
-                //TODO: Uncomment. This is commented for testing
                 //Send Inquiry
                 //Clay Martin 1/1/18: Change app name to BuyPlane
                 var response = await AdInquiryResponse.AdInquiry(int.Parse(AdProperty.ID), NameTextField.Text, EmailAddressTextField.Text, string.Empty, CommentsTextView.Text

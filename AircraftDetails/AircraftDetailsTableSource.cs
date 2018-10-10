@@ -122,7 +122,6 @@ public class AircraftDetailsTableSource : UITableViewSource
 				var startingViewController = modelController.GetViewController(0, false);
 				var viewControllers = new UIViewController[] { startingViewController };
 
-				//TODO: Uncomment after fixing
 				pageViewController.SetViewControllers(viewControllers, UIPageViewControllerNavigationDirection.Forward, true, null);
 
 				HelperMethods.SendBasicAlert("", "Aircraft arranged by " + (isAdNameSort ? ad.Name : ad.BrokerName));
