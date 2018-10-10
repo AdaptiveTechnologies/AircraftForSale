@@ -58,9 +58,9 @@ namespace AircraftForSale
 
         public async override void ViewDidLoad()
         {
-            //if(Settings.Email == null || Settings.Email == string.Empty){
-            //    Settings.Password = string.Empty;
-            //}
+            if(Settings.Email == null || Settings.Email == string.Empty){
+                Settings.Password = string.Empty;
+            }
 
             this.TableView.KeyboardDismissMode = UIScrollViewKeyboardDismissMode.OnDrag;
 
@@ -659,7 +659,9 @@ namespace AircraftForSale
                                     PasswordTextView.Text = "";
                                     PasswordTextView.BecomeFirstResponder();
                                     //HelperMethods.SendBasicAlert("Validation", "The password does not match the email address which is already in use on Globalair.com");
-                                    MessageViewController messageViewController = (MessageViewController)Storyboard.InstantiateViewController("MessageViewController");
+
+                                    var sb = UIStoryboard.FromName("Main_ipad", null);
+                                    MessageViewController messageViewController = (MessageViewController)sb.InstantiateViewController("MessageViewController");
                                     this.PresentViewController(messageViewController, true, null);
                                 });
 
