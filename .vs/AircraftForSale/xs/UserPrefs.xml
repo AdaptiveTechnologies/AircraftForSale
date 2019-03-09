@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{B8C03836-A778-482E-8FC3-92267A01DFDA}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="../AircraftForSale.PCL/Model/API/APIManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../AircraftForSale.PCL/Helpers/Settings.cs">
     <Files>
       <File FileName="ViewController/LoginViewController.cs" Line="1" Column="1" />
       <File FileName="Helpers/HelperMethods.cs" Line="1" Column="1" />
@@ -10,26 +10,22 @@
       <File FileName="Main_ipad.storyboard" />
       <File FileName="Info.plist" />
       <File FileName="ViewController/BanManProViewController.cs" Line="116" Column="66" />
-      <File FileName="../AircraftForSale.PCL/Helpers/Settings.cs" Line="866" Column="24" />
+      <File FileName="../AircraftForSale.PCL/Helpers/Settings.cs" Line="4" Column="16" />
       <File FileName="../AircraftForSale.PCL/Model/Ads/Ad.cs" Line="242" Column="53" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="AircraftForSale" expanded="True">
-            <Node name="AircraftForSale.PCL" expanded="True">
-              <Node name="Model" expanded="True">
-                <Node name="API" expanded="True">
-                  <Node name="APIManager.cs" selected="True" />
-                </Node>
-              </Node>
+            <Node name="AircraftForSale.PCL" expanded="True" selected="True">
+              <Node name="Helpers" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.AircraftForSale automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.6C24B930-2ABE-404C-BD64-8117990A901F" />
+  <MonoDevelop.Ide.ItemProperties.AircraftForSale automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.5A56DFCA-4CD9-46D0-9E11-25CA99ABC6A8" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
