@@ -51,7 +51,7 @@ namespace AircraftForSale
             // Make sure you set the application name before doing any inserts or gets
             BlobCache.ApplicationName = "AircraftForSaleAkavache";
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
-            
+
             var storyboard = UIStoryboard.FromName("Main_ipad", NSBundle.MainBundle);
 
             bool skipFirstStep = Settings.IsRegistered;
@@ -61,12 +61,12 @@ namespace AircraftForSale
                 rootViewController = storyboard.InstantiateViewController("MainTabBarController") as MainTabBarController;
             else
                 rootViewController = storyboard.InstantiateInitialViewController();
-                         
+
             //Wait until need to update content in the background... once implemented let the OS decide how often to fetch new content
             UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(UIApplication.BackgroundFetchIntervalNever);
 
 
-			Window.RootViewController = rootViewController;
+            Window.RootViewController = rootViewController;
 
             Window.MakeKeyAndVisible();
 
@@ -91,9 +91,9 @@ namespace AircraftForSale
             else
             {
 
-				//Clear SDImageCache
-				SDImageCache.SharedImageCache.ClearMemory();
-				SDImageCache.SharedImageCache.ClearDisk();
+                //Clear SDImageCache
+                SDImageCache.SharedImageCache.ClearMemory();
+                SDImageCache.SharedImageCache.ClearDisk();
 
                 List<Task> taskList = new List<Task>();
                 if (Settings.IsRegistered)
@@ -106,7 +106,7 @@ namespace AircraftForSale
                     {
                         Ad.DeleteAdsByClassification(fClass);
 
-                        await ProactivelyDownloadImages(await Ad.GetAdsByClassificationAsync(fClass));
+                        ProactivelyDownloadImages(await Ad.GetAdsByClassificationAsync(fClass));
                     });
 
                         taskList.Add(task);
@@ -129,7 +129,7 @@ namespace AircraftForSale
                         var task = Task.Run(async () =>
                         {
                             Ad.DeleteAdsByClassification(fClass);
-                            await ProactivelyDownloadImages(await Ad.GetAdsByClassificationAsync(fClass));
+                            ProactivelyDownloadImages(await Ad.GetAdsByClassificationAsync(fClass));
                         });
                         taskList.Add(task);
                     }
@@ -141,19 +141,8 @@ namespace AircraftForSale
 
                    InvokeOnMainThread(() =>
                    {
-                        //var url = "https://www.globalair.com/banmanpro/ad.aspx?ZoneID=94&Task=Get&Mode=HTML&SiteID=1&PageID=78751";
-                        //var width = UIScreen.MainScreen.Bounds.Width;
-                        //var screenHeight = UIScreen.MainScreen.Bounds.Height;
 
-                        //var frame = new CGRect(0, 0, width, screenHeight);
-                        //BanManProWebView = new UIWebView(frame);
-                        //BanManProWebView.LoadRequest(new NSUrlRequest(new NSUrl(url)));
-
-                        //No need to hide overlay if it is never rendered
-                        //loadingOverlay.Hide();
-
-                        //var window = UIApplication.SharedApplication.KeyWindow;
-                        var vc = Window.RootViewController;
+                       var vc = Window.RootViewController;
                        while (vc.PresentedViewController != null)
                        {
                            vc = vc.PresentedViewController;
@@ -183,95 +172,97 @@ namespace AircraftForSale
             return true;
         }
 
-        public static Task ProactivelyDownloadImages(IEnumerable<Ad> ads)
+        public static void ProactivelyDownloadImages(IEnumerable<Ad> ads)
         {
-            //if (FirstAd == null)
-            //{
-            //    FirstAd = ads.First();
-            //}
 
             //Proactively download images
-            return Task.Run(() =>
+            //return Task.Run(() =>
+            //{
+            List<Task> taskList = new List<Task>();
+            int counter = 0;
+            foreach (var adListing in ads)
             {
-                List<Task> taskList = new List<Task>();
-                int counter = 0;
-                foreach (var adListing in ads)
+                try
                 {
-                    try
+                    //var imageObject = SDImageCache.SharedImageCache.ValueForKeyPath(new NSString(adListing.ImageURL));
+
+                    //SDImageCache.SharedImageCache.QueryDiskCache(adListing.ImageURL, (isInCache) =>
+                    //SDImageCache.SharedImageCache.DiskImageExists(adListing.ImageURL,(isInCache) => ;)
+                    SDImageCache.SharedImageCache.DiskImageExists(adListing.ImageURL, (isInCache) =>
                     {
-                        //var imageObject = SDImageCache.SharedImageCache.ValueForKeyPath(new NSString(adListing.ImageURL));
-                        SDImageCache.SharedImageCache.QueryDiskCache(adListing.ImageURL, (isInCache) =>
+                        if (!isInCache)
                         {
-                            if (!isInCache)
+
+                            if (counter < 5)
                             {
-
-                                if (counter < 4)
+                                var task = Task.Run(async () =>
                                 {
-                                    var task = Task.Run(async () =>
-                                    {
-                                        var webClient = new WebClient();
-                                        try
-                                        {
-                                            var url = new Uri(adListing.ImageURL);
-                                            //Task.Run(async () =>
-                                            //{
-
-                                            var bytes = await webClient.DownloadDataTaskAsync(url);
-                                            var data = NSData.FromArray(bytes);
-                                            var uiimage = UIImage.LoadFromData(data);
-                                            SDImageCache.SharedImageCache.StoreImage(image: uiimage, key: adListing.ImageURL);
-                                        }
-                                        catch (Exception e)
-                                        {
-                                            string breakPoint = e.Message;
-                                        }
-                                    });
-                                    taskList.Add(task);
-                                    //}).Wait();
-                                }
-                                else
-                                {
+                                    var webClient = new WebClient();
                                     try
                                     {
-                                        SDWebImageManager.SharedManager.Download(
-                                        url: new NSUrl(adListing.ImageURL),
-                                        options: SDWebImageOptions.ContinueInBackground | SDWebImageOptions.HighPriority,
-                                        progressBlock: (recievedSize, expectedSize) =>
-                                        {
-                                            // Track progress...
-                                        },
-                                        completedBlock: (image, error, cacheType, finished, imageUrl) =>
-                                        {
-                                            //if (error != null)
-                                            //{
-                                            //	string breakPoint = "";
-                                            //}
-                                        });
+                                        var url = new Uri(adListing.ImageURL);
+                                        var bytes = await webClient.DownloadDataTaskAsync(url);
+                                        var dataBytes = NSData.FromArray(bytes);
+                                        var uiimage = UIImage.LoadFromData(dataBytes);
+                                        SDImageCache.SharedImageCache.StoreImageDataToDisk(dataBytes, adListing.ImageURL);
+
                                     }
                                     catch (Exception e)
                                     {
                                         string breakPoint = e.Message;
                                     }
+                                });
+                                taskList.Add(task);
+                            }
+                            else
+                            {
+                                if (taskList.Count > 0)
+                                {
+                                    //Why are we "waitall" here? need to test not waiting.
+                                    Task.WaitAll(taskList.ToArray());
+                                    taskList.Clear();
+                                }
+                                try
+                                {
+                                    SDWebImageManager.SharedManager.ImageDownloader.DownloadImage(
+                                    url: new NSUrl(adListing.ImageURL),
+                                    options: SDWebImageDownloaderOptions.HighPriority | SDWebImageDownloaderOptions.ContinueInBackground,
+                                    progressHandler: (receivedSize, expectedSize, url) =>
+                                    {
 
+                                    },
+                                    completedHandler: (imageInner, dataInner, error, finished) =>
+                                    {
+                                        if (dataInner != null && finished)
+                                        {
+                                            SDImageCache.SharedImageCache.StoreImageDataToDisk(dataInner, adListing.ImageURL);
+                                        }
+                                    });
+                                }
+                                catch (Exception e)
+                                {
+                                    string breakPoint = e.Message;
                                 }
 
                             }
                             counter++;
-                        });
-                    }
-                    catch (Exception e)
-                    {
-                        string breakPoint = e.Message;
-                    }
+                        }
 
+                    });
                 }
-                if (taskList.Count > 0)
+                catch (Exception e)
                 {
-                    //Why are we "waitall" here? need to test not waiting.
-                    //Task.WaitAll(taskList.ToArray());
-                    Task.WaitAny(taskList.ToArray());
+                    string breakPoint = e.Message;
                 }
-            });
+
+            }
+            //if (taskList.Count > 0)
+            //{
+            //    //Why are we "waitall" here? need to test not waiting.
+            //    Task.WaitAll(taskList.ToArray());
+            //    //Task.WaitAny(taskList.ToArray());
+            //}
+
         }
 
         //public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)

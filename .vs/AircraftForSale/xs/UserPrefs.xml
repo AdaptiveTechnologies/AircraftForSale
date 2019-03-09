@@ -1,31 +1,23 @@
 ﻿<Properties StartupConfiguration="{B8C03836-A778-482E-8FC3-92267A01DFDA}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="../AircraftForSale.PCL/Helpers/Settings.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="AppDelegate.cs">
     <Files>
-      <File FileName="ViewController/LoginViewController.cs" Line="1" Column="1" />
-      <File FileName="Helpers/HelperMethods.cs" Line="1" Column="1" />
-      <File FileName="../AircraftForSale.PCL/Model/API/APIManager.cs" Line="366" Column="61" />
-      <File FileName="ViewController/EmailInquiryViewController.cs" Line="30" Column="1" />
-      <File FileName="../AircraftForSale.PCL/Model/API/AuthResponse.cs" Line="1" Column="1" />
-      <File FileName="../AircraftForSale.PCL/Model/API/AdInquiryResponse.cs" Line="16" Column="1" />
-      <File FileName="Main_ipad.storyboard" />
-      <File FileName="Info.plist" />
-      <File FileName="ViewController/BanManProViewController.cs" Line="116" Column="66" />
-      <File FileName="../AircraftForSale.PCL/Helpers/Settings.cs" Line="4" Column="16" />
-      <File FileName="../AircraftForSale.PCL/Model/Ads/Ad.cs" Line="242" Column="53" />
+      <File FileName="AppDelegate.cs" Line="236" Column="17" />
+      <File FileName="ViewController/ChooseClassificationCollectionViewController.cs" Line="363" Column="17" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="AircraftForSale" expanded="True">
-            <Node name="AircraftForSale.PCL" expanded="True" selected="True">
-              <Node name="Helpers" expanded="True" />
+            <Node name="AircraftForSale" expanded="True">
+              <Node name="AppDelegate.cs" selected="True" />
             </Node>
+            <Node name="AircraftForSale.PCL" expanded="True" />
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.AircraftForSale automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.5A56DFCA-4CD9-46D0-9E11-25CA99ABC6A8" />
+  <MonoDevelop.Ide.ItemProperties.AircraftForSale automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.6C24B930-2ABE-404C-BD64-8117990A901F" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

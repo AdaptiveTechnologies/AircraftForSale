@@ -360,7 +360,7 @@ namespace AircraftForSale
                     }
                 }
 
-                await AppDelegate.ProactivelyDownloadImages(ads);
+                AppDelegate.ProactivelyDownloadImages(ads);
 
             }).ContinueWith((task) =>
             {
