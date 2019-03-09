@@ -22,10 +22,13 @@ namespace AircraftForSale
 				NameTextField.Layer.BorderColor = UIColor.Clear.CGColor;
                 NameTextField.Layer.BorderWidth = 0f;
 
+
+                bool isChecked = CheckButton.Selected;
+
                 //Send Inquiry
                 //Clay Martin 1/1/18: Change app name to BuyPlane
-                var response = await AdInquiryResponse.AdInquiry(int.Parse(AdProperty.ID), NameTextField.Text, EmailAddressTextField.Text, string.Empty, CommentsTextView.Text
-                , AdProperty.BrokerId, AdInquirySource.Email, "Inquiry about " + AdProperty.Name + " from GlobalAir.com BuyPlane Magazine");
+                var response = await AdInquiryResponse.AdInquiry(int.Parse(AdProperty.ID), NameTextField.Text, EmailAddressTextField.Text, PhoneTextField.Text, CommentsTextView.Text
+                                                                 , AdProperty.BrokerId, AdInquirySource.Email, "Inquiry about " + AdProperty.Name + " from GlobalAir.com BuyPlane Magazine", isChecked);
 
                 //AdInquiryResponse response = new AdInquiryResponse();
                 //response.Status = "Success";

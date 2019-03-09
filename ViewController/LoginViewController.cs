@@ -52,8 +52,18 @@ namespace AircraftForSale
             string password = PasswordTextField.Text;
 
 
+
             if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
             {
+
+                if(!HelperMethods.IsValidPassword(password)){
+                    HelperMethods.SendBasicAlert("Validation", "Passwords should contain letters and numbers and be at least 6 characters.");
+                    PasswordTextField.Layer.BorderColor = UIColor.Red.CGColor;
+                    PasswordTextField.Layer.BorderWidth = 1f;
+                    UsernameTextField.Enabled = true;
+                    PasswordTextField.Enabled = true;
+                    return;
+                }
                 //Save username/password to settings
 
                 Settings.Username = username;

@@ -640,7 +640,7 @@ namespace AircraftForSale
                 if(!bypassBeginEditingCall) {
                     if (!HelperMethods.IsValidPassword(PasswordTextView.Text, PasswordTextView))
                     {
-                        HelperMethods.SendBasicAlert("Validation", "Passwords should contain letters and numbers and be less than 15 characters.");
+                        HelperMethods.SendBasicAlert("Validation", "Passwords should contain letters and numbers and be at least 6 characters.");
                     }
                     else
                     {

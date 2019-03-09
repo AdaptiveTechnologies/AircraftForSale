@@ -444,12 +444,12 @@ namespace AircraftForSale
 		{
 			//regex "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{10,}$"
 			bool isValid = false;
-			Regex regex = new Regex(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$");
+			Regex regex = new Regex(@"^(?=.*[a-zA-Z\d].*)[a-zA-Z\d!@#$%&*]{6,}$");
 			Match match = regex.Match(password);
 			if (match.Success)
 			{
-				if (password.Length > 15)
-					isValid = false;
+     //           if (password.Length <= 5){}
+					//isValid = false;
 
 				isValid = true;
 			}
