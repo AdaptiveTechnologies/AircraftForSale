@@ -166,6 +166,9 @@
     <Reference Include="SDWebImage.iOS">
       <HintPath>packages\Xamarin.SDWebImage.4.4.0\lib\Xamarin.iOS\SDWebImage.iOS.dll</HintPath>
     </Reference>
+    <Reference Include="SVProgressHUD">
+      <HintPath>packages\SVProgressHUD.2.2.5\lib\Xamarin.iOS10\SVProgressHUD.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json" />

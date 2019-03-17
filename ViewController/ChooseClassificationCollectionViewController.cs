@@ -35,6 +35,16 @@ namespace AircraftForSale
 
             CollectionView.RegisterClassForCell(typeof(ClassificationCell), classificationCellID);
 
+            //if (Application.Current.Properties.ContainsKey("FirstUse"))
+            //{
+            //    //Do things when it's NOT the first use...
+            //}
+            //else
+            //{
+            //    Application.Current.Properties["FirstUse"] = false;
+            //    //Do things when it IS the first use...
+            //}
+
         }
 
         public override void ViewWillAppear(bool animated)

@@ -12,6 +12,8 @@ using SDWebImage;
 using UIKit;
 using Google.Analytics;
 using AdSupport;
+using SVProgressHUDBinding;
+
 
 namespace AircraftForSale
 {
@@ -33,6 +35,23 @@ namespace AircraftForSale
         }
 
 
+
+        public static event DataUpdatingEventHandler OnDataUpdate;
+        public int TaskCount { get; set; }
+        public int TaskIteration = 0;
+
+        public void UpdateTaskIteration()
+        {
+            if (AppDelegate.OnDataUpdate != null)
+            {
+                InvokeOnMainThread(() =>
+                {
+                    TaskIteration++;
+                    OnDataUpdate(this, new DataUpdateEventArgs(TaskIteration, TaskCount));
+                });
+            }
+        }
+
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             // Override point for customization after application launch.
@@ -52,23 +71,20 @@ namespace AircraftForSale
             BlobCache.ApplicationName = "AircraftForSaleAkavache";
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
+            //Wait until need to update content in the background... once implemented let the OS decide how often to fetch new content
+            UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(UIApplication.BackgroundFetchIntervalNever);
+
             var storyboard = UIStoryboard.FromName("Main_ipad", NSBundle.MainBundle);
-
             bool skipFirstStep = Settings.IsRegistered;
-
             UIViewController rootViewController;
             if (skipFirstStep)
                 rootViewController = storyboard.InstantiateViewController("MainTabBarController") as MainTabBarController;
             else
                 rootViewController = storyboard.InstantiateInitialViewController();
 
-            //Wait until need to update content in the background... once implemented let the OS decide how often to fetch new content
-            UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(UIApplication.BackgroundFetchIntervalNever);
-
-
             Window.RootViewController = rootViewController;
-
             Window.MakeKeyAndVisible();
+
 
             UINavigationBar.Appearance.BarTintColor = UIColor.Black;
 
@@ -81,6 +97,9 @@ namespace AircraftForSale
 
                 alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Cancel, null));
                 //alert.AddAction(UIAlertAction.Create("Snooze", UIAlertActionStyle.Default, action => Snooze()));
+
+
+
                 if (alert.PopoverPresentationController != null)
                 {
                     alert.PopoverPresentationController.SourceView = rootViewController.View;
@@ -95,75 +114,93 @@ namespace AircraftForSale
                 SDImageCache.SharedImageCache.ClearMemory();
                 SDImageCache.SharedImageCache.ClearDisk();
 
-                List<Task> taskList = new List<Task>();
-                if (Settings.IsRegistered)
+                AppDelegate.OnDataUpdate += (source, e) =>
                 {
-                    var favoredClassificationsList = Settings.GetFavoredClassifications();
-                    foreach (var fClass in favoredClassificationsList)
-                    {
-                        //remove current data in the database
-                        var task = Task.Run(async () =>
-                    {
-                        Ad.DeleteAdsByClassification(fClass);
 
-                        ProactivelyDownloadImages(await Ad.GetAdsByClassificationAsync(fClass));
-                    });
+                    float progress = (float)e.GetComplete() / (float)e.GetTotal();
 
-                        taskList.Add(task);
+                    //if (progress < 1f)
+                    //{
+                        SVProgressHUD.SetDefaultStyle(SVProgressHUDStyle.Dark);
+                        SVProgressHUD.ShowProgress(progress, "Loading aircraft data", SVProgressHUDMaskType.Gradient);
+                    //}
+
+                    if (progress >= 1)
+                    {
+                        SVProgressHUD.Dismiss();
                     }
-                }
-                else
+
+                };
+
+                Task.Run(async () =>
                 {
-
-                    //preload Jets
-                    Settings.IsJets = true;
-                    Settings.IsSingleEngine = true;
-                    Settings.IsTwinTurbines = true;
-
-                    List<string> preloadJetsAndOtherClassificationsIfSetSettingsTrueAbove = Settings.GetFavoredClassifications();
-
-
-                    foreach (var fClass in preloadJetsAndOtherClassificationsIfSetSettingsTrueAbove)
+                    if (Settings.IsRegistered)
                     {
-                        //remove current data in the database
-                        var task = Task.Run(async () =>
+                        var favoredClassificationsList = Settings.GetFavoredClassifications();
+
+                        TaskCount = favoredClassificationsList.Count;
+
+                        foreach (var fClass in favoredClassificationsList)
                         {
+                            //remove current data in the database
                             Ad.DeleteAdsByClassification(fClass);
+                            //UpdateTaskIteration();
                             ProactivelyDownloadImages(await Ad.GetAdsByClassificationAsync(fClass));
-                        });
-                        taskList.Add(task);
+                            UpdateTaskIteration();
+                        }
                     }
-                }
+                    else
+                    {
 
-                Task.WhenAny(taskList.ToArray()).ContinueWith((arg) =>
-               {
+                        //preload Jets
+                        Settings.IsJets = true;
+                        Settings.IsSingleEngine = true;
+                        Settings.IsTwinTurbines = true;
+
+                        List<string> preloadJetsAndOtherClassificationsIfSetSettingsTrueAbove = Settings.GetFavoredClassifications();
+
+                        TaskCount = preloadJetsAndOtherClassificationsIfSetSettingsTrueAbove.Count;
+
+                        foreach (var fClass in preloadJetsAndOtherClassificationsIfSetSettingsTrueAbove)
+                        {
+                            //remove current data in the database
+                            Ad.DeleteAdsByClassification(fClass);
+                            //UpdateTaskIteration();
+                            ProactivelyDownloadImages(await Ad.GetAdsByClassificationAsync(fClass));
+                            UpdateTaskIteration();
+                        }
+                    }
 
 
-                   InvokeOnMainThread(() =>
-                   {
 
-                       var vc = Window.RootViewController;
-                       while (vc.PresentedViewController != null)
-                       {
-                           vc = vc.PresentedViewController;
-                       }
 
-                       if (vc is MainTabBarController)
-                       {
-                           var maintTabBarController = vc as MainTabBarController;
-                           var magNavVC = maintTabBarController.ViewControllers.FirstOrDefault(row => row is MagazineNavigationViewController);
-                           if (magNavVC != null)
-                           {
-                               var chooseClassVC = (magNavVC as MagazineNavigationViewController).ViewControllers.FirstOrDefault(row => row is ChooseClassificationCollectionViewController);
-                               if (chooseClassVC != null)
-                               {
-                                   (chooseClassVC as ChooseClassificationCollectionViewController).LoadBackgroundImages();
-                               }
-                           }
-                       }
 
-                   });
-               });
+
+                    InvokeOnMainThread(() =>
+                      {
+
+                          var vc = Window.RootViewController;
+                          while (vc.PresentedViewController != null)
+                          {
+                              vc = vc.PresentedViewController;
+                          }
+
+                          if (vc is MainTabBarController)
+                          {
+                              var maintTabBarController = vc as MainTabBarController;
+                              var magNavVC = maintTabBarController.ViewControllers.FirstOrDefault(row => row is MagazineNavigationViewController);
+                              if (magNavVC != null)
+                              {
+                                  var chooseClassVC = (magNavVC as MagazineNavigationViewController).ViewControllers.FirstOrDefault(row => row is ChooseClassificationCollectionViewController);
+                                  if (chooseClassVC != null)
+                                  {
+                                      (chooseClassVC as ChooseClassificationCollectionViewController).LoadBackgroundImages();
+                                  }
+                              }
+                          }
+
+                      });
+                });
 
             }
 
@@ -178,8 +215,11 @@ namespace AircraftForSale
             //Proactively download images
             //return Task.Run(() =>
             //{
-            List<Task> taskList = new List<Task>();
-            int counter = 0;
+          
+
+                List<Task> taskList = new List<Task>();
+                int counter = 0;
+        
             foreach (var adListing in ads)
             {
                 try
@@ -193,7 +233,7 @@ namespace AircraftForSale
                         if (!isInCache)
                         {
 
-                            if (counter < 5)
+                            if (counter <= 15)
                             {
                                 var task = Task.Run(async () =>
                                 {
@@ -203,8 +243,8 @@ namespace AircraftForSale
                                         var url = new Uri(adListing.ImageURL);
                                         var bytes = await webClient.DownloadDataTaskAsync(url);
                                         var dataBytes = NSData.FromArray(bytes);
-                                        var uiimage = UIImage.LoadFromData(dataBytes);
-                                        SDImageCache.SharedImageCache.StoreImageDataToDisk(dataBytes, adListing.ImageURL);
+                                            //var uiimage = UIImage.LoadFromData(dataBytes);
+                                            SDImageCache.SharedImageCache.StoreImageDataToDisk(dataBytes, adListing.ImageURL);
 
                                     }
                                     catch (Exception e)
@@ -216,11 +256,11 @@ namespace AircraftForSale
                             }
                             else
                             {
-                                if (taskList.Count > 0)
+                                if (counter == 15)
                                 {
-                                    //Why are we "waitall" here? need to test not waiting.
-                                    Task.WaitAll(taskList.ToArray());
-                                    taskList.Clear();
+                                        //Why are we "waitall" here? need to test not waiting.
+                                        Task.WaitAll(taskList.ToArray());
+
                                 }
                                 try
                                 {
@@ -236,7 +276,8 @@ namespace AircraftForSale
                                         if (dataInner != null && finished)
                                         {
                                             SDImageCache.SharedImageCache.StoreImageDataToDisk(dataInner, adListing.ImageURL);
-                                        }
+                                                //SDImageCache.SharedImageCache.StoreImage(imageInner, adListing.ImageURL, null);
+                                            }
                                     });
                                 }
                                 catch (Exception e)
@@ -256,12 +297,14 @@ namespace AircraftForSale
                 }
 
             }
+
             //if (taskList.Count > 0)
             //{
             //    //Why are we "waitall" here? need to test not waiting.
             //    Task.WaitAll(taskList.ToArray());
             //    //Task.WaitAny(taskList.ToArray());
             //}
+            //});
 
         }
 

@@ -6,6 +6,7 @@ using CoreGraphics;
 using Google.Analytics;
 using AircraftForSale.PCL;
 using System.Threading.Tasks;
+//using SVProgressHUDBinding;
 
 namespace AircraftForSale
 {
@@ -239,6 +240,37 @@ namespace AircraftForSale
 
             });
 
+            DataUpdateProgressView.Progress = 0f;
+            DataUpdateProgressView.Hidden = true;
+
+            //UIView.Animate(8, 0, UIViewAnimationOptions.CurveLinear,
+                //() => {
+                //    DataUpdateProgressView.SetProgress(.1f, true);
+                //    //DataUpdateProgressView.SetProgress(progress, true);
+                //},
+                //() => {
+                //    // animation complete action, 
+                //    // instead of doing the delay above your animation just navigate away in here.
+                //}
+                //);
+            //Register for loading event
+
+            //AppDelegate.OnDataUpdate += (source, e) =>
+            //{
+
+            //    float progress = (float)e.GetComplete() / (float)e.GetTotal();
+
+            //    SVProgressHUD.SetDefaultStyle(SVProgressHUDStyle.Dark);
+
+            //    SVProgressHUD.ShowWithStatus("Loading aircraft data..." + (progress * 100) + "% complete");
+
+            //    if (progress >= 1)
+            //    {
+            //        SVProgressHUD.Dismiss();
+            //    }
+
+            //};
+
             int cornerRadius = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 25 : 20;
 
             UsernameTextField.Layer.CornerRadius = cornerRadius;
@@ -283,7 +315,7 @@ namespace AircraftForSale
             {
 
 
-				FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(new AircraftGridLayout(this));
+                FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(new AircraftGridLayout(this));
 
                 this.ShowViewController(new UINavigationController(favClassificationsVC), this);
             };
@@ -314,9 +346,8 @@ namespace AircraftForSale
 
             RegisterNowButton.TouchUpInside += (sender, e) =>
             {
-               
-
-				FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(new AircraftGridLayout(this));
+            
+                FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(new AircraftGridLayout(this));
 
                 this.ShowViewController(new UINavigationController(favClassificationsVC), this);
 
