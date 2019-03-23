@@ -89,6 +89,7 @@ namespace AircraftForSale
         }
 
         BetterExperienceOverlay loadingOverlay;
+        FixedPastProblemsOverlay fixedPastProblemsOverlay;
 
         public UIImageView BackgroundImageView
         {
@@ -247,14 +248,25 @@ namespace AircraftForSale
         {
             base.ViewDidAppear(animated);
 
-
-            if (!Settings.IsRegistered)
+            var bounds = UIScreen.MainScreen.Bounds;
+            if (!Settings.IsRegistered && !Settings.IsFirstLoad)
             {
-                var bounds = UIScreen.MainScreen.Bounds;
+               
                 // show the loading overlay on the UI thread using the correct orientation sizing
                 loadingOverlay = new BetterExperienceOverlay(bounds);
                 loadingOverlay.ParentViewController = this;
                 View.Add(loadingOverlay);
+            }
+            else
+            {
+                if (!Settings.IsRegistered)
+                {
+
+                    WelcomeBackViewController welcomeBackViewController = (WelcomeBackViewController)Storyboard.InstantiateViewController("WelcomeBackViewController");
+                    welcomeBackViewController.ModalPresentationStyle = UIModalPresentationStyle.OverCurrentContext;
+                    PresentViewController(welcomeBackViewController, true, null);
+
+                }
             }
             //CollectionView.DataSource = null;
             this.CollectionView.ReloadData();

@@ -47,7 +47,7 @@ namespace AircraftForSale
                 InvokeOnMainThread(() =>
                 {
                     TaskIteration++;
-                    OnDataUpdate(this, new DataUpdateEventArgs(TaskIteration, TaskCount));
+                    OnDataUpdate(this, new DataUpdateEventArgs(TaskIteration, TaskCount + 1));
                 });
             }
         }
@@ -111,26 +111,28 @@ namespace AircraftForSale
             {
 
                 //Clear SDImageCache
-                SDImageCache.SharedImageCache.ClearMemory();
-                SDImageCache.SharedImageCache.ClearDisk();
 
-                AppDelegate.OnDataUpdate += (source, e) =>
-                {
+                //TODO: Uncomment before release
+                //SDImageCache.SharedImageCache.ClearMemory();
+                //SDImageCache.SharedImageCache.ClearDisk();
 
-                    float progress = (float)e.GetComplete() / (float)e.GetTotal();
+                //AppDelegate.OnDataUpdate += (source, e) =>
+                //{
 
-                    //if (progress < 1f)
-                    //{
-                        SVProgressHUD.SetDefaultStyle(SVProgressHUDStyle.Dark);
-                        SVProgressHUD.ShowProgress(progress, "Loading aircraft data", SVProgressHUDMaskType.Gradient);
-                    //}
+                //    float progress = (float)e.GetComplete() / (float)e.GetTotal();
 
-                    if (progress >= 1)
-                    {
-                        SVProgressHUD.Dismiss();
-                    }
+                //    //if (progress < 1f)
+                //    //{
+                //        SVProgressHUD.SetDefaultStyle(SVProgressHUDStyle.Dark);
+                //        SVProgressHUD.ShowProgress(progress, "Loading aircraft data...", SVProgressHUDMaskType.Gradient);
+                //    //}
 
-                };
+                //    if (progress >= 1)
+                //    {
+                //        SVProgressHUD.Dismiss();
+                //    }
+
+                //};
 
                 Task.Run(async () =>
                 {
@@ -142,6 +144,7 @@ namespace AircraftForSale
 
                         foreach (var fClass in favoredClassificationsList)
                         {
+                            UpdateTaskIteration();
                             //remove current data in the database
                             Ad.DeleteAdsByClassification(fClass);
                             //UpdateTaskIteration();
@@ -163,6 +166,7 @@ namespace AircraftForSale
 
                         foreach (var fClass in preloadJetsAndOtherClassificationsIfSetSettingsTrueAbove)
                         {
+                            UpdateTaskIteration();
                             //remove current data in the database
                             Ad.DeleteAdsByClassification(fClass);
                             //UpdateTaskIteration();

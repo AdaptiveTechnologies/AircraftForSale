@@ -385,6 +385,11 @@
       <DependentUpon>MessageViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="AkavacheSqliteLinkerOverride.cs" />
+    <Compile Include="FixedPastProblemsOverlay.cs" />
+    <Compile Include="ViewController\WelcomeBackViewController.cs" />
+    <Compile Include="ViewController\WelcomeBackViewController.designer.cs">
+      <DependentUpon>WelcomeBackViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\profile.png" />

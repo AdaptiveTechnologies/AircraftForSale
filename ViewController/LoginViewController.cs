@@ -234,6 +234,30 @@ namespace AircraftForSale
         {
             base.ViewDidLoad();
 
+
+            LoadingOverlay overlay = new LoadingOverlay(this.View.Frame, "Loading aircraft data...");
+            AppDelegate.OnDataUpdate += (source, e) =>
+            {
+
+                float progress = (float)e.GetComplete() / (float)e.GetTotal();
+
+                if (progress < 1f)
+                {
+                    //SVProgressHUD.SetDefaultStyle(SVProgressHUDStyle.Dark);
+                    //SVProgressHUD.ShowProgress(progress, "Loading aircraft data...", SVProgressHUDMaskType.Gradient);
+                   
+                    this.View.AddSubview(overlay);
+                }
+
+               
+
+                if (progress >= 1)
+                {
+                    overlay.Hide();
+                }
+
+            };
+
             HideKeyboardGesture = new UITapGestureRecognizer(() =>
             {
                 View.EndEditing(true);
@@ -243,33 +267,7 @@ namespace AircraftForSale
             DataUpdateProgressView.Progress = 0f;
             DataUpdateProgressView.Hidden = true;
 
-            //UIView.Animate(8, 0, UIViewAnimationOptions.CurveLinear,
-                //() => {
-                //    DataUpdateProgressView.SetProgress(.1f, true);
-                //    //DataUpdateProgressView.SetProgress(progress, true);
-                //},
-                //() => {
-                //    // animation complete action, 
-                //    // instead of doing the delay above your animation just navigate away in here.
-                //}
-                //);
-            //Register for loading event
 
-            //AppDelegate.OnDataUpdate += (source, e) =>
-            //{
-
-            //    float progress = (float)e.GetComplete() / (float)e.GetTotal();
-
-            //    SVProgressHUD.SetDefaultStyle(SVProgressHUDStyle.Dark);
-
-            //    SVProgressHUD.ShowWithStatus("Loading aircraft data..." + (progress * 100) + "% complete");
-
-            //    if (progress >= 1)
-            //    {
-            //        SVProgressHUD.Dismiss();
-            //    }
-
-            //};
 
             int cornerRadius = UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad ? 25 : 20;
 
