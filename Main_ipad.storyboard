@@ -4029,19 +4029,20 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfz-07-dQQ">
-                                        <rect key="frame" x="10" y="120" width="334" height="83.666666666666686"/>
-                                        <string key="text">We recognize that you may have encountered problems registering in the past. If you have, it's likely we have fixed the problems you previously encountered. There are more reasons than ever to register today:</string>
+                                        <rect key="frame" x="10" y="120" width="334" height="67"/>
+                                        <string key="text">Registration issues with BuyPlane: BuyPlane and Globalair.com use the same login credentials.  If you are using the same email address you will need to use the same password.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tL5-NP-8Yj">
-                                        <rect key="frame" x="89.666666666666686" y="403" width="175" height="36"/>
+                                        <rect key="frame" x="89.666666666666686" y="235.66666666666669" width="175" height="25"/>
                                         <color key="backgroundColor" red="0.17121077370000001" green="0.52181832900000003" blue="0.17773805919999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="LV4-sA-HDl"/>
                                             <constraint firstAttribute="width" constant="175" id="dyk-jP-64A"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <state key="normal" title="Email Support">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -4054,65 +4055,75 @@
                                         </constraints>
                                         <state key="normal" image="close.png"/>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- Receive proactive push notifications regarding price changes and availability regarding aircraft of your interest" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOU-s1-L5Z">
-                                        <rect key="frame" x="10" y="213.66666666666669" width="334" height="50.333333333333314"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you do not remember your password please contact us" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOU-s1-L5Z">
+                                        <rect key="frame" x="10" y="197" width="334" height="33.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- Save aircraft of interest" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNb-l3-bd6">
-                                        <rect key="frame" x="10" y="281" width="334" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Updates for Registered Users" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNb-l3-bd6">
+                                        <rect key="frame" x="10" y="295.66666666666669" width="334" height="23"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- Receive Push notifications of new aircraft and price changes of aircraft that are of interest to you" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c7a-Na-3p7">
+                                        <rect key="frame" x="10" y="332.66666666666669" width="334" height="33.666666666666686"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- Search and filter aircraft by classification, manufacturer, and model" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c7a-Na-3p7">
-                                        <rect key="frame" x="10" y="312" width="334" height="33.666666666666686"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- Filter by aircraft broker" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D11-0O-LYB">
-                                        <rect key="frame" x="10" y="361" width="334" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- Save aircraft of interest" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D11-0O-LYB">
+                                        <rect key="frame" x="10" y="381.33333333333331" width="334" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WGN-Rp-6LT">
-                                        <rect key="frame" x="89.666666666666686" y="474" width="175" height="36"/>
+                                        <rect key="frame" x="89.666666666666686" y="445.33333333333337" width="175" height="36"/>
                                         <color key="backgroundColor" red="0.17121077370000001" green="0.52181832900000003" blue="0.17773805919999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="175" id="5gU-Te-tWb"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Try Again">
+                                        <state key="normal" title="Register">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- Filter by aircraft and broker" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PdH-bn-0j7">
+                                        <rect key="frame" x="10" y="413.33333333333337" width="334" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="tL5-NP-8Yj" firstAttribute="top" secondItem="ZOU-s1-L5Z" secondAttribute="bottom" constant="5" id="1qO-Iv-yr4"/>
                                     <constraint firstItem="01C-Fq-0wO" firstAttribute="top" secondItem="sbg-CN-XIa" secondAttribute="bottom" constant="5" id="4M5-DE-qYz"/>
                                     <constraint firstItem="c7a-Na-3p7" firstAttribute="trailing" secondItem="bNb-l3-bd6" secondAttribute="trailing" id="4qc-fg-ugq"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tL5-NP-8Yj" secondAttribute="bottom" constant="10" id="5pi-dQ-w32"/>
                                     <constraint firstItem="ZOU-s1-L5Z" firstAttribute="top" secondItem="qfz-07-dQQ" secondAttribute="bottom" constant="10" id="9Bw-CD-8uF"/>
+                                    <constraint firstItem="bNb-l3-bd6" firstAttribute="top" secondItem="tL5-NP-8Yj" secondAttribute="bottom" constant="35" id="CEN-GS-5Bb"/>
                                     <constraint firstItem="c7a-Na-3p7" firstAttribute="top" secondItem="bNb-l3-bd6" secondAttribute="bottom" constant="14" id="Dlj-UG-mOL"/>
                                     <constraint firstItem="ZOU-s1-L5Z" firstAttribute="leading" secondItem="qfz-07-dQQ" secondAttribute="leading" id="Gjj-aY-N6F"/>
                                     <constraint firstItem="01C-Fq-0wO" firstAttribute="leading" secondItem="4oN-Xp-IfP" secondAttribute="leading" constant="10" id="HSh-zh-DFO"/>
                                     <constraint firstAttribute="trailing" secondItem="qfz-07-dQQ" secondAttribute="trailing" constant="10" id="JTf-3v-h9M"/>
                                     <constraint firstAttribute="trailing" secondItem="sbg-CN-XIa" secondAttribute="trailing" constant="10" id="KAW-Df-LxD"/>
                                     <constraint firstItem="sbg-CN-XIa" firstAttribute="top" secondItem="4oN-Xp-IfP" secondAttribute="top" constant="25" id="Lx0-7b-q4Z"/>
-                                    <constraint firstItem="tL5-NP-8Yj" firstAttribute="top" secondItem="D11-0O-LYB" secondAttribute="bottom" constant="25" id="MU0-6b-l9z"/>
+                                    <constraint firstItem="PdH-bn-0j7" firstAttribute="leading" secondItem="D11-0O-LYB" secondAttribute="leading" id="O5r-eK-CJR"/>
                                     <constraint firstItem="qfz-07-dQQ" firstAttribute="top" secondItem="01C-Fq-0wO" secondAttribute="bottom" constant="20" id="Q65-7K-X19"/>
-                                    <constraint firstItem="D11-0O-LYB" firstAttribute="top" secondItem="c7a-Na-3p7" secondAttribute="bottom" constant="15.333333333333314" id="Suf-xb-cO1"/>
+                                    <constraint firstItem="D11-0O-LYB" firstAttribute="top" secondItem="c7a-Na-3p7" secondAttribute="bottom" constant="15" id="Suf-xb-cO1"/>
                                     <constraint firstItem="c7a-Na-3p7" firstAttribute="leading" secondItem="bNb-l3-bd6" secondAttribute="leading" id="V2i-HP-CXY"/>
                                     <constraint firstItem="tL5-NP-8Yj" firstAttribute="centerX" secondItem="4oN-Xp-IfP" secondAttribute="centerX" id="VGD-7g-NnR"/>
+                                    <constraint firstItem="PdH-bn-0j7" firstAttribute="top" secondItem="D11-0O-LYB" secondAttribute="bottom" constant="15" id="ZyK-jo-e9w"/>
                                     <constraint firstItem="ZOU-s1-L5Z" firstAttribute="trailing" secondItem="qfz-07-dQQ" secondAttribute="trailing" id="aeI-lW-yZh"/>
+                                    <constraint firstItem="PdH-bn-0j7" firstAttribute="trailing" secondItem="D11-0O-LYB" secondAttribute="trailing" id="e5j-WS-Z3V"/>
                                     <constraint firstItem="WGN-Rp-6LT" firstAttribute="centerX" secondItem="4oN-Xp-IfP" secondAttribute="centerX" id="fcx-8Y-ShD"/>
-                                    <constraint firstItem="WGN-Rp-6LT" firstAttribute="top" secondItem="tL5-NP-8Yj" secondAttribute="bottom" constant="35" id="iGm-5k-cEa"/>
                                     <constraint firstAttribute="trailing" secondItem="01C-Fq-0wO" secondAttribute="trailing" constant="10" id="ic9-uO-l7Y"/>
                                     <constraint firstItem="bNb-l3-bd6" firstAttribute="trailing" secondItem="ZOU-s1-L5Z" secondAttribute="trailing" id="ivx-8f-YxM"/>
                                     <constraint firstItem="D11-0O-LYB" firstAttribute="leading" secondItem="c7a-Na-3p7" secondAttribute="leading" id="j6M-Ii-cCX"/>
-                                    <constraint firstItem="bNb-l3-bd6" firstAttribute="top" secondItem="ZOU-s1-L5Z" secondAttribute="bottom" constant="17" id="p8b-H0-hLX"/>
+                                    <constraint firstItem="WGN-Rp-6LT" firstAttribute="top" secondItem="PdH-bn-0j7" secondAttribute="bottom" constant="15" id="lnN-6V-miV"/>
                                     <constraint firstItem="qfz-07-dQQ" firstAttribute="leading" secondItem="4oN-Xp-IfP" secondAttribute="leading" constant="10" id="pMw-cp-YJZ"/>
                                     <constraint firstItem="D11-0O-LYB" firstAttribute="trailing" secondItem="c7a-Na-3p7" secondAttribute="trailing" id="qMv-k8-3xy"/>
                                     <constraint firstItem="bNb-l3-bd6" firstAttribute="leading" secondItem="ZOU-s1-L5Z" secondAttribute="leading" id="uti-ET-BmW"/>
@@ -4136,6 +4147,127 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sff-5D-xEj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-815.94202898550736" y="-951.5625"/>
+        </scene>
+        <!--Push Notification Prompt View Controller-->
+        <scene sceneID="eal-3c-uCy">
+            <objects>
+                <viewController storyboardIdentifier="PushNotificationPromptViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gU6-WR-CwN" customClass="PushNotificationPromptViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Enq-Ol-IhC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5vz-1k-n5r">
+                                <rect key="frame" x="30" y="109" width="354" height="688"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get Notified!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vs9-do-n2V">
+                                        <rect key="frame" x="10" y="45" width="334" height="34.666666666666657"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RyV-R9-kEA">
+                                        <rect key="frame" x="10" y="99.666666666666657" width="334" height="83.666666666666657"/>
+                                        <string key="text">When you tap on the “Thumbs Up” icon for a specific aircraft BuyPlane can now send you push notifications containing valuable information about changes on that particular aircraft and new aircraft of the same make and model.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- An aircraft has a reduction in price" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ypl-vG-CEE">
+                                        <rect key="frame" x="10" y="198.33333333333331" width="334" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- A new same make and model has been added to BuyPlane" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sr3-Cy-INI">
+                                        <rect key="frame" x="10" y="230.33333333333331" width="334" height="33.666666666666686"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- Specifications or images have been updated on that aircraft" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HY0-Yu-7T6">
+                                        <rect key="frame" x="10" y="279" width="334" height="33.666666666666686"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="5zu-h9-8hZ">
+                                        <rect key="frame" x="15" y="381" width="324" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyj-fq-eCN">
+                                                <rect key="frame" x="0.0" y="0.0" width="158" height="30"/>
+                                                <color key="backgroundColor" red="0.17121077370000001" green="0.52181832900000003" blue="0.17773805919999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="Wf5-r7-B0s"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <state key="normal" title="YES">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fm-NP-nig">
+                                                <rect key="frame" x="194" y="0.0" width="130" height="30"/>
+                                                <color key="backgroundColor" red="0.17121077370000001" green="0.52181832900000003" blue="0.17773805919999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="130" id="t5a-ff-LX3"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <state key="normal" title="No thanks">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Would you like BuyPlane to send you this Information?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PsX-Yy-Rel">
+                                        <rect key="frame" x="10" y="327.66666666666669" width="334" height="38.333333333333314"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Sr3-Cy-INI" firstAttribute="top" secondItem="Ypl-vG-CEE" secondAttribute="bottom" constant="15" id="12n-6O-yBR"/>
+                                    <constraint firstItem="5zu-h9-8hZ" firstAttribute="top" secondItem="PsX-Yy-Rel" secondAttribute="bottom" constant="15" id="5Ng-Tl-4VV"/>
+                                    <constraint firstItem="Sr3-Cy-INI" firstAttribute="leading" secondItem="Ypl-vG-CEE" secondAttribute="leading" id="8i4-KQ-pvG"/>
+                                    <constraint firstItem="Ypl-vG-CEE" firstAttribute="leading" secondItem="RyV-R9-kEA" secondAttribute="leading" id="D16-rw-2RT"/>
+                                    <constraint firstItem="Ypl-vG-CEE" firstAttribute="trailing" secondItem="RyV-R9-kEA" secondAttribute="trailing" id="ENN-Iu-rik"/>
+                                    <constraint firstItem="Sr3-Cy-INI" firstAttribute="trailing" secondItem="Ypl-vG-CEE" secondAttribute="trailing" id="EdO-K9-HCR"/>
+                                    <constraint firstItem="PsX-Yy-Rel" firstAttribute="top" secondItem="HY0-Yu-7T6" secondAttribute="bottom" constant="15" id="HGD-fw-58s"/>
+                                    <constraint firstItem="PsX-Yy-Rel" firstAttribute="trailing" secondItem="HY0-Yu-7T6" secondAttribute="trailing" id="Ho7-Ru-6cp"/>
+                                    <constraint firstItem="HY0-Yu-7T6" firstAttribute="trailing" secondItem="Sr3-Cy-INI" secondAttribute="trailing" id="IhO-MY-VFU"/>
+                                    <constraint firstItem="RyV-R9-kEA" firstAttribute="top" secondItem="vs9-do-n2V" secondAttribute="bottom" constant="20" id="Rqb-Ej-yUL"/>
+                                    <constraint firstAttribute="trailing" secondItem="RyV-R9-kEA" secondAttribute="trailing" constant="10" id="Tlh-GJ-p9R"/>
+                                    <constraint firstItem="RyV-R9-kEA" firstAttribute="leading" secondItem="5vz-1k-n5r" secondAttribute="leading" constant="10" id="UMg-PP-Au2"/>
+                                    <constraint firstAttribute="trailing" secondItem="vs9-do-n2V" secondAttribute="trailing" constant="10" id="UUL-PZ-uMT"/>
+                                    <constraint firstItem="vs9-do-n2V" firstAttribute="leading" secondItem="5vz-1k-n5r" secondAttribute="leading" constant="10" id="VkT-NF-Ber"/>
+                                    <constraint firstItem="HY0-Yu-7T6" firstAttribute="top" secondItem="Sr3-Cy-INI" secondAttribute="bottom" constant="15" id="W1d-3Q-p1b"/>
+                                    <constraint firstItem="PsX-Yy-Rel" firstAttribute="leading" secondItem="HY0-Yu-7T6" secondAttribute="leading" id="er0-Za-CDo"/>
+                                    <constraint firstItem="HY0-Yu-7T6" firstAttribute="leading" secondItem="Sr3-Cy-INI" secondAttribute="leading" id="kCu-jW-TyP"/>
+                                    <constraint firstItem="vs9-do-n2V" firstAttribute="top" secondItem="5vz-1k-n5r" secondAttribute="top" constant="45" id="kF3-jx-Kc3"/>
+                                    <constraint firstAttribute="trailing" secondItem="5zu-h9-8hZ" secondAttribute="trailing" constant="15" id="uAJ-JI-xmQ"/>
+                                    <constraint firstItem="5zu-h9-8hZ" firstAttribute="leading" secondItem="5vz-1k-n5r" secondAttribute="leading" constant="15" id="uIR-Je-aam"/>
+                                    <constraint firstItem="Ypl-vG-CEE" firstAttribute="top" secondItem="RyV-R9-kEA" secondAttribute="bottom" constant="15" id="wre-1V-Cfe"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="e2g-cW-ZuO" firstAttribute="bottom" secondItem="5vz-1k-n5r" secondAttribute="bottom" constant="65" id="3E5-cA-qLg"/>
+                            <constraint firstItem="5vz-1k-n5r" firstAttribute="top" secondItem="e2g-cW-ZuO" secondAttribute="top" constant="65" id="7UP-hC-bZN"/>
+                            <constraint firstItem="5vz-1k-n5r" firstAttribute="leading" secondItem="e2g-cW-ZuO" secondAttribute="leading" constant="30" id="V1F-dy-Wtv"/>
+                            <constraint firstItem="e2g-cW-ZuO" firstAttribute="trailing" secondItem="5vz-1k-n5r" secondAttribute="trailing" constant="30" id="vvh-sd-vfp"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="e2g-cW-ZuO"/>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundView" destination="5vz-1k-n5r" id="A0N-0p-laO"/>
+                        <outlet property="noButton" destination="6fm-NP-nig" id="diA-ca-K4G"/>
+                        <outlet property="yesButton" destination="kyj-fq-eCN" id="oLu-3f-JNB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2eM-D4-htg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-815.94202898550736" y="-951.5625"/>
         </scene>

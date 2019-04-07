@@ -67,24 +67,32 @@ namespace AircraftForSale
                         loadingIndicator.Hide();
 						Settings.IsRegistered = true;
 
-						var alert = UIAlertController.Create("Congratulations!", "You have successfully registered.", UIAlertControllerStyle.Alert);
+                        //var registrationStoryboard = UIStoryboard.FromName("Main_ipad", NSBundle.MainBundle);
+                        //PushNotificationPromptViewController pushNotificationPromptViewController = (PushNotificationPromptViewController)registrationStoryboard.InstantiateViewController("PushNotificationPromptViewController");
+                        //pushNotificationPromptViewController.ModalPresentationStyle = UIModalPresentationStyle.OverCurrentContext;
+                        //PresentViewController(pushNotificationPromptViewController, true, () =>
+                        //{
+                            var alert = UIAlertController.Create("Congratulations!", "You have successfully registered.", UIAlertControllerStyle.Alert);
 
-						alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Cancel, (obj) =>
-						{
-                            this.DismissViewController(true, null);
-                            var loginViewController = this.PresentingViewController as LoginViewController;
-                            this.NavigationController.DismissViewController(true, null);
-                            if (loginViewController != null)
+                            alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Cancel, (obj) =>
                             {
-                                loginViewController.PerformSegue("LoadTabBarControllerSeque", loginViewController);
-                            }
+                                this.DismissViewController(true, null);
+                                var loginViewController = this.PresentingViewController as LoginViewController;
+                                this.NavigationController.DismissViewController(true, null);
+                                if (loginViewController != null)
+                                {
+                                    loginViewController.PerformSegue("LoadTabBarControllerSeque", loginViewController);
+                                }
 
-						}));
+                            }));
 
-						PresentViewController(alert, animated: true, completionHandler: () =>
-						{
+                            PresentViewController(alert, animated: true, completionHandler: () =>
+                            {
 
-						});
+                            });
+                        //});
+
+                       
 
 
 

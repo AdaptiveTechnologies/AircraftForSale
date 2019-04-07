@@ -1,13 +1,8 @@
 ﻿<Properties StartupConfiguration="{B8C03836-A778-482E-8FC3-92267A01DFDA}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ViewController/WelcomeBackViewController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ViewController/FavoritesViewController.cs">
     <Files>
-      <File FileName="AppDelegate.cs" Line="118" Column="1" />
-      <File FileName="ViewController/LoginViewController.cs" Line="108" Column="160" />
-      <File FileName="ViewController/ChooseClassificationCollectionViewController.cs" Line="264" Column="1" />
-      <File FileName="../AircraftForSale.PCL/Helpers/Settings.cs" Line="121" Column="1" />
-      <File FileName="BetterExperienceOverlay.cs" Line="1" Column="1" />
-      <File FileName="FixedPastProblemsOverlay.cs" Line="76" Column="53" />
-      <File FileName="ViewController/WelcomeBackViewController.cs" Line="31" Column="12" />
+      <File FileName="AppDelegate.cs" Line="427" Column="33" />
+      <File FileName="ViewController/FavoritesViewController.cs" Line="154" Column="8" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -15,7 +10,13 @@
           <Node name="AircraftForSale" expanded="True">
             <Node name="AircraftForSale" expanded="True">
               <Node name="ViewController" expanded="True">
-                <Node name="WelcomeBackViewController.cs" expanded="True" selected="True" />
+                <Node name="FavoritesViewController.cs" selected="True" />
+              </Node>
+            </Node>
+            <Node name="AircraftForSale.PCL" expanded="True">
+              <Node name="Helpers" expanded="True" />
+              <Node name="Model" expanded="True">
+                <Node name="Ads" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -23,16 +24,14 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.AircraftForSale automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.5A56DFCA-4CD9-46D0-9E11-25CA99ABC6A8" />
+  <MonoDevelop.Ide.ItemProperties.AircraftForSale automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.00008020-000C34502288002E" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhone" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/ViewController/EmailInquiryViewController.cs" relfile="ViewController/EmailInquiryViewController.cs" line="16" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/Helpers/HelperMethods.cs" relfile="Helpers/HelperMethods.cs" line="62" column="1" />
-      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/Helpers/HelperMethods.cs" relfile="Helpers/HelperMethods.cs" line="25" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/Helpers/HelperMethods.cs" relfile="Helpers/HelperMethods.cs" line="60" column="1" />
-      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/Helpers/HelperMethods.cs" relfile="Helpers/HelperMethods.cs" line="39" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/AuthResponse.cs" relfile=".PCL/Model/API/AuthResponse.cs" line="34" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/APIManager.cs" relfile=".PCL/Model/API/APIManager.cs" line="232" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/AuthResponse.cs" relfile=".PCL/Model/API/AuthResponse.cs" line="59" column="1" />
@@ -58,6 +57,7 @@
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/AdInquiryResponse.cs" relfile=".PCL/Model/API/AdInquiryResponse.cs" line="16" column="213" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/APIManager.cs" relfile=".PCL/Model/API/APIManager.cs" line="556" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/APIManager.cs" relfile=".PCL/Model/API/APIManager.cs" line="380" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/APIManager.cs" relfile=".PCL/Model/API/APIManager.cs" line="702" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />

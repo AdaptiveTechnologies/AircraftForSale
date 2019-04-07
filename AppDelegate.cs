@@ -13,7 +13,8 @@ using UIKit;
 using Google.Analytics;
 using AdSupport;
 using SVProgressHUDBinding;
-
+using WindowsAzure.Messaging;
+using UserNotifications;
 
 namespace AircraftForSale
 {
@@ -27,6 +28,8 @@ namespace AircraftForSale
         public ITracker Tracker;
 
         public static readonly string TrackingId = "UA-101868397-1";//"UA-204701-5";
+
+        private SBNotificationHub Hub { get; set; }
 
         public override UIWindow Window
         {
@@ -74,6 +77,13 @@ namespace AircraftForSale
             //Wait until need to update content in the background... once implemented let the OS decide how often to fetch new content
             UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(UIApplication.BackgroundFetchIntervalNever);
 
+            //Register for push notifications is user indicates wishes to receive
+            if (Settings.IsRegisterForPushNotifications) { 
+                this.PromptForPushNotifications();
+            }
+
+
+
             var storyboard = UIStoryboard.FromName("Main_ipad", NSBundle.MainBundle);
             bool skipFirstStep = Settings.IsRegistered;
             UIViewController rootViewController;
@@ -96,9 +106,6 @@ namespace AircraftForSale
                 var alert = UIAlertController.Create("Connect to a Network", Settings._networkProblemMessage, UIAlertControllerStyle.Alert);
 
                 alert.AddAction(UIAlertAction.Create("Ok", UIAlertActionStyle.Cancel, null));
-                //alert.AddAction(UIAlertAction.Create("Snooze", UIAlertActionStyle.Default, action => Snooze()));
-
-
 
                 if (alert.PopoverPresentationController != null)
                 {
@@ -116,23 +123,8 @@ namespace AircraftForSale
                 //SDImageCache.SharedImageCache.ClearMemory();
                 //SDImageCache.SharedImageCache.ClearDisk();
 
-                //AppDelegate.OnDataUpdate += (source, e) =>
-                //{
+         
 
-                //    float progress = (float)e.GetComplete() / (float)e.GetTotal();
-
-                //    //if (progress < 1f)
-                //    //{
-                //        SVProgressHUD.SetDefaultStyle(SVProgressHUDStyle.Dark);
-                //        SVProgressHUD.ShowProgress(progress, "Loading aircraft data...", SVProgressHUDMaskType.Gradient);
-                //    //}
-
-                //    if (progress >= 1)
-                //    {
-                //        SVProgressHUD.Dismiss();
-                //    }
-
-                //};
 
                 Task.Run(async () =>
                 {
@@ -147,8 +139,9 @@ namespace AircraftForSale
                             UpdateTaskIteration();
                             //remove current data in the database
                             Ad.DeleteAdsByClassification(fClass);
-                            //UpdateTaskIteration();
-                            ProactivelyDownloadImages(await Ad.GetAdsByClassificationAsync(fClass));
+
+                            //TODO: Uncomment before release
+                            //ProactivelyDownloadImages(await Ad.GetAdsByClassificationAsync(fClass));
                             UpdateTaskIteration();
                         }
                     }
@@ -169,8 +162,9 @@ namespace AircraftForSale
                             UpdateTaskIteration();
                             //remove current data in the database
                             Ad.DeleteAdsByClassification(fClass);
-                            //UpdateTaskIteration();
-                            ProactivelyDownloadImages(await Ad.GetAdsByClassificationAsync(fClass));
+
+                            //TODO: Uncomment before release
+                            //ProactivelyDownloadImages(await Ad.GetAdsByClassificationAsync(fClass));
                             UpdateTaskIteration();
                         }
                     }
@@ -213,14 +207,38 @@ namespace AircraftForSale
             return true;
         }
 
+        public void PromptForPushNotifications()
+        {
+            //Register for push notifications
+            if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0))
+            {
+                UNUserNotificationCenter.Current.RequestAuthorization(UNAuthorizationOptions.Alert | UNAuthorizationOptions.Sound | UNAuthorizationOptions.Sound,
+                                                                        (granted, error) =>
+                                                                        {
+                                                                            if (granted)
+                                                                                InvokeOnMainThread(UIApplication.SharedApplication.RegisterForRemoteNotifications);
+                                                                        });
+            }
+            else if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
+            {
+                var pushSettings = UIUserNotificationSettings.GetSettingsForTypes(
+                        UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
+                        new NSSet());
+
+                UIApplication.SharedApplication.RegisterUserNotificationSettings(pushSettings);
+                UIApplication.SharedApplication.RegisterForRemoteNotifications();
+            }
+            else
+            {
+                UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound;
+                UIApplication.SharedApplication.RegisterForRemoteNotificationTypes(notificationTypes);
+            }
+        }
+
         public static void ProactivelyDownloadImages(IEnumerable<Ad> ads)
         {
 
             //Proactively download images
-            //return Task.Run(() =>
-            //{
-          
-
                 List<Task> taskList = new List<Task>();
                 int counter = 0;
         
@@ -228,10 +246,7 @@ namespace AircraftForSale
             {
                 try
                 {
-                    //var imageObject = SDImageCache.SharedImageCache.ValueForKeyPath(new NSString(adListing.ImageURL));
 
-                    //SDImageCache.SharedImageCache.QueryDiskCache(adListing.ImageURL, (isInCache) =>
-                    //SDImageCache.SharedImageCache.DiskImageExists(adListing.ImageURL,(isInCache) => ;)
                     SDImageCache.SharedImageCache.DiskImageExists(adListing.ImageURL, (isInCache) =>
                     {
                         if (!isInCache)
@@ -302,37 +317,132 @@ namespace AircraftForSale
 
             }
 
-            //if (taskList.Count > 0)
-            //{
-            //    //Why are we "waitall" here? need to test not waiting.
-            //    Task.WaitAll(taskList.ToArray());
-            //    //Task.WaitAny(taskList.ToArray());
-            //}
-            //});
 
         }
 
-        //public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
-        //{
-        //    // Get current device token
-        //    var DeviceToken = deviceToken.Description;
-        //    if (!string.IsNullOrWhiteSpace(DeviceToken))
-        //    {
-        //        DeviceToken = DeviceToken.Trim('<').Trim('>');
-        //    }
+        public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
+        {
+            Hub = new SBNotificationHub(Constants.ListenConnectionString, Constants.NotificationHubName);
 
-        //    // Get previous device token
-        //    var oldDeviceToken = NSUserDefaults.StandardUserDefaults.StringForKey("PushDeviceToken");
+            List<string> tagList = new List<string>();
+            //add global identifier
+            tagList.Add("buyplane");
+            if (Settings.IsRegistered)
+            {
+                tagList.Add("userid:" + Settings.UserID.ToString());
+            }
 
-        //    // Has the token changed?
-        //    if (string.IsNullOrEmpty(oldDeviceToken) || !oldDeviceToken.Equals(DeviceToken))
-        //    {
-        //        //Put your own logic here to notify your server that the device token has changed/been created!
-        //    }
+            Hub.UnregisterAllAsync(deviceToken, (error) => {
+                if (error != null)
+                {
+                    System.Diagnostics.Debug.WriteLine("Error calling Unregister: {0}", error.ToString());
+                    return;
+                }
 
-        //    // Save new device token 
-        //    NSUserDefaults.StandardUserDefaults.SetString(DeviceToken, "PushDeviceToken");
-        //}
+
+
+                NSSet tags = new NSSet(tagList.ToArray());
+                Hub.RegisterNativeAsync(deviceToken, tags, (errorCallback) => {
+                    if (errorCallback != null)
+                        System.Diagnostics.Debug.WriteLine("RegisterNativeAsync error: " + errorCallback.ToString());
+                });
+            });
+        }
+
+        public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
+        {
+            ProcessNotification(userInfo, false);
+        }
+
+        void ProcessNotification(NSDictionary options, bool fromFinishedLaunching)
+        {
+            // Check to see if the dictionary has the aps key.  This is the notification payload you would have sent
+            if (null != options && options.ContainsKey(new NSString("aps")))
+            {
+                //Get the aps dictionary
+                NSDictionary aps = options.ObjectForKey(new NSString("aps")) as NSDictionary;
+
+                string alert = string.Empty;
+                string adId = string.Empty;
+                string classification = string.Empty;
+
+                //Extract the alert text
+                // NOTE: If you're using the simple alert by just specifying
+                // "  aps:{alert:"alert msg here"}  ", this will work fine.
+                // But if you're using a complex alert with Localization keys, etc.,
+                // your "alert" object from the aps dictionary will be another NSDictionary.
+                // Basically the JSON gets dumped right into a NSDictionary,
+                // so keep that in mind.
+                if (aps.ContainsKey(new NSString("alert")))
+                    alert = (aps[new NSString("alert")] as NSString).ToString();
+
+                if (aps.ContainsKey(new NSString("adid")))
+                    adId = (aps[new NSString("adid")] as NSString).ToString();
+
+                if (aps.ContainsKey(new NSString("classification")))
+                    classification = (aps[new NSString("classification")] as NSString).ToString();
+
+                //If this came from the ReceivedRemoteNotification while the app was running,
+                // we of course need to manually process things like the sound, badge, and alert.
+                if (!fromFinishedLaunching)
+                {
+                    //Manually show an alert
+                    if (!string.IsNullOrEmpty(alert))
+                    {
+                        //if adid != 0, navigate to ad
+                        if (adId != string.Empty && classification != string.Empty)
+                        {
+                            //Create Alert
+                            var okAlertController = UIAlertController.Create("Important Ad Update!", alert, UIAlertControllerStyle.Alert);
+
+                            //Add Action
+                            okAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, async (obj) =>
+                            {
+                                //Retrieve highlighted ad
+
+                                //remove cache
+                                Ad.DeleteAdsByClassification(classification);
+                                var adsByClassification = await Ad.GetAdsByClassificationAsync(classification);
+                                var highlightedAd = adsByClassification.Where(row => row.ID == adId).First();
+
+                                //navigate to favorites page
+                                var vc = Window.RootViewController;
+                                while (vc.PresentedViewController != null)
+                                {
+                                    vc = vc.PresentedViewController;
+                                }
+
+                                if (vc is MainTabBarController)
+                                {
+                                    var maintTabBarController = vc as MainTabBarController;
+
+                                    var favoritesVC = maintTabBarController.ViewControllers.FirstOrDefault(row => row is FavoritesViewController);
+                                    if (favoritesVC != null && favoritesVC is FavoritesViewController)
+                                    {
+                                      
+
+                                        var favoritesViewController = favoritesVC as FavoritesViewController;
+                                        favoritesViewController.HighlightedAd = highlightedAd;
+                                        maintTabBarController.SelectedIndex = 1;
+                                
+                                    }
+                                }
+
+
+                            }));
+
+                            // Present Alert
+                            Window.RootViewController.PresentViewController(okAlertController, true, null);
+                        }
+                        else
+                        {
+                            UIAlertView avAlert = new UIAlertView("Notification", alert, null, "OK", null);
+                            avAlert.Show();
+                        }
+                    }
+                }
+            }
+        }
 
         //perform data fetch here for the ads
         public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)

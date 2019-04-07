@@ -93,7 +93,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <OptimizePNGs>false</OptimizePNGs>
     <MtouchSdkVersion>10.2</MtouchSdkVersion>
-    <CodesignProvision>VS: WildCard Development</CodesignProvision>
+    <CodesignProvision>BuyPlane</CodesignProvision>
     <CodesignKey>iPhone Developer: Clay Martin (83H34G7LM2)</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
@@ -168,6 +168,9 @@
     </Reference>
     <Reference Include="SVProgressHUD">
       <HintPath>packages\SVProgressHUD.2.2.5\lib\Xamarin.iOS10\SVProgressHUD.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Azure.NotificationHubs.iOS">
+      <HintPath>packages\Xamarin.Azure.NotificationHubs.iOS-updated.1.2.5.3\lib\Xamarin.iOS10\Xamarin.Azure.NotificationHubs.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -390,6 +393,12 @@
     <Compile Include="ViewController\WelcomeBackViewController.designer.cs">
       <DependentUpon>WelcomeBackViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="PushNotificationPromptViewController.cs" />
+    <Compile Include="PushNotificationPromptViewController.designer.cs">
+      <DependentUpon>PushNotificationPromptViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Constants.cs" />
+    <Compile Include="UserNotificationCenterDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\profile.png" />

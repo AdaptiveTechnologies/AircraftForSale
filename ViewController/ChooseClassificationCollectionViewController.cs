@@ -35,15 +35,6 @@ namespace AircraftForSale
 
             CollectionView.RegisterClassForCell(typeof(ClassificationCell), classificationCellID);
 
-            //if (Application.Current.Properties.ContainsKey("FirstUse"))
-            //{
-            //    //Do things when it's NOT the first use...
-            //}
-            //else
-            //{
-            //    Application.Current.Properties["FirstUse"] = false;
-            //    //Do things when it IS the first use...
-            //}
 
         }
 
@@ -51,7 +42,6 @@ namespace AircraftForSale
         {
             base.ViewWillAppear(animated);
 
-            //CollectionView.DataSource = null;
 
             if (this.TabBarController != null)
             {
@@ -89,7 +79,7 @@ namespace AircraftForSale
         }
 
         BetterExperienceOverlay loadingOverlay;
-        FixedPastProblemsOverlay fixedPastProblemsOverlay;
+        //FixedPastProblemsOverlay fixedPastProblemsOverlay;
 
         public UIImageView BackgroundImageView
         {
@@ -251,8 +241,8 @@ namespace AircraftForSale
             var bounds = UIScreen.MainScreen.Bounds;
             if (!Settings.IsRegistered && !Settings.IsFirstLoad)
             {
-               
-                // show the loading overlay on the UI thread using the correct orientation sizing
+            
+                 //show the loading overlay on the UI thread using the correct orientation sizing
                 loadingOverlay = new BetterExperienceOverlay(bounds);
                 loadingOverlay.ParentViewController = this;
                 View.Add(loadingOverlay);
@@ -261,14 +251,23 @@ namespace AircraftForSale
             {
                 if (!Settings.IsRegistered)
                 {
-
                     WelcomeBackViewController welcomeBackViewController = (WelcomeBackViewController)Storyboard.InstantiateViewController("WelcomeBackViewController");
                     welcomeBackViewController.ModalPresentationStyle = UIModalPresentationStyle.OverCurrentContext;
                     PresentViewController(welcomeBackViewController, true, null);
+                    Settings.IsFirstLoad = false;
 
                 }
+                else
+                {
+                    if (!Settings.IsShownPushNotificationPrompt)
+                    {
+                        PushNotificationPromptViewController pushNotificationPromptViewController = (PushNotificationPromptViewController)Storyboard.InstantiateViewController("PushNotificationPromptViewController");
+                        pushNotificationPromptViewController.ModalPresentationStyle = UIModalPresentationStyle.OverCurrentContext;
+                        PresentViewController(pushNotificationPromptViewController, true, null);
+                        Settings.IsShownPushNotificationPrompt = true;
+                    }
+                }
             }
-            //CollectionView.DataSource = null;
             this.CollectionView.ReloadData();
         }
 

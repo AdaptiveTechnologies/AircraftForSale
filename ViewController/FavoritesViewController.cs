@@ -39,7 +39,9 @@ namespace AircraftForSale
 			set;
 		}
 
-		public override void ViewDidAppear(bool animated)
+        public Ad HighlightedAd { get; set; }
+
+        public override void ViewDidAppear(bool animated)
 		{
 			base.ViewDidAppear(animated);
 
@@ -112,7 +114,20 @@ namespace AircraftForSale
 				var adList = await (ad.GetAllAdsForFavorites());
 
 				var favoredAds = adList.Where(row => row.IsLiked).ToList();
-				for (int i = 0; i < favoredAds.Count; i++)
+                if(HighlightedAd != null)
+                {
+                    if(!favoredAds.Any(row => row.ID == HighlightedAd.ID))
+                    {
+                        favoredAds.Insert(0, HighlightedAd);
+                    }
+                    else
+                    {
+                        var highlightedAd = favoredAds.First(row => row.ID == HighlightedAd.ID);
+                        favoredAds.Remove(highlightedAd);
+                        favoredAds.Insert(0, highlightedAd);
+                    }
+                }
+                for (int i = 0; i < favoredAds.Count; i++)
 				{
 					string adID = favoredAds[i].ID;
 					var adLocal = await AdLocal.GetAdLocalByAdID(adID);

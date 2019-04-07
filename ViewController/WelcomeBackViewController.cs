@@ -21,6 +21,14 @@ namespace AircraftForSale
             this.PresentViewController(contactWebViewController, true, null);
         }
 
+        void Register_TouchUpInside(object sender, EventArgs e)
+        {
+            FavoriteClassificationsViewController favClassificationsVC = new FavoriteClassificationsViewController(new AircraftGridLayout(this));
+            this.ShowViewController(new UINavigationController(favClassificationsVC), this);
+            DismissModalViewController(true);
+
+        }
+
 
         public WelcomeBackViewController(IntPtr handle) : base (handle)
 		{
@@ -28,19 +36,22 @@ namespace AircraftForSale
 
         public override void ViewDidLoad()
         {
-            //    view.backgroundColor = UIColor.clearColor()
-            //view.opaque = false
+            base.ViewDidLoad();
+
             View.BackgroundColor = UIColor.Clear;
             View.Opaque = false;
 
             BackgroundView.Layer.CornerRadius = 25;
+
+            tryAgainButton.Layer.CornerRadius = tryAgainButton.Bounds.Height / 2;
+            emailSupportButton.Layer.CornerRadius = emailSupportButton.Bounds.Height / 2;
         }
 
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
             CloseButton.TouchUpInside += CloseButton_TouchUpInside;
-            tryAgainButton.TouchUpInside += CloseButton_TouchUpInside;
+            tryAgainButton.TouchUpInside += Register_TouchUpInside;
             emailSupportButton.TouchUpInside += EmailSupport_TouchUpInside;
 
         }
@@ -49,7 +60,7 @@ namespace AircraftForSale
         {
             base.ViewWillDisappear(animated);
             CloseButton.TouchUpInside -= CloseButton_TouchUpInside;
-            tryAgainButton.TouchUpInside -= CloseButton_TouchUpInside;
+            tryAgainButton.TouchUpInside -= Register_TouchUpInside;
             emailSupportButton.TouchUpInside -= EmailSupport_TouchUpInside;
         }
 

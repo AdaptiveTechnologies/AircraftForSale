@@ -90,7 +90,7 @@ namespace AircraftForSale
                     {
 
                         Settings.AppID = authResponse.AppId;
-                        Settings.UserID = authResponse.UserId;
+                        Settings.UserID = authResponse.MagAppUserId;
                         Settings.AuthToken = authResponse.AuthToken;
                     }
                     else
@@ -117,7 +117,7 @@ namespace AircraftForSale
                         return;
                     }
 
-                    //AuthResponse auResponse = await AuthResponse.GetAuthResponseAsync(Settings.AppID, Settings.Username, Settings.Password);
+
                     try
                     {
                         var responseProfile = await manager.getUserProfile(Settings.AppID, Settings.Username, Settings.AuthToken, Settings.Password);
@@ -219,15 +219,6 @@ namespace AircraftForSale
             Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateScreenView().Build());
 
 
-            //if (!Settings.IsRegistered && !Settings.DisplayedMessage)
-            //{
-            //    //In this scenario, display a modal (just once) asking if user has had trouble registering.
-            //    //ShowViewController(UIModalTransitionStyle.CoverVertical);
-
-            //    MessageViewController messageViewController = (MessageViewController)Storyboard.InstantiateViewController("MessageViewController");
-            //    //this.ShowViewController(messageViewController, this);
-            //    this.PresentViewController(messageViewController, true, () => { Settings.DisplayedMessage = true; });
-            //}
         }
 
         public override void ViewDidLoad()
@@ -243,9 +234,7 @@ namespace AircraftForSale
 
                 if (progress < 1f)
                 {
-                    //SVProgressHUD.SetDefaultStyle(SVProgressHUDStyle.Dark);
-                    //SVProgressHUD.ShowProgress(progress, "Loading aircraft data...", SVProgressHUDMaskType.Gradient);
-                   
+
                     this.View.AddSubview(overlay);
                 }
 
@@ -337,10 +326,8 @@ namespace AircraftForSale
                 changePassButton.Alpha = 0f;
 
                 Settings.Logout();
-                //this.TabBarItem.BadgeValue = "1";
             };
 
-            //View.AddSubviews(UpdateMyProfileButton, LogoutButton);
 
             RegisterNowButton.TouchUpInside += (sender, e) =>
             {
@@ -351,14 +338,7 @@ namespace AircraftForSale
 
             };
 
-            ////TODO: Remove after testing: testing new check username api endpoint
-            //Task.Run(async () =>
-            //{
-            //    APIManager apiManager = new APIManager();
-            //    //var authResponseInner = await apiManager.CheckUserNameAsync(Settings.AppID, Settings.AuthToken, "clay12345@me.com", Settings.Password);
 
-            //    var authResponseInner = await apiManager.ValidateLoginAsync(Settings.AppID, Settings.AuthToken, "Horseman@ganmail.com", "Showcase5");
-            //});
 
         }
 
