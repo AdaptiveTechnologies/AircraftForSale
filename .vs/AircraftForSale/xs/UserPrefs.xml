@@ -1,8 +1,10 @@
 ﻿<Properties StartupConfiguration="{B8C03836-A778-482E-8FC3-92267A01DFDA}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="ViewController/FavoritesViewController.cs">
     <Files>
-      <File FileName="AppDelegate.cs" Line="427" Column="33" />
-      <File FileName="ViewController/FavoritesViewController.cs" Line="154" Column="8" />
+      <File FileName="AppDelegate.cs" Line="200" Column="162" />
+      <File FileName="Main.cs" Line="12" Column="1" />
+      <File FileName="../AircraftForSale.PCL/Model/Ads/Ad.cs" Line="211" Column="1" />
+      <File FileName="ViewController/FavoritesViewController.cs" Line="42" Column="8" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -30,8 +32,6 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/ViewController/EmailInquiryViewController.cs" relfile="ViewController/EmailInquiryViewController.cs" line="16" column="1" />
-      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/Helpers/HelperMethods.cs" relfile="Helpers/HelperMethods.cs" line="62" column="1" />
-      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/Helpers/HelperMethods.cs" relfile="Helpers/HelperMethods.cs" line="60" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/AuthResponse.cs" relfile=".PCL/Model/API/AuthResponse.cs" line="34" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/APIManager.cs" relfile=".PCL/Model/API/APIManager.cs" line="232" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/AuthResponse.cs" relfile=".PCL/Model/API/AuthResponse.cs" line="59" column="1" />

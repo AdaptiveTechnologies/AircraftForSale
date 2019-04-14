@@ -29,12 +29,18 @@ namespace AircraftForSale
 			set;
 		}
 
-		//~MagazineFlipBoardViewController()
-		//{
-		//	Console.WriteLine("MagazineFlipBoardViewController is about to be collected");
-		//}
+        public string NavigateDirectlyToAdId
+        {
+            get;
+            set;
+        }
 
-		protected MagazineFlipBoardViewController(IntPtr handle) : base(handle)
+        //~MagazineFlipBoardViewController()
+        //{
+        //	Console.WriteLine("MagazineFlipBoardViewController is about to be collected");
+        //}
+
+        protected MagazineFlipBoardViewController(IntPtr handle) : base(handle)
 		{
 			// Note: this .ctor should not contain any initialization logic.
 		}
@@ -48,7 +54,78 @@ namespace AircraftForSale
 			Gai.SharedInstance.DefaultTracker.Set(GaiConstants.ScreenName, "MagazineFlip View");
 
             Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateScreenView().Build());
-		}
+
+            if(NavigateDirectlyToAdId != null && NavigateDirectlyToAdId != string.Empty)
+            {
+                var pageViewController = this.PageViewController;
+                var magFlipBoardViewController = this;
+
+
+
+                Ad ad = new Ad();
+
+                var adList = ModelController.adList;
+
+                ad = adList.FirstOrDefault(row => row.ID == NavigateDirectlyToAdId);
+
+                NavigateDirectlyToAdId = null;
+
+                if (ad != null && ad.ID != string.Empty)
+                {
+
+
+                    LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, "Loading Aircraft");
+                    this.View.AddSubview(loadingIndicator);
+
+                    var modelController = this.ModelController;
+                    List<Ad> searchAddList = new List<Ad>();
+
+                    Task.Run(async () =>
+                    {
+
+
+
+
+                        searchAddList = (await Ad.GetAdsByClassificationAsync(ad.Classification)).ToList();
+
+                    //get ads with this name and move them to the from of the liste
+                    List<Ad> similarAdList = new List<Ad>();
+
+                        similarAdList = searchAddList.Where(row => row.Name == ad.Name).OrderBy(r => r.IsFeatured).ToList();
+
+                    //similarAdList.Remove(ad);
+
+
+                    for (int i = 0; i < similarAdList.Count(); i++)
+                        {
+                            searchAddList.Remove(similarAdList[i]);
+                            searchAddList.Insert(0, similarAdList[i]);
+                        }
+
+                    //similarAdList.Remove(ad);
+                    //searchAddList.Insert(0, ad);
+
+
+                    var index = searchAddList.FindIndex(x => x.ID == ad.ID);
+                        var item = searchAddList[index];
+                        searchAddList[index] = searchAddList[0];
+                        searchAddList[0] = item;
+
+                        InvokeOnMainThread(() =>
+                        {
+                            modelController.LoadModalController(searchAddList, ad.Classification);
+                            loadingIndicator.Hide();
+                            var initialViewController = modelController.GetViewController(0, false);
+                            var searchViewControllers = new UIViewController[] { initialViewController };
+                            pageViewController.SetViewControllers(searchViewControllers, UIPageViewControllerNavigationDirection.Forward, true, null);
+
+                            HelperMethods.SendBasicAlert("", "Aircraft arranged based on search selection");
+                        });
+                    });
+                }
+            };
+        
+        }
 
 		public override void ViewDidLoad()
 		{

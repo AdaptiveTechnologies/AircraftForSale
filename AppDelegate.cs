@@ -78,7 +78,8 @@ namespace AircraftForSale
             UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(UIApplication.BackgroundFetchIntervalNever);
 
             //Register for push notifications is user indicates wishes to receive
-            if (Settings.IsRegisterForPushNotifications) { 
+            if (Settings.IsRegisterForPushNotifications)
+            {
                 this.PromptForPushNotifications();
             }
 
@@ -119,11 +120,10 @@ namespace AircraftForSale
 
                 //Clear SDImageCache
 
-                //TODO: Uncomment before release
-                //SDImageCache.SharedImageCache.ClearMemory();
-                //SDImageCache.SharedImageCache.ClearDisk();
+                SDImageCache.SharedImageCache.ClearMemory();
+                SDImageCache.SharedImageCache.ClearDisk();
 
-         
+
 
 
                 Task.Run(async () =>
@@ -140,8 +140,7 @@ namespace AircraftForSale
                             //remove current data in the database
                             Ad.DeleteAdsByClassification(fClass);
 
-                            //TODO: Uncomment before release
-                            //ProactivelyDownloadImages(await Ad.GetAdsByClassificationAsync(fClass));
+                            ProactivelyDownloadImages(await Ad.GetAdsByClassificationAsync(fClass));
                             UpdateTaskIteration();
                         }
                     }
@@ -163,8 +162,7 @@ namespace AircraftForSale
                             //remove current data in the database
                             Ad.DeleteAdsByClassification(fClass);
 
-                            //TODO: Uncomment before release
-                            //ProactivelyDownloadImages(await Ad.GetAdsByClassificationAsync(fClass));
+                            ProactivelyDownloadImages(await Ad.GetAdsByClassificationAsync(fClass));
                             UpdateTaskIteration();
                         }
                     }
@@ -193,6 +191,11 @@ namespace AircraftForSale
                                   if (chooseClassVC != null)
                                   {
                                       (chooseClassVC as ChooseClassificationCollectionViewController).LoadBackgroundImages();
+                                      //var pushNotificationOption = launchOptions[UIApplication.LaunchOptionsRemoteNotificationKey];
+                                      if(launchOptions != null  && launchOptions.ContainsKey(UIApplication.LaunchOptionsRemoteNotificationKey))
+                                      {
+                                          ReceivedRemoteNotification(application, launchOptions[UIApplication.LaunchOptionsRemoteNotificationKey] as NSDictionary);
+                                      }
                                   }
                               }
                           }
@@ -239,9 +242,9 @@ namespace AircraftForSale
         {
 
             //Proactively download images
-                List<Task> taskList = new List<Task>();
-                int counter = 0;
-        
+            List<Task> taskList = new List<Task>();
+            int counter = 0;
+
             foreach (var adListing in ads)
             {
                 try
@@ -262,8 +265,8 @@ namespace AircraftForSale
                                         var url = new Uri(adListing.ImageURL);
                                         var bytes = await webClient.DownloadDataTaskAsync(url);
                                         var dataBytes = NSData.FromArray(bytes);
-                                            //var uiimage = UIImage.LoadFromData(dataBytes);
-                                            SDImageCache.SharedImageCache.StoreImageDataToDisk(dataBytes, adListing.ImageURL);
+                                        //var uiimage = UIImage.LoadFromData(dataBytes);
+                                        SDImageCache.SharedImageCache.StoreImageDataToDisk(dataBytes, adListing.ImageURL);
 
                                     }
                                     catch (Exception e)
@@ -277,8 +280,8 @@ namespace AircraftForSale
                             {
                                 if (counter == 15)
                                 {
-                                        //Why are we "waitall" here? need to test not waiting.
-                                        Task.WaitAll(taskList.ToArray());
+                                    //Why are we "waitall" here? need to test not waiting.
+                                    Task.WaitAll(taskList.ToArray());
 
                                 }
                                 try
@@ -295,8 +298,8 @@ namespace AircraftForSale
                                         if (dataInner != null && finished)
                                         {
                                             SDImageCache.SharedImageCache.StoreImageDataToDisk(dataInner, adListing.ImageURL);
-                                                //SDImageCache.SharedImageCache.StoreImage(imageInner, adListing.ImageURL, null);
-                                            }
+                                            //SDImageCache.SharedImageCache.StoreImage(imageInner, adListing.ImageURL, null);
+                                        }
                                     });
                                 }
                                 catch (Exception e)
@@ -332,7 +335,8 @@ namespace AircraftForSale
                 tagList.Add("userid:" + Settings.UserID.ToString());
             }
 
-            Hub.UnregisterAllAsync(deviceToken, (error) => {
+            Hub.UnregisterAllAsync(deviceToken, (error) =>
+            {
                 if (error != null)
                 {
                     System.Diagnostics.Debug.WriteLine("Error calling Unregister: {0}", error.ToString());
@@ -342,7 +346,8 @@ namespace AircraftForSale
 
 
                 NSSet tags = new NSSet(tagList.ToArray());
-                Hub.RegisterNativeAsync(deviceToken, tags, (errorCallback) => {
+                Hub.RegisterNativeAsync(deviceToken, tags, (errorCallback) =>
+                {
                     if (errorCallback != null)
                         System.Diagnostics.Debug.WriteLine("RegisterNativeAsync error: " + errorCallback.ToString());
                 });
@@ -384,8 +389,8 @@ namespace AircraftForSale
 
                 //If this came from the ReceivedRemoteNotification while the app was running,
                 // we of course need to manually process things like the sound, badge, and alert.
-                if (!fromFinishedLaunching)
-                {
+                //if (!fromFinishedLaunching)
+                //{
                     //Manually show an alert
                     if (!string.IsNullOrEmpty(alert))
                     {
@@ -393,52 +398,102 @@ namespace AircraftForSale
                         if (adId != string.Empty && classification != string.Empty)
                         {
                             //Create Alert
-                            var okAlertController = UIAlertController.Create("Important Ad Update!", alert, UIAlertControllerStyle.Alert);
+                            var okAlertController = UIAlertController.Create("View Important Ad Update!", alert, UIAlertControllerStyle.Alert);
 
                             //Add Action
-                            okAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, async (obj) =>
+                            okAlertController.AddAction(UIAlertAction.Create("View Aircraft", UIAlertActionStyle.Default, async (obj) =>
                             {
-                                //Retrieve highlighted ad
+                                //if logged in, retrieve highlighted ad and navigate to it
 
-                                //remove cache
-                                Ad.DeleteAdsByClassification(classification);
-                                var adsByClassification = await Ad.GetAdsByClassificationAsync(classification);
-                                var highlightedAd = adsByClassification.Where(row => row.ID == adId).First();
+                                if (Settings.IsRegistered)
+                                {
+                                    SVProgressHUD.Show();
+                                    //Retrieve highlighted ad
+
+                                    //remove cache
+                                    Ad.DeleteAdsByClassification(classification);
+                                    var adsByClassification = await Ad.GetAdsByClassificationAsync(classification);
+                                    var highlightedAd = adsByClassification.Where(row => row.ID == adId).First();
+
+                                    //InvokeOnMainThread(() =>
+                                    //{
+
+                                    var vc = Window.RootViewController;
+                                    while (vc.PresentedViewController != null)
+                                    {
+                                        vc = vc.PresentedViewController;
+                                    }
+
+                                    if (vc is MainTabBarController)
+                                    {
+                                        var maintTabBarController = vc as MainTabBarController;
+                                        var magNavVC = maintTabBarController.ViewControllers.FirstOrDefault(row => row is MagazineNavigationViewController);
+                                        if (magNavVC != null)
+                                        {
+                                            maintTabBarController.SelectedIndex = 0;
+                                            var chooseClassVC = (magNavVC as MagazineNavigationViewController).ViewControllers.FirstOrDefault(row => row is ChooseClassificationCollectionViewController);
+                                            if (chooseClassVC != null)
+                                            {
+                                                var chooseClassificationViewController = chooseClassVC as ChooseClassificationCollectionViewController;
+                                                var storyboard = UIStoryboard.FromName("Main_ipad", NSBundle.MainBundle);
+                                                MagazineFlipBoardViewController flipboardVC = storyboard.InstantiateViewController("MagazineFlipBoardViewController") as MagazineFlipBoardViewController;
+                                                flipboardVC.Title = classification;
+                                                flipboardVC.SelectedClassification = classification;
+                                                flipboardVC.NavigateDirectlyToAdId = adId;
+                                                chooseClassificationViewController.NavigationController.PopToRootViewController(false);
+                                                //flipboardVC.TabBarController.HidesBottomBarWhenPushed = true;
+                                                chooseClassificationViewController.ShowViewController(flipboardVC, this);
+                                                //chooseClassificationViewController.ChildViewControllers.dim
+
+                                            }
+                                        }
+                                    }
+
+                                    SVProgressHUD.Dismiss();
+
+                                    //});
+
+                                }
 
                                 //navigate to favorites page
-                                var vc = Window.RootViewController;
-                                while (vc.PresentedViewController != null)
-                                {
-                                    vc = vc.PresentedViewController;
-                                }
+                                //var vc = Window.RootViewController;
+                                //while (vc.PresentedViewController != null)
+                                //{
+                                //    vc = vc.PresentedViewController;
+                                //}
 
-                                if (vc is MainTabBarController)
-                                {
-                                    var maintTabBarController = vc as MainTabBarController;
+                                //if (vc is MainTabBarController)
+                                //{
+                                //    var maintTabBarController = vc as MainTabBarController;
 
-                                    var favoritesVC = maintTabBarController.ViewControllers.FirstOrDefault(row => row is FavoritesViewController);
-                                    if (favoritesVC != null && favoritesVC is FavoritesViewController)
-                                    {
-                                      
+                                //    var favoritesVC = maintTabBarController.ViewControllers.FirstOrDefault(row => row is FavoritesViewController);
+                                //    if (favoritesVC != null && favoritesVC is FavoritesViewController)
+                                //    {
 
-                                        var favoritesViewController = favoritesVC as FavoritesViewController;
-                                        favoritesViewController.HighlightedAd = highlightedAd;
-                                        maintTabBarController.SelectedIndex = 1;
-                                
-                                    }
-                                }
+
+                                //        var favoritesViewController = favoritesVC as FavoritesViewController;
+                                //        favoritesViewController.HighlightedAd = highlightedAd;
+                                //        maintTabBarController.SelectedIndex = 1;
+
+                                //    }
+                                //}
 
 
                             }));
 
-                            // Present Alert
-                            Window.RootViewController.PresentViewController(okAlertController, true, null);
-                        }
-                        else
-                        {
-                            UIAlertView avAlert = new UIAlertView("Notification", alert, null, "OK", null);
-                            avAlert.Show();
-                        }
+                            okAlertController.AddAction(UIAlertAction.Create("Cancel", UIAlertActionStyle.Cancel, async (obj) =>
+                            {
+
+                            }));
+
+                                // Present Alert
+                                Window.RootViewController.PresentViewController(okAlertController, true, null);
+                        //}
+                        //else
+                        //{
+                        //    UIAlertView avAlert = new UIAlertView("Notification", alert, null, "OK", null);
+                        //    avAlert.Show();
+                        //}
                     }
                 }
             }
