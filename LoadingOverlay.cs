@@ -9,13 +9,22 @@ namespace AircraftForSale
 		// control declarations
 		UIActivityIndicatorView activitySpinner;
 		UILabel loadingLabel;
+        //public bool IsTransparent = true;
 
-		public LoadingOverlay(CGRect frame, string loadingMessage = "Loading Data...") : base(frame)
+        public LoadingOverlay(CGRect frame, string loadingMessage = "Loading Data...", bool isTransparent = true) : base(frame)
 		{
 			// configurable bits
 			BackgroundColor = UIColor.Black;
-			Alpha = 0.75f;
-			AutoresizingMask = UIViewAutoresizing.All;
+
+            if (isTransparent)
+            {
+                Alpha = 0.75f;
+            }else
+            {
+                Alpha = 1.0f;
+            }
+
+            AutoresizingMask = UIViewAutoresizing.All;
 
 			nfloat labelHeight = 22;
 			nfloat labelWidth = Frame.Width - 20;

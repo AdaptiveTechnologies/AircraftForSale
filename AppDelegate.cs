@@ -192,7 +192,7 @@ namespace AircraftForSale
                                   {
                                       (chooseClassVC as ChooseClassificationCollectionViewController).LoadBackgroundImages();
                                       //var pushNotificationOption = launchOptions[UIApplication.LaunchOptionsRemoteNotificationKey];
-                                      if(launchOptions != null  && launchOptions.ContainsKey(UIApplication.LaunchOptionsRemoteNotificationKey))
+                                      if (launchOptions != null && launchOptions.ContainsKey(UIApplication.LaunchOptionsRemoteNotificationKey))
                                       {
                                           ReceivedRemoteNotification(application, launchOptions[UIApplication.LaunchOptionsRemoteNotificationKey] as NSDictionary);
                                       }
@@ -356,10 +356,11 @@ namespace AircraftForSale
 
         public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
         {
-            ProcessNotification(userInfo, false);
+            bool appInForeground = UIApplication.SharedApplication.ApplicationState == UIApplicationState.Active;
+            ProcessNotification(userInfo, appInForeground);
         }
 
-        void ProcessNotification(NSDictionary options, bool fromFinishedLaunching)
+        void ProcessNotification(NSDictionary options, bool appInForeground)
         {
             // Check to see if the dictionary has the aps key.  This is the notification payload you would have sent
             if (null != options && options.ContainsKey(new NSString("aps")))
@@ -371,13 +372,7 @@ namespace AircraftForSale
                 string adId = string.Empty;
                 string classification = string.Empty;
 
-                //Extract the alert text
-                // NOTE: If you're using the simple alert by just specifying
-                // "  aps:{alert:"alert msg here"}  ", this will work fine.
-                // But if you're using a complex alert with Localization keys, etc.,
-                // your "alert" object from the aps dictionary will be another NSDictionary.
-                // Basically the JSON gets dumped right into a NSDictionary,
-                // so keep that in mind.
+
                 if (aps.ContainsKey(new NSString("alert")))
                     alert = (aps[new NSString("alert")] as NSString).ToString();
 
@@ -387,116 +382,103 @@ namespace AircraftForSale
                 if (aps.ContainsKey(new NSString("classification")))
                     classification = (aps[new NSString("classification")] as NSString).ToString();
 
-                //If this came from the ReceivedRemoteNotification while the app was running,
-                // we of course need to manually process things like the sound, badge, and alert.
-                //if (!fromFinishedLaunching)
-                //{
-                    //Manually show an alert
-                    if (!string.IsNullOrEmpty(alert))
+
+                //Manually show an alert
+                if (!string.IsNullOrEmpty(alert))
+                {
+                    //if adid != 0, navigate to ad
+                    if (adId != string.Empty && classification != string.Empty)
                     {
-                        //if adid != 0, navigate to ad
-                        if (adId != string.Empty && classification != string.Empty)
+                       
+                        //if logged in, retrieve highlighted ad and navigate to it
+                        if (Settings.IsRegistered)
                         {
-                            //Create Alert
-                            var okAlertController = UIAlertController.Create("View Important Ad Update!", alert, UIAlertControllerStyle.Alert);
+                            //SVProgressHUD.Show();
 
-                            //Add Action
-                            okAlertController.AddAction(UIAlertAction.Create("View Aircraft", UIAlertActionStyle.Default, async (obj) =>
+
+                            if (!appInForeground)
                             {
-                                //if logged in, retrieve highlighted ad and navigate to it
+                                NavigateToAdd(classification, adId);
+                            }else
+                            {
+                                //Create Alert
+                                var okAlertController = UIAlertController.Create("View Important Ad Update!", alert, UIAlertControllerStyle.Alert);
 
-                                if (Settings.IsRegistered)
+                                //Add Action
+                                okAlertController.AddAction(UIAlertAction.Create("View Aircraft", UIAlertActionStyle.Default, async (obj) =>
                                 {
-                                    SVProgressHUD.Show();
-                                    //Retrieve highlighted ad
+                                    NavigateToAdd(classification, adId);
+                                }));
 
-                                    //remove cache
-                                    Ad.DeleteAdsByClassification(classification);
-                                    var adsByClassification = await Ad.GetAdsByClassificationAsync(classification);
-                                    var highlightedAd = adsByClassification.Where(row => row.ID == adId).First();
+                                okAlertController.AddAction(UIAlertAction.Create("Cancel", UIAlertActionStyle.Cancel, async (obj) =>
+                                {
 
-                                    //InvokeOnMainThread(() =>
-                                    //{
-
-                                    var vc = Window.RootViewController;
-                                    while (vc.PresentedViewController != null)
-                                    {
-                                        vc = vc.PresentedViewController;
-                                    }
-
-                                    if (vc is MainTabBarController)
-                                    {
-                                        var maintTabBarController = vc as MainTabBarController;
-                                        var magNavVC = maintTabBarController.ViewControllers.FirstOrDefault(row => row is MagazineNavigationViewController);
-                                        if (magNavVC != null)
-                                        {
-                                            maintTabBarController.SelectedIndex = 0;
-                                            var chooseClassVC = (magNavVC as MagazineNavigationViewController).ViewControllers.FirstOrDefault(row => row is ChooseClassificationCollectionViewController);
-                                            if (chooseClassVC != null)
-                                            {
-                                                var chooseClassificationViewController = chooseClassVC as ChooseClassificationCollectionViewController;
-                                                var storyboard = UIStoryboard.FromName("Main_ipad", NSBundle.MainBundle);
-                                                MagazineFlipBoardViewController flipboardVC = storyboard.InstantiateViewController("MagazineFlipBoardViewController") as MagazineFlipBoardViewController;
-                                                flipboardVC.Title = classification;
-                                                flipboardVC.SelectedClassification = classification;
-                                                flipboardVC.NavigateDirectlyToAdId = adId;
-                                                chooseClassificationViewController.NavigationController.PopToRootViewController(false);
-                                                //flipboardVC.TabBarController.HidesBottomBarWhenPushed = true;
-                                                chooseClassificationViewController.ShowViewController(flipboardVC, this);
-                                                //chooseClassificationViewController.ChildViewControllers.dim
-
-                                            }
-                                        }
-                                    }
-
-                                    SVProgressHUD.Dismiss();
-
-                                    //});
-
-                                }
-
-                                //navigate to favorites page
-                                //var vc = Window.RootViewController;
-                                //while (vc.PresentedViewController != null)
-                                //{
-                                //    vc = vc.PresentedViewController;
-                                //}
-
-                                //if (vc is MainTabBarController)
-                                //{
-                                //    var maintTabBarController = vc as MainTabBarController;
-
-                                //    var favoritesVC = maintTabBarController.ViewControllers.FirstOrDefault(row => row is FavoritesViewController);
-                                //    if (favoritesVC != null && favoritesVC is FavoritesViewController)
-                                //    {
-
-
-                                //        var favoritesViewController = favoritesVC as FavoritesViewController;
-                                //        favoritesViewController.HighlightedAd = highlightedAd;
-                                //        maintTabBarController.SelectedIndex = 1;
-
-                                //    }
-                                //}
-
-
-                            }));
-
-                            okAlertController.AddAction(UIAlertAction.Create("Cancel", UIAlertActionStyle.Cancel, async (obj) =>
-                            {
-
-                            }));
+                                }));
 
                                 // Present Alert
                                 Window.RootViewController.PresentViewController(okAlertController, true, null);
-                        //}
-                        //else
-                        //{
-                        //    UIAlertView avAlert = new UIAlertView("Notification", alert, null, "OK", null);
-                        //    avAlert.Show();
-                        //}
+                            }
+
+
+
+                        }
+                      
+
                     }
                 }
             }
+        }
+
+        public async void  NavigateToAdd(string classification, string adId)
+        {
+            var vc = Window.RootViewController;
+            while (vc.PresentedViewController != null)
+            {
+                vc = vc.PresentedViewController;
+            }
+
+            //return Task.Run(async () =>
+            //{
+                LoadingOverlay loadingIndicator = new LoadingOverlay(vc.View.Frame, "Loading ...", false);
+
+
+                if (vc is MainTabBarController)
+                {
+
+                    vc.View.AddSubview(loadingIndicator);
+
+                    //remove cache
+                    Ad.DeleteAdsByClassification(classification);
+                    //Retrieve highlighted ad
+                    var adsByClassification = await Ad.GetAdsByClassificationAsync(classification);
+                    var highlightedAd = adsByClassification.Where(row => row.ID == adId).First();
+
+
+                    var maintTabBarController = vc as MainTabBarController;
+                    var magNavVC = maintTabBarController.ViewControllers.FirstOrDefault(row => row is MagazineNavigationViewController);
+                    if (magNavVC != null)
+                    {
+                        maintTabBarController.SelectedIndex = 0;
+                        var chooseClassVC = (magNavVC as MagazineNavigationViewController).ViewControllers.FirstOrDefault(row => row is ChooseClassificationCollectionViewController);
+                        if (chooseClassVC != null)
+                        {
+                            var chooseClassificationViewController = chooseClassVC as ChooseClassificationCollectionViewController;
+                            var storyboard = UIStoryboard.FromName("Main_ipad", NSBundle.MainBundle);
+                            MagazineFlipBoardViewController flipboardVC = storyboard.InstantiateViewController("MagazineFlipBoardViewController") as MagazineFlipBoardViewController;
+                            flipboardVC.Title = classification;
+                            flipboardVC.SelectedClassification = classification;
+                            flipboardVC.NavigateDirectlyToAdId = adId;
+                            chooseClassificationViewController.NavigationController.PopToRootViewController(false);
+                            chooseClassificationViewController.ShowViewController(flipboardVC, this);
+
+
+                        }
+                    }
+                }
+
+                //SVProgressHUD.Dismiss();
+                loadingIndicator.Hide();
+            //});
         }
 
         //perform data fetch here for the ads

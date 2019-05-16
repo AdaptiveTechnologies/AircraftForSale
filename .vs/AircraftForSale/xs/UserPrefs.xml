@@ -1,34 +1,27 @@
 ﻿<Properties StartupConfiguration="{B8C03836-A778-482E-8FC3-92267A01DFDA}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ViewController/FavoritesViewController.cs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="AppDelegate.cs" Line="200" Column="162" />
+      <File FileName="AppDelegate.cs" Line="357" Column="106" />
+      <File FileName="Info.plist" />
+      <File FileName="Entitlements.plist" />
+      <File FileName="Constants.cs" Line="10" Column="9" />
       <File FileName="Main.cs" Line="12" Column="1" />
-      <File FileName="../AircraftForSale.PCL/Model/Ads/Ad.cs" Line="211" Column="1" />
-      <File FileName="ViewController/FavoritesViewController.cs" Line="42" Column="8" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="AircraftForSale" expanded="True">
-            <Node name="AircraftForSale" expanded="True">
-              <Node name="ViewController" expanded="True">
-                <Node name="FavoritesViewController.cs" selected="True" />
-              </Node>
-            </Node>
-            <Node name="AircraftForSale.PCL" expanded="True">
-              <Node name="Helpers" expanded="True" />
-              <Node name="Model" expanded="True">
-                <Node name="Ads" expanded="True" />
-              </Node>
-            </Node>
+            <Node name="AircraftForSale" expanded="True" selected="True" />
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.AircraftForSale automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.00008020-000C34502288002E" />
+  <MonoDevelop.Ide.ItemProperties.AircraftForSale automaticSigning="True" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget.00008020-000C34502288002E">
+    <MonoDevelop.MacDev.AppleDevelopmentTeam DeveloperId="JJ6S52M66E" TeamId="24K6W497BD" />
+  </MonoDevelop.Ide.ItemProperties.AircraftForSale>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhone" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhone" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/ViewController/EmailInquiryViewController.cs" relfile="ViewController/EmailInquiryViewController.cs" line="16" column="1" />
@@ -58,6 +51,11 @@
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/APIManager.cs" relfile=".PCL/Model/API/APIManager.cs" line="556" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/APIManager.cs" relfile=".PCL/Model/API/APIManager.cs" line="380" column="1" />
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/APIManager.cs" relfile=".PCL/Model/API/APIManager.cs" line="702" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/AppDelegate.cs" relfile="AppDelegate.cs" line="342" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/AppDelegate.cs" relfile="AppDelegate.cs" line="352" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Helpers/Settings.cs" relfile=".PCL/Helpers/Settings.cs" line="371" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/.PCL/Model/API/APIManager.cs" relfile=".PCL/Model/API/APIManager.cs" line="232" column="1" />
+      <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/AppDelegate.cs" relfile="AppDelegate.cs" line="197" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />

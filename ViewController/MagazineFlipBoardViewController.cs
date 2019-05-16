@@ -35,6 +35,10 @@ namespace AircraftForSale
             set;
         }
 
+        //LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, "Loading Aircraft", false);
+
+        public LoadingOverlay LoadingIndicator { get; set; }
+
         //~MagazineFlipBoardViewController()
         //{
         //	Console.WriteLine("MagazineFlipBoardViewController is about to be collected");
@@ -74,8 +78,8 @@ namespace AircraftForSale
                 {
 
 
-                    LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, "Loading Aircraft");
-                    this.View.AddSubview(loadingIndicator);
+                   
+                    //this.View.AddSubview(loadingIndicator);
 
                     var modelController = this.ModelController;
                     List<Ad> searchAddList = new List<Ad>();
@@ -114,14 +118,25 @@ namespace AircraftForSale
                         InvokeOnMainThread(() =>
                         {
                             modelController.LoadModalController(searchAddList, ad.Classification);
-                            loadingIndicator.Hide();
+
                             var initialViewController = modelController.GetViewController(0, false);
                             var searchViewControllers = new UIViewController[] { initialViewController };
-                            pageViewController.SetViewControllers(searchViewControllers, UIPageViewControllerNavigationDirection.Forward, true, null);
+                            pageViewController.SetViewControllers(searchViewControllers, UIPageViewControllerNavigationDirection.Forward, true,(finished) => {
+                                if(LoadingIndicator != null)
+                                {
+                                    LoadingIndicator.Hide();
+                                }
+                            });
 
-                            HelperMethods.SendBasicAlert("", "Aircraft arranged based on search selection");
+                            //HelperMethods.SendBasicAlert("", "Aircraft arranged based on search selection");
                         });
                     });
+                }else
+                {
+                    if (LoadingIndicator != null)
+                    {
+                        LoadingIndicator.Hide();
+                    }
                 }
             };
         
@@ -136,6 +151,7 @@ namespace AircraftForSale
 				this.TabBarController.TabBar.Hidden = true;
 			}
 
+           
 
 			//Ensure database refresh
 			//this.NavigationItem.SetRightBarButtonItem(
@@ -291,9 +307,16 @@ namespace AircraftForSale
 			// Add the page view controller's gesture recognizers to the book view controller's view so that the gestures are started more easily.
 			View.GestureRecognizers = PageViewController.GestureRecognizers;
 
-		}
+            if (NavigateDirectlyToAdId != null && NavigateDirectlyToAdId != string.Empty)
+            {
+                LoadingIndicator = new LoadingOverlay(this.View.Frame, "Loading Aircraft", false);
+                this.View.AddSubview(LoadingIndicator);
+            }
 
-		[Export("pageViewController:spineLocationForInterfaceOrientation:")]
+
+        }
+
+        [Export("pageViewController:spineLocationForInterfaceOrientation:")]
 		public UIPageViewControllerSpineLocation GetSpineLocation(UIPageViewController pageViewController, UIInterfaceOrientation orientation)
 		{
 			UIViewController currentViewController;

@@ -92,9 +92,9 @@
     <MtouchTlsProvider>Default</MtouchTlsProvider>
     <PlatformTarget>x86</PlatformTarget>
     <OptimizePNGs>false</OptimizePNGs>
-    <MtouchSdkVersion>10.2</MtouchSdkVersion>
-    <CodesignProvision>BuyPlane</CodesignProvision>
+    <MtouchSdkVersion>12.2</MtouchSdkVersion>
     <CodesignKey>iPhone Developer: Clay Martin (83H34G7LM2)</CodesignKey>
+    <CodesignProvision>VS: WildCard Development</CodesignProvision>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
