@@ -85,11 +85,6 @@ namespace AircraftForSale
                 NameTextField = null;
             }
 
-            if (PhoneTextField != null) {
-                PhoneTextField.Dispose ();
-                PhoneTextField = null;
-            }
-
             if (SubmitButton != null) {
                 SubmitButton.Dispose ();
                 SubmitButton = null;

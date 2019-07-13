@@ -204,6 +204,7 @@
     <InterfaceDefinition Include="Registration_New.storyboard" />
     <InterfaceDefinition Include="Resources\Registration.storyboard" />
     <InterfaceDefinition Include="Main_ipad.storyboard" />
+    <InterfaceDefinition Include="MyViewController.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -399,6 +400,7 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="UserNotificationCenterDelegate.cs" />
+    <Compile Include="Helpers\BuyplaneAPISessionDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\profile.png" />

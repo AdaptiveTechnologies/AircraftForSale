@@ -227,25 +227,25 @@ namespace AircraftForSale
 
 
             LoadingOverlay overlay = new LoadingOverlay(this.View.Frame, "Loading aircraft data...");
-            AppDelegate.OnDataUpdate += (source, e) =>
-            {
+            //AppDelegate.OnDataUpdate += (source, e) =>
+            //{
 
-                float progress = (float)e.GetComplete() / (float)e.GetTotal();
+            //    float progress = (float)e.GetComplete() / (float)e.GetTotal();
 
-                if (progress < 1f)
-                {
+            //    if (progress < 1f)
+            //    {
 
-                    this.View.AddSubview(overlay);
-                }
+            //        this.View.AddSubview(overlay);
+            //    }
 
                
 
-                if (progress >= 1)
-                {
-                    overlay.Hide();
-                }
+            //    if (progress >= 1)
+            //    {
+            //        overlay.Hide();
+            //    }
 
-            };
+            //};
 
             HideKeyboardGesture = new UITapGestureRecognizer(() =>
             {

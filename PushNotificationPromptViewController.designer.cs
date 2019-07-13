@@ -1,42 +1,31 @@
 // WARNING
 //
-// This file has been generated automatically by Visual Studio to store outlets and
-// actions made in the UI designer. If it is removed, they will be lost.
-// Manual changes to this file may not be handled correctly.
+// This file has been generated automatically by Visual Studio from the outlets and
+// actions declared in your storyboard file.
+// Manual changes to this file will not be maintained.
 //
 using Foundation;
+using System;
 using System.CodeDom.Compiler;
 
 namespace AircraftForSale
 {
-	[Register ("PushNotificationPromptViewController")]
-	partial class PushNotificationPromptViewController
-	{
-		[Outlet]
-		UIKit.UIView backgroundView { get; set; }
+    [Register ("PushNotificationPromptViewController")]
+    partial class PushNotificationPromptViewController
+    {
+        [Outlet]
+        UIKit.UIView backgroundView { get; set; }
 
-		[Outlet]
-		UIKit.UIButton noButton { get; set; }
 
-		[Outlet]
-		UIKit.UIButton yesButton { get; set; }
-		
-		void ReleaseDesignerOutlets ()
-		{
-			if (yesButton != null) {
-				yesButton.Dispose ();
-				yesButton = null;
-			}
+        [Outlet]
+        UIKit.UIButton noButton { get; set; }
 
-			if (noButton != null) {
-				noButton.Dispose ();
-				noButton = null;
-			}
 
-			if (backgroundView != null) {
-				backgroundView.Dispose ();
-				backgroundView = null;
-			}
-		}
-	}
+        [Outlet]
+        UIKit.UIButton yesButton { get; set; }
+
+        void ReleaseDesignerOutlets ()
+        {
+        }
+    }
 }

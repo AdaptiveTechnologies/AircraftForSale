@@ -243,11 +243,6 @@ namespace AircraftForSale
                 Ad2PriceChangeLabel = null;
             }
 
-            if (Ad2TableView != null) {
-                Ad2TableView.Dispose ();
-                Ad2TableView = null;
-            }
-
             if (Ad3MessageButton != null) {
                 Ad3MessageButton.Dispose ();
                 Ad3MessageButton = null;
@@ -261,11 +256,6 @@ namespace AircraftForSale
             if (Ad3PriceChangeLabel != null) {
                 Ad3PriceChangeLabel.Dispose ();
                 Ad3PriceChangeLabel = null;
-            }
-
-            if (Ad3TableView != null) {
-                Ad3TableView.Dispose ();
-                Ad3TableView = null;
             }
 
             if (AdEmail1 != null) {

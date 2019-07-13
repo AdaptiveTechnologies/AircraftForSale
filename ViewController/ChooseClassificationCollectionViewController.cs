@@ -380,8 +380,10 @@ namespace AircraftForSale
                             }
                     }
                 }
+                var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
+                appDelegate.PerformBackgroundDataFetchFromBuyplaneAPI(() => Console.WriteLine("Background Fetch for ads chosen from ChooseClassificationCollention complete", ads));
 
-                AppDelegate.ProactivelyDownloadImages(ads);
+                //AppDelegate.PerformBackgroundDataFetchFromBuyplaneAPI((obj) => Console.WriteLine("Background Fetch for ads chosen from ChooseClassificationCollention complete", ads);
 
             }).ContinueWith((task) =>
             {

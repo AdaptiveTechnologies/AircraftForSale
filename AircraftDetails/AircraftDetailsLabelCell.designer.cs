@@ -30,16 +30,6 @@ namespace AircraftForSale
                 aircraftDescription.Dispose ();
                 aircraftDescription = null;
             }
-
-            if (aircraftDetails != null) {
-                aircraftDetails.Dispose ();
-                aircraftDetails = null;
-            }
-
-            if (aircraftLabel != null) {
-                aircraftLabel.Dispose ();
-                aircraftLabel = null;
-            }
         }
     }
 }

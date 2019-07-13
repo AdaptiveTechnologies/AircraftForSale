@@ -114,65 +114,6 @@ namespace AircraftForSale
 
         void ReleaseDesignerOutlets ()
         {
-            if (Ad1NameButton != null) {
-                Ad1NameButton.Dispose ();
-                Ad1NameButton = null;
-            }
-
-            if (Ad1PriceChangeLabel != null) {
-                Ad1PriceChangeLabel.Dispose ();
-                Ad1PriceChangeLabel = null;
-            }
-
-            if (Ad1RGButton != null) {
-                Ad1RGButton.Dispose ();
-                Ad1RGButton = null;
-            }
-
-            if (Ad1TechnicalSpecButton != null) {
-                Ad1TechnicalSpecButton.Dispose ();
-                Ad1TechnicalSpecButton = null;
-            }
-
-            if (AdEmail1 != null) {
-                AdEmail1.Dispose ();
-                AdEmail1 = null;
-            }
-
-            if (AdImage1 != null) {
-                AdImage1.Dispose ();
-                AdImage1 = null;
-            }
-
-            if (AdLike1 != null) {
-                AdLike1.Dispose ();
-                AdLike1 = null;
-            }
-
-            if (AdMessages1 != null) {
-                AdMessages1.Dispose ();
-                AdMessages1 = null;
-            }
-
-            if (AdShare1 != null) {
-                AdShare1.Dispose ();
-                AdShare1 = null;
-            }
-
-            if (FeaturedLabel != null) {
-                FeaturedLabel.Dispose ();
-                FeaturedLabel = null;
-            }
-
-            if (PageIndicator != null) {
-                PageIndicator.Dispose ();
-                PageIndicator = null;
-            }
-
-            if (SpecTableView != null) {
-                SpecTableView.Dispose ();
-                SpecTableView = null;
-            }
         }
     }
 }

@@ -46,35 +46,6 @@ namespace AircraftForSale
 
         void ReleaseDesignerOutlets ()
         {
-            if (addressEdt != null) {
-                addressEdt.Dispose ();
-                addressEdt = null;
-            }
-
-            if (checkbox != null) {
-                checkbox.Dispose ();
-                checkbox = null;
-            }
-
-            if (commentsEdt != null) {
-                commentsEdt.Dispose ();
-                commentsEdt = null;
-            }
-
-            if (nameEdt != null) {
-                nameEdt.Dispose ();
-                nameEdt = null;
-            }
-
-            if (phnoEdt != null) {
-                phnoEdt.Dispose ();
-                phnoEdt = null;
-            }
-
-            if (submitButton != null) {
-                submitButton.Dispose ();
-                submitButton = null;
-            }
         }
     }
 }

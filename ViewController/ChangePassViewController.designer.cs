@@ -38,25 +38,6 @@ namespace AircraftForSale
 
         void ReleaseDesignerOutlets ()
         {
-            if (confirmpassEdt != null) {
-                confirmpassEdt.Dispose ();
-                confirmpassEdt = null;
-            }
-
-            if (nPassEdt != null) {
-                nPassEdt.Dispose ();
-                nPassEdt = null;
-            }
-
-            if (oldPassEdt != null) {
-                oldPassEdt.Dispose ();
-                oldPassEdt = null;
-            }
-
-            if (submitBtn != null) {
-                submitBtn.Dispose ();
-                submitBtn = null;
-            }
         }
     }
 }

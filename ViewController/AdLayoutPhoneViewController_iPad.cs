@@ -229,10 +229,10 @@ namespace AircraftForSale
 			base.ViewDidAppear(animated);
 
 
-			SpecTableView.FlashScrollIndicators();
+			//SpecTableView.FlashScrollIndicators();
 
 
-			PerformSelector(new ObjCRuntime.Selector("demo:"), null, 1);
+			//PerformSelector(new ObjCRuntime.Selector("demo:"), null, 1);
 			// This screen name value will remain set on the tracker and sent with
 			// hits until it is set to a new value or to null.
 			Gai.SharedInstance.DefaultTracker.Set(GaiConstants.ScreenName, "AdLayout View");
@@ -240,12 +240,12 @@ namespace AircraftForSale
 			Gai.SharedInstance.DefaultTracker.Send(DictionaryBuilder.CreateScreenView().Build());
 		}
 
-		[Export("demo:")]
-		void RunDemo(NSString arg)
-		{
-			SpecTableView.FlashScrollIndicators();
-			PerformSelector(new ObjCRuntime.Selector("demo:"), null, 1);
-		}
+		//[Export("demo:")]
+		//void RunDemo(NSString arg)
+		//{
+		//	//SpecTableView.FlashScrollIndicators();
+		//	//PerformSelector(new ObjCRuntime.Selector("demo:"), null, 1);
+		//}
 
 
 		void TapImageAction1(UITapGestureRecognizer tap)

@@ -15,6 +15,7 @@ using AdSupport;
 using SVProgressHUDBinding;
 using WindowsAzure.Messaging;
 using UserNotifications;
+using AircraftForSale.Helpers;
 
 namespace AircraftForSale
 {
@@ -37,23 +38,8 @@ namespace AircraftForSale
             set;
         }
 
+        bool launchedFromPushNotification = false;
 
-
-        public static event DataUpdatingEventHandler OnDataUpdate;
-        public int TaskCount { get; set; }
-        public int TaskIteration = 0;
-
-        public void UpdateTaskIteration()
-        {
-            if (AppDelegate.OnDataUpdate != null)
-            {
-                InvokeOnMainThread(() =>
-                {
-                    TaskIteration++;
-                    OnDataUpdate(this, new DataUpdateEventArgs(TaskIteration, TaskCount + 1));
-                });
-            }
-        }
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
@@ -75,15 +61,13 @@ namespace AircraftForSale
             Window = new UIWindow(UIScreen.MainScreen.Bounds);
 
             //Wait until need to update content in the background... once implemented let the OS decide how often to fetch new content
-            UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(UIApplication.BackgroundFetchIntervalNever);
+            UIApplication.SharedApplication.SetMinimumBackgroundFetchInterval(UIApplication.BackgroundFetchIntervalMinimum);
 
             //Register for push notifications is user indicates wishes to receive
             if (Settings.IsRegisterForPushNotifications)
             {
                 this.PromptForPushNotifications();
             }
-
-
 
             var storyboard = UIStoryboard.FromName("Main_ipad", NSBundle.MainBundle);
             bool skipFirstStep = Settings.IsRegistered;
@@ -98,8 +82,6 @@ namespace AircraftForSale
 
 
             UINavigationBar.Appearance.BarTintColor = UIColor.Black;
-
-
 
 
             if (!Reachability.IsHostReachable(Settings._baseDomain))
@@ -117,91 +99,97 @@ namespace AircraftForSale
             }
             else
             {
-
-                //Clear SDImageCache
-
-                SDImageCache.SharedImageCache.ClearMemory();
-                SDImageCache.SharedImageCache.ClearDisk();
-
-
-
-
-                Task.Run(async () =>
+                //Determine if need to dump cache
+                if(Settings.LastImageCacheDump != string.Empty)
                 {
-                    if (Settings.IsRegistered)
+                    DateTime startDate = DateTime.Parse(Settings.LastImageCacheDump);
+                    double days = (DateTime.Now - startDate).TotalDays;
+                    if(days > 7)
                     {
-                        var favoredClassificationsList = Settings.GetFavoredClassifications();
-
-                        TaskCount = favoredClassificationsList.Count;
-
-                        foreach (var fClass in favoredClassificationsList)
-                        {
-                            UpdateTaskIteration();
-                            //remove current data in the database
-                            Ad.DeleteAdsByClassification(fClass);
-
-                            ProactivelyDownloadImages(await Ad.GetAdsByClassificationAsync(fClass));
-                            UpdateTaskIteration();
-                        }
-                    }
-                    else
-                    {
-
-                        //preload Jets
-                        Settings.IsJets = true;
-                        Settings.IsSingleEngine = true;
-                        Settings.IsTwinTurbines = true;
-
-                        List<string> preloadJetsAndOtherClassificationsIfSetSettingsTrueAbove = Settings.GetFavoredClassifications();
-
-                        TaskCount = preloadJetsAndOtherClassificationsIfSetSettingsTrueAbove.Count;
-
-                        foreach (var fClass in preloadJetsAndOtherClassificationsIfSetSettingsTrueAbove)
-                        {
-                            UpdateTaskIteration();
-                            //remove current data in the database
-                            Ad.DeleteAdsByClassification(fClass);
-
-                            ProactivelyDownloadImages(await Ad.GetAdsByClassificationAsync(fClass));
-                            UpdateTaskIteration();
-                        }
+                        SDImageCache.SharedImageCache.ClearMemory();
+                        SDImageCache.SharedImageCache.ClearDisk();
+                        Settings.LastImageCacheDump = string.Empty;
                     }
 
+                }
 
+                //Determine if app was launched from a push notification
 
+                if (launchOptions != null && launchOptions.ContainsKey(UIApplication.LaunchOptionsRemoteNotificationKey))
+                {
+                    launchedFromPushNotification = true;
+                }
+                else
+                {
+                    launchedFromPushNotification = false;
+                }
 
+                if (!launchedFromPushNotification)
+                {
 
+                    PerformBackgroundDataFetchFromBuyplaneAPI(() =>
+                    {
+                        InvokeOnMainThread(() =>
+                        {
 
-                    InvokeOnMainThread(() =>
-                      {
+                            var vc = Window.RootViewController;
+                            while (vc.PresentedViewController != null)
+                            {
+                                vc = vc.PresentedViewController;
+                            }
 
-                          var vc = Window.RootViewController;
-                          while (vc.PresentedViewController != null)
-                          {
-                              vc = vc.PresentedViewController;
-                          }
+                            if (vc is MainTabBarController)
+                            {
+                                var maintTabBarController = vc as MainTabBarController;
+                                var magNavVC = maintTabBarController.ViewControllers.FirstOrDefault(row => row is MagazineNavigationViewController);
+                                if (magNavVC != null)
+                                {
+                                    var chooseClassVC = (magNavVC as MagazineNavigationViewController).ViewControllers.FirstOrDefault(row => row is ChooseClassificationCollectionViewController);
+                                    if (chooseClassVC != null)
+                                    {
+                                        (chooseClassVC as ChooseClassificationCollectionViewController).LoadBackgroundImages();
+                                        if (launchOptions != null && launchOptions.ContainsKey(UIApplication.LaunchOptionsRemoteNotificationKey))
+                                        {
+                                            NSDictionary notificationDictionary = launchOptions[UIApplication.LaunchOptionsRemoteNotificationKey] as NSDictionary;
+                                            ReceivedRemoteNotification(application, notificationDictionary);
+                                        }
+                                    }
+                                }
+                            }
 
-                          if (vc is MainTabBarController)
-                          {
-                              var maintTabBarController = vc as MainTabBarController;
-                              var magNavVC = maintTabBarController.ViewControllers.FirstOrDefault(row => row is MagazineNavigationViewController);
-                              if (magNavVC != null)
-                              {
-                                  var chooseClassVC = (magNavVC as MagazineNavigationViewController).ViewControllers.FirstOrDefault(row => row is ChooseClassificationCollectionViewController);
-                                  if (chooseClassVC != null)
-                                  {
-                                      (chooseClassVC as ChooseClassificationCollectionViewController).LoadBackgroundImages();
-                                      //var pushNotificationOption = launchOptions[UIApplication.LaunchOptionsRemoteNotificationKey];
-                                      if (launchOptions != null && launchOptions.ContainsKey(UIApplication.LaunchOptionsRemoteNotificationKey))
-                                      {
-                                          ReceivedRemoteNotification(application, launchOptions[UIApplication.LaunchOptionsRemoteNotificationKey] as NSDictionary);
-                                      }
-                                  }
-                              }
-                          }
+                        });
 
-                      });
-                });
+                    });
+                }else
+                {
+                    var vc = Window.RootViewController;
+                    while (vc.PresentedViewController != null)
+                    {
+                        vc = vc.PresentedViewController;
+                    }
+
+                    if (vc is MainTabBarController)
+                    {
+                        var maintTabBarController = vc as MainTabBarController;
+                        var magNavVC = maintTabBarController.ViewControllers.FirstOrDefault(row => row is MagazineNavigationViewController);
+                        if (magNavVC != null)
+                        {
+                            var chooseClassVC = (magNavVC as MagazineNavigationViewController).ViewControllers.FirstOrDefault(row => row is ChooseClassificationCollectionViewController);
+                            if (chooseClassVC != null)
+                            {
+                                (chooseClassVC as ChooseClassificationCollectionViewController).LoadBackgroundImages();
+                                if (launchOptions != null && launchOptions.ContainsKey(UIApplication.LaunchOptionsRemoteNotificationKey))
+                                {
+                                    NSDictionary notificationDictionary = launchOptions[UIApplication.LaunchOptionsRemoteNotificationKey] as NSDictionary;
+                                    ReceivedRemoteNotification(application, notificationDictionary);
+                                }
+                            }
+                        }
+                    }
+                }
+
+               
+                //});
 
             }
 
@@ -238,90 +226,6 @@ namespace AircraftForSale
             }
         }
 
-        public static void ProactivelyDownloadImages(IEnumerable<Ad> ads)
-        {
-
-            //Proactively download images
-            List<Task> taskList = new List<Task>();
-            int counter = 0;
-
-            foreach (var adListing in ads)
-            {
-                try
-                {
-
-                    SDImageCache.SharedImageCache.DiskImageExists(adListing.ImageURL, (isInCache) =>
-                    {
-                        if (!isInCache)
-                        {
-
-                            if (counter <= 15)
-                            {
-                                var task = Task.Run(async () =>
-                                {
-                                    var webClient = new WebClient();
-                                    try
-                                    {
-                                        var url = new Uri(adListing.ImageURL);
-                                        var bytes = await webClient.DownloadDataTaskAsync(url);
-                                        var dataBytes = NSData.FromArray(bytes);
-                                        //var uiimage = UIImage.LoadFromData(dataBytes);
-                                        SDImageCache.SharedImageCache.StoreImageDataToDisk(dataBytes, adListing.ImageURL);
-
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        string breakPoint = e.Message;
-                                    }
-                                });
-                                taskList.Add(task);
-                            }
-                            else
-                            {
-                                if (counter == 15)
-                                {
-                                    //Why are we "waitall" here? need to test not waiting.
-                                    Task.WaitAll(taskList.ToArray());
-
-                                }
-                                try
-                                {
-                                    SDWebImageManager.SharedManager.ImageDownloader.DownloadImage(
-                                    url: new NSUrl(adListing.ImageURL),
-                                    options: SDWebImageDownloaderOptions.HighPriority | SDWebImageDownloaderOptions.ContinueInBackground,
-                                    progressHandler: (receivedSize, expectedSize, url) =>
-                                    {
-
-                                    },
-                                    completedHandler: (imageInner, dataInner, error, finished) =>
-                                    {
-                                        if (dataInner != null && finished)
-                                        {
-                                            SDImageCache.SharedImageCache.StoreImageDataToDisk(dataInner, adListing.ImageURL);
-                                            //SDImageCache.SharedImageCache.StoreImage(imageInner, adListing.ImageURL, null);
-                                        }
-                                    });
-                                }
-                                catch (Exception e)
-                                {
-                                    string breakPoint = e.Message;
-                                }
-
-                            }
-                            counter++;
-                        }
-
-                    });
-                }
-                catch (Exception e)
-                {
-                    string breakPoint = e.Message;
-                }
-
-            }
-
-
-        }
 
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
         {
@@ -389,17 +293,22 @@ namespace AircraftForSale
                     //if adid != 0, navigate to ad
                     if (adId != string.Empty && classification != string.Empty)
                     {
-                       
+
                         //if logged in, retrieve highlighted ad and navigate to it
                         if (Settings.IsRegistered)
                         {
                             //SVProgressHUD.Show();
 
 
-                            if (!appInForeground)
+                            if (!appInForeground || launchedFromPushNotification)
                             {
+                                if (launchedFromPushNotification)
+                                {
+                                    launchedFromPushNotification = false;
+                                }
                                 NavigateToAdd(classification, adId);
-                            }else
+                            }
+                            else
                             {
                                 //Create Alert
                                 var okAlertController = UIAlertController.Create("View Important Ad Update!", alert, UIAlertControllerStyle.Alert);
@@ -418,18 +327,13 @@ namespace AircraftForSale
                                 // Present Alert
                                 Window.RootViewController.PresentViewController(okAlertController, true, null);
                             }
-
-
-
                         }
-                      
-
                     }
                 }
             }
         }
 
-        public async void  NavigateToAdd(string classification, string adId)
+        public async void NavigateToAdd(string classification, string adId)
         {
             var vc = Window.RootViewController;
             while (vc.PresentedViewController != null)
@@ -437,58 +341,174 @@ namespace AircraftForSale
                 vc = vc.PresentedViewController;
             }
 
-            //return Task.Run(async () =>
-            //{
-                LoadingOverlay loadingIndicator = new LoadingOverlay(vc.View.Frame, "Loading ...", false);
+            LoadingOverlay loadingIndicator = new LoadingOverlay(vc.View.Frame, "Loading ...", false);
 
 
-                if (vc is MainTabBarController)
+            if (vc is MainTabBarController)
+            {
+
+                vc.View.AddSubview(loadingIndicator);
+
+                //remove cache
+                //Ad.DeleteAdsByClassification(classification);
+                //Retrieve highlighted ad
+                var adsByClassification = await Ad.GetAdsByClassificationAsync(classification);
+                var highlightedAd = adsByClassification.Where(row => row.ID == adId).First();
+
+
+                var maintTabBarController = vc as MainTabBarController;
+                var magNavVC = maintTabBarController.ViewControllers.FirstOrDefault(row => row is MagazineNavigationViewController);
+                if (magNavVC != null)
                 {
-
-                    vc.View.AddSubview(loadingIndicator);
-
-                    //remove cache
-                    Ad.DeleteAdsByClassification(classification);
-                    //Retrieve highlighted ad
-                    var adsByClassification = await Ad.GetAdsByClassificationAsync(classification);
-                    var highlightedAd = adsByClassification.Where(row => row.ID == adId).First();
-
-
-                    var maintTabBarController = vc as MainTabBarController;
-                    var magNavVC = maintTabBarController.ViewControllers.FirstOrDefault(row => row is MagazineNavigationViewController);
-                    if (magNavVC != null)
+                    maintTabBarController.SelectedIndex = 0;
+                    var chooseClassVC = (magNavVC as MagazineNavigationViewController).ViewControllers.FirstOrDefault(row => row is ChooseClassificationCollectionViewController);
+                    if (chooseClassVC != null)
                     {
-                        maintTabBarController.SelectedIndex = 0;
-                        var chooseClassVC = (magNavVC as MagazineNavigationViewController).ViewControllers.FirstOrDefault(row => row is ChooseClassificationCollectionViewController);
-                        if (chooseClassVC != null)
-                        {
-                            var chooseClassificationViewController = chooseClassVC as ChooseClassificationCollectionViewController;
-                            var storyboard = UIStoryboard.FromName("Main_ipad", NSBundle.MainBundle);
-                            MagazineFlipBoardViewController flipboardVC = storyboard.InstantiateViewController("MagazineFlipBoardViewController") as MagazineFlipBoardViewController;
-                            flipboardVC.Title = classification;
-                            flipboardVC.SelectedClassification = classification;
-                            flipboardVC.NavigateDirectlyToAdId = adId;
-                            chooseClassificationViewController.NavigationController.PopToRootViewController(false);
-                            chooseClassificationViewController.ShowViewController(flipboardVC, this);
+                        var chooseClassificationViewController = chooseClassVC as ChooseClassificationCollectionViewController;
+                        var storyboard = UIStoryboard.FromName("Main_ipad", NSBundle.MainBundle);
+                        MagazineFlipBoardViewController flipboardVC = storyboard.InstantiateViewController("MagazineFlipBoardViewController") as MagazineFlipBoardViewController;
+                        flipboardVC.Title = classification;
+                        flipboardVC.SelectedClassification = classification;
+                        flipboardVC.NavigateDirectlyToAdId = adId;
+                        chooseClassificationViewController.NavigationController.PopToRootViewController(false);
+                        chooseClassificationViewController.ShowViewController(flipboardVC, this);
 
 
-                        }
                     }
                 }
-
-                //SVProgressHUD.Dismiss();
-                loadingIndicator.Hide();
-            //});
+            }
+            loadingIndicator.Hide();
         }
 
         //perform data fetch here for the ads
         public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
         {
             // Check for new data, and display it
+            PerformBackgroundDataFetchFromBuyplaneAPI(() =>
+            {
+                // Inform system of fetch results... inform if data has been refreshed or an error has occurred 
+                completionHandler(UIBackgroundFetchResult.NewData);
+            });
+        }
+
+        public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
+        {
+            //Refresh content prior to calling completion handler
+            PerformBackgroundDataFetchFromBuyplaneAPI(() =>
+            {
+                // fetch content
+                completionHandler(UIBackgroundFetchResult.NewData);
+            });
+        }
+
+        const string SessionId = "com.globalair.aircraftforsale.backgroundupdate";
+        private NSUrlSession ConfigureBackgroundSession()
+        {
+            var configuration = NSUrlSessionConfiguration.BackgroundSessionConfiguration(SessionId);
+            if (configuration == null)
+            {
+                configuration = NSUrlSessionConfiguration.CreateBackgroundSessionConfiguration(SessionId);
+            }
+
+            using (configuration)
+            {
+                return NSUrlSession.FromConfiguration(configuration, new BuyplaneAPISessionDelegate(), null);
+            }
+        }
+
+        public async void PerformBackgroundDataFetchFromBuyplaneAPI(System.Action completionHandler, List<Ad> adListOverride = null)
+        {
+            //NSUrlSession session = ConfigureBackgroundSession();
+
+   
+
+            List<Ad> adList = new List<Ad>();
+            if (adListOverride == null)
+            {
+               
+                if (Settings.IsRegistered)
+                {
+                    var favoredClassificationsList = Settings.GetFavoredClassifications();
+
+                    foreach (var fClass in favoredClassificationsList)
+                    {
+                        //remove current data in the database
+                        Ad.DeleteAdsByClassification(fClass);
+                        adList.AddRange(await Ad.GetAdsByClassificationAsync(fClass));
+                    }
+                }
+                else
+                {
+
+                    //preload Jets
+                    Settings.IsJets = true;
+                    Settings.IsSingleEngine = true;
+                    Settings.IsTwinTurbines = true;
+
+                    List<string> preloadJetsAndOtherClassificationsIfSetSettingsTrueAbove = Settings.GetFavoredClassifications();
+
+                    foreach (var fClass in preloadJetsAndOtherClassificationsIfSetSettingsTrueAbove)
+                    {
+                        //remove current data in the database
+                        Ad.DeleteAdsByClassification(fClass);
+                        adList.AddRange(await Ad.GetAdsByClassificationAsync(fClass));
+                    }
+                }
+            }else
+            {
+                adList = adListOverride;
+            }
+
+            //filter out previously cached
+            int adsAlreadyInCacheCount = 0;
+            int adCount = 0;
+            foreach (var ad in adList)
+            {
+                SDImageCache.SharedImageCache.DiskImageExists(ad.ImageURL, (isInCache) =>
+                    {
+                        adCount++;
+                        if (!isInCache)
+                        {
+                            FetchImage(ad.ImageURL);
+
+                        }else
+                        {
+                            adsAlreadyInCacheCount++;
+                        }
+                        if (adsAlreadyInCacheCount == adList.Count)
+                        {
+                            completionHandler.Invoke();
+                        }
+                        if (adCount == adList.Count)
+                        {
+                            completionHandler.Invoke();
+                        }
+                    });
+            }
 
 
-            // Inform system of fetch results... inform if data has been refreshed or an error has occurred 
-            completionHandler(UIBackgroundFetchResult.NoData);
+        }
+
+        public UIBackgroundFetchResult FetchImage(string url)
+        {
+            var session = ConfigureBackgroundSession();
+
+            var request = new NSMutableUrlRequest(NSUrl.FromString(url));
+            request.HttpMethod = "GET";
+            using (request)
+            {
+                var task = session.CreateDownloadTask(request);
+                task.Resume();
+            }
+
+            return UIBackgroundFetchResult.NewData;
+        }
+
+        public System.Action BackgroundUrlCompletionHandler;
+
+        public override void HandleEventsForBackgroundUrl(UIApplication application, string sessionIdentifier, System.Action completionHandler)
+        {
+            this.BackgroundUrlCompletionHandler = completionHandler;
         }
 
         public override void OnResignActivation(UIApplication application)
@@ -503,16 +523,6 @@ namespace AircraftForSale
         {
             // Use this method to release shared resources, save user data, invalidate timers and store the application state.
             // If your application supports background exection this method is called instead of WillTerminate when the user quits.
-
-            //var classifications = AdList.Select(row => row.Classification).Distinct();
-            //if (classifications.Count() > 0)
-            //{
-            //	var ad = new Ad();
-            //	foreach (var classification in classifications)
-            //	{
-            //		ad.SaveAdsByClassification(AdList.Where(row => row.Classification == classification), classification);
-            //	}
-            //}
         }
 
         public override void WillEnterForeground(UIApplication application)

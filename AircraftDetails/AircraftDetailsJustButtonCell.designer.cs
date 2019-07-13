@@ -22,10 +22,6 @@ namespace AircraftForSale
 
         void ReleaseDesignerOutlets ()
         {
-            if (button != null) {
-                button.Dispose ();
-                button = null;
-            }
         }
     }
 }
