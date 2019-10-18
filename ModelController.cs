@@ -52,7 +52,7 @@ namespace AircraftForSale
 
 		List<MagazinePage> magPageList;
 
-		int PageIndex;
+		//int PageIndex;
 
 		public List<Ad> adList;
 
@@ -291,35 +291,35 @@ namespace AircraftForSale
 			if (index >= magPageList.Count)
 				return null;
 
-			if (index == 0)
-			{
-				PageIndex = 0;
-			}
-			else
-			{
+			//if (index == 0)
+			//{
+			//	PageIndex = 0;
+			//}
+			//else
+			//{
 
-				if (isPrev)
-					PageIndex -= 1;
-				else
-					PageIndex += 1;
-			}
-
-
+			//	if (isPrev)
+			//		PageIndex -= 1;
+			//	else
+			//		PageIndex += 1;
+			//}
 
 
 
-			var currentPage = magPageList[index];
+
+
+		
 
 			UIViewController returnViewController;
 
-			var device = UIDevice.CurrentDevice;
+	
          
-			var ad = magPageList[PageIndex];
+			//var ad = magPageList[PageIndex];
 
-            //featured ads always have to have layout 2
-            //if(ad)
+            var ad = magPageList[index];
 
-			var layout = ad.Layout;
+
+            var layout = ad.Layout;
                      
 			switch (layout)
 			{

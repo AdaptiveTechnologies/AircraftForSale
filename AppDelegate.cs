@@ -100,11 +100,11 @@ namespace AircraftForSale
             else
             {
                 //Determine if need to dump cache
-                if(Settings.LastImageCacheDump != string.Empty)
+                if (Settings.LastImageCacheDump != string.Empty)
                 {
                     DateTime startDate = DateTime.Parse(Settings.LastImageCacheDump);
                     double days = (DateTime.Now - startDate).TotalDays;
-                    if(days > 7)
+                    if (days > 7)
                     {
                         SDImageCache.SharedImageCache.ClearMemory();
                         SDImageCache.SharedImageCache.ClearDisk();
@@ -127,40 +127,45 @@ namespace AircraftForSale
                 if (!launchedFromPushNotification)
                 {
 
-                    PerformBackgroundDataFetchFromBuyplaneAPI(() =>
-                    {
-                        InvokeOnMainThread(() =>
-                        {
+                    //Task.Run(async () =>
+                    //{
+                    //    await PerformBackgroundDataFetchFromBuyplaneAPI(() =>
+                    //    {
+                    //        InvokeOnMainThread(() =>
+                    //        {
 
-                            var vc = Window.RootViewController;
-                            while (vc.PresentedViewController != null)
-                            {
-                                vc = vc.PresentedViewController;
-                            }
-
-                            if (vc is MainTabBarController)
-                            {
-                                var maintTabBarController = vc as MainTabBarController;
-                                var magNavVC = maintTabBarController.ViewControllers.FirstOrDefault(row => row is MagazineNavigationViewController);
-                                if (magNavVC != null)
+                                var vc = Window.RootViewController;
+                                while (vc.PresentedViewController != null)
                                 {
-                                    var chooseClassVC = (magNavVC as MagazineNavigationViewController).ViewControllers.FirstOrDefault(row => row is ChooseClassificationCollectionViewController);
-                                    if (chooseClassVC != null)
+                                    vc = vc.PresentedViewController;
+                                }
+
+                                if (vc is MainTabBarController)
+                                {
+                                    var maintTabBarController = vc as MainTabBarController;
+                                    var magNavVC = maintTabBarController.ViewControllers.FirstOrDefault(row => row is MagazineNavigationViewController);
+                                    if (magNavVC != null)
                                     {
-                                        (chooseClassVC as ChooseClassificationCollectionViewController).LoadBackgroundImages();
-                                        if (launchOptions != null && launchOptions.ContainsKey(UIApplication.LaunchOptionsRemoteNotificationKey))
+                                        var chooseClassVC = (magNavVC as MagazineNavigationViewController).ViewControllers.FirstOrDefault(row => row is ChooseClassificationCollectionViewController);
+                                        if (chooseClassVC != null)
                                         {
-                                            NSDictionary notificationDictionary = launchOptions[UIApplication.LaunchOptionsRemoteNotificationKey] as NSDictionary;
-                                            ReceivedRemoteNotification(application, notificationDictionary);
+                                            (chooseClassVC as ChooseClassificationCollectionViewController).LoadBackgroundImages();
+                                            if (launchOptions != null && launchOptions.ContainsKey(UIApplication.LaunchOptionsRemoteNotificationKey))
+                                            {
+                                                NSDictionary notificationDictionary = launchOptions[UIApplication.LaunchOptionsRemoteNotificationKey] as NSDictionary;
+                                                ReceivedRemoteNotification(application, notificationDictionary);
+                                            }
                                         }
                                     }
                                 }
-                            }
 
-                        });
+                    //        });
 
-                    });
-                }else
+                    //    });
+                    //});
+                   
+                }
+                else
                 {
                     var vc = Window.RootViewController;
                     while (vc.PresentedViewController != null)
@@ -188,7 +193,7 @@ namespace AircraftForSale
                     }
                 }
 
-               
+
                 //});
 
             }
@@ -384,21 +389,28 @@ namespace AircraftForSale
         public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
         {
             // Check for new data, and display it
-            PerformBackgroundDataFetchFromBuyplaneAPI(() =>
+            Task.Run(async () =>
             {
-                // Inform system of fetch results... inform if data has been refreshed or an error has occurred 
-                completionHandler(UIBackgroundFetchResult.NewData);
-            });
+                await PerformBackgroundDataFetchFromBuyplaneAPI(() =>
+                {
+                    // Inform system of fetch results... inform if data has been refreshed or an error has occurred 
+                    completionHandler(UIBackgroundFetchResult.NewData);
+                });
+            }); 
         }
 
         public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action<UIBackgroundFetchResult> completionHandler)
         {
-            //Refresh content prior to calling completion handler
-            PerformBackgroundDataFetchFromBuyplaneAPI(() =>
+            Task.Run(async () =>
             {
-                // fetch content
-                completionHandler(UIBackgroundFetchResult.NewData);
+                //Refresh content prior to calling completion handler
+                await PerformBackgroundDataFetchFromBuyplaneAPI(() =>
+                {
+                    // fetch content
+                    completionHandler(UIBackgroundFetchResult.NewData);
+                });
             });
+           
         }
 
         const string SessionId = "com.globalair.aircraftforsale.backgroundupdate";
@@ -416,16 +428,16 @@ namespace AircraftForSale
             }
         }
 
-        public async void PerformBackgroundDataFetchFromBuyplaneAPI(System.Action completionHandler, List<Ad> adListOverride = null)
+        public async Task PerformBackgroundDataFetchFromBuyplaneAPI(System.Action completionHandler, List<Ad> adListOverride = null)
         {
             //NSUrlSession session = ConfigureBackgroundSession();
 
-   
+
 
             List<Ad> adList = new List<Ad>();
             if (adListOverride == null)
             {
-               
+
                 if (Settings.IsRegistered)
                 {
                     var favoredClassificationsList = Settings.GetFavoredClassifications();
@@ -454,7 +466,8 @@ namespace AircraftForSale
                         adList.AddRange(await Ad.GetAdsByClassificationAsync(fClass));
                     }
                 }
-            }else
+            }
+            else
             {
                 adList = adListOverride;
             }
@@ -465,26 +478,29 @@ namespace AircraftForSale
             foreach (var ad in adList)
             {
                 SDImageCache.SharedImageCache.DiskImageExists(ad.ImageURL, (isInCache) =>
+                {
+                    adCount++;
+                    if (!isInCache)
                     {
-                        adCount++;
-                        if (!isInCache)
-                        {
-                            FetchImage(ad.ImageURL);
+                        FetchImage(ad.ImageURL);
 
-                        }else
-                        {
-                            adsAlreadyInCacheCount++;
-                        }
-                        if (adsAlreadyInCacheCount == adList.Count)
-                        {
-                            completionHandler.Invoke();
-                        }
-                        if (adCount == adList.Count)
-                        {
-                            completionHandler.Invoke();
-                        }
-                    });
+                    }
+                    else
+                    {
+                        adsAlreadyInCacheCount++;
+                    }
+                    if (adsAlreadyInCacheCount == adList.Count)
+                    {
+                        completionHandler.Invoke();
+                    }
+                    if (adCount == adList.Count)
+                    {
+                        completionHandler.Invoke();
+                    }
+                });
             }
+
+
 
 
         }

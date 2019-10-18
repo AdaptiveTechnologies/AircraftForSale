@@ -27,17 +27,59 @@ namespace AircraftForSale
 			}
 		}
 
-		public UIButton EditTableButton
+        void RefreshButton_TouchUpInside(object sender, EventArgs e)
+        {
+            if (Reachability.IsHostReachable(Settings._baseDomain))
+            {
+                LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame);
+                this.View.AddSubview(loadingIndicator);
+                // button was clicked
+                //List<Ad> adList = new List<Ad>();
+
+                Task.Run(async () =>
+                {
+                    foreach (var classification in Settings.GetFavoredClassifications())
+                    {
+                        Ad.DeleteAdsByClassification(classification);
+                        //adList.AddRange(await Ad.GetAdsByClassificationAsync(classification));
+                    }
+
+                    BeginInvokeOnMainThread(() =>
+                    {
+                        loadingIndicator.Hide();
+                    });
+
+                    await LoadTable();
+                    
+                });
+               
+
+            }
+            else
+            {
+                HelperMethods.SendBasicAlert("Connect to a Network", "Please connect to a network to refresh these ads");
+            }
+        }
+
+        public UIButton EditTableButton
 		{
 			get;
 			set;
 		}
 
-		public List<Ad> FavoritesAdList
+        public UIButton RefreshButton
+        {
+            get;
+            set;
+        }
+
+        public List<Ad> FavoritesAdList
 		{
 			get;
 			set;
 		}
+
+        public LoadingOverlay LoadingOverlayProperty { get; set; }
 
         //public Ad HighlightedAd { get; set; }
 
@@ -80,25 +122,25 @@ namespace AircraftForSale
 
 
 			FavoritesTableView.BackgroundView = null;
-			//FavoritesTableView.BackgroundColor = UIColor.Clear;
 
 			EditTableButton = new UIButton(new CGRect(View.Bounds.Width - 110, statusBarHeight, 100, 25));
 			EditTableButton.SetTitle("Edit", UIControlState.Normal);
-			EditTableButton.SetTitleColor(UIColor.Blue, UIControlState.Normal);
+			EditTableButton.SetTitleColor(UIColor.White, UIControlState.Normal);
 
-			//FavoritesTableView.RowHeight = UITableView.AutomaticDimension
-			//FavoritesTableView.EstimatedRowHeight = 100f;
+            RefreshButton = new UIButton(new CGRect(35, statusBarHeight, 25, 25));
+            //RefreshButton.SetTitle("Refresh", UIControlState.Normal);
+            RefreshButton.SetTitleColor(UIColor.White, UIControlState.Normal);
 
-            
-
-
-			View.Add(EditTableButton);
+            RefreshButton.SetImage(new UIImage("refresh.png"), UIControlState.Normal);
 
 
-            
+            View.Add(EditTableButton);
+
+            View.Add(RefreshButton);
 
 
-		}
+
+        }
 
 		public override void ViewWillAppear(bool animated)
 		{
@@ -106,64 +148,63 @@ namespace AircraftForSale
 
 			//register for events
 			EditTableButton.TouchUpInside += EditTableButton_TouchUpInside;
-			LoadingOverlay overlay = new LoadingOverlay(this.View.Frame, "Loading...");
-			this.View.AddSubview(overlay);
-			Task.Run(async () =>
-			{
-				Ad ad = new Ad();
-				var adList = await (ad.GetAllAdsForFavorites());
+            RefreshButton.TouchUpInside += RefreshButton_TouchUpInside;
+            LoadingOverlayProperty = new LoadingOverlay(this.View.Frame, "Loading...");
+			this.View.AddSubview(LoadingOverlayProperty);
 
-				var favoredAds = adList.Where(row => row.IsLiked).ToList();
-                //if(HighlightedAd != null)
-                //{
-                //    if(!favoredAds.Any(row => row.ID == HighlightedAd.ID))
-                //    {
-                //        favoredAds.Insert(0, HighlightedAd);
-                //    }
-                //    else
-                //    {
-                //        var highlightedAd = favoredAds.First(row => row.ID == HighlightedAd.ID);
-                //        favoredAds.Remove(highlightedAd);
-                //        favoredAds.Insert(0, highlightedAd);
-                //    }
-                //}
+
+            Task.Run(async () =>
+            {
+                await LoadTable();
+            });
+
+
+
+        }
+
+        private async Task LoadTable()
+        {
+
+                Ad ad = new Ad();
+                var adList = await (ad.GetAllAdsForFavorites());
+
+                var favoredAds = adList.Where(row => row.IsLiked).ToList();
+
                 for (int i = 0; i < favoredAds.Count; i++)
-				{
-					string adID = favoredAds[i].ID;
-					var adLocal = await AdLocal.GetAdLocalByAdID(adID);
-					if (adLocal == null || string.IsNullOrEmpty(adLocal.AdID))
-					{
-						adLocal = new AdLocal();
-						adLocal.AdID = adID;
-						adLocal.Sequence = favoredAds.Count;
-					}
+                {
+                    string adID = favoredAds[i].ID;
+                    var adLocal = await AdLocal.GetAdLocalByAdID(adID);
+                    if (adLocal == null || string.IsNullOrEmpty(adLocal.AdID))
+                    {
+                        adLocal = new AdLocal();
+                        adLocal.AdID = adID;
+                        adLocal.Sequence = favoredAds.Count;
+                    }
 
-					favoredAds[i].ClientFavoritesSortOrder = adLocal.Sequence;
-					favoredAds[i].Notes = adLocal.Notes;
-				}
+                    favoredAds[i].ClientFavoritesSortOrder = adLocal.Sequence;
+                    favoredAds[i].Notes = adLocal.Notes;
+                }
 
-				favoredAds = favoredAds.OrderBy(row => row.ClientFavoritesSortOrder).ToList();
+                favoredAds = favoredAds.OrderBy(row => row.ClientFavoritesSortOrder).ToList();
 
-				InvokeOnMainThread(() =>
-				{
-					overlay.Hide();
-					FavoritesAdList = favoredAds;
-					FavoritesTableView.Source = new FavoritesTableSource(this);
+                InvokeOnMainThread(() =>
+                {
+                    LoadingOverlayProperty.Hide();
+                    FavoritesAdList = favoredAds;
+                    FavoritesTableView.Source = new FavoritesTableSource(this);
 
-					FavoritesTableView.ReloadData();
-				});
-			});
-
-
-
-
-		}
+                    FavoritesTableView.ReloadData();
+                });
+     
+        }
 
 		public override void ViewDidDisappear(bool animated)
 		{
 			//unregister from events
 			EditTableButton.TouchUpInside -= EditTableButton_TouchUpInside;
-			return;
+            RefreshButton.TouchUpInside -= RefreshButton_TouchUpInside;
+
+            return;
 
 			var localModifiedAdList = FavoritesAdList.Where(row => row.IsModified).ToList();
 

@@ -110,7 +110,7 @@ namespace AircraftForSale
             if (Reachability.IsHostReachable(Settings._baseDomain))
             {
                 LoadingOverlay loadingOverlay = new LoadingOverlay(View.Frame);
-                View.Add(loadingOverlay);;
+                View.Add(loadingOverlay);
                 Task.Run(() =>
                {
                    var image = HelperMethods.FromUrl(Settings.BanManProURL);

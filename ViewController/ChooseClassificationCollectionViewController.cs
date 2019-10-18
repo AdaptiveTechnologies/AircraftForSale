@@ -381,7 +381,7 @@ namespace AircraftForSale
                     }
                 }
                 var appDelegate = UIApplication.SharedApplication.Delegate as AppDelegate;
-                appDelegate.PerformBackgroundDataFetchFromBuyplaneAPI(() => Console.WriteLine("Background Fetch for ads chosen from ChooseClassificationCollention complete", ads));
+                await appDelegate.PerformBackgroundDataFetchFromBuyplaneAPI(() => Console.WriteLine("Background Fetch for ads chosen from ChooseClassificationCollention complete"), ads);
 
                 //AppDelegate.PerformBackgroundDataFetchFromBuyplaneAPI((obj) => Console.WriteLine("Background Fetch for ads chosen from ChooseClassificationCollention complete", ads);
 

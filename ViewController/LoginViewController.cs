@@ -6,6 +6,7 @@ using CoreGraphics;
 using Google.Analytics;
 using AircraftForSale.PCL;
 using System.Threading.Tasks;
+using Akavache;
 //using SVProgressHUDBinding;
 
 namespace AircraftForSale
@@ -75,8 +76,11 @@ namespace AircraftForSale
                 LoadingOverlay loadingIndicator = new LoadingOverlay(this.View.Frame, "Loading ...");
                 this.View.AddSubview(loadingIndicator);
 
+                //AuthResponse
 
-                AuthResponse response = await AuthResponse.GetAuthResponseAsync(0, Settings.Username, Settings.Password);
+                BlobCache.LocalMachine.InvalidateObject<AuthResponse>(AuthResponse.getAuthResponse);
+
+                    AuthResponse response = await AuthResponse.GetAuthResponseAsync(0, Settings.Username, Settings.Password);
 
                 Settings.AppID = response.AppId;
                 Settings.AuthToken = response.AuthToken;
@@ -84,6 +88,7 @@ namespace AircraftForSale
                 APIManager manager = new APIManager();
 
                 {
+                    //LoginResponse authResponse = await manager.loginUser(Settings.AppID, Settings.Username, Settings.Password, Settings.AuthToken);
                     LoginResponse authResponse = await manager.loginUser(Settings.AppID, Settings.Username, Settings.Password, Settings.AuthToken);
 
                     if (authResponse.AuthToken != null)
@@ -226,26 +231,8 @@ namespace AircraftForSale
             base.ViewDidLoad();
 
 
-            LoadingOverlay overlay = new LoadingOverlay(this.View.Frame, "Loading aircraft data...");
-            //AppDelegate.OnDataUpdate += (source, e) =>
-            //{
+            //LoadingOverlay overlay = new LoadingOverlay(this.View.Frame, "Loading aircraft data...");
 
-            //    float progress = (float)e.GetComplete() / (float)e.GetTotal();
-
-            //    if (progress < 1f)
-            //    {
-
-            //        this.View.AddSubview(overlay);
-            //    }
-
-               
-
-            //    if (progress >= 1)
-            //    {
-            //        overlay.Hide();
-            //    }
-
-            //};
 
             HideKeyboardGesture = new UITapGestureRecognizer(() =>
             {

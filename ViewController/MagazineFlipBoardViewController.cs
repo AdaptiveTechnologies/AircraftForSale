@@ -274,15 +274,16 @@ namespace AircraftForSale
 
 			List<UIBarButtonItem> navButtonList = new List<UIBarButtonItem>();
 			navButtonList.Add(searchButton);
-			navButtonList.Add(refreshButton); ;
+			navButtonList.Add(refreshButton);
 
 
 			this.NavigationItem.SetRightBarButtonItems(navButtonList.ToArray(), true);
 
 			ModelController = new ModelController(SelectedClassification);
 
-			// Configure the page view controller and add it as a child view controller.
-			PageViewController = new UIPageViewController(UIPageViewControllerTransitionStyle.PageCurl, UIPageViewControllerNavigationOrientation.Horizontal, UIPageViewControllerSpineLocation.Min);
+            // Configure the page view controller and add it as a child view controller.
+            //UIPageViewControllerSpineLocation.Min
+            PageViewController = new UIPageViewController(UIPageViewControllerTransitionStyle.PageCurl, UIPageViewControllerNavigationOrientation.Horizontal, UIPageViewControllerSpineLocation.Min);
 			PageViewController.WeakDelegate = this;
 
 			var startingViewController = ModelController.GetViewController(0, false);
