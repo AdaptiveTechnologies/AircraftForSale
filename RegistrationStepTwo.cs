@@ -954,11 +954,11 @@ namespace AircraftForSale
             var pilotTypeList = Settings.LocationResponse.AreYouAPilot;
             if (Settings.IsPilot)
             {
-                pilotTypeList = pilotTypeList.Where(row => !notAPilotList.Contains(row.PilotStatusId)).ToList();
+                pilotTypeList = pilotTypeList.Where(row => !notAPilotList.Contains(row.PilotStatusId) && row.IsPilot).ToList();
             }
             else
             {
-                pilotTypeList = pilotTypeList.Where(row => notAPilotList.Contains(row.PilotStatusId)).ToList();
+                pilotTypeList = pilotTypeList.Where(row => notAPilotList.Contains(row.PilotStatusId) && !row.IsPilot).ToList();
             }
             return pilotTypeList.Count;
         }

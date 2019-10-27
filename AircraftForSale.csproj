@@ -97,6 +97,8 @@
     <MtouchSdkVersion>12.2</MtouchSdkVersion>
     <CodesignKey>iPhone Developer: Clay Martin (83H34G7LM2)</CodesignKey>
     <CodesignProvision>VS: WildCard Development</CodesignProvision>
+    <CrashReportingApiKey></CrashReportingApiKey>
+    <CrashReportingEnabled>false</CrashReportingEnabled>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

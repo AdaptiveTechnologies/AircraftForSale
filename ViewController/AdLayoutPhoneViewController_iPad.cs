@@ -294,8 +294,11 @@ namespace AircraftForSale
 			UIActivity[] applicationActivities = null;
 
 			var activityController = new UIActivityViewController(activityItems, applicationActivities);
-			activityController.PopoverPresentationController.SourceView = senderButton;
-			activityController.PopoverPresentationController.SourceRect = senderButton.Bounds;
+
+            if (activityController.PopoverPresentationController != null) {
+                activityController.PopoverPresentationController.SourceView = senderButton;
+                activityController.PopoverPresentationController.SourceRect = senderButton.Bounds;
+            }
 
 			PresentViewController(activityController, true, null);
 

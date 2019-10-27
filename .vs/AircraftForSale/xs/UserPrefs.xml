@@ -1,10 +1,11 @@
 ﻿<Properties StartupConfiguration="{B8C03836-A778-482E-8FC3-92267A01DFDA}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Info.plist">
+  <MonoDevelop.Ide.Workbench>
     <Files>
-      <File FileName="ViewController/ChooseClassificationCollectionViewController.cs" Line="53" Column="1" />
-      <File FileName="AppDelegate.cs" Line="78" Column="33" />
-      <File FileName="LineLayout.cs" Line="1" Column="1" />
-      <File FileName="ViewController/AdLayoutPhoneViewController_iPad.cs" Line="287" Column="1" />
+      <File FileName="Page2RegistrationViewController.cs" Line="1" Column="1" />
+      <File FileName="RegistrationStepTwo.cs" Line="922" Column="1" />
+      <File FileName="../AircraftForSale.PCL/Helpers/Settings.cs" Line="629" Column="50" />
+      <File FileName="../AircraftForSale.PCL/Model/API/LocationResponse.cs" Line="90" Column="1" />
+      <File FileName="../AircraftForSale.PCL/Model/API/APIManager.cs" Line="425" Column="1" />
       <File FileName="Info.plist" />
     </Files>
     <Pads>
@@ -15,18 +16,20 @@
               <Node name="Info.plist" selected="True" />
             </Node>
             <Node name="AircraftForSale.PCL" expanded="True">
-              <Node name="Packages" expanded="True" />
+              <Node name="Helpers" expanded="True" />
+              <Node name="Model" expanded="True">
+                <Node name="Ads" expanded="True" />
+                <Node name="API" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.AircraftForSale automaticSigning="True" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.65258EF4-A89A-4E88-8887-EED3816BAED6">
-    <MonoDevelop.MacDev.AppleDevelopmentTeam DeveloperId="JJ6S52M66E" TeamId="24K6W497BD" />
-  </MonoDevelop.Ide.ItemProperties.AircraftForSale>
+  <MonoDevelop.Ide.ItemProperties.AircraftForSale automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.5385A6F3-2663-407F-95E1-B9747F554BD3" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhoneSimulator" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/normanmartin/AircraftForSale-master/AircraftForSale/ViewController/AdLayoutPhoneViewController.cs" relfile="ViewController/AdLayoutPhoneViewController.cs" line="427" column="1" />
